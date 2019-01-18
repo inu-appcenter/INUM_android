@@ -3,4 +3,17 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="white">#ffffff</color>
+
+    <color name="gunmetal">#475058</color>
+    <color name="greyish_brown">#4a4a4a</color>
+    <color name="orangey_red">#fb3a2f</color>
+    <color name="pinkish_grey">#c4c4c4</color>
+    <color name="pale_grey">#f6f8fa</color>
+
+    <!--color_status_stroke-->
+    <color name="cloudy_blue">#cad2e2</color>
+
+    <!--color_use_chat-->
+    <color name="canary">#fff35e</color>
 </resources>
