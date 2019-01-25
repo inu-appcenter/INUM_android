@@ -9,7 +9,7 @@ import retrofit2.http.POST;
 
 public interface RetrofitService {
     @FormUrlEncoded
-    @POST("tlogin")
+    @POST("login")
     public Call<retrofit_login>
     login(@Field("id") String id, @Field("passwd") String passwd, @Field("FCM") String FCM);
 }

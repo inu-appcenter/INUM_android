@@ -8,10 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:statusBarColor">@color/white</item>
         <item name="android:colorBackground">@color/white</item>
-    </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name = "windowActionBar">false</item>
+        <!--NoActionBar-->
         <item name = "windowNoTitle">true</item>
     </style>
 
@@ -19,6 +17,7 @@
         <item name="android:textColor">@color/greyish_brown</item>
         <item name="android:textColorHint">@color/pinkish_grey</item>
         <item name="android:colorControlNormal">@color/pale_grey</item>
+        <item name="android:colorControlActivated">@color/warm_grey</item>
     </style>
 
 </resources>
