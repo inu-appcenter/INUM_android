@@ -18,4 +18,6 @@
 
     <!--color_use_chat-->
     <color name="canary">#fff35e</color>
+
+    <color name="white_two">#e0e0e0</color>
 </resources>

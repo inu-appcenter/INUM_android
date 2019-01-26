@@ -12,7 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import org.gowoon.inum.R;
-import org.gowoon.inum.model.retrofit_login;
+import org.gowoon.inum.fragment.forgotpwFragment;
+import org.gowoon.inum.model.LoginResult;
 import org.gowoon.inum.util.Singleton;
 
 import retrofit2.Call;
@@ -25,6 +26,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextView tv_notcorrect, tv_join, tv_findpw;
     public String stdid, pw;
     private CheckBox checkBox_login;
+
 
     public SharedPreferences pref_info;
     SharedPreferences.Editor editor;
@@ -47,9 +49,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btn_login = findViewById(R.id.btn_login);
         btn_login.setOnClickListener(this);
 
-        stdid = etv_stdid.getText().toString();
-        pw = etv_pw.getText().toString();
-
         checkBox_login = findViewById(R.id.checkbox_login);
 
         pref_info = getSharedPreferences("userinfo",MODE_PRIVATE);
@@ -61,33 +60,53 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (view.getId()){
             case R.id.btn_login:
             {
-                Singleton.retrofit.login(stdid,pw,"notwork").enqueue(new Callback<retrofit_login>() {
+                String FCM = "notwork";
+                stdid = etv_stdid.getText().toString();
+                pw = etv_pw.getText().toString();
+
+                Singleton.retrofit.login(stdid,pw,FCM).enqueue(new Callback<LoginResult>() {
                     @Override
-                    public void onResponse(Call<retrofit_login> call, Response<retrofit_login> response) {
-                        if (response.isSuccessful()){
-                            retrofit_login result = response.body();
-                            if (result != null){
-                             if ((result.getToken().length()!=0)&&(result.getMessage().equals("logged in success"))) {
-                              if (!pref_info.getString("token","").equals(result.getToken())){
-                                  editor.putString("token",result.getToken());
-                                  editor.commit();
-                              }
-                             }
-                                Log.d("login_result_msg",""+result.message + result.token);
+                    public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
+                        if ((response.isSuccessful())&&(response.body() != null)){
+                            LoginResult result = response.body();
+                            if (result.getMessage().equals("logged in success")) {
+//                                if (checkBox_login.isChecked()){
+//                                    editor.putString("userid",stdid);
+//                                    editor.putString("userpw",pw);
+//                                    editor.putBoolean("checkboxlogin",checkBox_login.isChecked());
+//                                    editor.commit();
+//                                }
+//
+//                                if (!pref_info.getString("token","").equals(result.getToken())){
+//                                    editor.putString("token",result.getToken());
+//                                    editor.commit();
+//                                }
+
+                                Log.d("login_result_msg",""+result.getMessage() + result.getToken());
                                 tv_notcorrect.setVisibility(View.INVISIBLE);
 
                                 Intent intent_login = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent_login);
                                 finish();
                             }
+                            else {
+                                if (result.getMessage().equals("certification")) {
+                                    Log.d("login_result_msg_Err","인증안됨");
+                                    tv_notcorrect.setText("이메일 인증 후 로그인 해주세요");
+                                }
+                                else if (result.getMessage().equals("fail")){
+                                    Log.d("login_fail_wrong","아이디비밀번호오류");
+                                }
+                            }
                         }
+                        tv_notcorrect.setVisibility(View.VISIBLE);
                     }
-
                     @Override
-                    public void onFailure(Call<retrofit_login> call, Throwable t) {
-
+                    public void onFailure(Call<LoginResult> call, Throwable t) {
+                        Log.d("Loginfail","onFailure"+t);
                     }
                 });
+                break;
             }
             case R.id.tv_login_join:
             {
@@ -95,7 +114,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
             case R.id.tv_login_findpw:
             {
-
+                forgotpwFragment fragment = new forgotpwFragment();
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.login,fragment)
+                        .addToBackStack(null)
+                        .commit();
+                break;
             }
         }
     }

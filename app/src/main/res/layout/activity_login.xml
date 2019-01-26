@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.LoginActivity">
-
+    tools:context=".activity.LoginActivity"
+    android:id="@+id/login">
 
     <ImageView
         android:id="@+id/iv_login_logo"
@@ -53,6 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="4dp"
+            android:inputType="number"
             android:hint="입력"
             android:paddingStart="13.4dp"
             android:textSize="16sp"
@@ -144,16 +145,13 @@
         android:layout_height="48dp"
         android:layout_marginBottom="25dp"
         android:layout_marginHorizontal="40dp"
-        android:background="@drawable/round_square_8dp"
-        android:backgroundTint="@color/white"
-        android:elevation = "3dp"
         android:text="로그인"
         android:textSize="16sp"
         android:textColor="@color/gunmetal"
         android:gravity="center"
+        android:background="@drawable/gradient_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
 
 </android.support.constraint.ConstraintLayout>
