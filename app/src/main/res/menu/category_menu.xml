@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/book"
+        android:icon="@drawable/book"
+        android:title="책"
+        />
+    <item
+        android:title="의류"
+        android:icon="@drawable/cloth"
+        android:id="@+id/cloth"
+        />
+    <item
+        android:id="@+id/electric"
+        android:title="가전가구"
+        android:icon="@drawable/electric"
+        />
+    <item
+        android:title="잡화"
+        android:id="@+id/etc"
+        android:icon="@drawable/etc"
+        />
+    <item
+        android:id="@+id/room"
+        android:icon="@drawable/room"
+        android:title="자취방"
+        />
+    <item
+        android:id="@+id/ticket"
+        android:title="식권"
+        android:icon="@drawable/ticket"
+        />
+</menu>
