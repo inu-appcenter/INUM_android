@@ -2,7 +2,7 @@ package org.gowoon.inum.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class retrofit_login {
+public class LoginResult {
     @SerializedName("message")
     public String message;
 
@@ -18,7 +18,13 @@ public class retrofit_login {
     @SerializedName("tel")
     public String tel;
 
-    public retrofit_login(String message, String token , String id, String name , String tel) {
+    @SerializedName("letter")
+    public Integer letter;
+
+    @SerializedName("product")
+    public Integer product;
+
+    public LoginResult(String message, String token , String id, String name , String tel) {
         this.message = message;
         this.token = token;
         this.id = id;

@@ -3,8 +3,113 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.forgotpwFragment">
 
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
+        <ImageView
+            android:id="@+id/iv_forgotpw_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/logo_mainpage"/>
+
+        <LinearLayout
+            android:id="@+id/linearLayout_forgotpw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="43dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_forgotpw_logo">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginStart="8dp"
+                android:text="패스워드 분실"
+                android:textColor="@color/gunmetal"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:layout_marginStart="7.6dp"
+                android:layout_marginTop="33.5dp"
+                android:text="이름"
+                android:textColor="@color/gunmetal"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/etv_forgotpw_name"
+                style="@style/EdittextStyle_login"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="2.5dp"
+                android:hint="입력"
+                android:paddingStart="13.4dp"
+                android:textSize="16sp"
+                android:theme="@style/EdittextStyle_login" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:layout_marginStart="7.6dp"
+                android:layout_marginTop="17.5dp"
+                android:text="학번"
+                android:textColor="@color/gunmetal"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/etv_forgotpw_id"
+                style="@style/EdittextStyle_login"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="2.5dp"
+                android:inputType="number"
+                android:hint="입력"
+                android:paddingStart="13.4dp"
+                android:textSize="16sp"
+                android:theme="@style/EdittextStyle_login" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_forgotpw_noinput"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_marginBottom="19.8dp"
+            android:text="* 이름과 학번을 입력해 주세요."
+            android:textColor="@color/orangey_red"
+            android:textSize="12sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@id/btn_forgotpw"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btn_forgotpw"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="25.2dp"
+            android:layout_marginHorizontal="40dp"
+            android:background="@drawable/gradient_btn"
+            android:text="이메일 인증"
+            android:textColor="@color/gunmetal"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
 
 </FrameLayout>

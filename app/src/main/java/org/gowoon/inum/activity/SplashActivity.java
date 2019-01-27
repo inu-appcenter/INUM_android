@@ -1,6 +1,7 @@
 package org.gowoon.inum.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,9 @@ public class SplashActivity extends AppCompatActivity {
     private Layout layout;
     private final int SPLASH_DISPLAY_LENGTH = 1500;
 
+    public SharedPreferences pref_info;
+    SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,12 +26,22 @@ public class SplashActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_splash);
 
+        pref_info = getSharedPreferences("userinfo",MODE_PRIVATE);
+        editor = pref_info.edit();
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent_splash = new Intent(SplashActivity.this, MainActivity.class);
-                SplashActivity.this.startActivity(intent_splash);
-                SplashActivity.this.finish();
+                if (pref_info.getBoolean("checkboxlogin", Boolean.parseBoolean(""))){
+                    Intent intent_splash = new Intent(SplashActivity.this, MainActivity.class);
+                    SplashActivity.this.startActivity(intent_splash);
+                    SplashActivity.this.finish();
+                }
+                else {
+                    Intent intent_splash_login = new Intent(SplashActivity.this, LoginActivity.class);
+                    SplashActivity.this.startActivity(intent_splash_login);
+                    SplashActivity.this.finish();
+                }
             }
         },SPLASH_DISPLAY_LENGTH);
     }
