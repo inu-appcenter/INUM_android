@@ -19,5 +19,12 @@
     <!--color_use_chat-->
     <color name="canary">#fff35e</color>
 
-    <color name="white_two">#e0e0e0</color>
+    <color name="white_e0">#e0e0e0</color>
+
+    <!--product category-->
+    <color name="blush">#f1a2a2</color>
+
+    <!--blank view-->
+    <color name="white_two">#f4f4f4</color>
+    <color name="pale_grey_two">#f3f3f5</color>
 </resources>

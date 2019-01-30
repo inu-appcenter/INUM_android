@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.NavigationView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_mypage"
+    tools:context=".fragment.DrawerMypageFragment">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_mypage_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="33dp"
+            android:layout_marginTop="36dp"
+            android:src="@drawable/mypage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btn_mypage_closedrawer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="1dp"
+            android:layout_marginTop="6dp"
+            android:background="#ffffff"
+            android:src="@drawable/ckose"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_mypage_name"
+            android:layout_width="wrap_content"
+            android:layout_height="21dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="50dp"
+            android:text="정고운"
+            android:textColor="#4a4a4a"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/iv_mypage_icon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="192dp"
+            android:layout_marginTop="33dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_mypage_icon"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/framelayout_mypage_myproduct"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/model_mypage_list">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="내 상품"
+                    android:layout_marginStart="28dp"
+                    android:textColor="@color/gunmetal"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/tv_mypage_newproduct"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20.8dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="13dp"
+                    android:text="3"
+                    android:textColor="@color/greyish_brown"
+                    android:textSize="14sp" />
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tv_mypage_uploadproduct"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                android:text="상품 등록하기"
+                android:paddingStart="28dp"
+                android:textColor="@color/gunmetal"
+                android:textSize="18sp"
+                android:background="@drawable/model_mypage_list"/>
+
+            <FrameLayout
+                android:id="@+id/framelayout_mypage_message"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/model_mypage_list">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="메세지"
+                    android:layout_marginStart="28dp"
+                    android:textColor="@color/gunmetal"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/tv_mypage_newmessage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20.8dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="13dp"
+                    android:text="3"
+                    android:textColor="@color/greyish_brown"
+                    android:textSize="14sp" />
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tv_mypage_setting"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                android:text="설정"
+                android:paddingStart="28dp"
+                android:textColor="@color/gunmetal"
+                android:textSize="18sp"
+                android:background="@drawable/model_mypage_list"/>
+
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.design.widget.NavigationView>

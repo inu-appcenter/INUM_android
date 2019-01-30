@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="165.5dp"
+    android:layout_height="102.6dp"
+    android:background="@drawable/gradient_btn">
+
+    <ImageView
+        android:id="@+id/iv_productcard_image"
+        android:layout_width="82.8dp"
+        android:layout_height="82.8dp"
+        android:layout_marginStart="6.9dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/round_square_6dot9dp" />
+
+    <TextView
+        android:id="@+id/tv_productcard_childcategory"
+        android:layout_width="wrap_content"
+        android:layout_height="26dp"
+        android:layout_marginStart="6.8dp"
+        android:layout_marginTop="9.9dp"
+        android:text="식권"
+        android:textColor="@color/blush"
+        android:textSize="8.6sp"
+        app:layout_constraintStart_toEndOf="@id/iv_productcard_image"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_productcard_name"
+        android:layout_width="61.3dp"
+        android:layout_height="15dp"
+        android:layout_marginStart="6.8dp"
+        android:layout_marginTop="58.6dp"
+        android:textColor="@color/gunmetal"
+        android:text="현대미술의.."
+        android:textSize="10.4sp"
+        app:layout_constraintStart_toEndOf="@id/iv_productcard_image"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_productcard_price"
+        android:layout_width="wrap_content"
+        android:layout_height="15dp"
+        android:layout_marginStart="6.8dp"
+        android:textColor="@color/gunmetal"
+        android:text="15000원"
+        android:textSize="10.4sp"
+        app:layout_constraintStart_toEndOf="@id/iv_productcard_image"
+        app:layout_constraintTop_toBottomOf="@id/tv_productcard_name"/>
+</android.support.constraint.ConstraintLayout>
