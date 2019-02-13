@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/fragment_mypage"
+    android:id="@+id/nv_mypage"
     tools:context=".fragment.DrawerMypageFragment">
 
     <android.support.constraint.ConstraintLayout
@@ -22,8 +22,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/btn_mypage_closedrawer"
+        <ImageView
+            android:id="@+id/iv_drawer_mypage_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="1dp"
@@ -60,7 +60,7 @@
                 android:id="@+id/framelayout_mypage_myproduct"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:background="@drawable/model_mypage_list">
+                android:background="@drawable/item_mypage_list">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -93,13 +93,13 @@
                 android:paddingStart="28dp"
                 android:textColor="@color/gunmetal"
                 android:textSize="18sp"
-                android:background="@drawable/model_mypage_list"/>
+                android:background="@drawable/item_mypage_list"/>
 
             <FrameLayout
                 android:id="@+id/framelayout_mypage_message"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:background="@drawable/model_mypage_list">
+                android:background="@drawable/item_mypage_list">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -132,7 +132,7 @@
                 android:paddingStart="28dp"
                 android:textColor="@color/gunmetal"
                 android:textSize="18sp"
-                android:background="@drawable/model_mypage_list"/>
+                android:background="@drawable/item_mypage_list"/>
 
         </LinearLayout>
     </android.support.constraint.ConstraintLayout>

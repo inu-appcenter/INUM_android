@@ -5,8 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/login"
     tools:context=".activity.LoginActivity"
-    android:id="@+id/login">
+    >
 
     <ImageView
         android:id="@+id/iv_login_logo"
