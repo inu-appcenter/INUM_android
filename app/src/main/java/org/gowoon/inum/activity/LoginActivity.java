@@ -70,17 +70,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if ((response.isSuccessful())&&(response.body() != null)){
                             LoginResult result = response.body();
                             if (result.getMessage().equals("logged in success")) {
-//                                if (checkBox_login.isChecked()){
-//                                    editor.putString("userid",stdid);
-//                                    editor.putString("userpw",pw);
-//                                    editor.putBoolean("checkboxlogin",checkBox_login.isChecked());
-//                                    editor.commit();
-//                                }
-//
-//                                if (!pref_info.getString("token","").equals(result.getToken())){
-//                                    editor.putString("token",result.getToken());
-//                                    editor.commit();
-//                                }
+                                if (checkBox_login.isChecked()){
+                                    editor.putString("userid",stdid);
+                                    editor.putString("userpw",pw);
+                                    editor.putBoolean("checkboxlogin",checkBox_login.isChecked());
+                                    editor.commit();
+                                }
+
+                                if (!pref_info.getString("token","").equals(result.getToken())){
+                                    editor.putString("token",result.getToken());
+                                    editor.putString("userid",stdid);
+                                    editor.putString("userpw",pw);
+                                    editor.commit();
+                                }
 
                                 Log.d("login_result_msg",""+result.getMessage() + result.getToken());
                                 tv_notcorrect.setVisibility(View.INVISIBLE);
@@ -96,10 +98,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 }
                                 else if (result.getMessage().equals("fail")){
                                     Log.d("login_fail_wrong","아이디비밀번호오류");
+                                    tv_notcorrect.setVisibility(View.VISIBLE);
                                 }
                             }
                         }
-                        tv_notcorrect.setVisibility(View.VISIBLE);
                     }
                     @Override
                     public void onFailure(Call<LoginResult> call, Throwable t) {
@@ -111,6 +113,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.tv_login_join:
             {
 
+                break;
             }
             case R.id.tv_login_findpw:
             {
