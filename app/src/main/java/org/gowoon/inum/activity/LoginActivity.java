@@ -73,14 +73,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 if (checkBox_login.isChecked()){
                                     editor.putString("userid",stdid);
                                     editor.putString("userpw",pw);
+                                    editor.putString("usertel",result.getTel());
                                     editor.putBoolean("checkboxlogin",checkBox_login.isChecked());
                                     editor.commit();
                                 }
 
                                 if (!pref_info.getString("token","").equals(result.getToken())){
                                     editor.putString("token",result.getToken());
+                                    editor.putString("usertel",result.getTel());
                                     editor.putString("userid",stdid);
                                     editor.putString("userpw",pw);
+                                    editor.putString("name",result.getName());
                                     editor.commit();
                                 }
 

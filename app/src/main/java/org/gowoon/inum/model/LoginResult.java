@@ -7,7 +7,7 @@ public class LoginResult {
     public String message;
 
     @SerializedName("token")
-    public String token;
+    private String token;
 
     @SerializedName("id")
     public String id;
@@ -16,7 +16,7 @@ public class LoginResult {
     public String name;
 
     @SerializedName("tel")
-    public String tel;
+    private String tel;
 
     @SerializedName("letter")
     public Integer letter;

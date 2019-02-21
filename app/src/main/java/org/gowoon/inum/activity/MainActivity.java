@@ -1,5 +1,6 @@
 package org.gowoon.inum.activity;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //    List<String> product_image;
 //    private String name, productid;
 
+    public static Activity Main;
+
     private Fragment category,mypage;
     DrawerLayout mDrawer, cDrawer;
 
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Main = MainActivity.this;
 
         mDrawer = findViewById(R.id.nv_mypage);
         cDrawer = findViewById(R.id.nv_category);
