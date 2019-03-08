@@ -4,45 +4,40 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.ListView;
+import android.widget.TextView;
 
 import org.gowoon.inum.R;
-import org.gowoon.inum.model.ItemListviewMainProduct;
-import org.gowoon.inum.model.MainProductResult;
-import org.gowoon.inum.recycler.Adapter_ProductMain;
-import org.gowoon.inum.util.Singleton;
+import org.gowoon.inum.fragment.MainFragment;
+import org.gowoon.inum.fragment.SearchProductMainFragment;
 
-import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ConstraintLayout btn_message;
-    RecyclerView recyclerView_book, recyclerView_room, recyclerView_ticket;
-    Adapter_ProductMain Adapter_room, Adapter_book, Adapter_ticket ;
-    ArrayList<MainProductResult> list = new ArrayList<>();
     SharedPreferences pref;
 //    List<String> product_image;
 //    private String name, productid;
+    EditText et_search;
 
     public static Activity Main;
 
     private Fragment category,mypage;
     DrawerLayout mDrawer, cDrawer;
-
+    FrameLayout search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cDrawer = findViewById(R.id.nv_category);
         mypage = getSupportFragmentManager().findFragmentById(R.id.drawer_main_mypage);
         category = getSupportFragmentManager().findFragmentById(R.id.drawer_main_category);
+
         ImageView iv_category = findViewById(R.id.iv_main_category);
         iv_category.setOnClickListener(this);
         ImageView iv_mypage = findViewById(R.id.iv_main_mypage);
@@ -64,94 +60,69 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         iv_closecategory.setOnClickListener(this);
         iv_closemypage.setOnClickListener(this);
 
-        btn_message = findViewById(R.id.constraint_main_message);
-        btn_message.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        MainFragment product = new MainFragment();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.framelayout_fragment_main_main,product).commit();
 
+        et_search = findViewById(R.id.etv_main_search);
+        search = findViewById(R.id.framelayout_main_searchbar);
+        final ImageView iv_cancle = findViewById(R.id.iv_main_searcherase);
+        final TextView tv_searchok = findViewById(R.id.tv_main_searchok);
+        iv_cancle.setOnClickListener(this);
+        tv_searchok.setOnClickListener(this);
+
+        et_search.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus){
+                    float mScale = getResources().getDisplayMetrics().density;
+                    ConstraintLayout.LayoutParams layoutParams
+                            = new ConstraintLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, WRAP_CONTENT);
+                    layoutParams.height = (int) (mScale*78);
+                    layoutParams.setMargins((int)mScale*13, 0, (int) mScale*68,0);
+                    et_search.setHint("");
+                    search.setLayoutParams(layoutParams);
+                    tv_searchok.setVisibility(View.VISIBLE);
+                    iv_cancle.setVisibility(View.VISIBLE);
+                }
+                else{
+                    tv_searchok.setVisibility(View.INVISIBLE);
+                    iv_cancle.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+        et_search.setOnKeyListener(new View.OnKeyListener(){
+            @Override
+            public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
+                if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    float mScale = getResources().getDisplayMetrics().density;
+                    //Enter키눌렀을떄 처리
+                    ViewGroup.LayoutParams param = search.getLayoutParams();
+                    param.height = (int) (mScale * 33);
+                    param.width = MATCH_PARENT;
+                    search.setLayoutParams(param);
+//                    et_search.setHint("찾고있는 상품을 입력하세요");
+                    et_search.setText("");
+                    et_search.clearFocus();
+
+                    InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                    inputMethodManager.hideSoftInputFromWindow(et_search.getWindowToken(),0);
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString("search", String.valueOf(et_search.getText().toString()));
+
+//                    SearchProductMainFragment searchproduct = new SearchProductMainFragment();
+//                    searchproduct.setArguments(bundle);
+//                    getFragmentManager().beginTransaction()
+//                            .replace(R.id.framelayout_fragment_main_main, searchproduct)
+//                            .addToBackStack(null)
+//                            .commit();
+                    return true;
+                }
+                return false;
             }
         });
 
-        pref = getSharedPreferences("userinfo",MODE_PRIVATE);
-        String token =  pref.getString("token","");
-        String id = pref.getString("userid","");
-
-        if (!token.equals("")) {
-            Log.d("Sharedpreferences test", "토큰 받은거 확인" + token);
-            Singleton.retrofit.main(token).enqueue(new Callback<ArrayList<ArrayList<MainProductResult>>>() {
-                @Override
-                public void onResponse(Call<ArrayList<ArrayList<MainProductResult>>> call, Response<ArrayList<ArrayList<MainProductResult>>> response) {
-                    Log.d("main recycler test", "" + response.code());
-                    if (response.isSuccessful()) {
-                        ArrayList<ArrayList<MainProductResult>> result = response.body();
-
-                        assert result != null;
-                        Adapter_ticket.mDataset.addAll(result.get(0));
-                        Adapter_ticket.notifyDataSetChanged();
-
-                        Adapter_book.mDataset.addAll(result.get(1));
-                        Adapter_book.notifyDataSetChanged();
-
-                        Adapter_room.mDataset.addAll(result.get(2));
-                        Adapter_room.notifyDataSetChanged();
-
-                        Log.d("maintest", "메인 상품 로딩성공" + result);
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ArrayList<ArrayList<MainProductResult>>> call, Throwable t) {
-                    Log.d("fail", "안돼");
-                }
-            });
-        }
-
-        Adapter_ticket = new Adapter_ProductMain();
-        Adapter_book = new Adapter_ProductMain();
-        Adapter_room = new Adapter_ProductMain();
-
-        recyclerView_book = (RecyclerView) findViewById(R.id.recyclerview_main_product_book);
-        recyclerView_book.setHasFixedSize(true);
-
-        recyclerView_room = (RecyclerView) findViewById(R.id.recyclerview_main_product_room);
-        recyclerView_room.setHasFixedSize(true);
-
-        recyclerView_ticket = (RecyclerView) findViewById(R.id.recyclerview_main_product_ticket);
-        recyclerView_ticket.setHasFixedSize(true);
-
-
-//        Adapter_ticket = new Adapter_ProductMain();
-       // if (mAdapter.)
-//        mAdapter.setItemClick(new Adapter_ProductMain().ItemClick() {
-
-//            @Override
-//            public void onClick(View view, int position) {
-//                String pid = mAdapter.mDataset.get(position).getProductId();
-//                Intent intent_detail = new Intent(getActivity(), ProductDetail.class);
-//                intent_detail.putExtra("id",pid);
-//                startActivity(intent_detail);
-//            }
-//        });
-        RecyclerView.LayoutManager mLayoutManager_book ,mLayoutManager_room, mLayoutManager_ticket;
-        mLayoutManager_book = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false);
-        recyclerView_book.setLayoutManager(mLayoutManager_book);
-        recyclerView_book.setItemAnimator(new DefaultItemAnimator());
-        recyclerView_book.setAdapter(Adapter_book);
-
-        mLayoutManager_room = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false);
-        recyclerView_room.setLayoutManager(mLayoutManager_room);
-        recyclerView_room.setItemAnimator(new DefaultItemAnimator());
-        recyclerView_room.setAdapter(Adapter_room);
-
-        mLayoutManager_ticket = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false);
-        recyclerView_ticket.setLayoutManager(mLayoutManager_ticket);
-        recyclerView_ticket.setItemAnimator(new DefaultItemAnimator());
-        recyclerView_ticket.setAdapter(Adapter_ticket);
-
-
-        Adapter_book.notifyDataSetChanged();
-        Adapter_room.notifyDataSetChanged();
-        Adapter_ticket.notifyDataSetChanged();
     }
 
     @Override
@@ -160,6 +131,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (drawerLayout.isDrawerOpen(findViewById(R.id.drawer_main_mypage))||drawerLayout.isDrawerOpen(findViewById(R.id.drawer_main_category))) {
             drawerLayout.closeDrawers();
+        }
+        else if (search.hasFocus()){
+            search.clearFocus();
         }
 //        else if (findViewById(R.id.fragment_Main_product).getVisibility() == View.VISIBLE){
 //            long tempTime = System.currentTimeMillis();
@@ -175,9 +149,49 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-
+        ConstraintLayout.LayoutParams param
+                = new ConstraintLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_main);
+        et_search = findViewById(R.id.etv_main_search);
+        search = findViewById(R.id.framelayout_main_searchbar);
+        float mScale = getResources().getDisplayMetrics().density;
         switch(view.getId()){
+            case R.id.tv_main_searchok: {
+                param.setMargins((int) mScale*13,(int) mScale*22,(int)mScale*13,(int) mScale*22);
+                param.height = (int) (mScale * 33);
+                param.width = MATCH_PARENT;
+                search.setLayoutParams(param);
+                Bundle bundle = new Bundle();
+                String searchtext = et_search.getText().toString();
+                bundle.putString("search", searchtext);
+                SearchProductMainFragment searchproduct = new SearchProductMainFragment();
+                searchproduct.setArguments(bundle);
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.framelayout_fragment_main_main, searchproduct)
+                        .addToBackStack(null)
+                        .commit();
+
+
+                et_search.clearFocus();
+                et_search.setText("");
+
+
+               // break;
+            }
+
+            case R.id.iv_main_searcherase:{
+//                param.width = MATCH_PARENT;
+//                param.setMargins((int) mScale*13,(int) mScale*22,(int)mScale*13,(int) mScale*22);
+//                param.height = (int) (mScale*33);
+//                search.setLayoutParams(param);
+//                et_search.clearFocus();
+//                et_search.setText("");
+                InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(et_search.getWindowToken(),0);
+                findViewById(R.id.iv_main_searcherase).setVisibility(View.INVISIBLE);
+                findViewById(R.id.tv_main_searchok).setVisibility(View.INVISIBLE);
+                break;
+            }
 
             case R.id.iv_drawer_category_close:{
                 drawer.closeDrawer(Gravity.START);

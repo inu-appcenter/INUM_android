@@ -19,8 +19,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.SignupActivity" />
         <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.MypageActivity"></activity>
+        <activity android:name=".activity.UploadAcitivity" />
+        <activity android:name=".activity.MypageActivity" />
+        <activity android:name=".activity.ChatActivity" />
     </application>
 
 </manifest>

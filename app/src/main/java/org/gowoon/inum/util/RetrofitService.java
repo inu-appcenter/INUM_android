@@ -2,9 +2,11 @@ package org.gowoon.inum.util;
 
 import com.google.gson.JsonObject;
 
+import org.gowoon.inum.model.BannerItemResult;
 import org.gowoon.inum.model.LoginResult;
 import org.gowoon.inum.model.MainProductResult;
 import org.gowoon.inum.model.SearchIdResult;
+import org.gowoon.inum.model.UserData;
 
 import java.util.ArrayList;
 
@@ -16,6 +18,11 @@ import retrofit2.http.POST;
 
 public interface RetrofitService {
     //User
+    @FormUrlEncoded
+    @POST("account")
+    Call<JsonObject>
+    account(@Field("id") String id, @Field("passwd") String passwd, @Field("name") String name, @Field("tel") String tel);
+
     @FormUrlEncoded
     @POST("login")
     Call<LoginResult>
@@ -48,9 +55,19 @@ public interface RetrofitService {
     main(@Header("x-access-token") String main_token);
 
     @FormUrlEncoded
+    @POST("PSelect/search")
+    public Call<ArrayList<MainProductResult>>
+    searchproduct(@Field("productName") String searchtxt);
+
+    @FormUrlEncoded
     @POST("PSelect/searchId")
     public Call<ArrayList<SearchIdResult>>
     searchId( @Field("sellerId") String sellerid);
+
+    @FormUrlEncoded
+    @POST("PSelect/category")
+    public Call<ArrayList<MainProductResult>>
+    category(@Field("category") String cateogory);
 
     //report _ moonhee,119
     @FormUrlEncoded
@@ -63,4 +80,8 @@ public interface RetrofitService {
     public Call<JsonObject>
     report(@Field("kind") String kind, @Field("senderId") String senderId, @Field("productId") String productId);
 
+    // banner
+//    @POST("readBanner")
+//    public Call<BannerItemResult>
+//    readBanner();
 }
