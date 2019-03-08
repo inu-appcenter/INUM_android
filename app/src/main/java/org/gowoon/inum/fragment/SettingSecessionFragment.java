@@ -90,7 +90,6 @@ public class SettingSecessionFragment extends Fragment {
                 });
             }
         });
-
         return rootview;
     }
 

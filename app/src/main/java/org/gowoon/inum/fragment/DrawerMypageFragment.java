@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import org.gowoon.inum.R;
 import org.gowoon.inum.activity.MypageActivity;
+import org.gowoon.inum.activity.UploadAcitivity;
 import org.gowoon.inum.model.SearchIdResult;
 import org.gowoon.inum.util.Singleton;
 
@@ -30,12 +31,21 @@ import static android.content.Context.MODE_PRIVATE;
 public class DrawerMypageFragment extends Fragment {
 
     private FrameLayout Drawer;
-    TextView newmessage,productnum, mypagename;
+    TextView newmessage,productnum, mypagename, upload;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         Drawer = (FrameLayout) inflater.inflate(R.layout.fragment_drawer_mypage, container, false);
+
+        upload = Drawer.findViewById(R.id.tv_mypage_uploadproduct);
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent upload_intent = new Intent(getActivity().getApplicationContext(),UploadAcitivity.class);
+                startActivity(upload_intent);
+            }
+        });
 
         mypagename = Drawer.findViewById(R.id.tv_mypage_name);
         newmessage = (TextView) Drawer.findViewById(R.id.tv_mypage_newmessage);

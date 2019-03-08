@@ -78,12 +78,6 @@ public class SettingQuestFragment extends Fragment {
                 });
             }
         });
-        dialog_send.setOnCancelButtonClickListener(new Adapter_dialog_twobutton.OnCancelButtonClickListener() {
-            @Override
-            public void onClick() {
-                dialog_send.dismiss();
-            }
-        });
         return rootview;
     }
 
