@@ -2,8 +2,6 @@ package org.gowoon.inum.model;
 
 import android.graphics.drawable.Drawable;
 
-import org.gowoon.inum.fragment.DrawerMypageFragment;
-
 import java.util.Vector;
 
 public class DataCategoryParent {
