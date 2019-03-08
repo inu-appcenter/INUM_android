@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="197dp"
+    android:layout_height="109dp"
+    android:background="@drawable/gradient_btn">
+
+    <TextView
+        android:id="@+id/tv_item_chat_productname"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_marginStart="26.9dp"
+        android:layout_marginTop="32.3dp"
+        android:text="전동자전거"
+        android:textColor="@color/gunmetal"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_item_chat_productprice"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_marginStart="27.4dp"
+        android:layout_marginTop="7.7dp"
+        android:text="12000원"
+        android:textColor="@color/gunmetal"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_item_chat_productname" />
+
+    <ImageView
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/round_square_2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
