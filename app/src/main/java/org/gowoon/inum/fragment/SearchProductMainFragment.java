@@ -79,7 +79,6 @@ public class SearchProductMainFragment extends Fragment {
         }
         else
         {
-            none.setText("검색어를 입력해주세요");
         }
         recyclersearch.setHasFixedSize(true);
         mAdapter = new Adapter_recycler_ProductSearch();

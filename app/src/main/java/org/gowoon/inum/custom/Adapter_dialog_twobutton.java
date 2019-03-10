@@ -82,7 +82,7 @@ public class Adapter_dialog_twobutton extends Dialog {
         dismiss();
     }
 
-    @OnClick(R.id.btn_di_twobutton_submit)
+    @OnClick(R.id.btn_di_twobutton_cancle)
     public void cancleButton(){
         if(cancelButtonClickListener != null){
             cancelButtonClickListener.onClick();

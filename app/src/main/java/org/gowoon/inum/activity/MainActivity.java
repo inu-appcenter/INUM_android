@@ -17,6 +17,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import org.gowoon.inum.R;
@@ -37,7 +38,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Fragment category,mypage;
     DrawerLayout mDrawer, cDrawer;
-    FrameLayout search;
+    FrameLayout search,fragments;
+    ScrollView scrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +74,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         iv_cancle.setOnClickListener(this);
         tv_searchok.setOnClickListener(this);
 
+        fragments = findViewById(R.id.framelayout_fragment_main_main);
+
         et_search.setOnFocusChangeListener(new View.OnFocusChangeListener(){
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
@@ -79,14 +83,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     float mScale = getResources().getDisplayMetrics().density;
                     ConstraintLayout.LayoutParams layoutParams
                             = new ConstraintLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, WRAP_CONTENT);
-                    layoutParams.height = (int) (mScale*78);
                     layoutParams.setMargins((int)mScale*13, 0, (int) mScale*68,0);
                     et_search.setHint("");
+                    fragments.setVisibility(View.INVISIBLE);
                     search.setLayoutParams(layoutParams);
                     tv_searchok.setVisibility(View.VISIBLE);
                     iv_cancle.setVisibility(View.VISIBLE);
                 }
                 else{
+                    fragments.setVisibility(View.VISIBLE);
                     tv_searchok.setVisibility(View.INVISIBLE);
                     iv_cancle.setVisibility(View.INVISIBLE);
                 }
@@ -98,25 +103,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     float mScale = getResources().getDisplayMetrics().density;
                     //Enter키눌렀을떄 처리
-                    ViewGroup.LayoutParams param = search.getLayoutParams();
-                    param.height = (int) (mScale * 33);
-                    param.width = MATCH_PARENT;
+                    ConstraintLayout.LayoutParams param
+                            = new ConstraintLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, WRAP_CONTENT);
+                    param.setMargins((int) mScale*13,0,(int)mScale*68,0);
                     search.setLayoutParams(param);
-//                    et_search.setHint("찾고있는 상품을 입력하세요");
-                    et_search.setText("");
                     et_search.clearFocus();
+
+                    tv_searchok.setVisibility(View.VISIBLE);
+                    iv_cancle.setVisibility(View.VISIBLE);
 
                     InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
                     inputMethodManager.hideSoftInputFromWindow(et_search.getWindowToken(),0);
-//                    Bundle bundle = new Bundle();
-//                    bundle.putString("search", String.valueOf(et_search.getText().toString()));
-
-//                    SearchProductMainFragment searchproduct = new SearchProductMainFragment();
-//                    searchproduct.setArguments(bundle);
-//                    getFragmentManager().beginTransaction()
-//                            .replace(R.id.framelayout_fragment_main_main, searchproduct)
-//                            .addToBackStack(null)
-//                            .commit();
                     return true;
                 }
                 return false;
@@ -133,6 +130,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             drawerLayout.closeDrawers();
         }
         else if (search.hasFocus()){
+            float mScale = getResources().getDisplayMetrics().density;
+            ConstraintLayout.LayoutParams param
+                    = new ConstraintLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, WRAP_CONTENT);
+            param.setMargins((int) mScale*13,0,(int)mScale*13,0);
+            search.setLayoutParams(param);
             search.clearFocus();
         }
 //        else if (findViewById(R.id.fragment_Main_product).getVisibility() == View.VISIBLE){
@@ -150,46 +152,51 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         ConstraintLayout.LayoutParams param
-                = new ConstraintLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
+                = new ConstraintLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, WRAP_CONTENT);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_main);
         et_search = findViewById(R.id.etv_main_search);
         search = findViewById(R.id.framelayout_main_searchbar);
         float mScale = getResources().getDisplayMetrics().density;
         switch(view.getId()){
             case R.id.tv_main_searchok: {
-                param.setMargins((int) mScale*13,(int) mScale*22,(int)mScale*13,(int) mScale*22);
-                param.height = (int) (mScale * 33);
-                param.width = MATCH_PARENT;
+                param.setMargins((int) mScale*13,0,(int)mScale*13,0);
                 search.setLayoutParams(param);
                 Bundle bundle = new Bundle();
                 String searchtext = et_search.getText().toString();
                 bundle.putString("search", searchtext);
+                fragments.setVisibility(View.VISIBLE);
+
                 SearchProductMainFragment searchproduct = new SearchProductMainFragment();
                 searchproduct.setArguments(bundle);
                 getFragmentManager().beginTransaction()
                         .replace(R.id.framelayout_fragment_main_main, searchproduct)
                         .addToBackStack(null)
                         .commit();
-
+                InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(et_search.getWindowToken(),0);
 
                 et_search.clearFocus();
                 et_search.setText("");
+                et_search.setHint("찾고있는 상품을 입력하세요");
+                findViewById(R.id.iv_main_searcherase).setVisibility(View.INVISIBLE);
+                findViewById(R.id.tv_main_searchok).setVisibility(View.INVISIBLE);
 
-
-               // break;
+                break;
             }
 
             case R.id.iv_main_searcherase:{
 //                param.width = MATCH_PARENT;
-//                param.setMargins((int) mScale*13,(int) mScale*22,(int)mScale*13,(int) mScale*22);
+                param.setMargins((int) mScale*13,0,(int)mScale*13,0);
 //                param.height = (int) (mScale*33);
-//                search.setLayoutParams(param);
-//                et_search.clearFocus();
-//                et_search.setText("");
+                search.setLayoutParams(param);
+                et_search.clearFocus();
+                et_search.setText("");
+                et_search.setHint("찾고있는 상품을 입력하세요");
                 InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(et_search.getWindowToken(),0);
                 findViewById(R.id.iv_main_searcherase).setVisibility(View.INVISIBLE);
                 findViewById(R.id.tv_main_searchok).setVisibility(View.INVISIBLE);
+                fragments.setVisibility(View.VISIBLE);
                 break;
             }
 

@@ -67,7 +67,7 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST("PSelect/category")
     public Call<ArrayList<MainProductResult>>
-    category(@Field("category") String cateogory);
+    category(@Field("category") String category);
 
     //report _ moonhee,119
     @FormUrlEncoded

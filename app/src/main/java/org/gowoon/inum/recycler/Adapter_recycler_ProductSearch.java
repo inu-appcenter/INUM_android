@@ -31,8 +31,8 @@ public class Adapter_recycler_ProductSearch extends RecyclerView.Adapter<Adapter
     public Adapter_recycler_ProductSearch(){
 
     }
-    public Adapter_recycler_ProductSearch(ArrayList<MainProductResult> myData) {
-        this.mDataset.addAll(myData);
+    public Adapter_recycler_ProductSearch(ArrayList<MainProductResult> mDataset) {
+        this.mDataset.addAll(mDataset);
     }
 
 
