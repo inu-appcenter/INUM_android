@@ -105,15 +105,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     //Enter키눌렀을떄 처리
                     ConstraintLayout.LayoutParams param
                             = new ConstraintLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, WRAP_CONTENT);
-                    param.setMargins((int) mScale*13,0,(int)mScale*68,0);
+                    param.setMargins((int) mScale*13,0,(int)mScale*13,0);
                     search.setLayoutParams(param);
-                    et_search.clearFocus();
+                    Bundle bundle = new Bundle();
+                    String searchtext = et_search.getText().toString();
+                    bundle.putString("search", searchtext);
+                    fragments.setVisibility(View.VISIBLE);
 
-                    tv_searchok.setVisibility(View.VISIBLE);
-                    iv_cancle.setVisibility(View.VISIBLE);
-
+                    SearchProductMainFragment searchproduct = new SearchProductMainFragment();
+                    searchproduct.setArguments(bundle);
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.framelayout_fragment_main_main, searchproduct)
+                            .addToBackStack(null)
+                            .commit();
                     InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
                     inputMethodManager.hideSoftInputFromWindow(et_search.getWindowToken(),0);
+
+                    et_search.clearFocus();
+                    et_search.setText("");
+                    et_search.setHint("찾고있는 상품을 입력하세요");
+                    findViewById(R.id.iv_main_searcherase).setVisibility(View.INVISIBLE);
+                    findViewById(R.id.tv_main_searchok).setVisibility(View.INVISIBLE);
                     return true;
                 }
                 return false;
@@ -137,16 +149,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             search.setLayoutParams(param);
             search.clearFocus();
         }
-//        else if (findViewById(R.id.fragment_Main_product).getVisibility() == View.VISIBLE){
+//        else if (findViewById(R.id.frame).getVisibility() == View.VISIBLE){
 //            long tempTime = System.currentTimeMillis();
 //            long intervalTime = tempTime - backPressedTime;
 //            if (0 <= intervalTime && FINISH_INTERVAL_TIME >= intervalTime) {
+        else {
             super.onBackPressed();
+        }
 //            } else {
 //                backPressedTime = tempTime;
 //                Toast.makeText(getApplicationContext(), "버튼을 한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
 //            }
-    //    }
+//        }
     }
 
     @Override

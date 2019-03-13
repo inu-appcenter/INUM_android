@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import org.gowoon.inum.R;
 import org.gowoon.inum.model.MainProductResult;
+import org.gowoon.inum.model.SearchIdResult;
 import org.gowoon.inum.recycler.Adapter_recycler_ProductSearch;
 import org.gowoon.inum.util.Singleton;
 
@@ -31,7 +32,6 @@ public class SearchProductMainFragment extends Fragment {
     TextView resultnum, tv_search, none;
     RecyclerView recyclersearch;
     Adapter_recycler_ProductSearch mAdapter;
-    ArrayList<MainProductResult> list = new ArrayList<>();
     String search;
     SharedPreferences pref;
 
@@ -48,11 +48,11 @@ public class SearchProductMainFragment extends Fragment {
 
         tv_search.setText("'"+search+"'");
         if (!search.equals("")) {
-            Singleton.retrofit.searchproduct(search).enqueue(new Callback<ArrayList<MainProductResult>>() {
+            Singleton.retrofit.searchproduct(search).enqueue(new Callback<ArrayList<SearchIdResult>>() {
                 @Override
-                public void onResponse(Call<ArrayList<MainProductResult>> call, Response<ArrayList<MainProductResult>> response) {
+                public void onResponse(Call<ArrayList<SearchIdResult>> call, Response<ArrayList<SearchIdResult>> response) {
                     if (response.isSuccessful()) {
-                        ArrayList<MainProductResult> results = response.body();
+                        ArrayList<SearchIdResult> results = response.body();
                         if (results != null) {
                             if (results.size() == 0) {
                                 resultnum.setText("검색결과 00");
@@ -63,7 +63,8 @@ public class SearchProductMainFragment extends Fragment {
                                 resultnum.setText("검색결과 " + results.size());
                                 recyclersearch.setVisibility(View.VISIBLE);
                                 none.setVisibility(View.INVISIBLE);
-                                mAdapter.mDataset.addAll(results);
+                                mAdapter = new Adapter_recycler_ProductSearch(results);
+                                recyclersearch.setAdapter(mAdapter);
                                 mAdapter.notifyDataSetChanged();
                                 Log.d("searchtest", "검색결과부르기" + mAdapter.mDataset.get(0));
                             }
@@ -72,7 +73,7 @@ public class SearchProductMainFragment extends Fragment {
                 }
 
                 @Override
-                public void onFailure(Call<ArrayList<MainProductResult>> call, Throwable t) {
+                public void onFailure(Call<ArrayList<SearchIdResult>> call, Throwable t) {
 
                 }
             });
@@ -81,7 +82,6 @@ public class SearchProductMainFragment extends Fragment {
         {
         }
         recyclersearch.setHasFixedSize(true);
-        mAdapter = new Adapter_recycler_ProductSearch();
 //        mAdapter.setItemClick(new Adapter_recycler_ProductSearch.ItemClick() {
 //            @Override
 //            public void onClick(View view, int position) {
@@ -93,9 +93,6 @@ public class SearchProductMainFragment extends Fragment {
         mLayoutManager = new GridLayoutManager(getActivity(),3);
         recyclersearch.setLayoutManager(mLayoutManager);
         recyclersearch.setItemAnimator(new DefaultItemAnimator());
-        recyclersearch.setAdapter(mAdapter);
-        mAdapter.notifyDataSetChanged();
-
         return rootview;
     }
 }
