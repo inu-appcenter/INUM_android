@@ -73,7 +73,7 @@ public class DrawerCategoryFragment extends Fragment {
 
                     Bundle bundle = new Bundle();
                     bundle.putString("parent",parentname);
-                    //   bundle.putInt("categoryimage",image);
+                    bundle.putInt("groupposition",groupPosition);
 
                     SearchProductCategoryFragment category_product = new SearchProductCategoryFragment();
                     category_product.setArguments(bundle);
@@ -91,14 +91,13 @@ public class DrawerCategoryFragment extends Fragment {
         categoryListview.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long id) {
-                Drawable image = parentList[groupPosition].getCategory_image();
                 String childname = parentList[groupPosition].child.get(childPosition);
                 String parentname = parentList[groupPosition].getCategory_name();
 
                 Bundle bundle = new Bundle();
+                bundle.putInt("groupposition",groupPosition);
                 bundle.putString("child",childname);
                 bundle.putString("parent",parentname);
-                //   bundle.putInt("categoryimage",image);
 
                 SearchProductCategoryFragment category_product = new SearchProductCategoryFragment();
                 category_product.setArguments(bundle);
