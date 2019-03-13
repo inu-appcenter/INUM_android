@@ -56,7 +56,7 @@ public interface RetrofitService {
 
     @FormUrlEncoded
     @POST("PSelect/search")
-    public Call<ArrayList<MainProductResult>>
+    public Call<ArrayList<SearchIdResult>>
     searchproduct(@Field("productName") String searchtxt);
 
     @FormUrlEncoded
@@ -66,7 +66,7 @@ public interface RetrofitService {
 
     @FormUrlEncoded
     @POST("PSelect/category")
-    public Call<ArrayList<MainProductResult>>
+    public Call<ArrayList<SearchIdResult>>
     category(@Field("category") String category);
 
     //report _ moonhee,119

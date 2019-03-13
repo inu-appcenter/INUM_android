@@ -21,12 +21,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
-    private Button btn_login;
+    private TextView btn_login;
     public EditText etv_stdid, etv_pw;
     private TextView tv_notcorrect, tv_join, tv_findpw;
     public String stdid, pw;
     private CheckBox checkBox_login;
-
 
     public SharedPreferences pref_info;
     SharedPreferences.Editor editor;
@@ -53,7 +52,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         pref_info = getSharedPreferences("userinfo",MODE_PRIVATE);
         editor = pref_info.edit();
-    }
+
+}
 
     @Override
     public void onClick(View view){
@@ -101,8 +101,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 }
                                 else if (result.getMessage().equals("fail")){
                                     Log.d("login_fail_wrong","아이디비밀번호오류");
+                                    tv_notcorrect.setText("*학번과 일치하는 패스워드가 아닙니다.");
                                     tv_notcorrect.setVisibility(View.VISIBLE);
                                 }
+                                tv_notcorrect.setVisibility(View.VISIBLE);
                             }
                         }
                     }
@@ -115,7 +117,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
             case R.id.tv_login_join:
             {
-
+                Intent intent_signup = new Intent(getApplicationContext(), SignupActivity.class);
+                startActivity(intent_signup);
                 break;
             }
             case R.id.tv_login_findpw:

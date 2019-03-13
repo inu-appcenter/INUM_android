@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.gowoon.inum.R;
@@ -40,6 +41,13 @@ public class Adapter_listview_Chat extends BaseAdapter{
             holder.tv_date = convertView.findViewById(R.id.tv_itemchat_date);
             holder.tv_name = convertView.findViewById(R.id.tv_itemchat_name);
             holder.tv_text = convertView.findViewById(R.id.tv_itemchat_text);
+            holder.iv_out = convertView.findViewById(R.id.iv_itemchat_out);
+            holder.iv_out.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
 
             convertView.setTag(holder);
 
@@ -57,6 +65,7 @@ public class Adapter_listview_Chat extends BaseAdapter{
     }
     class ChatViewHolder{
         TextView tv_name, tv_text, tv_date;
+        ImageView iv_out;
     }
     public void addItem(ItemListViewChat list){
         chatlist.add(list);
