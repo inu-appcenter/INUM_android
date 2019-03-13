@@ -33,7 +33,7 @@ public class SettingPwChangeFragment extends Fragment {
     TextView noinput, diff, ok , same, less8;
     EditText et_currentpw, et_newpw, et_newpwagain;
     Boolean length,same_beforepw;
-    String id,pw;
+    String id,pw,currentpw;
     SharedPreferences pref;
     
     @Override
@@ -41,7 +41,9 @@ public class SettingPwChangeFragment extends Fragment {
                              Bundle savedInstanceState) {
         ViewGroup rootview =(ViewGroup)inflater.inflate(R.layout.fragment_setting_pw_change, container, false);
 
-        length = true;
+        length = Boolean.FALSE;
+        same_beforepw = Boolean.FALSE;
+
 
         et_currentpw = rootview.findViewById(R.id.et_setting_pwchange_currentpw);
         noinput =rootview.findViewById(R.id.tv_setting_pwchange_newpw_noinput);
@@ -50,7 +52,7 @@ public class SettingPwChangeFragment extends Fragment {
         same = rootview.findViewById(R.id.tv_setting_pwchange_newpw_same);
         less8 = rootview.findViewById(R.id.tv_setting_pwchange_newpw_less8);
 
-        et_currentpw = rootview.findViewById(R.id.et_setting_pwchange_currentpw);
+        currentpw = et_currentpw.getText().toString().trim();
         et_newpw =rootview.findViewById(R.id.et_setting_pwchange_newpw);
         et_newpwagain = rootview.findViewById(R.id.et_setting_pwchange_newpw_again);
 
@@ -82,7 +84,6 @@ public class SettingPwChangeFragment extends Fragment {
             }
         });
 
-
         et_newpwagain.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -91,7 +92,7 @@ public class SettingPwChangeFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (length) {
+                if (length){
                     if (s.toString().equals(et_newpw.getText().toString())) {
                         same.setVisibility(View.VISIBLE);
                         diff.setVisibility(View.INVISIBLE);
@@ -109,48 +110,51 @@ public class SettingPwChangeFragment extends Fragment {
 
             }
         });
-
         rootview.findViewById(R.id.btn_setting_pwchange).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if((et_currentpw.getText().toString().equals(pw))){
-                    if((same_beforepw)&&(length)){
-                        //noinput.setVisibility(View.VISIBLE);
-                        Adapter_dialog_twobutton dialog = new Adapter_dialog_twobutton(getActivity(),"확인을 누르시면 새로운\n비밀번호로 변경됩니다.");
-                        dialog.setOnOkButtonClickListener(new Adapter_dialog_twobutton.OnOkButtonClickListener() {
-                            @Override
-                            public void onClick() {
-                                final String st_newpw = et_newpw.getText().toString();
+                @Override
+                public void onClick(View v) {
 
-                                Singleton.retrofit.changePasswd(id ,pw ,st_newpw).enqueue(new Callback<JsonObject>() {
-                                    @Override
-                                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                                        if(response.isSuccessful()){
-                                            assert response.body() != null;
-                                            JsonObject result = response.body();
-                                            if(String.valueOf(result.get("ans")).equals("true")){
-                                                FragmentManager fragmentManager = getActivity().getFragmentManager();
-                                                fragmentManager.beginTransaction().remove(SettingPwChangeFragment.this).commit();
+                    if ((same_beforepw) && (length)) {
+                        noinput.setVisibility(View.INVISIBLE);
+
+                        if ((currentpw.equals(pw))) {
+                            Adapter_dialog_twobutton dialog_twobtn = new Adapter_dialog_twobutton(getActivity(), "확인을 누르시면 새로운\n비밀번호로 변경됩니다.");
+                            dialog_twobtn.setOnOkButtonClickListener(new Adapter_dialog_twobutton.OnOkButtonClickListener() {
+                                @Override
+                                public void onClick() {
+                                    final String st_newpw = et_newpw.getText().toString();
+                                    Singleton.retrofit.changePasswd(id, pw, st_newpw).enqueue(new Callback<JsonObject>() {
+                                        @Override
+                                        public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                                            if (response.isSuccessful()) {
+                                                assert response.body() != null;
+                                                JsonObject result = response.body();
+                                                if (String.valueOf(result.get("ans")).equals("true")) {
+                                                    FragmentManager fragmentManager = getActivity().getFragmentManager();
+                                                    fragmentManager.beginTransaction().remove(SettingPwChangeFragment.this).commit();
+                                                }
                                             }
                                         }
-                                    }
-                                    @Override
-                                    public void onFailure(Call<JsonObject> call, Throwable t) {
-                                    }
-                                });
-                            }
-                        });
 
-                        dialog.show();}
+                                        @Override
+                                        public void onFailure(Call<JsonObject> call, Throwable t) {
+                                        }
+                                    });
+                                }
+                            });
+                            dialog_twobtn.show();
+                        } else {
+                            Adapter_dialog_onebutton dialog_incorrect
+                                    = new Adapter_dialog_onebutton(getActivity(), "현재 비밀번호가\n일치하지 않습니다.");
+                            dialog_incorrect.show();
+                        }
+                    }
+                    else
+                    {
+                        noinput.setVisibility(View.VISIBLE);
+                    }
                 }
-                else{
-                    Adapter_dialog_onebutton dialog_incorrect
-                            = new Adapter_dialog_onebutton(getActivity(),"현재 비밀번호가\n일치하지 않습니다.");
-                    dialog_incorrect.show();
-                }
-            }
-        });
-
+            });
         return rootview;
     }
 }

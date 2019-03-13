@@ -14,7 +14,9 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import org.gowoon.inum.R;
+import org.gowoon.inum.activity.ChatActivity;
 import org.gowoon.inum.activity.MypageActivity;
+import org.gowoon.inum.activity.MyproductActivity;
 import org.gowoon.inum.activity.UploadAcitivity;
 import org.gowoon.inum.model.SearchIdResult;
 import org.gowoon.inum.util.Singleton;
@@ -30,7 +32,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class DrawerMypageFragment extends Fragment {
 
-    private FrameLayout Drawer;
+    private FrameLayout Drawer,message,myproduct;
     TextView newmessage,productnum, mypagename, upload;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,6 +55,24 @@ public class DrawerMypageFragment extends Fragment {
         SharedPreferences pref = Objects.requireNonNull(getActivity()).getSharedPreferences("userinfo",MODE_PRIVATE);
         String id = pref.getString("userid","");
         mypagename.setText(pref.getString("name",""));
+
+        message = Drawer.findViewById(R.id.framelayout_mypage_message);
+        message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_message = new Intent(getActivity(), ChatActivity.class);
+                startActivity(intent_message);
+            }
+        });
+
+        myproduct = Drawer.findViewById(R.id.framelayout_mypage_myproduct);
+        myproduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_product = new Intent(getActivity(), MyproductActivity.class);
+                startActivity(intent_product);
+            }
+        });
 
         Singleton.retrofit.searchId(id).enqueue(new Callback<ArrayList<SearchIdResult>>() {
             @Override
