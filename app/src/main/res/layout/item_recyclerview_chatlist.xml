@@ -7,7 +7,7 @@
     android:layout_height="107dp">
 
     <TextView
-        android:id="@+id/tv_itemchat_name"
+        android:id="@+id/tv_itemchatlist_name"
         android:layout_width="wrap_content"
         android:layout_height="27dp"
         android:layout_marginStart="41.9dp"
@@ -19,18 +19,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_itemchat_text"
+        android:id="@+id/tv_itemchatlist_text"
         android:layout_width="wrap_content"
         android:layout_height="27dp"
         android:layout_marginTop="8dp"
         android:text="안녕하세요"
         android:textColor="#000"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/tv_itemchat_name"
-        app:layout_constraintTop_toBottomOf="@+id/tv_itemchat_name" />
+        app:layout_constraintStart_toStartOf="@+id/tv_itemchatlist_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_itemchatlist_name" />
 
     <TextView
-        android:id="@+id/tv_itemchat_date"
+        android:id="@+id/tv_itemchatlist_date"
         android:layout_width="wrap_content"
         android:layout_height="19dp"
         android:layout_marginEnd="44.4dp"
@@ -48,12 +48,13 @@
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="16dp"
+        android:id="@+id/iv_itemchatlist_out"
+        android:layout_width="44dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/red" />
+
 
 </android.support.constraint.ConstraintLayout>

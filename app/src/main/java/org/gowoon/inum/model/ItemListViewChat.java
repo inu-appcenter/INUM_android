@@ -1,7 +1,10 @@
 package org.gowoon.inum.model;
 
+import android.view.View;
+
 public class ItemListViewChat {
-    private String name, text, yymmdd;
+    private String name, chattext, yymmdd;
+    public View.OnClickListener onClickListener;
 
     public String getName() {
         return name;
@@ -11,12 +14,12 @@ public class ItemListViewChat {
         this.name = name;
     }
 
-    public String getText() {
-        return text;
+    public String getChattext() {
+        return chattext;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setChatText(String chattext) {
+        this.chattext = chattext;
     }
 
     public String getYymmdd() {
