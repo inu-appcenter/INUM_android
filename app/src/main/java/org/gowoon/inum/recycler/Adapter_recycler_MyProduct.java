@@ -16,7 +16,7 @@ import org.gowoon.inum.model.SearchIdResult;
 
 import java.util.ArrayList;
 
-public class    Adapter_recycler_MyProduct extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class Adapter_recycler_MyProduct extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private ArrayList<SearchIdResult> data = new ArrayList<>();
     LayoutInflater inflater;
 
