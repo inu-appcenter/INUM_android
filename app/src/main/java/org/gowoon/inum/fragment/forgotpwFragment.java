@@ -31,8 +31,6 @@ public class forgotpwFragment extends Fragment {
         btn_find = rootview.findViewById(R.id.btn_forgotpw);
         tv_err = rootview.findViewById(R.id.tv_forgotpw_noinput);
 
-        btn_find.bringToFront();
-
         btn_find.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

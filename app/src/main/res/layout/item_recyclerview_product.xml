@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="90dp"
+    android:layout_height="140dp"
+    android:layout_marginStart="12.5dp"
+    android:layout_marginEnd="12.5dp"
+    android:layout_marginBottom="20dp">
+
+    <ImageView
+        android:id="@+id/iv_productcard2_image"
+        android:layout_width="90dp"
+        android:layout_height="95dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/round_square_8dp" />
+
+    <TextView
+        android:id="@+id/tv_productcard2_name"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="9dp"
+        android:text="상품이름"
+        android:textColor="@color/gunmetal"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_productcard2_image" />
+
+    <TextView
+        android:id="@+id/tv_productcard2_price"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_marginStart="6dp"
+        android:text="200000원"
+        android:textColor="@color/gunmetal"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_productcard2_name" />
+    
+</android.support.constraint.ConstraintLayout>

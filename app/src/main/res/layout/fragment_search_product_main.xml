@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.SearchProductMainFragment">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraint_search_product_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_search_product_main_resultnum"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="7dp"
+            android:text="검색결과 00"
+            android:textColor="@color/gunmetal"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_search_product_main_searchtxt"
+            android:layout_width="wrap_content"
+            android:layout_height="29dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginStart="28dp"
+            android:text="'책'"
+            android:textColor="@color/gunmetal"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_search_product_main_resultnum"/>
+
+        <TextView
+            android:id="@+id/tv_search_product_main_none"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="0.5dp"
+            android:text="에 대한 검색 결과가 없습니다:-("
+            android:visibility="invisible"
+            android:textColor="@color/gunmetal"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@id/tv_search_product_main_searchtxt"
+            app:layout_constraintTop_toBottomOf="@id/tv_search_product_main_resultnum"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView_search_product_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="7.5dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="67dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </android.support.constraint.ConstraintLayout>
+
+</FrameLayout>

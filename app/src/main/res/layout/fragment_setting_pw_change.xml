@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.SettingPwChangeFragment"
+    android:clickable="true">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff">
+
+        <TextView
+            android:id="@+id/tv_changepw"
+            android:layout_width="wrap_content"
+            android:layout_height="29dp"
+            android:layout_marginTop="20dp"
+            android:text="비밀번호 변경"
+            android:textColor="@color/gunmetal"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view_changepw_partition"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_marginTop="65dp"
+            android:background="@color/white_two"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_setting_pwchange_currentpw"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="32dp"
+            android:text="현재 비밀번호 입력"
+            android:textColor="@color/gunmetal"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_changepw_partition" />
+
+        <EditText
+            android:theme="@style/EdittextStyle_login"
+            style="@style/EdittextStyle_login"
+            android:id="@+id/et_setting_pwchange_currentpw"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="19.2dp"
+            android:layout_marginEnd="19.2dp"
+            android:layout_marginTop="4dp"
+            android:ems="10"
+            android:paddingStart="14.8dp"
+            android:inputType="textPassword"
+            android:hint="입력"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_setting_pwchange_currentpw" />
+
+        <TextView
+            android:id="@+id/tv_setting_pwchange_newpw"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="112dp"
+            android:text="새로운 비밀번호 입력"
+            android:textColor="@color/gunmetal"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_setting_pwchange_currentpw" />
+
+        <EditText
+            android:theme="@style/EdittextStyle_login"
+            style="@style/EdittextStyle_login"
+            android:id="@+id/et_setting_pwchange_newpw"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="19.2dp"
+            android:layout_marginEnd="19.2dp"
+            android:layout_marginTop="4dp"
+            android:ems="10"
+            android:paddingStart="14.8dp"
+            android:inputType="textPassword"
+            android:hint="입력"
+            android:textColorHint="#c4c4c4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_setting_pwchange_newpw" />
+
+        <TextView
+            android:id="@+id/tv_setting_pwchange_newpw_again"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="84dp"
+            android:text="새로운 비밀번호 재입력"
+            android:textColor="@color/gunmetal"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_setting_pwchange_newpw" />
+
+        <EditText
+            android:theme="@style/EdittextStyle_login"
+            style="@style/EdittextStyle_login"
+            android:id="@+id/et_setting_pwchange_newpw_again"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="19.2dp"
+            android:layout_marginEnd="19.2dp"
+            android:layout_marginTop="4dp"
+            android:ems="10"
+            android:paddingStart="14.8dp"
+            android:inputType="textPassword"
+            android:hint="입력"
+            android:textColorHint="#c4c4c4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_setting_pwchange_newpw_again" />
+
+        <Button
+            android:id="@+id/btn_setting_pwchange"
+            android:layout_width="match_parent"
+            android:layout_height="53.8dp"
+            android:text="비밀번호 변경하기"
+            android:textSize="18sp"
+            android:textColor="@color/gunmetal"
+            android:background="@drawable/upside_stroke_square_3dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_setting_pwchange_newpw_noinput"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_marginBottom="22.3dp"
+            android:visibility="invisible"
+            android:text="* 변경할 비밀번호를 입력해야 합니다."
+            android:textSize="12sp"
+            android:textColor="@color/orangey_red"
+            app:layout_constraintBottom_toTopOf="@+id/btn_setting_pwchange"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_setting_pwchange-newpw_less8"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="8dp"
+            android:visibility="invisible"
+            android:text="* 8글자 이상 입력해야 합니다."
+            android:textSize="12sp"
+            android:textColor="@color/orangey_red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_setting_pwchange_newpw" />
+
+        <TextView
+            android:id="@+id/tv_setting_pwchange_newpw_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="8dp"
+            android:visibility="invisible"
+            android:text="* 사용할 수 있는 비밀번호입니다."
+            android:textSize="12sp"
+            android:textColor="@color/apple_green"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_setting_pwchange_newpw" />
+
+
+        <TextView
+            android:id="@+id/tv_setting_pwchange_newpw_diff"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="8dp"
+            android:visibility="invisible"
+            android:text="* 비밀번호가 일치하지 않습니다."
+            android:textSize="12sp"
+            android:textColor="@color/orangey_red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_setting_pwchange_newpw_again" />
+
+        <TextView
+            android:id="@+id/tv_setting_pwchange_newpw_same"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="8dp"
+            android:visibility="invisible"
+            android:text="* 비밀번호가 일치합니다."
+            android:textSize="12sp"
+            android:textColor="@color/apple_green"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_setting_pwchange_newpw_again" />
+
+    </android.support.constraint.ConstraintLayout>
+</FrameLayout>

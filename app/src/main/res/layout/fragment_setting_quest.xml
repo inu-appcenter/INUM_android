@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.SettingQuestFragment"
+    android:clickable="true">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff">
+        
+        <TextView
+            android:id="@+id/tv_question"
+            android:layout_width="wrap_content"
+            android:layout_height="29dp"
+            android:layout_marginTop="20dp"
+            android:text="문의하기"
+            android:textColor="@color/gunmetal"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view_qustion_partition"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_marginTop="65dp"
+            android:background="@color/pale_grey_two"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="32dp"
+            android:text="문의내용"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_qustion_partition" />
+
+        <EditText
+            android:theme="@style/EdittextStyle_setting_quest"
+            style="@style/EdittextStyle_setting_quest"
+            android:id="@+id/et_setting_question"
+            android:layout_width="match_parent"
+            android:layout_height="139dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="54dp"
+            android:ems="10"
+            android:backgroundTint="@color/pale_grey_three"
+            android:background="@drawable/round_square_4dp_stroke_2dp"
+            android:inputType="textMultiLine"
+            android:hint="입력"
+            android:paddingStart="14dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="105dp"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_qustion_partition" />
+
+        <Button
+            android:id="@+id/btn_question_send"
+            android:layout_width="match_parent"
+            android:layout_height="53.8dp"
+            android:text="보내기"
+            android:textSize="18sp"
+            android:textColor="@color/gunmetal"
+            android:background="@drawable/upside_stroke_square_3dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_setting_question_noinput"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_marginBottom="9dp"
+            android:text="* 문의사항을 입력해야 합니다."
+            android:textColor="@color/orangey_red"
+            android:textSize="12sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/btn_question_send"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+</FrameLayout>

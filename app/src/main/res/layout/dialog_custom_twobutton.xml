@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="335dp"
+    android:layout_height="218dp"
+    android:background="@drawable/popup_product_background"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tv_dialog_twobutton"
+        android:layout_width="wrap_content"
+        android:layout_height="58dp"
+        android:layout_marginEnd="69dp"
+        android:layout_marginStart="71dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="100dp"
+        android:gravity="center_horizontal"
+        android:textColor="@color/gunmetal"
+        android:lines="2"
+        android:text="확인을 누르시면 새로운\n전화번호로 변경됩니다."
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view8"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="57dp"
+        android:background="@color/white_two"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <Button
+        android:id="@+id/btn_di_twobutton_cancle"
+        android:layout_width="168dp"
+        android:layout_height="56dp"
+        android:text="취소"
+        android:background="#00ffffff"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/view9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view8" />
+
+    <View
+        android:id="@+id/view9"
+        android:layout_width="1dp"
+        android:layout_height="56dp"
+        android:background="@color/white_two"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_di_twobutton_submit"
+        android:layout_width="168dp"
+        android:layout_height="56dp"
+        android:text="확인"
+        android:background="#00ffffff"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/view9"
+        app:layout_constraintTop_toBottomOf="@+id/view8" />
+</android.support.constraint.ConstraintLayout>

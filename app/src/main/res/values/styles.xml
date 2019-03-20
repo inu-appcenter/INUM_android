@@ -20,4 +20,17 @@
         <item name="android:colorControlActivated">@color/warm_grey</item>
     </style>
 
+    <style name="EdittextStyle_setting_quest" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">@color/pinkish_grey</item>
+        <item name="android:textColorHint">@color/pinkish_grey</item>
+        <item name="android:colorControlNormal">@color/pale_grey</item>
+        <item name="android:colorControlActivated">@color/warm_grey</item>
+    </style>
+
+    <style name="EdittextStyle_setting" parent="Widget.AppCompat.EditText">
+        <item name="android:colorControlNormal">#000000</item>
+        <item name="android:colorControlActivated">#000000</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
 </resources>

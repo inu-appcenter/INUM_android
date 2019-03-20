@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.SettingPhoneChangeFragment"
+    android:clickable="true">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/fragment_constraint_phone_change"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff">
+
+        <View
+            android:id="@+id/view_phonechange_partition"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_marginTop="65dp"
+            android:background="@color/white_two"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="29dp"
+            android:layout_marginTop="20dp"
+            android:text="전화번호 변경"
+            android:textColor="@color/gunmetal"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="40dp"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/view_phonechange_partition">
+
+            <TextView
+                android:id="@+id/tv_setting_phonechange_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:textColor="@color/gunmetal"
+                android:textSize="16sp"
+                android:text="현재 전화번호" />
+
+            <TextView
+                android:id="@+id/tv_setting_phonechange_current_num"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/gunmetal"
+                android:textSize="16sp"
+                android:text="01000000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_marginTop="78.5dp"
+                android:textColor="@color/gunmetal"
+                android:textSize="16sp"
+                android:text="새 전화번호"/>
+
+            <EditText
+                android:id="@+id/etv_setting_phonechange_newnum"
+                style="@style/EdittextStyle_setting"
+                android:theme="@style/EdittextStyle_setting"
+                android:layout_width="160dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="17.5dp"
+                android:gravity="center"
+                android:inputType="number"
+                android:textSize="16sp"
+                android:maxLength="11"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                />
+        </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_setting_phone_change"
+                android:layout_width="match_parent"
+                android:layout_height="53.8dp"
+                android:text="수정 하기"
+                android:textSize="18sp"
+                android:textColor="@color/gunmetal"
+                android:background="@drawable/upside_stroke_square_3dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_setting_phonechange_noinput"
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:layout_marginBottom="60.9dp"
+                android:text="* 전화번호를 입력해주세요."
+                android:textColor="@color/orangey_red"
+                android:textSize="12sp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toTopOf="@+id/btn_setting_phone_change"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+</FrameLayout>

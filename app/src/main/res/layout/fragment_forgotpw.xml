@@ -4,12 +4,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.forgotpwFragment">
+    tools:context=".fragment.forgotpwFragment"
+    android:background="@color/white"
+    android:clickable="true">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white">
+
+        <Button
+            android:id="@+id/btn_forgotpw"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="25.2dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginStart="40dp"
+            android:background="@drawable/gradient_btn"
+            android:text="이메일 인증"
+            android:textColor="@color/gunmetal"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
             android:id="@+id/iv_forgotpw_logo"
@@ -93,20 +110,6 @@
             android:textSize="12sp"
             android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@id/btn_forgotpw"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/btn_forgotpw"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginBottom="25.2dp"
-            android:layout_marginHorizontal="40dp"
-            android:background="@drawable/gradient_btn"
-            android:text="이메일 인증"
-            android:textColor="@color/gunmetal"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 

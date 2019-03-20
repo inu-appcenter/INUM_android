@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/book"
+        android:icon="@drawable/book"
+        android:title="책">
+
+        <menu>
+            <item android:title="전체"
+                android:id="@+id/menu_book_entire"/>
+            <item android:id="@+id/menu_book_culture"
+                android:title="교양"/>
+            <item android:id="@+id/menu_book_major"
+                android:title="전공"/>
+            <item android:id="@+id/menu_book_etc"
+                android:title="기타"/>
+        </menu>
+    </item>
+
+    <item
+        android:title="의류"
+        android:icon="@drawable/cloth"
+        android:id="@+id/cloth">
+
+        <menu>
+            <item android:title="전체"
+                android:id="@+id/menu_cloth_entire"/>
+            <item android:id="@+id/menu_cloth_male"
+                android:title="남성 의류"/>
+            <item android:id="@+id/menu_cloth_female"
+                android:title="여성의류"/>
+            <item android:id="@+id/menu_cloth_etc"
+                android:title="기타"/>
+        </menu>
+
+    </item>
+
+    <item
+        android:id="@+id/electric"
+        android:title="가전가구"
+        android:icon="@drawable/electric">
+        <menu>
+            <item android:title="전체"
+                android:id="@+id/menu_electric_entire"/>
+            <item android:id="@+id/menu_electric_elec"
+                android:title="전자기기"/>
+            <item android:id="@+id/menu_electric_furniture"
+                android:title="가구"/>
+            <item android:id="@+id/menu_electirc_etc"
+                android:title="기타"/>
+        </menu>
+    </item>
+    <item
+        android:title="잡화"
+        android:id="@+id/etc"
+        android:icon="@drawable/etc">
+
+        <menu>
+            <item android:id="@+id/menu_etc_entire"
+                android:title="전체" />
+            <item android:id="@+id/menu_etc_living"
+                android:title="생활/사무"/>
+            <item android:id="@+id/menu_etc_bagshoe"
+                android:title="가방/신발"/>
+            <item android:id="@+id/menu_etc_etc"
+                android:title="기타"/>
+        </menu>
+    </item>
+    <item
+        android:id="@+id/room"
+        android:icon="@drawable/room"
+        android:title="자취방"
+        />
+    <item
+        android:id="@+id/ticket"
+        android:title="식권"
+        android:icon="@drawable/ticket"
+        />
+</menu>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:id="@+id/activiy_setting"
+    tools:context=".activity.MypageActivity">
+
+    <View
+        android:id="@+id/view_mypagesetting_partition"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_marginTop="65dp"
+        android:background="@color/white_two"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/txt_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="29dp"
+        android:layout_marginTop="20dp"
+        android:text="설정"
+        android:textColor="@color/gunmetal"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/listview_mypage"
+        android:layout_width="match_parent"
+        android:layout_height="310dp"
+        android:divider="@color/pale_grey_two"
+        android:dividerHeight="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_mypagesetting_partition">
+    </ListView>
+
+</android.support.constraint.ConstraintLayout>
