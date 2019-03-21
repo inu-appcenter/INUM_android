@@ -11,8 +11,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.SplashActivity">
@@ -27,7 +27,9 @@
         <activity android:name=".activity.UploadAcitivity" />
         <activity android:name=".activity.MypageActivity" />
         <activity android:name=".activity.ChatActivity" />
-        <activity android:name=".activity.MyproductActivity" />
+        <activity android:name=".activity.MyproductActivity">
+
+        </activity>
     </application>
 
 </manifest>

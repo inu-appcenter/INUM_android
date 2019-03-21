@@ -27,7 +27,6 @@ public class Adapter_recycler_ProductSearch extends RecyclerView.Adapter<Adapter
     }
     public Adapter_recycler_ProductSearch(ArrayList<SearchIdResult> myData) {
         this.mDataset = myData;
-        Log.d("심심", mDataset.toString());
     }
 
     public class mViewHolder extends RecyclerView.ViewHolder{
@@ -39,8 +38,6 @@ public class Adapter_recycler_ProductSearch extends RecyclerView.Adapter<Adapter
             productimg = itemView.findViewById(R.id.iv_productcard2_image);
             name = itemView.findViewById(R.id.tv_productcard2_name);
             price = itemView.findViewById(R.id.tv_productcard2_price);
-
-            Log.d("바보",productimg.toString());
         }
     }
 
@@ -49,17 +46,14 @@ public class Adapter_recycler_ProductSearch extends RecyclerView.Adapter<Adapter
     public mViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_recyclerview_product,parent,false);
-        Log.d("바보", "gdgdgdgdgdgdg");
         return new Adapter_recycler_ProductSearch.mViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull Adapter_recycler_ProductSearch.mViewHolder holder, final int position) {
         holder.name.setText(mDataset.get(position).getProductName());
-        holder.price.setText(mDataset.get(position).getProductPrice() + "");
-        Log.d("바보", mDataset.get(position).getProductName() );
-        Log.d("바보", mDataset.get(position).getProductPrice() + "");
-//        Glide.with(holder.productimg).load(Config.serverUrl + "imgload/" + mDataset.get(position).getProductImg().get(0)).into(holder.productimg);
+        holder.price.setText(mDataset.get(position).getProductPrice() + "원");
+        Glide.with(holder.productimg).load(Config.serverUrl + "imgload/" + mDataset.get(position).getProductImg().get(0)).into(holder.productimg);
 //        holder.itemView.setOnClickListener(new View.OnClickListener(){
 
 //            @Override
@@ -70,7 +64,6 @@ public class Adapter_recycler_ProductSearch extends RecyclerView.Adapter<Adapter
 //            }
 //        });
     }
-
     //    public ItemClick itemClick;
 //
 //    public interface ItemClick{

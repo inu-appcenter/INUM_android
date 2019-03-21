@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="335dp"
+    android:layout_height="352.7dp"
+    android:background="@drawable/popup_product_background"
+    tools:context=".custom.Adapter_dialog_product_menu">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="27dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="26.7dp"
+        android:text="상품 상태 변경"
+        android:textColor="@color/gunmetal"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    
+    <View
+        android:id="@+id/view_dialog_product_menu_divider_top"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="74.7dp"
+        android:background="@color/faded_orange"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/linearLayout_di"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/view_dialog_product_menu_divider_bottom"
+        app:layout_constraintTop_toBottomOf="@id/view_dialog_product_menu_divider_top">
+
+        <TextView
+            android:id="@+id/tv_dialog_product_menu_sold"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingStart="31dp"
+            android:text="판매 완료"
+            android:textColor="@color/gunmetal"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/warm_gery_three" />
+
+        <TextView
+            android:id="@+id/tv_dialog_product_menu_edit"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingStart="31dp"
+            android:text="상품 수정"
+            android:textColor="@color/gunmetal"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/warm_gery_three" />
+
+        <TextView
+            android:id="@+id/tv_dialog_product_menu_delete"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingStart="31dp"
+            android:text="상품 삭제"
+            android:textColor="@color/gunmetal"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view_dialog_product_menu_divider_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="57dp"
+        android:background="@color/white_two"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <Button
+        android:id="@+id/btn_dialog_product_menu_cancle"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:text="취소"
+        android:textColor="@color/gunmetal"
+        android:textSize="16sp"
+        android:background="?android:attr/selectableItemBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/view_dialog_product_menu_divider_two"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout_di" />
+
+    <Button
+        android:id="@+id/btn_dialog_product_menu_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:text="확인"
+        android:textColor="@color/gunmetal"
+        android:textSize="16sp"
+        android:background="#00ffffff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/view_dialog_product_menu_divider_two"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout_di" />
+
+    <View
+        android:id="@+id/view_dialog_product_menu_divider_two"
+        android:layout_width="1dp"
+        android:layout_height="56dp"
+        android:background="@color/white_two"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
