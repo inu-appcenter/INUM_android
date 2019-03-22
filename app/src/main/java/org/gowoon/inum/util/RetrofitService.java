@@ -28,17 +28,19 @@ public interface RetrofitService {
     Call<LoginResult>
     login(@Field("id") String id, @Field("passwd") String passwd, @Field("FCM") String FCM);
 
+    //비밀번호 변경
+    @FormUrlEncoded
+    @POST("stateChange/newPassword")
+    public Call<JsonObject>
+    forgotPw(@Field("id") String id, @Field("name") String name);
+
+
     @FormUrlEncoded
     @POST("account/delete")
     Call<JsonObject>
     secession(@Field("id") String id, @Field("passwd") String passwd);
 
     //Setting
-    @FormUrlEncoded
-    @POST("stateChange/newPassword")
-    public Call<JsonObject>
-    forgot_pw(@Field("id") String id, @Field("name") String name);
-
     @FormUrlEncoded
     @POST("stateChange/changeTel")
     public Call<JsonObject>

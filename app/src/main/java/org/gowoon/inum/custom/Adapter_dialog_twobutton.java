@@ -18,9 +18,9 @@ import butterknife.OnClick;
 
 public class Adapter_dialog_twobutton extends Dialog {
 
-    public Adapter_dialog_twobutton(@NonNull Context context) {
-        super(context);
-    }
+//    public Adapter_dialog_twobutton(@NonNull Context context) {
+//        super(context);
+//    }
 
     @BindView(R.id.btn_di_twobutton_submit) protected Button okButton;
     @BindView(R.id.btn_di_twobutton_cancle) protected Button cancelButton;
@@ -53,17 +53,6 @@ public class Adapter_dialog_twobutton extends Dialog {
         this.mTitle = title;
     }
 
-//
-//    @OnClick(R.id.my_product_di_state)
-//    public void stateChange(){
-//        selectWhat="change";
-//    }
-//
-//    @OnClick(R.id.my_product_di_delete)
-//    public void productDelete(){
-//        selectWhat="delete";
-//    }
-
     public void setdialogtxt(String text){
         mTitleView.setText(text);
     }
@@ -89,7 +78,4 @@ public class Adapter_dialog_twobutton extends Dialog {
         }
         dismiss();
     }
-
-//    public String getSelectWhat() {return selectWhat;}
-//    public void setSelectWhat(String selectWhat) {this.selectWhat = selectWhat;}
 }

@@ -18,11 +18,16 @@ import butterknife.OnClick;
 
 public class Adapter_dialog_onebutton extends Dialog {
 
-    public Adapter_dialog_onebutton(@NonNull Context context) {
-        super(context);
-    }
+//    public Adapter_dialog_onebutton(@NonNull Context context) {
+//        super(context);
+//    }
 
     @BindView(R.id.btn_di_submit) protected Button okButton;
+
+    public interface OnOkButtonClickListener {
+        void onClick();
+    }
+    private OnOkButtonClickListener okButtonClickListener = null;
 
     private TextView mTitleView;
     private String mTitle;
@@ -46,8 +51,15 @@ public class Adapter_dialog_onebutton extends Dialog {
         mTitleView.setText(text);
     }
 
+    public void setOnOkButtonClickListener(OnOkButtonClickListener listener){
+        okButtonClickListener = listener;
+    }
+
     @OnClick(R.id.btn_di_submit)
     public void okButton(){
+        if(okButtonClickListener != null){
+            okButtonClickListener.onClick();
+        }
         dismiss();
     }
 }
