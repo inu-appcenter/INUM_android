@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import org.gowoon.inum.R;
 import org.gowoon.inum.activity.ChatActivity;
@@ -34,13 +35,12 @@ public class MainFragment extends android.support.v4.app.Fragment {
     ConstraintLayout btn_message;
     RecyclerView recyclerView_book, recyclerView_room, recyclerView_ticket;
     Adapter_ProductMain Adapter_room, Adapter_book, Adapter_ticket ;
-    ArrayList<MainProductResult> list = new ArrayList<>();
+//    ArrayList<MainProductResult> list = new ArrayList<>();
 //    AutoScrollViewPager autoviewpager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_main, container, false);
 
 //        ArrayList<String> data = new ArrayList<>();
@@ -66,7 +66,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
         String id = pref.getString("userid","");
 
         if (!token.equals("")) {
-            Log.d("Sharedpreferences test", "토큰 받은거 확인" + token);
+            Log.d("token test", token);
             Singleton.retrofit.main(token).enqueue(new Callback<ArrayList<ArrayList<MainProductResult>>>() {
                 @Override
                 public void onResponse(Call<ArrayList<ArrayList<MainProductResult>>> call, Response<ArrayList<ArrayList<MainProductResult>>> response) {
@@ -90,7 +90,8 @@ public class MainFragment extends android.support.v4.app.Fragment {
 
                 @Override
                 public void onFailure(Call<ArrayList<ArrayList<MainProductResult>>> call, Throwable t) {
-                    Log.d("fail", "안돼");
+                    Log.d("fail", "연결오류");
+                    Toast.makeText(getActivity(), "네트워크 연결상태를 확인해주세요",Toast.LENGTH_LONG).show();
                 }
             });
         }
@@ -137,7 +138,6 @@ public class MainFragment extends android.support.v4.app.Fragment {
         recyclerView_ticket.setLayoutManager(mLayoutManager_ticket);
         recyclerView_ticket.setItemAnimator(new DefaultItemAnimator());
         recyclerView_ticket.setAdapter(Adapter_ticket);
-
 
         Adapter_book.notifyDataSetChanged();
         Adapter_room.notifyDataSetChanged();

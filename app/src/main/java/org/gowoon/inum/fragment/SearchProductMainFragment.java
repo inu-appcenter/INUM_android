@@ -29,7 +29,7 @@ import retrofit2.Response;
 
 public class SearchProductMainFragment extends Fragment {
 
-    TextView resultnum, tv_search, none;
+    TextView resultNum, tv_search, none, noInput;
     RecyclerView recyclersearch;
     Adapter_recycler_ProductSearch mAdapter;
     String search;
@@ -43,11 +43,14 @@ public class SearchProductMainFragment extends Fragment {
         pref = getActivity().getSharedPreferences("userinfo", Context.MODE_PRIVATE);
         search = getArguments().getString("search","");
         recyclersearch = rootview.findViewById(R.id.recyclerView_search_product_main);
-        resultnum = rootview.findViewById(R.id.tv_search_product_main_resultnum);
+        resultNum = rootview.findViewById(R.id.tv_search_product_main_resultnum);
         none = rootview.findViewById(R.id.tv_search_product_main_none);
+        noInput = rootview.findViewById(R.id.tv_search_product_main_none_text);
 
         tv_search.setText("'"+search+"'");
         if (!search.equals("")) {
+            noInput.setVisibility(View.INVISIBLE);
+            tv_search.setVisibility(View.VISIBLE);
             Singleton.retrofit.searchproduct(search).enqueue(new Callback<ArrayList<SearchIdResult>>() {
                 @Override
                 public void onResponse(Call<ArrayList<SearchIdResult>> call, Response<ArrayList<SearchIdResult>> response) {
@@ -55,12 +58,12 @@ public class SearchProductMainFragment extends Fragment {
                         ArrayList<SearchIdResult> results = response.body();
                         if (results != null) {
                             if (results.size() == 0) {
-                                resultnum.setText("검색결과 00");
+                                resultNum.setText("검색결과 00");
                                 recyclersearch.setVisibility(View.INVISIBLE);
                                 none.setVisibility(View.VISIBLE);
 
                             } else {
-                                resultnum.setText("검색결과 " + results.size());
+                                resultNum.setText("검색결과 " + results.size());
                                 recyclersearch.setVisibility(View.VISIBLE);
                                 none.setVisibility(View.INVISIBLE);
                                 mAdapter = new Adapter_recycler_ProductSearch(results);
@@ -80,6 +83,10 @@ public class SearchProductMainFragment extends Fragment {
         }
         else
         {
+            resultNum.setText("검색결과 00");
+            recyclersearch.setVisibility(View.INVISIBLE);
+            noInput.setVisibility(View.VISIBLE);
+            tv_search.setVisibility(View.INVISIBLE);
         }
         recyclersearch.setHasFixedSize(true);
 //        mAdapter.setItemClick(new Adapter_recycler_ProductSearch.ItemClick() {
