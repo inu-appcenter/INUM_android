@@ -25,11 +25,10 @@
         <activity android:name=".activity.SignupActivity" />
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.UploadAcitivity" />
-        <activity android:name=".activity.MypageActivity" />
+        <activity android:name=".activity.MypageActivity"
+            android:windowSoftInputMode="adjustNothing"/>
         <activity android:name=".activity.ChatActivity" />
-        <activity android:name=".activity.MyproductActivity">
-
-        </activity>
+        <activity android:name=".activity.MyproductActivity"/>
     </application>
 
 </manifest>
