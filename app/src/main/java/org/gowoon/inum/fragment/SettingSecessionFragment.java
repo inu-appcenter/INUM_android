@@ -9,6 +9,7 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -24,6 +25,7 @@ import retrofit2.Response;
 
 public class SettingSecessionFragment extends Fragment {
     EditText id, pw;
+    Button btnSecession;
     TextView noinput, incorrect;
     Boolean i ,j;
     SharedPreferences.Editor editor;
@@ -34,8 +36,8 @@ public class SettingSecessionFragment extends Fragment {
         ViewGroup rootview = (ViewGroup) inflater.inflate(R.layout.fragment_setting_secession, container, false);
 
         final SharedPreferences pref = getActivity().getSharedPreferences("userinfo", Context.MODE_PRIVATE);
-        final String userid = pref.getString("userid","");
-        final String userpw = pref.getString("userpw","");
+        final String userId = pref.getString("userid","");
+        final String userPw = pref.getString("userpw","");
 
         id = rootview.findViewById(R.id.et_setting_secession_studentid);
         pw = rootview.findViewById(R.id.et_setting_secession_pw);
@@ -46,29 +48,31 @@ public class SettingSecessionFragment extends Fragment {
         final Adapter_dialog_twobutton dialog_out
                 = new Adapter_dialog_twobutton(getActivity(),"확인을 누르시면 회원 탈퇴됩니다.");
 
-        if ((id.getText().toString().length() ==0)||(pw.getText().toString().length()==0)){
-            noinput.setVisibility(View.VISIBLE);
-            incorrect.setVisibility(View.INVISIBLE);
-        }
-        else {
-            if ((id.getText().toString().equals(userid))&&(pw.getText().toString().equals(userpw))){
-                rootview.findViewById(R.id.btn_setting_secession).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+        btnSecession = rootview.findViewById(R.id.btn_setting_secession);
+        btnSecession.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if ((id.getText().toString().length() ==0)||(pw.getText().toString().length()==0)){
+                    noinput.setVisibility(View.VISIBLE);
+                    incorrect.setVisibility(View.INVISIBLE);
+                }
+                else {
+                    if ((id.getText().toString().trim().equals(userId))&&(pw.getText().toString().trim().equals(userPw))){
                         dialog_out.show();
                     }
-                });
+                    else{
+                        incorrect.setVisibility(View.VISIBLE);
+                        noinput.setVisibility(View.INVISIBLE);
+                    }
+                }
+
             }
-            else{
-                incorrect.setVisibility(View.VISIBLE);
-                noinput.setVisibility(View.INVISIBLE);
-            }
-        }
-        
+        });
+
         dialog_out.setOnOkButtonClickListener(new Adapter_dialog_twobutton.OnOkButtonClickListener() {
             @Override
             public void onClick() {
-                Singleton.retrofit.secession(userid, userpw).enqueue(new Callback<JsonObject>() {
+                Singleton.retrofit.secession(userId, userPw).enqueue(new Callback<JsonObject>() {
                     @Override
                     public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                         assert response.body() != null;

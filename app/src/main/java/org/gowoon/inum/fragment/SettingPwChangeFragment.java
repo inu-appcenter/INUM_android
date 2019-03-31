@@ -2,6 +2,7 @@ package org.gowoon.inum.fragment;
 
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,8 @@ import android.widget.Toast;
 import com.google.gson.JsonObject;
 
 import org.gowoon.inum.R;
+import org.gowoon.inum.activity.LoginActivity;
+import org.gowoon.inum.activity.MainActivity;
 import org.gowoon.inum.custom.Adapter_dialog_onebutton;
 import org.gowoon.inum.custom.Adapter_dialog_twobutton;
 import org.gowoon.inum.util.Singleton;
@@ -36,7 +40,9 @@ public class SettingPwChangeFragment extends Fragment {
     Boolean length,sameBefore, sameCurrent;
     String id,pw,currentPw;
     SharedPreferences pref;
-    
+    SharedPreferences.Editor editor;
+    MainActivity mainactivity;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -130,9 +136,21 @@ public class SettingPwChangeFragment extends Fragment {
                                         if (response.isSuccessful()) {
                                             JsonObject result = response.body();
                                             if (String.valueOf(result.get("ans")).equals("true")) {
-                                                FragmentManager fragmentManager = getActivity().getFragmentManager();
-                                                fragmentManager.beginTransaction().remove(SettingPwChangeFragment.this).commit();
-                                                Toast.makeText(getActivity(), "비밀번호 변경 성공!", Toast.LENGTH_SHORT).show();
+                                                Toast toastSuccess = Toast.makeText(getActivity(), "비밀번호 변경 성공!\n 변경된 비밀번호로 다시 로그인해주세요", Toast.LENGTH_LONG);
+                                                toastSuccess.setGravity(Gravity.CENTER,0,0);
+                                                toastSuccess.show();
+
+                                                editor = pref.edit();
+                                                editor.clear();
+                                                editor.apply();
+
+                                                mainactivity = (MainActivity) MainActivity.Main;
+                                                mainactivity.finish();
+                                                getActivity().finish();
+
+                                                Intent intent_login = new Intent(getActivity(), LoginActivity.class);
+                                                intent_login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                startActivity(intent_login);
                                             } else {
                                                 Toast.makeText(getActivity(), "비밀번호 변경 실패", Toast.LENGTH_SHORT).show();
                                             }
