@@ -1,6 +1,5 @@
 package org.gowoon.inum.fragment;
 
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -44,7 +43,7 @@ public class DrawerMypageFragment extends Fragment {
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent upload_intent = new Intent(getActivity().getApplicationContext(),UploadAcitivity.class);
+                Intent upload_intent = new Intent(getActivity().getApplicationContext(), UploadAcitivity.class);
                 startActivity(upload_intent);
             }
         });

@@ -91,8 +91,8 @@
 
     <Button
         android:id="@+id/btn_dialog_product_menu_cancle"
-        android:layout_width="wrap_content"
-        android:layout_height="24dp"
+        android:layout_width="168dp"
+        android:layout_height="56dp"
         android:text="취소"
         android:textColor="@color/gunmetal"
         android:textSize="16sp"
@@ -104,8 +104,8 @@
 
     <Button
         android:id="@+id/btn_dialog_product_menu_ok"
-        android:layout_width="wrap_content"
-        android:layout_height="24dp"
+        android:layout_width="168dp"
+        android:layout_height="56dp"
         android:text="확인"
         android:textColor="@color/gunmetal"
         android:textSize="16sp"
