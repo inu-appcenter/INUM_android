@@ -2,7 +2,8 @@ package org.gowoon.inum.model;
 
 public class UserData {
     public static UserData userData = new UserData();
-    public static UserData getInstance(){
+
+    public static UserData getInstance() {
         return userData;
     }
 

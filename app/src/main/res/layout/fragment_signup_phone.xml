@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_phone">
+
+    <TextView
+        android:id="@+id/txt_phone_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="휴대폰 인증"
+        android:textColor="@color/gunmetal"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="44dp" />
+
+    <ImageView
+        android:id="@+id/imv_phone_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/signup_indi_step4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_phone_title"
+        android:layout_marginTop="17dp"/>
+
+    <TextView
+        android:id="@+id/txt_myphonenum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="내 전화번호"
+        android:textColor="@color/gunmetal"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imv_phone_indicator"
+        android:layout_marginTop="107dp"/>
+
+    <EditText
+        android:id="@+id/etv_signup_phonenum"
+        android:layout_width="160dp"
+        android:layout_height="48dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_myphonenum"/>
+
+    <TextView
+        android:id="@+id/txt_phone_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="14dp"
+        android:text="*휴대폰 인증을 해야 합니다."
+        android:textColor="@color/orangey_red"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_signup_phone_nextstep"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="invisible"/>
+
+    <Button
+        android:id="@+id/btn_signup_phone_nextstep"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/upside_stroke_square_3dp"
+        android:text="다음"
+        android:textSize="20sp"
+        android:textColor="@color/gunmetal"/>
+
+</android.support.constraint.ConstraintLayout>

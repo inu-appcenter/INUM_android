@@ -13,33 +13,38 @@ public class Upload {
     private String method;
     private String place;
     private String userfile;
+    private String category;
 
-    public String getProductName(){return productName;}
+    public String getProductName(String productName){return this.productName;}
 
-    public void setProductName(EditText productName){this.productName = String.valueOf(productName);}
+    public void setProductName(String productName){this.productName = String.valueOf(productName);}
 
-    public String getProductState(){return productState;}
+    public String getProductState(String productState){return this.productState;}
 
     public void setProductState(String productState){this.productState = productState;}
 
-    public String getProductPrice(){return  productPrice;}
+    public String getProductPrice(String productPrice){return this.productPrice;}
 
     public void setProductPrice(String productPrice){this.productPrice = productPrice;}
 
-    public  String getProductInfo(){return productInfo;}
+    public  String getProductInfo(String productInfo){return this.productInfo;}
 
     public void setProductInfo(String productInfo){this.productInfo = productInfo;}
 
-    public String getMethod(){return method;}
+    public String getMethod(String method){return this.method;}
 
     public void setMethod(String method){this.method = method;}
 
-    public String getPlace(){return place;}
+    public String getPlace(String place){return this.place;}
 
     public void setPlace(String place){this.place = place;}
 
     public String getUserfile(){return userfile;}
 
     public void setUserfile(String userfile){this.userfile = userfile;}
+
+    public String getProductCategory(String category){return this.category;}
+
+    public void setProductCategory(String category){this.category = category;}
 
 }
