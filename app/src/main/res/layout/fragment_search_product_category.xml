@@ -12,18 +12,6 @@
         android:background="#fff"
         android:layout_marginTop="5dp">
 
-        <TextView
-            android:id="@+id/tv_search_category_none"
-            android:layout_width="wrap_content"
-            android:layout_height="22dp"
-            android:text="아직 등록된 상품이 없어요:("
-            android:textColor="@color/gunmetal_two"
-            android:textSize="15sp"
-            android:layout_marginBottom="23.4dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/gridview_search_category" />
-
         <FrameLayout
             android:id="@+id/framelayout_search_category_searchbar"
             android:layout_width="match_parent"
@@ -114,17 +102,36 @@
                 android:background="@color/white_d8"
                 />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerview_search_category"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraint_search_product_product_layer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="174dp"
-            android:layout_marginStart="6.5dp"
-            android:layout_marginEnd="6.5dp"
-            tools:listitem="@layout/item_grid_searchsubcategory"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/gridview_search_category" />
+            android:layout_marginTop="148.5dp"
+            app:layout_constraintTop_toTopOf="parent">
 
+            <TextView
+                android:id="@+id/tv_search_category_none"
+                android:layout_width="wrap_content"
+                android:layout_height="22dp"
+                android:text="아직 등록된 상품이 없어요:("
+                android:textColor="@color/gunmetal_two"
+                android:textSize="15sp"
+                android:layout_marginTop="23.4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview_search_category"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="19.5dp"
+                android:layout_marginStart="6.5dp"
+                android:layout_marginEnd="6.5dp"
+                tools:listitem="@layout/item_grid_searchsubcategory"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>

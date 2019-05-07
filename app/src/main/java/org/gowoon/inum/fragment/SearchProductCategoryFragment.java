@@ -31,7 +31,6 @@ import org.gowoon.inum.recycler.Adapter_recycler_ProductSearch;
 import org.gowoon.inum.util.Singleton;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -49,9 +48,9 @@ public class SearchProductCategoryFragment extends Fragment {
 
     FrameLayout search;
     GridView gridView;
-    String[] categorychild;
+    String[] categoryChild;
     ArrayList<String> griditems;
-    TextView tv_category, tv_searchok;
+    TextView tv_category, tv_searchok, tvNone;
     ImageView iv_icon, iv_cancle;
     String parent, child;
     Integer caticon;
@@ -76,7 +75,9 @@ public class SearchProductCategoryFragment extends Fragment {
         et_search = rootview.findViewById(R.id.etv_search_category_search);
         tv_searchok = rootview.findViewById(R.id.tv_search_category_ok);
         iv_cancle = rootview.findViewById(R.id.iv_search_category_erase);
+        tvNone = rootview.findViewById(R.id.tv_search_category_none);
 
+        //  검색창
         et_search.setOnFocusChangeListener(new View.OnFocusChangeListener(){
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
@@ -117,13 +118,13 @@ public class SearchProductCategoryFragment extends Fragment {
         });
 
         griditems = new ArrayList<>();
-
         if(groupposition <4){
             for (int j = 0 ; j <4; j++){
-                categorychild = new String[]{menu.getItem(groupposition).getSubMenu().getItem(j).getTitle().toString()};
-                Collections.addAll(griditems, categorychild);
+                categoryChild = new String[]{menu.getItem(groupposition).getSubMenu().getItem(j).getTitle().toString()};
+                Collections.addAll(griditems, categoryChild);
             }
         }
+
         Adapter_gridview_categorychild gAdapter = new Adapter_gridview_categorychild(getActivity(),griditems);
         gridView = rootview.findViewById(R.id.gridview_search_category);
         gridView.setAdapter(gAdapter);
@@ -150,7 +151,9 @@ public class SearchProductCategoryFragment extends Fragment {
                     if (results.size()!=0){
                         Adapter.mDataset.addAll(results);
                         Adapter.notifyDataSetChanged();
+                        tvNone.setVisibility(View.INVISIBLE);
                     }else{
+                        tvNone.setVisibility(View.VISIBLE);
                         recyclerView.setVisibility(View.INVISIBLE);
                     }
 //                    Log.d("category_load","카테고리별 상품 로딩" +results.get(0).getProductName());

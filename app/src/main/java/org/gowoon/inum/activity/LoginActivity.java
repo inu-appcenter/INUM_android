@@ -95,6 +95,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 finish();
                             }
                             else {
+                                tv_notcorrect.setVisibility(View.VISIBLE);
                                 if (result.getMessage().equals("certification")) {
                                     Log.d("login_result_msg_Err","인증안됨");
                                     tv_notcorrect.setText("이메일 인증 후 로그인 해주세요");
@@ -104,7 +105,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     tv_notcorrect.setText("*학번과 일치하는 패스워드가 아닙니다.");
                                     tv_notcorrect.setVisibility(View.VISIBLE);
                                 }
-                                tv_notcorrect.setVisibility(View.VISIBLE);
                             }
                         }
                     }
