@@ -9,8 +9,29 @@
     <include
         android:id="@+id/layout_product"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        layout="@layout/fragment_upload_preview"
+        android:layout_height="match_parent"
+        layout="@layout/fragment_product_detail"
         />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btn_product_detail_question"
+            android:layout_width="match_parent"
+            android:layout_height="53.7dp"
+            android:background="@drawable/upside_stroke_square_3dp"
+            android:text="메시지 보내기"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>

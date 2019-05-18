@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import org.gowoon.inum.model.BannerItemResult;
 import org.gowoon.inum.model.LoginResult;
 import org.gowoon.inum.model.MainProductResult;
+import org.gowoon.inum.model.ProductOneItemResult;
 import org.gowoon.inum.model.SearchIdResult;
 import org.gowoon.inum.model.UserData;
 
@@ -86,4 +87,10 @@ public interface RetrofitService {
 //    @POST("readBanner")
 //    public Call<BannerItemResult>
 //    readBanner();
+
+    @FormUrlEncoded
+    @POST("tPSelect/oneItem")
+    public Call<ProductOneItemResult>
+    productOneItem(@Header("x-access-token") String main_token, @Field("productId") String productId);
+
 }

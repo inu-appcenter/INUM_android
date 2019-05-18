@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import org.gowoon.inum.R;
 import org.gowoon.inum.activity.ChatActivity;
+import org.gowoon.inum.activity.ProductActivity;
 import org.gowoon.inum.custom.Adapter_autoViewpager;
 import org.gowoon.inum.model.MainProductResult;
 import org.gowoon.inum.recycler.Adapter_ProductMain;
@@ -100,6 +101,35 @@ public class MainFragment extends android.support.v4.app.Fragment {
         Adapter_book = new Adapter_ProductMain();
         Adapter_room = new Adapter_ProductMain();
 
+        Adapter_book.setItemClick(new Adapter_ProductMain.ItemClick() {
+            @Override
+            public void onClick(View view, int position) {
+                String productId = Adapter_book.mDataset.get(position).getProductId();
+                Intent intentProductDetail = new Intent(getActivity(), ProductActivity.class);
+                intentProductDetail.putExtra("id", productId);
+                startActivity(intentProductDetail);
+            }
+        });
+
+        Adapter_ticket.setItemClick(new Adapter_ProductMain.ItemClick() {
+            @Override
+            public void onClick(View view, int position) {
+                String productId = Adapter_book.mDataset.get(position).getProductId();
+                Intent intentProductDetail = new Intent(getActivity(), ProductActivity.class);
+                intentProductDetail.putExtra("id", productId);
+                startActivity(intentProductDetail);
+            }
+        });
+        Adapter_room.setItemClick(new Adapter_ProductMain.ItemClick() {
+            @Override
+            public void onClick(View view, int position) {
+                String productId = Adapter_book.mDataset.get(position).getProductId();
+                Intent intentProductDetail = new Intent(getActivity(), ProductActivity.class);
+                intentProductDetail.putExtra("id", productId);
+                startActivity(intentProductDetail);
+            }
+        });
+
         recyclerView_book = (RecyclerView) rootview.findViewById(R.id.recyclerview_main_product_book);
         recyclerView_book.setHasFixedSize(true);
 
@@ -108,20 +138,6 @@ public class MainFragment extends android.support.v4.app.Fragment {
 
         recyclerView_ticket = (RecyclerView) rootview.findViewById(R.id.recyclerview_main_product_ticket);
         recyclerView_ticket.setHasFixedSize(true);
-
-
-//        Adapter_ticket = new Adapter_ProductMain();
-        // if (mAdapter.)
-//        mAdapter.setItemClick(new Adapter_ProductMain().ItemClick() {
-
-//            @Override
-//            public void onClick(View view, int position) {
-//                String pid = mAdapter.mDataset.get(position).getProductId();
-//                Intent intent_detail = new Intent(getActivity(), ProductDetail.class);
-//                intent_detail.putExtra("id",pid);
-//                startActivity(intent_detail);
-//            }
-//        });
 
         RecyclerView.LayoutManager mLayoutManager_book ,mLayoutManager_room, mLayoutManager_ticket;
         mLayoutManager_book = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL,false);

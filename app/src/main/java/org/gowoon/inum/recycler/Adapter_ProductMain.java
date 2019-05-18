@@ -28,7 +28,6 @@ public class Adapter_ProductMain extends RecyclerView.Adapter<Adapter_ProductMai
     public Adapter_ProductMain() {
 
     }
-
     public interface ItemClick{
         public void onClick(View view, int position);
     }

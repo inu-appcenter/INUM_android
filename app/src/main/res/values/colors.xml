@@ -37,4 +37,5 @@
     <!--blank view-->
     <color name = "white_d8">#d8d8d8</color>
 
+    <color name="blush_pink">#ff7c8c</color>
 </resources>
