@@ -84,9 +84,9 @@ public interface RetrofitService {
     report(@Field("kind") String kind, @Field("senderId") String senderId, @Field("productId") String productId);
 
     // banner
-//    @POST("readBanner")
-//    public Call<BannerItemResult>
-//    readBanner();
+    @POST("readBanner")
+    public Call<BannerItemResult>
+    readBanner();
 
     @FormUrlEncoded
     @POST("tPSelect/oneItem")

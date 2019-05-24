@@ -10,14 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v4.view.ViewPager
+        <cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager
             android:id="@+id/viewpager_main_banner"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-        </android.support.v4.view.ViewPager>
+        </cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager>
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/constraint_main_message"

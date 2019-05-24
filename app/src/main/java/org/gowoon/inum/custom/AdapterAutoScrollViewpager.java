@@ -11,14 +11,16 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 
 import org.gowoon.inum.R;
+import org.gowoon.inum.util.Config;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class Adapter_autoViewpager extends PagerAdapter {
+public class AdapterAutoScrollViewpager extends PagerAdapter {
     Context context;
     ArrayList<String> data;
 
-    public Adapter_autoViewpager(Context context, ArrayList<String> data){
+    public AdapterAutoScrollViewpager(Context context, ArrayList<String> data){
         this.context = context;
         this.data = data;
     }
@@ -30,7 +32,7 @@ public class Adapter_autoViewpager extends PagerAdapter {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.item_autoviewpager, null);
         ImageView iv_item = (ImageView) v.findViewById(R.id.iv_item_autoviewpager);
-        Glide.with(context).load(data.get(position)).into((iv_item));
+        Glide.with(context).load(Config.serverUrl+"andBanner/"+data.get(position)).into((iv_item));
         container.addView(v);
 
         return v;
