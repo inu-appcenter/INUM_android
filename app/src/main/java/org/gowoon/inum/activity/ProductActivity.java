@@ -97,7 +97,7 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
                         tvPlace.setText("- 거래 장소: " +result.getPlace());
                         tvCategory.setText("- 카테고리: " +result.getCategory());
                         tvInfo.setText(result.getProductInfo());
-                        tvStar.setText("현재" + result.getProductStar()+"명의 학생들이 문의중입니다!");
+                        tvStar.setText("현재 " + result.getProductStar()+"명의 학생들이 문의중입니다!");
                     }
                 }
 

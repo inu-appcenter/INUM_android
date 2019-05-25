@@ -138,7 +138,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
         Adapter_ticket.setItemClick(new Adapter_ProductMain.ItemClick() {
             @Override
             public void onClick(View view, int position) {
-                String productId = Adapter_book.mDataset.get(position).getProductId();
+                String productId = Adapter_ticket.mDataset.get(position).getProductId();
                 Intent intentProductDetail = new Intent(getActivity(), ProductActivity.class);
                 intentProductDetail.putExtra("id", productId);
                 startActivity(intentProductDetail);
@@ -147,7 +147,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
         Adapter_room.setItemClick(new Adapter_ProductMain.ItemClick() {
             @Override
             public void onClick(View view, int position) {
-                String productId = Adapter_book.mDataset.get(position).getProductId();
+                String productId = Adapter_room.mDataset.get(position).getProductId();
                 Intent intentProductDetail = new Intent(getActivity(), ProductActivity.class);
                 intentProductDetail.putExtra("id", productId);
                 startActivity(intentProductDetail);

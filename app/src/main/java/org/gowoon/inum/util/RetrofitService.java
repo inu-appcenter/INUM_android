@@ -89,7 +89,7 @@ public interface RetrofitService {
     readBanner();
 
     @FormUrlEncoded
-    @POST("tPSelect/oneItem")
+    @POST("PSelect/oneItem")
     public Call<ProductOneItemResult>
     productOneItem(@Header("x-access-token") String main_token, @Field("productId") String productId);
 

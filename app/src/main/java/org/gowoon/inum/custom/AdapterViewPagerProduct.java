@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import org.gowoon.inum.R;
 import org.gowoon.inum.util.Config;
@@ -29,8 +30,10 @@ public class AdapterViewPagerProduct extends PagerAdapter {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.item_viewpager_product_one,container,false);
         ImageView imageView = (ImageView)view.findViewById(R.id.image_viewpager_productimage);
-        Glide.with(context).load(Config.serverUrl + "imgload/" + mResources.get(position)).into(imageView);
-        // imageView.setImageResource(Integer.parseInt(mResources.get(position)));
+        int mScale = (int) context.getResources().getDisplayMetrics().density;
+//        Glide.with(context).load(Config.serverUrl + "imgload/" + mResources.get(position)).
+        Glide.with(context).load(Config.serverUrl+"imgload/"+mResources.get(position))
+                .apply(new RequestOptions().override(mScale*360,mScale*267).centerCrop()).into(imageView);
         container.addView(view);
         return view;
     }
