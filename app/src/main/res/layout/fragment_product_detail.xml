@@ -14,20 +14,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     
-    <me.relex.circleindicator.CircleIndicator
-        android:id="@+id/indicator_product_image"
-        android:layout_width="match_parent"
-        android:layout_height="8dp"
+    <!--<me.relex.circleindicator.CircleIndicator-->
+        <!--android:id="@+id/indicator_product_image"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="13.5dp"-->
+        <!--android:background="#00ffffff"-->
+        <!--app:layout_constraintCircleRadius="3dp"-->
+        <!--app:ci_drawable="@drawable/selected_dot"-->
+        <!--app:ci_drawable_unselected="@color/warm_grey_four"-->
+        <!--app:ci_margin="9dp"-->
+        <!--app:ci_height="6dp"-->
+        <!--app:layout_constraintBottom_toBottomOf="@id/viewpager_product_detail_image"-->
+        <!--&gt;-->
+    <!--</me.relex.circleindicator.CircleIndicator>-->
+
+    <com.pm10.library.CircleIndicator
+        android:id="@+id/indicator_product_circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="13.5dp"
         android:background="#00ffffff"
-        app:ci_width="6dp"
-        app:ci_height="6dp"
-        app:ci_margin="9dp"
-        app:ci_drawable="@drawable/selected_dot"
-        app:ci_drawable_unselected="@drawable/default_dot"
-        app:layout_constraintBottom_toBottomOf="@id/viewpager_product_detail_image"
-        >
-    </me.relex.circleindicator.CircleIndicator>
+        app:p_defaultColor="@color/warm_grey_four"
+        app:p_gap="9dp"
+        app:p_radius="3dp"
+        app:p_strokeColor="@color/pale_grey_three"
+        app:p_strokeWidth="1dp"
+        app:p_selectedColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/viewpager_product_detail_image"/>
 
     <ScrollView
         android:id="@+id/scroll_product_detail"

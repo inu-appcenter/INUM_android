@@ -35,6 +35,7 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
     String productId, sellerId;
     ViewPager viewPager;
     CircleIndicator indicator;
+    com.pm10.library.CircleIndicator circleIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +63,8 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
         tvStar = findViewById(R.id.tv_product_detail_current);
 
         viewPager = findViewById(R.id.viewpager_product_detail_image);
-        indicator = findViewById(R.id.indicator_product_image);
+//        indicator = findViewById(R.id.indicator_product_image);
+        circleIndicator = findViewById(R.id.indicator_product_circle);
 
         Intent intent = getIntent();
         productId = intent.getStringExtra("id");
@@ -87,9 +89,11 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
 
                         vAdapter = new AdapterViewPagerProduct(getApplicationContext(), arrayImage);
                         viewPager.setAdapter(vAdapter);
-                        indicator.setViewPager(viewPager);
-                        vAdapter.registerDataSetObserver(indicator.getDataSetObserver());
-                        indicator.bringToFront();
+//                        indicator.setViewPager(viewPager);
+                        circleIndicator.setupWithViewPager(viewPager);
+//                        vAdapter.registerDataSetObserver(indicator.getDataSetObserver());
+//                        indicator.bringToFront();
+                        circleIndicator.bringToFront();
 
 //                        Intent intentSeller = new Intent(getApplicationContext(),SellerProduct.class);
 //                        intentSeller.putExtra("sellerId",sellerId);
