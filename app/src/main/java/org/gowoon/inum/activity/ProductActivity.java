@@ -19,6 +19,7 @@ import org.gowoon.inum.util.Singleton;
 
 import java.util.ArrayList;
 
+import me.relex.circleindicator.CircleIndicator;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,16 +31,18 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
 
     ArrayList<String> arrayImage, arrayProductData;
 
+    AdapterViewPagerProduct vAdapter;
     String productId, sellerId;
     ViewPager viewPager;
+    CircleIndicator indicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
 
-        ImageButton btn_left = findViewById(R.id.btn_product_detail_slideleft);
-        ImageButton btn_right = findViewById(R.id.btn_product_detail_slideright);
+        ImageButton btn_left = findViewById(R.id.btn_product_detail_left);
+        ImageButton btn_right = findViewById(R.id.btn_product_detail_right);
         btn_left.setOnClickListener(this);
         btn_right.setOnClickListener(this);
 
@@ -59,6 +62,7 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
         tvStar = findViewById(R.id.tv_product_detail_current);
 
         viewPager = findViewById(R.id.viewpager_product_detail_image);
+        indicator = findViewById(R.id.indicator_product_image);
 
         Intent intent = getIntent();
         productId = intent.getStringExtra("id");
@@ -81,9 +85,11 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
                         arrayProductData.add(result.getSellerId());
                         arrayProductData.add(result.getCategory());
 
-                        AdapterViewPagerProduct vAdapter = new AdapterViewPagerProduct(getApplicationContext(), arrayImage);
-//                        vAdapter.registerDataSetObserver();
+                        vAdapter = new AdapterViewPagerProduct(getApplicationContext(), arrayImage);
                         viewPager.setAdapter(vAdapter);
+                        indicator.setViewPager(viewPager);
+                        vAdapter.registerDataSetObserver(indicator.getDataSetObserver());
+                        indicator.bringToFront();
 
 //                        Intent intentSeller = new Intent(getApplicationContext(),SellerProduct.class);
 //                        intentSeller.putExtra("sellerId",sellerId);
@@ -126,28 +132,32 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
+        int curr = viewPager.getCurrentItem();
+        int last = vAdapter.getCount()-1;
+        int next = curr+1;
+        int prev = curr-1;
         switch (v.getId()) {
 //            case R.id.btn_productdetail_otherproduct:{
 //                startActivity(intent_seller);
 //                break;
 //            }
-//            case R.id.btn_productdetail_slideright:
-//            {
-//                if (next>last){
-//                    viewPager.setCurrentItem(0,false);
-//                }
-//                else
-//                    viewPager.setCurrentItem(next);
-//                break;
-//            }
-//            case R.id.btn_productdetail_slideleft:{
-//                if(prev<0){
-//                    viewPager.setCurrentItem(last,false);
-//                }
-//                else
-//                    viewPager.setCurrentItem(prev);
-//                break;
-//            }
+            case R.id.btn_product_detail_right:
+            {
+                if (next>last){
+                    viewPager.setCurrentItem(0,false);
+                }
+                else
+                    viewPager.setCurrentItem(next);
+                break;
+            }
+            case R.id.btn_product_detail_left:{
+                if(prev<0){
+                    viewPager.setCurrentItem(last,false);
+                }
+                else
+                    viewPager.setCurrentItem(prev);
+                break;
+            }
         }
     }
 }
