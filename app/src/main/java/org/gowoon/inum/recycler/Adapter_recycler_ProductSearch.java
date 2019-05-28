@@ -54,37 +54,29 @@ public class Adapter_recycler_ProductSearch extends RecyclerView.Adapter<Adapter
         holder.name.setText(mDataset.get(position).getProductName());
         holder.price.setText(mDataset.get(position).getProductPrice() + "원");
         Glide.with(holder.productimg).load(Config.serverUrl + "imgload/" + mDataset.get(position).getProductImg().get(0)).into(holder.productimg);
-//        holder.itemView.setOnClickListener(new View.OnClickListener(){
+        holder.itemView.setOnClickListener(new View.OnClickListener(){
 
-//            @Override
-//            public void onClick(View v) {
-//                if (itemClick != null){
-//                    itemClick.onClick(v,position);
-//                }
-//            }
-//        });
+            @Override
+            public void onClick(View v) {
+                if (itemClick != null){
+                    itemClick.onClick(v,position);
+                }
+            }
+        });
     }
-    //    public ItemClick itemClick;
-//
-//    public interface ItemClick{
-//        void onClick(View view, int position);
-//    }
-//
-//    public void setItemClick(Adapter_recycler_ProductSearch.ItemClick itemClick){
-//        this.itemClick = itemClick;
-//    }
+        public ItemClick itemClick;
 
+    public interface ItemClick{
+        void onClick(View view, int position);
+    }
 
+    public void setItemClick(Adapter_recycler_ProductSearch.ItemClick itemClick){
+        this.itemClick = itemClick;
+    }
 
     @Override
     public int getItemCount() {
         return mDataset.size();
     }
-
-
-
-
-
-
 
 }

@@ -148,7 +148,7 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.btn_product_detail_right:
             {
                 if (next>last){
-                    viewPager.setCurrentItem(0,false);
+                    viewPager.setCurrentItem(0,true);
                 }
                 else
                     viewPager.setCurrentItem(next);
@@ -156,7 +156,7 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
             }
             case R.id.btn_product_detail_left:{
                 if(prev<0){
-                    viewPager.setCurrentItem(last,false);
+                    viewPager.setCurrentItem(last,true);
                 }
                 else
                     viewPager.setCurrentItem(prev);

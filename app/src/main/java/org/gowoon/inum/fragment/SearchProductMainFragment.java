@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.gowoon.inum.R;
+import org.gowoon.inum.activity.ProductActivity;
 import org.gowoon.inum.model.MainProductResult;
 import org.gowoon.inum.model.SearchIdResult;
 import org.gowoon.inum.recycler.Adapter_recycler_ProductSearch;
@@ -68,6 +69,17 @@ public class SearchProductMainFragment extends Fragment {
                                 none.setVisibility(View.INVISIBLE);
                                 mAdapter = new Adapter_recycler_ProductSearch(results);
                                 recyclersearch.setAdapter(mAdapter);
+
+                                mAdapter.setItemClick(new Adapter_recycler_ProductSearch.ItemClick() {
+                                    @Override
+                                    public void onClick(View view, int position) {
+                                        String productId = mAdapter.mDataset.get(position).getProductId();
+                                        Intent intentProductDetail = new Intent(getActivity(), ProductActivity.class);
+                                        intentProductDetail.putExtra("id", productId);
+                                        startActivity(intentProductDetail);
+                                    }
+                                });
+
                                 mAdapter.notifyDataSetChanged();
                                 Log.d("searchtest", "검색결과부르기" + mAdapter.mDataset.get(0));
                             }
@@ -89,13 +101,7 @@ public class SearchProductMainFragment extends Fragment {
             tv_search.setVisibility(View.INVISIBLE);
         }
         recyclersearch.setHasFixedSize(true);
-//        mAdapter.setItemClick(new Adapter_recycler_ProductSearch.ItemClick() {
-//            @Override
-//            public void onClick(View view, int position) {
-//                Intent intent_detail = new Intent(getActivity(), ProductDetail.class);
-//                startActivity(intent_detail);
-//            }
-//        });
+
         RecyclerView.LayoutManager mLayoutManager;
         mLayoutManager = new GridLayoutManager(getActivity(),3);
         recyclersearch.setLayoutManager(mLayoutManager);

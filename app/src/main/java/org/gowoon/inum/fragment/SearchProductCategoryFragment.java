@@ -1,6 +1,7 @@
 package org.gowoon.inum.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.constraint.ConstraintLayout;
@@ -24,6 +25,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import org.gowoon.inum.R;
+import org.gowoon.inum.activity.ProductActivity;
 import org.gowoon.inum.custom.Adapter_gridview_categorychild;
 import org.gowoon.inum.model.MainProductResult;
 import org.gowoon.inum.model.SearchIdResult;
@@ -165,13 +167,15 @@ public class SearchProductCategoryFragment extends Fragment {
             }
         });
         Adapter = new Adapter_recycler_ProductSearch();
-//        Adapter.setItemClick(new Adapter_recycler_ProductSearch.ItemClick() {
-//            @Override
-//            public void onClick(View view, int position) {
-//                String productid = Adapter.mDataset.get(position).getProductId();
-//
-//            }
-//        });
+        Adapter.setItemClick(new Adapter_recycler_ProductSearch.ItemClick() {
+            @Override
+            public void onClick(View view, int position) {
+                String productId = Adapter.mDataset.get(position).getProductId();
+                Intent intentProductDetail = new Intent(getActivity(), ProductActivity.class);
+                intentProductDetail.putExtra("id", productId);
+                startActivity(intentProductDetail);
+            }
+        });
 
         recyclerView = rootview.findViewById(R.id.recyclerview_search_category);
         recyclerView.setHasFixedSize(true);
