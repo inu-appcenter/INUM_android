@@ -11,18 +11,18 @@ import org.gowoon.inum.R;
 
 import java.util.ArrayList;
 
-public class Adapter_gridview_categorychild extends BaseAdapter {
+public class AdapterGridCategory extends BaseAdapter {
     private Context mContext;
-    private final ArrayList<String> childcategory;
+    private final ArrayList<String> childCategory;
 
-    public Adapter_gridview_categorychild(Context c, ArrayList<String> childcategory){
+    public AdapterGridCategory(Context c, ArrayList<String> childcategory){
         mContext = c;
-        this.childcategory = childcategory;
+        this.childCategory = childcategory;
     }
 
     @Override
     public int getCount() {
-        return childcategory.size();
+        return childCategory.size();
     }
 
     @Override
@@ -41,11 +41,10 @@ public class Adapter_gridview_categorychild extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (convertView == null){
-            grid = new View(mContext);
             grid = inflater.inflate(R.layout.item_grid_searchsubcategory,null);
             TextView textView = grid.findViewById(R.id.tv_item_grid_category);
 
-            textView.setText(childcategory.get(position));
+            textView.setText(childCategory.get(position));
         }
         else {
             grid = convertView;

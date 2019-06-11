@@ -1,15 +1,13 @@
 package org.gowoon.inum.fragment;
 
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -26,15 +24,13 @@ import android.widget.TextView;
 
 import org.gowoon.inum.R;
 import org.gowoon.inum.activity.ProductActivity;
-import org.gowoon.inum.custom.Adapter_gridview_categorychild;
-import org.gowoon.inum.model.MainProductResult;
+import org.gowoon.inum.custom.AdapterGridCategory;
 import org.gowoon.inum.model.SearchIdResult;
 import org.gowoon.inum.recycler.Adapter_recycler_ProductSearch;
 import org.gowoon.inum.util.Singleton;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -127,7 +123,7 @@ public class SearchProductCategoryFragment extends Fragment {
             }
         }
 
-        Adapter_gridview_categorychild gAdapter = new Adapter_gridview_categorychild(getActivity(),griditems);
+        AdapterGridCategory gAdapter = new AdapterGridCategory(getActivity(),griditems);
         gridView = rootview.findViewById(R.id.gridview_search_category);
         gridView.setAdapter(gAdapter);
 
