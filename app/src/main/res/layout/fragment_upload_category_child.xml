@@ -13,13 +13,13 @@
         <ListView
             android:id="@+id/listview_upload_category_child"
             android:layout_width="287dp"
-            android:layout_height="120dp"
-            android:divider="@color/cloudy_blue"
-            android:dividerHeight="1dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="167dp"
+            android:divider="@null"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/item_listview_upload_category_child">
 
         </ListView>
 
