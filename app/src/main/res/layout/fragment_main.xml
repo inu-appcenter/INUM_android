@@ -15,7 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
         </cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager>
 
@@ -63,7 +64,9 @@
                 android:id="@+id/iv_main_message_arrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/rightside" />
 
         </android.support.constraint.ConstraintLayout>
