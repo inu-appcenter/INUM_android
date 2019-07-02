@@ -1,180 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/upload_category"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#ffffff">
-
-    <TextView
-        android:id="@+id/txt_title_upload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="상품 등록하기"
-        android:textColor="@color/gunmetal"
-        android:textSize="20sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-
-        tools:layout_editor_absoluteY="44dp"
-        tools:ignore="MissingConstraints"/>
-    <ImageView
-        android:id="@+id/img_upload_whitetwo"
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:src="@color/white_two"
-        app:layout_constraintTop_toBottomOf="@+id/txt_title_upload"
-        android:layout_marginTop="16dp" />
-
-    <TextView
-        android:id="@+id/txt_category"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="카테고리"
-        android:textColor="@color/gunmetal"
-        android:textSize="18sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_upload_whitetwo"
-        android:layout_marginTop="20dp"/>
+    tools:context=".fragment.UploadCategoryFragment">
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/layout_catecory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/txt_category"
-        android:layout_marginTop="44dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-    <Button
-        android:id="@+id/btn_upload_category_book"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#00ffffff"
-        android:drawableStart="@drawable/book"
-        android:text="책"
-        android:textColor="@color/gunmetal"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="44dp"
-        android:textSize="18sp" />
-    <ImageView
-        android:id="@+id/img_bar_book"
-        android:layout_width="210dp"
-        android:layout_height="2dp"
-        android:src="@color/pale_grey"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_upload_category_book"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btn_upload_category_cloth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#00ffffff"
-        android:drawableStart="@drawable/cloth"
-        android:text="의류"
-        android:textColor="@color/gunmetal"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@id/btn_upload_category_book"
-        app:layout_constraintTop_toBottomOf="@+id/img_bar_book"
-        />
+        <TextView
+            android:id="@+id/tv_upload_category"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_marginTop="40dp"
+            android:text="카테고리"
+            android:textColor="@color/gunmetal"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/img_bar_cloth"
-        android:layout_width="210dp"
-        android:layout_height="2dp"
-        android:src="@color/pale_grey"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_upload_category_cloth"/>
+        <ListView
+            android:id="@+id/listview_upload_category"
+            android:layout_width="210dp"
+            android:layout_height="288dp"
+            android:layout_marginHorizontal="75dp"
+            android:layout_marginTop="44dp"
+            android:divider="@null"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_upload_category"
+            tools:listitem="@layout/item_listview_upload_category">
 
-    <Button
-        android:id="@+id/btn_upload_category_electric"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#00ffffff"
-        android:drawableStart="@drawable/electric"
-        android:text="가전/가구"
-        android:textColor="@color/gunmetal"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@id/btn_upload_category_book"
-        app:layout_constraintTop_toBottomOf="@+id/img_bar_cloth"
-       />
+        </ListView>
 
-    <ImageView
-        android:id="@+id/img_bar_electric"
-        android:layout_width="210dp"
-        android:layout_height="2dp"
-        android:src="@color/pale_grey"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_upload_category_electric"/>
+    </android.support.constraint.ConstraintLayout>
 
-    <Button
-        android:id="@+id/btn_upload_category_etc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#00ffffff"
-        android:drawableStart="@drawable/etc"
-        android:text="잡화"
-        android:textColor="@color/gunmetal"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@id/btn_upload_category_book"
-        app:layout_constraintTop_toBottomOf="@+id/img_bar_electric"
-        />
-    <ImageView
-        android:id="@+id/img_bar_etc"
-        android:layout_width="210dp"
-        android:layout_height="2dp"
-        android:src="@color/pale_grey"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_upload_category_etc"/>
 
-    <Button
-        android:id="@+id/btn_upload_category_room"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#00ffffff"
-        android:drawableStart="@drawable/room"
-        android:text="자취방"
-        android:textColor="@color/gunmetal"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@id/btn_upload_category_book"
-        app:layout_constraintTop_toBottomOf="@+id/img_bar_etc"
-         />
-    <ImageView
-        android:id="@+id/img_bar_room"
-        android:layout_width="210dp"
-        android:layout_height="2dp"
-        android:src="@color/pale_grey"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_upload_category_room" />
-
-    <Button
-        android:id="@+id/btn_upload_category_ticket"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#00ffffff"
-        android:drawableStart="@drawable/ticket"
-        android:text="식권"
-        android:textColor="@color/gunmetal"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@id/btn_upload_category_book"
-        app:layout_constraintTop_toBottomOf="@+id/img_bar_room"
-        />
-    <ImageView
-        android:id="@+id/img_bar_ticket"
-        android:layout_width="210dp"
-        android:layout_height="2dp"
-        android:src="@color/pale_grey"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_upload_category_ticket"/>
-
-</android.support.constraint.ConstraintLayout>
-
-</android.support.constraint.ConstraintLayout>
+</FrameLayout>

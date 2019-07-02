@@ -15,7 +15,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".activity.ProductActivity"></activity>
+        <activity android:name=".activity.UploadActivity"></activity>
+        <activity android:name=".activity.ProductActivity" />
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.SplashActivity">
             <intent-filter>

@@ -13,6 +13,9 @@ public class DataCategoryParent {
 
     public Vector<String> child;
 
+    public DataCategoryParent(){
+    }
+
     public DataCategoryParent(Drawable category_image, String category_name){
         this.category_image = category_image;
         this.category_name = category_name;

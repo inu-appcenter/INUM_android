@@ -31,39 +31,27 @@ import java.util.Vector;
 public class DrawerCategoryFragment extends Fragment {
 
     private ExpandableListView categoryListview;
+    private final DataCategoryParent parentList[] = new DataCategoryParent[6];
+    public String[] childlist;
+    Vector<DataCategoryParent> data;
+    ExpandableListCategory_Adapter eAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View rootview = (FrameLayout)inflater.inflate(R.layout.fragment_drawer_category, container, false);
         categoryListview = rootview.findViewById(R.id.expandablelist_category);
-        final DataCategoryParent parentList[] = new DataCategoryParent[6];
 
-        PopupMenu p  = new PopupMenu(this.getActivity(), null);
-        Menu menu = p.getMenu();
-        MenuInflater inflatermenu = getActivity().getMenuInflater();
-        inflatermenu.inflate(R.menu.category_menu, menu);
+        CategoryMenu();
 
-        String[] childlist;
-        for (int i = 0; i<parentList.length ; i++){
-            parentList[i] = new DataCategoryParent(menu.getItem(i).getIcon(),menu.getItem(i).getTitle().toString());
-            if (i<4) {
-                for (int j = 0; j < 4; j++) {
-                    childlist = new String[]{menu.getItem(i).getSubMenu().getItem(j).getTitle().toString()};
-                    Collections.addAll(parentList[i].child, childlist);
-                }
-            }
-        }
-        Vector<DataCategoryParent> data = new Vector<>(Arrays.asList(parentList).subList(0,6));
-        ExpandableListCategory_Adapter adapter = new ExpandableListCategory_Adapter(this.getActivity(),data);
+        eAdapter = new ExpandableListCategory_Adapter(this.getActivity(),data);
 
         DisplayMetrics metrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
         int width = metrics.widthPixels;
 
 //        categoryListview.setIndicatorBounds(width - GetPixelFromDips(50), width - GetPixelFromDips(10));
-        categoryListview.setAdapter(adapter);
-
+        categoryListview.setAdapter(eAdapter);
         categoryListview.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
             public boolean onGroupClick(ExpandableListView expandableListView, View view, int groupPosition, long id) {
@@ -116,5 +104,23 @@ public class DrawerCategoryFragment extends Fragment {
         });
 
         return rootview;
+    }
+
+    public void CategoryMenu(){
+        PopupMenu p  = new PopupMenu(this.getActivity(), null);
+        Menu menu = p.getMenu();
+        MenuInflater inflaterMenu = getActivity().getMenuInflater();
+        inflaterMenu.inflate(R.menu.category_menu, menu);
+
+        for (int i = 0; i<parentList.length ; i++){
+            parentList[i] = new DataCategoryParent(menu.getItem(i).getIcon(),menu.getItem(i).getTitle().toString());
+            if (i<4) {
+                for (int j = 0; j < 4; j++) {
+                    childlist = new String[]{menu.getItem(i).getSubMenu().getItem(j).getTitle().toString()};
+                    Collections.addAll(parentList[i].child, childlist);
+                }
+            }
+        }
+        data = new Vector<>(Arrays.asList(parentList).subList(0,6));
     }
 }

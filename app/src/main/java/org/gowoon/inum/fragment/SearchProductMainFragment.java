@@ -37,6 +37,13 @@ public class SearchProductMainFragment extends Fragment {
     SharedPreferences pref;
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        search = getArguments().getString("search","");
+
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootview = (ViewGroup) inflater.inflate(R.layout.fragment_search_product_main, container, false);

@@ -16,7 +16,7 @@ import org.gowoon.inum.R;
 import org.gowoon.inum.activity.ChatActivity;
 import org.gowoon.inum.activity.MypageActivity;
 import org.gowoon.inum.activity.MyproductActivity;
-import org.gowoon.inum.activity.UploadAcitivity;
+import org.gowoon.inum.activity.UploadActivity;
 import org.gowoon.inum.model.SearchIdResult;
 import org.gowoon.inum.util.Singleton;
 
@@ -43,7 +43,7 @@ public class DrawerMypageFragment extends Fragment {
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent upload_intent = new Intent(getActivity().getApplicationContext(), UploadAcitivity.class);
+                Intent upload_intent = new Intent(getActivity().getApplicationContext(), UploadActivity.class);
                 startActivity(upload_intent);
             }
         });
