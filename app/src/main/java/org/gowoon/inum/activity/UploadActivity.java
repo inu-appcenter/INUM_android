@@ -12,6 +12,8 @@ public class UploadActivity extends AppCompatActivity {
     FragmentManager fragmentManager;
     Fragment fragmentCategory = new UploadCategoryFragment();
 
+    public static Bundle bundleUpload = new Bundle();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +21,6 @@ public class UploadActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .add(R.id.constraint_upload, fragmentCategory)
-                .addToBackStack(null)
                 .commit();
     }
 }

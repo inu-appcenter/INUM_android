@@ -7,6 +7,12 @@ import java.util.List;
 
 public class ProductOneItemResult {
 
+    public static ProductOneItemResult productData = new ProductOneItemResult();
+
+    public static ProductOneItemResult getInstance() {
+        return productData;
+    }
+
     @SerializedName("productImg")
     @Expose
     private List<String> productImg;

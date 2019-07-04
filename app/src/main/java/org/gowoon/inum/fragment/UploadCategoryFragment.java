@@ -11,20 +11,21 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 
 import org.gowoon.inum.R;
 import org.gowoon.inum.custom.AdapterListviewCategory;
-import org.gowoon.inum.model.DataCategoryParent;
+import org.gowoon.inum.model.ProductOneItemResult;
 
 import java.util.ArrayList;
 
+import static org.gowoon.inum.activity.UploadActivity.bundleUpload;
 
 public class UploadCategoryFragment extends Fragment {
     public AdapterListviewCategory lAdapter = new AdapterListviewCategory();
     public ListView listViewCategory;
-    public static Bundle bundleUpload, bundle = new Bundle();
-    Boolean loadData = true;
 
+    Boolean loadData = true;
     String[] childList;
     ArrayList<String[]> childArray = new ArrayList<>();
 
@@ -36,6 +37,9 @@ public class UploadCategoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootview = inflater.inflate(R.layout.fragment_upload_category, container, false);
         listViewCategory = rootview.findViewById(R.id.listview_upload_category);
+
+        TextView tvNext = getActivity().findViewById(R.id.tv_upload_next);
+        tvNext.setVisibility(View.INVISIBLE);
 
         // 프래그먼트 실행할 때마다 새로 카테고리 값이 불러와져서 넣음
         if (loadData){
@@ -49,9 +53,11 @@ public class UploadCategoryFragment extends Fragment {
 //                bundleUpload.putString("category", lAdapter.getName(position));
                 if (position<4){
                     UploadCategoryChildFragment categoryChild = new UploadCategoryChildFragment();
-                    bundle.putStringArray("category child",childArray.get(position));
+           //         Bundle bundle = new Bundle();
+                    bundleUpload.putInt("category",position);
+                    bundleUpload.putStringArray("category child",childArray.get(position));
                     categoryChild.setArguments(bundleUpload);
-                    categoryChild.setArguments(bundle);
+//                    categoryChild.setArguments(bundle);
 
                     getFragmentManager().beginTransaction()
                             .replace(R.id.constraint_upload, categoryChild)
