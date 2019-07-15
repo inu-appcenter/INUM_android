@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import org.gowoon.inum.R;
 
-public class UploadExplainFragment extends android.support.v4.app.Fragment {
+public class UploadExplainFragment extends android.support.v4.app.Fragment{
 
     public UploadExplainFragment() {
         // Required empty public constructor
