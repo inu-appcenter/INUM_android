@@ -75,7 +75,7 @@ public class signup_pwFragment extends Fragment {
                     stdpw = pw.getText().toString();
                     UserData.getInstance().setPw(stdpw);
                     getFragmentManager().beginTransaction()
-                            .setCustomAnimations(R.anim.enter_from_right,0,0,R.anim.exit_to_left)
+                            .setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left,R.anim.enter_from_left,R.anim.exit_to_right)
                             .replace(R.id.container_signup, new signup_phoneFragment())
                             .commit();
                 }

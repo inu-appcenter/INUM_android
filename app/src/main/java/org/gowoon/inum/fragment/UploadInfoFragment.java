@@ -64,7 +64,7 @@ public class UploadInfoFragment extends Fragment {
                     Log.d("info",info[0]+info[1]+info[2]);
 
                     getFragmentManager().beginTransaction()
-                            .setCustomAnimations(R.anim.enter_from_right,0,0,R.anim.exit_to_left)
+                            .setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left,R.anim.enter_from_left,R.anim.exit_to_right)
                             .replace(R.id.constraint_upload, uploadExplain)
                             .addToBackStack(null)
                             .commit();

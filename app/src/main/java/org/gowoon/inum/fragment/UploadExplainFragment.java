@@ -77,7 +77,7 @@ public class UploadExplainFragment extends android.support.v4.app.Fragment{
 
                 UploadImageFragment uploadImage = new UploadImageFragment();
                 getFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.enter_from_right,0,0,R.anim.exit_to_left)
+                        .setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left,R.anim.enter_from_left,R.anim.exit_to_right)
                         .replace(R.id.constraint_upload, uploadImage)
                         .addToBackStack(null)
                         .commit();

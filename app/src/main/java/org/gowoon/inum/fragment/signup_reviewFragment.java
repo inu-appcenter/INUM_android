@@ -69,7 +69,7 @@ public class signup_reviewFragment extends Fragment {
                                     // result "ans"가 false 일 때도 설정
                                     if (String.valueOf(result.get("ans")).equals("true")) {
                                         getFragmentManager().beginTransaction()
-                                                .setCustomAnimations(R.anim.enter_from_right,0,0,R.anim.exit_to_left)
+                                                .setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left,R.anim.enter_from_left,R.anim.exit_to_right)
                                                 .replace(R.id.container_signup, new signup_completeFragment())
                                                 .commit();
                                     }

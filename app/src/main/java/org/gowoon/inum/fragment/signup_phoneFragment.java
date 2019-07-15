@@ -43,7 +43,7 @@ public class signup_phoneFragment extends Fragment {
                     //TODO
                     //프래그먼트에서 뒤로가기 누르면 전단계로 돌아가기
                     getFragmentManager().beginTransaction()
-                            .setCustomAnimations(R.anim.enter_from_right,0,0,R.anim.exit_to_left)
+                            .setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left,R.anim.enter_from_left,R.anim.exit_to_right)
                             .replace(R.id.container_signup, new signup_reviewFragment())
                             .commit();
                 }

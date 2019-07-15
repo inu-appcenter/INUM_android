@@ -38,7 +38,7 @@ public class UploadCategoryChildFragment extends Fragment {
                 ProductOneItemResult.getInstance().setCategory(childList[position]);
                 UploadInfoFragment categoryInfo = new UploadInfoFragment();
                 getFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.enter_from_right,0,0,R.anim.exit_to_left)
+                        .setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left,R.anim.enter_from_left,R.anim.exit_to_right)
                         .replace(R.id.constraint_upload, categoryInfo)
                         .addToBackStack(null)
                         .commit();
