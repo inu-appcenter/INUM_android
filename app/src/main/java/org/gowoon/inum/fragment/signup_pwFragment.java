@@ -1,7 +1,7 @@
 package org.gowoon.inum.fragment;
 
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,7 +74,10 @@ public class signup_pwFragment extends Fragment {
                     //비밀번호 일치,8글자 이상
                     stdpw = pw.getText().toString();
                     UserData.getInstance().setPw(stdpw);
-                    getFragmentManager().beginTransaction().replace(R.id.container_signup, new signup_phoneFragment()).commit();
+                    getFragmentManager().beginTransaction()
+                            .setCustomAnimations(R.anim.enter_from_right,0,0,R.anim.exit_to_left)
+                            .replace(R.id.container_signup, new signup_phoneFragment())
+                            .commit();
                 }
             }
         });

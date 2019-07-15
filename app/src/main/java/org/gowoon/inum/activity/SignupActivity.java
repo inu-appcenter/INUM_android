@@ -16,15 +16,15 @@ import org.gowoon.inum.fragment.signup_reviewFragment;
 import org.gowoon.inum.fragment.signup_stdinfoFragment;
 
 public class SignupActivity extends AppCompatActivity {
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_singnup);
 
-        android.app.FragmentManager fm = getFragmentManager();
-        android.app.FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.add(R.id.container_signup, new signup_argeementFragment());
-        fragmentTransaction.commit();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container_signup, new signup_argeementFragment())
+                .commit();
     }
 
     //TODO

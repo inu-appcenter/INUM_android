@@ -1,7 +1,7 @@
 package org.gowoon.inum.fragment;
 
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +42,10 @@ public class signup_phoneFragment extends Fragment {
                     UserData.getInstance().setPhone(phone);
                     //TODO
                     //프래그먼트에서 뒤로가기 누르면 전단계로 돌아가기
-                    getFragmentManager().beginTransaction().replace(R.id.container_signup, new signup_reviewFragment()).commit();
+                    getFragmentManager().beginTransaction()
+                            .setCustomAnimations(R.anim.enter_from_right,0,0,R.anim.exit_to_left)
+                            .replace(R.id.container_signup, new signup_reviewFragment())
+                            .commit();
                 }
             }
         });

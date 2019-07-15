@@ -1,7 +1,7 @@
 package org.gowoon.inum.fragment;
 
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,7 +68,10 @@ public class signup_reviewFragment extends Fragment {
 
                                     // result "ans"가 false 일 때도 설정
                                     if (String.valueOf(result.get("ans")).equals("true")) {
-                                        getFragmentManager().beginTransaction().replace(R.id.container_signup, new signup_completeFragment()).commit();
+                                        getFragmentManager().beginTransaction()
+                                                .setCustomAnimations(R.anim.enter_from_right,0,0,R.anim.exit_to_left)
+                                                .replace(R.id.container_signup, new signup_completeFragment())
+                                                .commit();
                                     }
                                 }
                             }

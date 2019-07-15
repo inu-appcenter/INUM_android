@@ -2,8 +2,9 @@ package org.gowoon.inum.fragment;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ public class signup_argeementFragment extends Fragment {
     private TextView message;
     private Button btn_nextstep;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -35,19 +37,17 @@ public class signup_argeementFragment extends Fragment {
             public void onClick(View v) {
                 if (checkBox.isChecked()) {
                     message.setVisibility(View.INVISIBLE);
-                   
-
 //                    FragmentManager agree_fm = getFragmentManager();
 //                    FragmentTransaction tran = agree_fm.beginTransaction();
 //
 //                    tran.replace(R.id.container_signup,);
                     //TODO
                     //프래그먼트에서 뒤로가기 누르면 전단계로 돌아가기
-                    getFragmentManager().beginTransaction().replace(R.id.container_signup, new signup_stdinfoFragment()).commit();
-//                    getFragmentManager().beginTransaction()
-//                            .replace(R.id.login,fragment)
-//                            .addToBackStack(null)
-//                            .commit();
+                    getFragmentManager().beginTransaction()
+                            .setCustomAnimations(R.anim.enter_from_right,0,0,R.anim.exit_to_left)
+                            .replace(R.id.container_signup, new signup_stdinfoFragment())
+                            .addToBackStack(null)
+                            .commit();
 
                 } else {
                     message.setVisibility(View.VISIBLE);

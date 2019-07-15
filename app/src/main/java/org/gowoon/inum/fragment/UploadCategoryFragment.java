@@ -60,6 +60,7 @@ public class UploadCategoryFragment extends Fragment {
 //                    categoryChild.setArguments(bundle);
 
                     getFragmentManager().beginTransaction()
+                            .setCustomAnimations(R.anim.enter_from_right,0,0,R.anim.exit_to_left)
                             .replace(R.id.constraint_upload, categoryChild)
                             .addToBackStack(null)
                             .commit();
@@ -67,6 +68,7 @@ public class UploadCategoryFragment extends Fragment {
                 else{
                     UploadInfoFragment categoryInfo = new UploadInfoFragment();
                     getFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_right,0,0,R.anim.exit_to_left)
                         .replace(R.id.constraint_upload, categoryInfo)
                         .addToBackStack(null)
                         .commit();
