@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.gowoon.inum.R;
 import org.gowoon.inum.fragment.forgotpwFragment;
@@ -63,6 +64,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 String FCM = "notwork";
                 stdid = etv_stdid.getText().toString();
                 pw = etv_pw.getText().toString();
+                Log.d("login click",stdid + pw);
 
                 Singleton.retrofit.login(stdid,pw,FCM).enqueue(new Callback<LoginResult>() {
                     @Override
@@ -111,6 +113,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onFailure(Call<LoginResult> call, Throwable t) {
                         Log.d("Loginfail","onFailure"+t);
+                        Toast.makeText(LoginActivity.this, "네트워크 연결을 확인해주세요", Toast.LENGTH_LONG).show();
                     }
                 });
                 break;
