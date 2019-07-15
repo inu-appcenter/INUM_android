@@ -36,7 +36,10 @@
     <color name="blush">#f1a2a2</color>
 
     <!--blank view-->
-    <color name = "white_d8">#d8d8d8</color>
-
+    <color name="white_d8">#d8d8d8</color>
     <color name="blush_pink">#ff7c8c</color>
+
+    <!--upload-->
+    <color name="dark_mint_green">#1ac07a</color>
+    <color name="pinkish_grey_two">#cccccc</color>
 </resources>
