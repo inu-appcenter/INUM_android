@@ -1,6 +1,8 @@
 package org.gowoon.inum.recycler;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
+import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,32 +16,45 @@ import org.gowoon.inum.model.ItemImageList;
 
 import java.util.ArrayList;
 
-public class AdapterRecyclerUploadImage extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class AdapterRecyclerUploadImage extends RecyclerView.Adapter<AdapterRecyclerUploadImage.ListViewHolder>{
     private ArrayList<ItemImageList> data = new ArrayList<>(8);
-    LayoutInflater inflater;
+
+    public AdapterRecyclerUploadImage(){}
+
+    public AdapterRecyclerUploadImage(ArrayList<ItemImageList> myData) {
+        this.data = myData;
+    }
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = null;
+    public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        view = inflater.inflate(R.layout.item_upload_recyclerview_image,parent,false);
-        ListViewHolder imageholder = new ListViewHolder(view);
-        return imageholder;
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_upload_recyclerview_image,parent,false);
+//        inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        view = inflater.inflate(R.layout.item_upload_recyclerview_image,parent,false);
+//        ListViewHolder imageHolder = new ListViewHolder(view);
+        return new AdapterRecyclerUploadImage.ListViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
+    public void onBindViewHolder(@NonNull AdapterRecyclerUploadImage.ListViewHolder holder, final int position) {
         Log.d("viewHolder", String.valueOf(position));
-        final ItemImageList iL = data.get(position);
-        final ListViewHolder listholder = (ListViewHolder) holder;
-        listholder.uploadImage.setImageURI(iL.getImageUri());
 
+        final ItemImageList iL = data.get(position);
+//        final ListViewHolder listholder = (ListViewHolder) holder;
+        holder.uploadImage.setImageURI(iL.getImageUri());
+        holder.itemView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if (itemClick != null){
+                    itemClick.onClick(v,position);
+                }
+            }
+        });
     }
 
-    private class ListViewHolder extends RecyclerView.ViewHolder{
+    public class ListViewHolder extends RecyclerView.ViewHolder{
         public ImageView uploadImage;
 
         public ListViewHolder(View itemView){
@@ -58,6 +73,16 @@ public class AdapterRecyclerUploadImage extends RecyclerView.Adapter<RecyclerVie
             notifyItemRemoved(i);
         }
         data = new ArrayList<>();
+    }
+
+    public ItemClick itemClick;
+
+    public interface ItemClick{
+        void onClick(View view, int position);
+    }
+
+    public void setItemClick(AdapterRecyclerUploadImage.ItemClick itemClick){
+        this.itemClick = itemClick;
     }
 
     public void addItem(ItemImageList Data){
