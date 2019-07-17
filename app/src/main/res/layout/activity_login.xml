@@ -150,7 +150,9 @@
         android:textSize="16sp"
         android:textColor="@color/gunmetal"
         android:gravity="center"
-        android:background="@drawable/gradient_btn"
+        android:elevation="5dp"
+        android:background="@drawable/round_square_8dp"
+        android:backgroundTint="#fff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

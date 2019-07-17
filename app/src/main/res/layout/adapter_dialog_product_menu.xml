@@ -48,7 +48,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="@color/warm_gery_three" />
+            android:background="@color/warm_grey_three" />
 
         <TextView
             android:id="@+id/tv_dialog_product_menu_edit"
@@ -64,7 +64,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="@color/warm_gery_three" />
+            android:background="@color/warm_grey_three" />
 
         <TextView
             android:id="@+id/tv_dialog_product_menu_delete"
