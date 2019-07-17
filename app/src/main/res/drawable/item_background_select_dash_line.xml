@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/round_square_8dp_dash_line"
+        android:state_pressed="false"
+        />
+    <item
+        android:drawable="@drawable/round_square_8dp_dash_line_selected"
+        android:state_pressed="true"
+        />
+</selector>

@@ -50,17 +50,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout_upload_image" />
 
-        <Button
-            android:id="@+id/addButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="imageAdd"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerview_upload_image" />
+        <!--<Button-->
+            <!--android:id="@+id/addButton"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:text="imageAdd"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/recyclerview_upload_image" />-->
 
         <TextView
             android:id="@+id/tv_upload_image_no_input"
@@ -77,11 +77,11 @@
 
         <LinearLayout
             android:id="@+id/linearLayout_upload_image_select"
-            android:layout_width="270dp"
-            android:layout_height="wrap_content"
+            android:layout_width="280dp"
+            android:layout_height="111.7dp"
             android:orientation="vertical"
-            android:layout_marginBottom="58dp"
             android:visibility="gone"
+            android:layout_marginBottom="58dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -90,10 +90,13 @@
 
             <TextView
                 android:id="@+id/tv_upload_image_camera"
-                android:layout_width="match_parent"
+                android:layout_width="268.8dp"
                 android:layout_height="46.1dp"
+                android:layout_marginTop="3dp"
                 android:layout_marginBottom="11.5dp"
-                android:background="@drawable/gradient_btn"
+                android:elevation="5dp"
+                android:background="@drawable/round_square_8dp"
+                android:backgroundTint="#fff"
                 android:gravity="center"
                 android:text="촬영하기"
                 android:textColor="@color/gunmetal"
@@ -101,13 +104,16 @@
 
             <TextView
                 android:id="@+id/tv_upload_image_multi"
-                android:layout_width="match_parent"
+                android:layout_width="268.8dp"
                 android:layout_height="46.1dp"
-                android:background="@drawable/gradient_btn"
+                android:elevation="5dp"
+                android:background="@drawable/round_square_8dp"
+                android:backgroundTint="#fff"
                 android:gravity="center"
                 android:text="앨범 (여러장)"
                 android:textColor="@color/gunmetal"
                 android:textSize="16sp"
+                android:layout_marginBottom="3dp"
                 />
         </LinearLayout>
     </android.support.constraint.ConstraintLayout>

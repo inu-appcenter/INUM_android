@@ -2,18 +2,19 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="73dp"
     android:layout_height="72.9dp"
-    android:background="@drawable/round_square_8dp_dash_line">
+    >
 
     <ImageView
         android:id="@+id/iv_item_upload_image"
         android:layout_height="match_parent"
-        android:layout_width="match_parent" />
+        android:layout_width="match_parent"
+        android:background="@drawable/item_background_select_dash_line"
+        />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/iv_item_upload_image_plus"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:gravity="center"
@@ -23,5 +24,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <!--<view-->
+        <!--android:id="@+id/view_upload_item_opacity"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="#000"-->
+        <!--android:alpha="20"-->
+        <!--android:visibility="invisible"/>-->
 
 </android.support.constraint.ConstraintLayout>
