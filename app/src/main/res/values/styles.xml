@@ -13,11 +13,21 @@
         <item name = "windowNoTitle">true</item>
     </style>
 
-    <style name="EdittextStyle_login" parent="Widget.AppCompat.EditText">
+    <style name="EditTextStylePinkishGrey" parent="@android:style/Widget.EditText">
+        <item name="android:layout_width">match_parent</item>
         <item name="android:textColor">@color/greyish_brown</item>
         <item name="android:textColorHint">@color/pinkish_grey</item>
         <item name="android:colorControlNormal">@color/pale_grey</item>
-        <item name="android:colorControlActivated">@color/warm_grey</item>
+        <item name="android:colorControlActivated">@color/pale_grey</item>
+    </style>
+
+    <!--Login, ForgotPw, SignUp-->
+    <style name="EditTextStyleLight" parent="EditTextStylePinkishGrey">
+        <item name="android:textSize">16sp</item>
+        <item name="android:hint">입력</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:singleLine">true</item>
     </style>
 
     <style name="EdittextStyle_setting_quest" parent="Widget.AppCompat.EditText">
@@ -34,4 +44,24 @@
         <item name="android:colorControlActivated">#000000</item>
     </style>
 
+    <style name="TextViewStyleSmall" parent="@android:style/Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">18dp</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextViewStyleSmallRed" parent="TextViewStyleSmall">
+        <item name="android:textColor">@color/orangey_red</item>
+    </style>
+
+    <style name="TextViewStyleSmallGunmetal" parent="TextViewStyleSmall">
+        <item name="android:textColor">@color/gunmetal</item>
+    </style>
+
+    <style name="TextViewStyleTitle" parent="@android:style/Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">29dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/gunmetal</item>
+    </style>
 </resources>

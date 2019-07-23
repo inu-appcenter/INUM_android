@@ -40,46 +40,34 @@
             android:textSize="24sp" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="18dp"
+            style="@style/TextViewStyleSmallGunmetal"
+            android:theme="@style/TextViewStyleSmallGunmetal"
             android:layout_marginStart="8dp"
             android:layout_marginTop="32dp"
-            android:text="학번"
-            android:textColor="@color/gunmetal"
-            android:textSize="12sp" />
+            android:text="학번"/>
 
         <EditText
             android:id="@+id/etv_login_stdid"
-            style="@style/EdittextStyle_login"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="4dp"
+            style="@style/EditTextStyleLight"
+            android:theme="@style/EditTextStyleLight"
             android:inputType="number"
-            android:hint="입력"
             android:paddingStart="13.4dp"
-            android:textSize="16sp"
-            android:theme="@style/EdittextStyle_login" />
+            />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="18dp"
+            style="@style/TextViewStyleSmallGunmetal"
+            android:theme="@style/TextViewStyleSmallGunmetal"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:text="비밀번호"
-            android:textColor="@color/gunmetal"
-            android:textSize="12sp" />
+            android:text="비밀번호" />
 
         <EditText
             android:id="@+id/etv_login_pw"
-            style="@style/EdittextStyle_login"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="4dp"
+            style="@style/EditTextStyleLight"
+            android:theme="@style/EditTextStyleLight"
             android:inputType="textPassword"
-            android:hint="입력"
             android:paddingStart="13.4dp"
-            android:textSize="16sp"
-            android:theme="@style/EdittextStyle_login" />
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -100,17 +88,15 @@
                 android:textSize="12sp" />
 
             <TextView
+                style="@style/TextViewStyleSmallRed"
+                android:theme="@style/TextViewStyleSmallRed"
                 android:id="@+id/tv_login_notcorrect"
-                android:layout_width="wrap_content"
-                android:layout_height="18dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="5dp"
                 android:layout_weight="1"
                 android:visibility="invisible"
                 android:gravity="end"
-                android:text="*학번과 일치하는 패스워드가 아닙니다."
-                android:textColor="@color/orangey_red"
-                android:textSize="12sp" />
+                android:text="*학번과 일치하는 패스워드가 아닙니다." />
         </LinearLayout>
 
         <LinearLayout
@@ -119,24 +105,22 @@
             android:layout_marginTop="7dp">
 
             <TextView
+                style="@style/TextViewStyleSmallGunmetal"
+                android:theme="@style/TextViewStyleSmallGunmetal"
                 android:id="@+id/tv_login_join"
-                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="*회원 가입"
-                android:textColor="@color/gunmetal"
-                android:textSize="12sp" />
+                android:text="*회원 가입" />
 
             <TextView
+                style="@style/TextViewStyleSmallGunmetal"
+                android:theme="@style/TextViewStyleSmallGunmetal"
                 android:id="@+id/tv_login_findpw"
-                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="패스워드 분실"
-                android:textColor="@color/gunmetal"
-                android:textSize="12sp" />
+                android:text="패스워드 분실" />
         </LinearLayout>
     </LinearLayout>
 

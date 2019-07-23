@@ -60,55 +60,40 @@
                 android:textSize="24sp" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="18dp"
+                style="@style/TextViewStyleSmallGunmetal"
+                android:theme="@style/TextViewStyleSmallGunmetal"
                 android:layout_marginStart="7.6dp"
                 android:layout_marginTop="33.5dp"
-                android:text="이름"
-                android:textColor="@color/gunmetal"
-                android:textSize="12sp" />
+                android:text="이름" />
 
             <EditText
                 android:id="@+id/etv_forgotpw_name"
-                style="@style/EdittextStyle_login"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="2.5dp"
-                android:hint="입력"
-                android:paddingStart="13.4dp"
-                android:textSize="16sp"
-                android:theme="@style/EdittextStyle_login" />
+                style="@style/EditTextStyleLight"
+                android:theme="@style/EditTextStyleLight"
+                android:layout_marginTop="-1.5dp"
+                android:paddingStart="13.4dp" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="18dp"
+                style="@style/TextViewStyleSmallGunmetal"
+                android:theme="@style/TextViewStyleSmallGunmetal"
                 android:layout_marginStart="7.6dp"
                 android:layout_marginTop="17.5dp"
-                android:text="학번"
-                android:textColor="@color/gunmetal"
-                android:textSize="12sp" />
+                android:text="학번" />
 
             <EditText
                 android:id="@+id/etv_forgotpw_id"
-                style="@style/EdittextStyle_login"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="2.5dp"
+                style="@style/EditTextStyleLight"
+                android:theme="@style/EditTextStyleLight"
                 android:inputType="number"
-                android:hint="입력"
-                android:paddingStart="13.4dp"
-                android:textSize="16sp"
-                android:theme="@style/EdittextStyle_login" />
+                android:paddingStart="13.4dp" />
         </LinearLayout>
 
         <TextView
+            style="@style/TextViewStyleSmallRed"
+            android:theme="@style/TextViewStyleSmallRed"
             android:id="@+id/tv_forgotpw_noinput"
-            android:layout_width="wrap_content"
-            android:layout_height="18dp"
             android:layout_marginBottom="19.8dp"
             android:text="* 이름과 학번을 입력해 주세요."
-            android:textColor="@color/orangey_red"
-            android:textSize="12sp"
             android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@id/btn_forgotpw"
             app:layout_constraintEnd_toEndOf="parent"
