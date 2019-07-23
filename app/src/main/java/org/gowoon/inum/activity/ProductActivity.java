@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,7 +28,7 @@ import retrofit2.Response;
 public class ProductActivity extends AppCompatActivity implements View.OnClickListener{
 
     TextView tvName, tvPlace, tvPrice, tvInfo, tvMethod, tvCategory, tvState, tvStar;
-    Button btnSeller;
+    LinearLayout btnSeller;
 
     ArrayList<String> arrayImage, arrayProductData;
 
@@ -50,7 +51,7 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
         arrayImage = new ArrayList<>();
         arrayProductData = new ArrayList<>();
 
-        btnSeller = findViewById(R.id.btn_product_detail_otherproduct);
+        btnSeller = findViewById(R.id.layout_detail_other_product);
         btnSeller.setOnClickListener(this);
 
         tvName = findViewById(R.id.tv_product_detail_name);

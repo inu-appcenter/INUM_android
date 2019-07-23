@@ -35,8 +35,8 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:theme="@style/TextViewStyleSmallGunmetal"
+            style="@style/TextViewStyleSmallGunmetal"
             android:layout_marginStart="28dp"
             android:layout_marginTop="32dp"
             android:text="문의내용"
@@ -44,23 +44,16 @@
             app:layout_constraintTop_toBottomOf="@+id/view_qustion_partition" />
 
         <EditText
-            android:theme="@style/EdittextStyle_setting_quest"
-            style="@style/EdittextStyle_setting_quest"
+            android:theme="@style/EditTextStyleBox"
+            style="@style/EditTextStyleBox"
             android:id="@+id/et_setting_question"
-            android:layout_width="match_parent"
             android:layout_height="139dp"
             android:layout_marginEnd="20dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="54dp"
-            android:ems="10"
             android:backgroundTint="@color/pale_grey_three"
-            android:background="@drawable/round_square_4dp_stroke_2dp"
-            android:inputType="textMultiLine"
-            android:hint="입력"
             android:paddingStart="14dp"
             android:paddingTop="10dp"
-            android:paddingBottom="105dp"
-            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view_qustion_partition" />

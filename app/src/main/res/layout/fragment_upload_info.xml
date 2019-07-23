@@ -19,54 +19,43 @@
             android:layout_marginEnd="20.2dp">
 
             <TextView
+                style="@style/TextViewStyleSmallGunmetal"
+                android:theme="@style/TextViewStyleSmallGunmetal"
                 android:id="@+id/tv_upload_info_name"
-                android:layout_width="wrap_content"
-                android:layout_height="18dp"
-                android:textSize="12sp"
-                android:textColor="@color/gunmetal"
                 android:text="상품명"
                 android:layout_marginStart="8.7dp"/>
 
             <EditText
+                style="@style/EditTextStyleLight"
+                android:theme="@style/EditTextStyleLight"
                 android:id="@+id/etv_upload_info_name"
-                android:layout_width="match_parent"
                 android:layout_height="46dp"
                 android:layout_marginTop="3.5dp"
-                android:hint="입력"
-                android:textSize="16sp"
-                android:paddingStart="8.7dp"
-                style="@style/EdittextStyle_login"
-                android:theme="@style/EdittextStyle_login"/>
+                android:paddingStart="8.7dp"/>
 
             <TextView
+                style="@style/TextViewStyleSmallGunmetal"
+                android:theme="@style/TextViewStyleSmallGunmetal"
                 android:id="@+id/tv_upload_info_status"
-                android:layout_width="wrap_content"
-                android:layout_height="18dp"
-                android:textSize="12sp"
                 android:layout_marginTop="15dp"
-                android:textColor="@color/gunmetal"
                 android:layout_marginStart="8.7dp"
                 android:text="상품 상태"
                 />
 
             <EditText
+                style="@style/EditTextStyleLight"
+                android:theme="@style/EditTextStyleLight"
                 android:id="@+id/etv_upload_info_status"
-                android:layout_width="match_parent"
                 android:layout_height="46dp"
                 android:layout_marginTop="3.5dp"
                 android:hint="ex) 신상 or 중고 3개월 사용"
-                android:textSize="16sp"
-                android:paddingStart="8.7dp"
-                style="@style/EdittextStyle_login"
-                android:theme="@style/EdittextStyle_login"/>
+                android:paddingStart="8.7dp"/>
 
             <TextView
+                style="@style/TextViewStyleSmallGunmetal"
+                android:theme="@style/TextViewStyleSmallGunmetal"
                 android:id="@+id/tv_upload_info_price"
-                android:layout_width="wrap_content"
-                android:layout_height="18dp"
-                android:textSize="12sp"
                 android:layout_marginTop="15dp"
-                android:textColor="@color/gunmetal"
                 android:layout_marginStart="8.7dp"
                 android:text="가격"
                />
@@ -77,15 +66,12 @@
                 
                 <EditText
                     android:id="@+id/etv_upload_info_price"
-                    android:layout_width="match_parent"
                     android:layout_height="46dp"
                     android:layout_marginTop="3.5dp"
                     android:inputType="number"
-                    android:textSize="16sp"
-                    android:hint="입력"
                     android:paddingStart="8.7dp"
-                    style="@style/EdittextStyle_login"
-                    android:theme="@style/EdittextStyle_login"/>
+                    style="@style/EditTextStyleLight"
+                    android:theme="@style/EditTextStyleLight"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -98,24 +84,18 @@
                     android:layout_marginEnd="14.4dp"/>
                 
             </FrameLayout>
-           
-
         </LinearLayout>
 
         <TextView
+            style="@style/TextViewStyleSmallRed"
+            android:theme="@style/TextViewStyleSmallRed"
             android:id="@+id/tv_upload_info_message"
-            android:layout_width="wrap_content"
-            android:layout_height="18dp"
             android:layout_marginBottom="18.8dp"
             android:text="*상품 정보를 입력해야 합니다."
-            android:textColor="@color/orangey_red"
-            android:textSize="12sp"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
-
 
     </android.support.constraint.ConstraintLayout>
 

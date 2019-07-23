@@ -21,17 +21,15 @@
             >
 
             <TextView
+                style="@style/TextViewStyleSmallGunmetal"
+                android:theme="@style/TextViewStyleSmallGunmetal"
                 android:id="@+id/tv_upload_image"
-                android:layout_width="wrap_content"
-                android:layout_height="18dp"
-                android:textSize="12sp"
                 android:text="사진 등록"
-                android:textColor="@color/gunmetal"
-                 />
+                />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="18dp"
+                style="@style/TextViewStyleSmall"
+                android:theme="@style/TextViewStyleSmall"
                 android:textColor="@color/dark_mint_green"
                 android:text="0/8"
                 android:layout_marginStart="7.7dp"
@@ -50,26 +48,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout_upload_image" />
 
-        <!--<Button-->
-            <!--android:id="@+id/addButton"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginStart="8dp"-->
-            <!--android:layout_marginTop="8dp"-->
-            <!--android:layout_marginEnd="8dp"-->
-            <!--android:text="imageAdd"-->
-            <!--app:layout_constraintEnd_toEndOf="parent"-->
-            <!--app:layout_constraintStart_toStartOf="parent"-->
-            <!--app:layout_constraintTop_toBottomOf="@+id/recyclerview_upload_image" />-->
-
         <TextView
+            style="@style/TextViewStyleSmallRed"
+            android:theme="@style/TextViewStyleSmallRed"
             android:id="@+id/tv_upload_image_no_input"
-            android:layout_width="wrap_content"
-            android:layout_height="18dp"
             android:layout_marginBottom="18.8dp"
             android:text="*상품 사진이 등록되어야 합니다."
-            android:textColor="@color/orangey_red"
-            android:textSize="12sp"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -110,7 +94,7 @@
                 android:background="@drawable/round_square_8dp"
                 android:backgroundTint="#fff"
                 android:gravity="center"
-                android:text="앨범 (여러장)"
+                android:text="앨범"
                 android:textColor="@color/gunmetal"
                 android:textSize="16sp"
                 android:layout_marginBottom="3dp"

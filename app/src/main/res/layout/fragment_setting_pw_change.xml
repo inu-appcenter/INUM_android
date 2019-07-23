@@ -47,18 +47,15 @@
             app:layout_constraintTop_toBottomOf="@+id/view_changepw_partition" />
 
         <EditText
-            android:theme="@style/EdittextStyle_login"
-            style="@style/EdittextStyle_login"
+            android:theme="@style/EditTextStyleLight"
+            style="@style/EditTextStyleLight"
             android:id="@+id/et_setting_pwchange_currentpw"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
             android:layout_marginStart="19.2dp"
             android:layout_marginEnd="19.2dp"
             android:layout_marginTop="4dp"
             android:ems="10"
             android:paddingStart="14.8dp"
             android:inputType="textPassword"
-            android:hint="입력"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_setting_pwchange_currentpw" />
 
@@ -75,18 +72,15 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_setting_pwchange_currentpw" />
 
         <EditText
-            android:theme="@style/EdittextStyle_login"
-            style="@style/EdittextStyle_login"
+            android:theme="@style/EditTextStyleLight"
+            style="@style/EditTextStyleLight"
             android:id="@+id/et_setting_pwchange_newpw"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
             android:layout_marginStart="19.2dp"
             android:layout_marginEnd="19.2dp"
             android:layout_marginTop="4dp"
             android:ems="10"
             android:paddingStart="14.8dp"
             android:inputType="textPassword"
-            android:hint="입력"
             android:textColorHint="#c4c4c4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_setting_pwchange_newpw" />
@@ -104,18 +98,15 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_setting_pwchange_newpw" />
 
         <EditText
-            android:theme="@style/EdittextStyle_login"
-            style="@style/EdittextStyle_login"
+            android:theme="@style/EditTextStyleLight"
+            style="@style/EditTextStyleLight"
             android:id="@+id/et_setting_pwchange_newpw_again"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
             android:layout_marginStart="19.2dp"
             android:layout_marginEnd="19.2dp"
             android:layout_marginTop="4dp"
             android:ems="10"
             android:paddingStart="14.8dp"
             android:inputType="textPassword"
-            android:hint="입력"
             android:textColorHint="#c4c4c4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_setting_pwchange_newpw_again" />

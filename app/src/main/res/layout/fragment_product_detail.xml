@@ -166,19 +166,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_product_detail_dealplace" />
 
-            <Button
-                android:id="@+id/btn_product_detail_otherproduct"
-                android:layout_width="wrap_content"
-                android:layout_height="52dp"
-                android:background="#00ffffff"
-                android:paddingEnd="43.6dp"
-                android:paddingStart="27.4dp"
-                android:text="판매자의 다른 상품 보기"
-                android:textColor="@color/gunmetal"
-                android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_product_detail_category" />
-
             <ImageButton
                 android:id="@+id/btn_product_detail_report"
                 android:layout_width="wrap_content"
@@ -189,15 +176,39 @@
                 app:layout_constraintTop_toTopOf="parent"
                 />
 
-            <ImageView
-                android:id="@+id/imageView4"
+            <LinearLayout
+                android:id="@+id/layout_detail_other_product"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="19.9dp"
-                android:layout_marginTop="19dp"
-                app:layout_constraintEnd_toEndOf="@+id/btn_product_detail_otherproduct"
-                app:layout_constraintTop_toTopOf="@+id/btn_product_detail_otherproduct"
-                app:srcCompat="@drawable/group_22_copy" />
+                android:orientation="horizontal"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_product_detail_category">
+
+                <TextView
+                    android:id="@+id/btn_product_detail_otherproduct"
+                    android:layout_width="wrap_content"
+                    android:layout_height="52dp"
+                    android:paddingEnd="43.6dp"
+                    android:paddingStart="27.4dp"
+                    android:text="판매자의 다른 상품 보기"
+                    android:textColor="@color/gunmetal"
+                    android:textSize="13sp"
+                    android:gravity="center_vertical"
+                     />
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="19.9dp"
+                    android:layout_marginTop="19dp"
+                    app:layout_constraintEnd_toEndOf="@+id/btn_product_detail_otherproduct"
+                    app:layout_constraintTop_toTopOf="@+id/btn_product_detail_otherproduct"
+                    app:srcCompat="@drawable/group_22_copy" />
+
+            </LinearLayout>
+
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>

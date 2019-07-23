@@ -20,10 +20,8 @@
             >
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="18dp"
-                android:textColor="@color/gunmetal"
-                android:textSize="12sp"
+                style="@style/TextViewStyleSmallGunmetal"
+                android:theme="@style/TextViewStyleSmallGunmetal"
                 android:text="상품 설명"
                 android:layout_marginTop="11.1dp"
                 android:layout_marginStart="7.7dp"
@@ -31,26 +29,18 @@
 
             <EditText
                 android:id="@+id/etv_upload_explain"
-                android:theme="@style/EdittextStyle_setting_quest"
-                style="@style/EdittextStyle_setting_quest"
-                android:layout_width="match_parent"
+                android:theme="@style/EditTextStyleBox"
+                style="@style/EditTextStyleBox"
                 android:layout_height="133.4dp"
-                android:layout_marginTop="0.2dp"
-                android:inputType="textMultiLine"
-                android:textSize="16sp"
-                android:hint="입력"
+                android:layout_marginTop="3.5dp"
                 android:paddingStart="13.7dp"
                 android:paddingTop="9.1dp"
-                android:gravity="top"
-                android:background="@drawable/round_square_4dp_stroke_2dp"
                 />
 
             <TextView
+                style="@style/TextViewStyleSmallGunmetal"
+                android:theme="@style/TextViewStyleSmallGunmetal"
                 android:id="@+id/tv_upload_explain_method"
-                android:layout_width="wrap_content"
-                android:layout_height="18dp"
-                android:textColor="@color/gunmetal"
-                android:textSize="12sp"
                 android:text="거래 방식"
                 android:layout_marginTop="15dp"
                 android:layout_marginStart="7.7dp"
@@ -67,10 +57,11 @@
                     android:id="@+id/radio_group_upload"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:gravity="center"
+                    android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <RadioButton
                         android:id="@+id/radio_btn_meeting"
@@ -101,39 +92,32 @@
                 </RadioGroup>
             </android.support.constraint.ConstraintLayout>
 
-            <android.support.constraint.ConstraintLayout
+            <LinearLayout
                 android:id="@+id/constraint_upload_explain_method"
                 android:layout_width="match_parent"
                 android:layout_height="67.5dp"
                 android:layout_marginTop="12.8dp"
+                android:orientation="vertical"
                 android:visibility="gone">
 
                 <TextView
+                    style="@style/TextViewStyleSmallGunmetal"
+                    android:theme="@style/TextViewStyleSmallGunmetal"
                     android:id="@+id/tv_upload_explain_place"
-                    android:layout_width="wrap_content"
-                    android:layout_height="18dp"
                     android:layout_marginStart="6.8dp"
                     android:text="직거래 장소"
-                    android:textColor="@color/gunmetal"
-                    android:textSize="12sp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
                     />
 
                 <EditText
                     android:id="@+id/etv_upload_explain_place"
-                    android:layout_width="match_parent"
-                    android:layout_height="46dp"
-                    android:backgroundTint="@color/cloudy_blue"
-                    android:ems="10"
-                    android:hint="입력"
-                    android:textColor="#000"
-                    android:textSize="16sp"
+                    style="@style/EditTextStyleLight"
                     android:layout_marginTop="3.5dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_upload_explain_place" />
-
-            </android.support.constraint.ConstraintLayout>
+                    android:ems="10"
+                    android:textColor="#000"
+                    android:paddingStart="7.7dp"
+                    android:theme="@style/EditTextStyleLight"
+                    />
+            </LinearLayout>
         </LinearLayout>
     </android.support.constraint.ConstraintLayout>
 

@@ -55,16 +55,12 @@
                  />
 
             <EditText
-                android:theme="@style/EdittextStyle_login"
-                style="@style/EdittextStyle_login"
+                android:theme="@style/EditTextStyleLight"
+                style="@style/EditTextStyleLight"
                 android:id="@+id/et_setting_secession_studentid"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
                 android:layout_marginTop="4dp"
                 android:paddingStart="14dp"
-                android:inputType="number"
-                android:hint="입력"
-                android:textSize="16sp"/>
+                android:inputType="number"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -76,16 +72,12 @@
                 android:textSize="12sp" />
 
             <EditText
-                android:theme="@style/EdittextStyle_login"
-                style="@style/EdittextStyle_login"
+                android:theme="@style/EditTextStyleLight"
+                style="@style/EditTextStyleLight"
                 android:id="@+id/et_setting_secession_pw"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
                 android:layout_marginTop="4dp"
                 android:paddingStart="14dp"
-                android:inputType="textPassword"
-                android:hint="입력"
-                android:textSize="16sp" />
+                android:inputType="textPassword" />
         </LinearLayout>
 
         <Button

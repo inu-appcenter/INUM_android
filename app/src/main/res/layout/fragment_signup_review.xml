@@ -43,10 +43,8 @@
         android:layout_width="320dp"
         android:layout_height="48dp"
         android:layout_marginTop="4dp"
-        style="@style/EdittextStyle_login"
-        android:textColorHint="@color/pinkish_grey"
+        style="@style/EditTextStyleLight"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.437"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_stdname" />
 
@@ -64,12 +62,9 @@
     <TextView
         android:id="@+id/txt_signup_stdnum"
         android:layout_width="320dp"
-        android:layout_height="48dp"
         android:layout_marginTop="4dp"
-        style="@style/EdittextStyle_login"
-        android:textColorHint="@color/pinkish_grey"
+        style="@style/EditTextStyleLight"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.437"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_stdnum" />
 
@@ -87,12 +82,9 @@
     <TextView
         android:id="@+id/txt_signup_phone_num"
         android:layout_width="320dp"
-        android:layout_height="48dp"
         android:layout_marginTop="4dp"
-        style="@style/EdittextStyle_login"
-        android:textColorHint="@color/pinkish_grey"
+        style="@style/EditTextStyleLight"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.437"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_phone_num" />
 
