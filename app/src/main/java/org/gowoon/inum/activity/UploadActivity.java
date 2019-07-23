@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.TextView;
 
 import org.gowoon.inum.R;
 import org.gowoon.inum.fragment.UploadCategoryFragment;
@@ -22,5 +24,17 @@ public class UploadActivity extends AppCompatActivity {
         fragmentManager.beginTransaction()
                 .add(R.id.constraint_upload, fragmentCategory)
                 .commit();
+    }
+    public void initView(String title, String next, Boolean visible){
+        TextView tvPreview = findViewById(R.id.tv_upload);
+        tvPreview.setText(title);
+
+        TextView tvUpload = findViewById(R.id.tv_upload_next);
+        tvUpload.setText(next);
+
+        if (visible){
+        tvUpload.setVisibility(View.VISIBLE);}
+        else
+            tvUpload.setVisibility(View.INVISIBLE);
     }
 }

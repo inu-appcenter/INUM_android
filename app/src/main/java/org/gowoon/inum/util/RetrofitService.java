@@ -8,14 +8,20 @@ import org.gowoon.inum.model.MainProductResult;
 import org.gowoon.inum.model.ProductOneItemResult;
 import org.gowoon.inum.model.SearchIdResult;
 import org.gowoon.inum.model.UserData;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 
 public interface RetrofitService {
     //User
@@ -93,4 +99,20 @@ public interface RetrofitService {
     public Call<ProductOneItemResult>
     productOneItem(@Header("x-access-token") String main_token, @Field("productId") String productId);
 
+    // Product Upload
+    @Multipart
+    @POST ("Pupload")
+    public Call<JSONObject>
+    productUpload(@Header("x-access-token") String main_token
+            ,@Part("userfile") List<String> stringList
+            ,@Part("productName") String name
+            ,@Part("productState") String state
+            ,@Part("productPrice") Integer price
+            ,@Part("category") String category
+            ,@Part("productInfo") String info
+            ,@Part("method") String method
+            ,@Part("place") String place
+            ,@Part("id") String id
+
+    );
 }

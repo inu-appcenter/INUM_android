@@ -45,6 +45,8 @@ public class DrawerMypageFragment extends Fragment {
             public void onClick(View view) {
                 Intent upload_intent = new Intent(getActivity().getApplicationContext(), UploadActivity.class);
                 startActivity(upload_intent);
+                DrawerLayout drawer = getActivity().findViewById(R.id.drawer_main);
+                drawer.closeDrawer(Gravity.END);
             }
         });
 

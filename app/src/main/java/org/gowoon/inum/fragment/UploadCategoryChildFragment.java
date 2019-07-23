@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import org.gowoon.inum.R;
+import org.gowoon.inum.activity.UploadActivity;
 import org.gowoon.inum.custom.AdapterListviewCategoryChild;
 import org.gowoon.inum.model.ProductOneItemResult;
 
@@ -27,15 +28,15 @@ public class UploadCategoryChildFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_upload_category_child, container, false);
         listViewChild = rootView.findViewById(R.id.listview_upload_category_child);
 
-        TextView tvNext = getActivity().findViewById(R.id.tv_upload_next);
-        tvNext.setVisibility(View.INVISIBLE);
+        ((UploadActivity)getActivity()).initView("상품 등록하기","",false);
 
         childList = getArguments().getStringArray("category child");
-        AdapterListviewCategoryChild cAdapter = new AdapterListviewCategoryChild(childList);
+        final AdapterListviewCategoryChild cAdapter = new AdapterListviewCategoryChild(childList);
         listViewChild.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ProductOneItemResult.getInstance().setCategory(childList[position]);
+                ProductOneItemResult.getInstance().setCategory(getArguments().getString("category parent")+cAdapter.getName(position));
+
                 UploadInfoFragment categoryInfo = new UploadInfoFragment();
                 getFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left,R.anim.enter_from_left,R.anim.exit_to_right)

@@ -2,13 +2,16 @@ package org.gowoon.inum.fragment;
 
 
 import android.Manifest;
+import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,10 +27,15 @@ import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
 import org.gowoon.inum.R;
+import org.gowoon.inum.activity.UploadActivity;
 import org.gowoon.inum.model.ItemImageList;
 import org.gowoon.inum.recycler.AdapterRecyclerUploadImage;
 
 import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
@@ -35,15 +43,16 @@ import static android.app.Activity.RESULT_OK;
 public class UploadImageFragment extends Fragment {
 
     AdapterRecyclerUploadImage rAdapter = new AdapterRecyclerUploadImage();
-    ItemImageList list;
+    ItemImageList list, itemImageList;
     RecyclerView recyclerViewImage;
     LinearLayout layoutSelect;
     TextView tvAddImage, tvCamera;
 
-    private static final int SELECT_ALBUM = 1, SELECT_CAMERA = 2, IMAGE_OUTPUT_SIZE = 300;
+    private static final int SELECT_ALBUM = 1, SELECT_CAMERA = 2, IMAGE_OUTPUT_SIZE = 191;
     private static final int CROP_FROM_CAMERA = 3, CROP_FROM_ALBUM =4;
     private String filePath;
     private Uri imageCaptureUri;
+    List<String> imageList = new ArrayList<>();
 
     public UploadImageFragment() {
         // Required empty public constructor
@@ -55,13 +64,29 @@ public class UploadImageFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_upload_image, container, false);
 
+        ((UploadActivity)getActivity()).initView("상품 등록하기","다음",true);
         makePermission();
+
+        getActivity().findViewById(R.id.tv_upload_next).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UploadPreviewFragment uploadPreview = new UploadPreviewFragment();
+
+                getFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left,R.anim.enter_from_left,R.anim.exit_to_right)
+                        .replace(R.id.constraint_upload, uploadPreview)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
 
         layoutSelect = rootView.findViewById(R.id.linearLayout_upload_image_select);
         recyclerViewImage = rootView.findViewById(R.id.recyclerview_upload_image);
         list = new ItemImageList(Uri.parse(""),true);
 
-        rAdapter.addItem(list);
+//        rAdapter.addItem(list);
+        rAdapter.addItem("");
+
         RecyclerView.LayoutManager mLayoutManager;
         mLayoutManager = new GridLayoutManager(getActivity(),4);
         recyclerViewImage.setLayoutManager(mLayoutManager);
@@ -86,27 +111,55 @@ public class UploadImageFragment extends Fragment {
                         getFromCamera();
                     }
                 });
+
             }
         });
-
-
         return rootView;
     }
 
     public void getFromAlbum(){
         Intent intentImage = new Intent(Intent.ACTION_PICK);
         intentImage.setType(MediaStore.Images.Media.CONTENT_TYPE);
+        intentImage.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
         startActivityForResult(intentImage,SELECT_ALBUM);
-
     }
+
     public void getFromCamera(){
         Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intentCamera, SELECT_CAMERA);
 
-        String imageURL = "tmp_"+ String.valueOf(System.currentTimeMillis()) +".jpg";
-        imageCaptureUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), imageURL));
-
-        intentCamera.putExtra(MediaStore.EXTRA_OUTPUT,imageCaptureUri);
-        startActivityForResult(intentCamera,SELECT_CAMERA);
+        File photoFile = null;
+        try {
+            photoFile = createImageFile();
+        } catch (IOException e) {
+            Toast.makeText(getContext(), "이미지 처리 오류! 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
+        }
+        if (photoFile != null) {
+           imageCaptureUri = FileProvider.getUriForFile(getContext(),
+                    "com.example.test.provider", photoFile); //FileProvider의 경우 이전 포스트를 참고하세요.
+            intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, imageCaptureUri); //사진을 찍어 해당 Content uri를 photoUri에 적용시키기 위함
+            startActivityForResult(intentCamera, SELECT_CAMERA);
+        }
+//        String imageURL = "tmp_"+ String.valueOf(System.currentTimeMillis()) +".jpg";
+//        imageCaptureUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), imageURL));
+//
+//        intentCamera.putExtra(MediaStore.EXTRA_OUTPUT,imageCaptureUri);
+//        startActivityForResult(intentCamera,SELECT_CAMERA);
+    }
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("HHmmss").format(new Date());
+        String imageFileName = "IP" + timeStamp + "_";
+        File storageDir = new File(Environment.getExternalStorageDirectory() + "/test/"); //test라는 경로에 이미지를 저장하기 위함
+        if (!storageDir.exists()) {
+            storageDir.mkdirs();
+        }
+        File image = File.createTempFile(
+                imageFileName,
+                ".jpg",
+                storageDir
+        );
+        return image;
     }
 
     @Override
@@ -141,16 +194,25 @@ public class UploadImageFragment extends Fragment {
                 case CROP_FROM_CAMERA: {
                     //크롭된 이미지 받기
                     final Bundle extra = data.getExtras();
-                    filePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/SmartWheel/" + System.currentTimeMillis() + ".jpg";
+                    filePath = Environment.getExternalStorageDirectory()
+                            .getAbsolutePath() + "/SmartWheel/" + System.currentTimeMillis() + ".jpg";
 
                     if (extra != null) {
+//                        TODO
                         Bitmap photo = extra.getParcelable("data");
-
-
+                        imageList.add(imageCaptureUri+filePath);
+//                        imageList.add(String.valueOf(imageCaptureUri));
+//                        list.setImageUri(imageList);
+//                        imageList = itemImageList;
+                        Log.d("image crop", filePath);
+                        rAdapter.addItem(imageList.get(0));
+                        rAdapter.notifyDataSetChanged();
+                        break;
                     }
                 }
             }
         }
+        return;
     }
     public void makePermission(){
         PermissionListener permissionListener = new PermissionListener(){
@@ -160,12 +222,6 @@ public class UploadImageFragment extends Fragment {
 
             @Override
             public void onPermissionDenied(List<String> deniedPermissions) {
-//                TedPermission.with(getContext())
-//                        .setRationaleTitle("권한 허용")
-//                        .setRationaleMessage("사진 업로드를 위해 권한을 허용해주세요")
-//                        .setDeniedMessage("나중에 [설정]>[권한]에서 허용할 수 있습니다")
-//                        .setPermissions(Manifest.permission.CAMERA,Manifest.permission.READ_EXTERNAL_STORAGE)
-//                        .check();
                 Toast.makeText(getActivity(), "다음 권한이 거부되었습니다\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
             }
         };

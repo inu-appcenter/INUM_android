@@ -9,11 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import org.gowoon.inum.R;
+import org.gowoon.inum.activity.UploadActivity;
 import org.gowoon.inum.model.ProductOneItemResult;
 
 public class UploadExplainFragment extends android.support.v4.app.Fragment{
@@ -24,7 +26,7 @@ public class UploadExplainFragment extends android.support.v4.app.Fragment{
     private String method, place;
 
     Boolean meeting;
-    ConstraintLayout constraintLayoutMethod;
+    LinearLayout constraintLayoutMethod;
 
     public UploadExplainFragment() {
         // Required empty public constructor
@@ -36,6 +38,8 @@ public class UploadExplainFragment extends android.support.v4.app.Fragment{
         View rootView = inflater.inflate(R.layout.fragment_upload_explain, container, false);
 
         TextView tvNext = getActivity().findViewById(R.id.tv_upload_next);
+        ((UploadActivity)getActivity()).initView("상품 등록하기","다음",true);
+
         evExplain = rootView.findViewById(R.id.etv_upload_explain);
         evPlace = rootView.findViewById(R.id.etv_upload_explain_place);
 
@@ -55,7 +59,7 @@ public class UploadExplainFragment extends android.support.v4.app.Fragment{
                         break;
                     case R.id.radio_btn_postbox:
                         constraintLayoutMethod.setVisibility(View.INVISIBLE);
-                        place = "";
+                        place = "postbox";
                         method = "택배";
                         meeting = false;
                         break;

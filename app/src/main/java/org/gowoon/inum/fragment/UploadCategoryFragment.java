@@ -14,6 +14,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import org.gowoon.inum.R;
+import org.gowoon.inum.activity.UploadActivity;
 import org.gowoon.inum.custom.AdapterListviewCategory;
 import org.gowoon.inum.model.ProductOneItemResult;
 
@@ -38,8 +39,7 @@ public class UploadCategoryFragment extends Fragment {
         View rootview = inflater.inflate(R.layout.fragment_upload_category, container, false);
         listViewCategory = rootview.findViewById(R.id.listview_upload_category);
 
-        TextView tvNext = getActivity().findViewById(R.id.tv_upload_next);
-        tvNext.setVisibility(View.INVISIBLE);
+        ((UploadActivity)getActivity()).initView("상품 등록하기","",false);
 
         // 프래그먼트 실행할 때마다 새로 카테고리 값이 불러와져서 넣음
         if (loadData){
@@ -50,14 +50,12 @@ public class UploadCategoryFragment extends Fragment {
         listViewCategory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                bundleUpload.putString("category", lAdapter.getName(position));
                 if (position<4){
                     UploadCategoryChildFragment categoryChild = new UploadCategoryChildFragment();
-           //         Bundle bundle = new Bundle();
                     bundleUpload.putInt("category",position);
+                    bundleUpload.putString("category parent",lAdapter.getName(position));
                     bundleUpload.putStringArray("category child",childArray.get(position));
                     categoryChild.setArguments(bundleUpload);
-//                    categoryChild.setArguments(bundle);
 
                     getFragmentManager().beginTransaction()
                             .setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left,R.anim.enter_from_left,R.anim.exit_to_right)
@@ -73,6 +71,8 @@ public class UploadCategoryFragment extends Fragment {
                         .addToBackStack(null)
                         .commit();
                 }
+                Log.d("select cateogory",lAdapter.getName(position));
+//                ProductOneItemResult.getInstance().setCategory(lAdapter.getName(position));
             }
         });
         return rootview;

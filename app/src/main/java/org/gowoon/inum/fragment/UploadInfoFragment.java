@@ -39,7 +39,7 @@ public class UploadInfoFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_upload_info, container, false);
         TextView tvNext = getActivity().findViewById(R.id.tv_upload_next);
-        tvNext.setVisibility(View.VISIBLE);
+        ((UploadActivity)getActivity()).initView("상품 등록하기","다음",true);
 
         etvName = rootView.findViewById(R.id.etv_upload_info_name);
         etvPrice = rootView.findViewById(R.id.etv_upload_info_price);
@@ -52,10 +52,10 @@ public class UploadInfoFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 info = new String[]{etvName.getText().toString(), etvStatus.getText().toString(), etvPrice.getText().toString()};
-                for (int i = 0 ; i <3 ; i++){
-                    inputItem = !(info[i].equals(""));
-                }
-                if (inputItem){
+//                for (int i = 0 ; i <3 ; i++){
+//                    inputItem = !(info[i].equals(""));
+//                }
+//                if (inputItem){
                     ProductOneItemResult.getInstance().setProductName(info[0]);
                     ProductOneItemResult.getInstance().setProductState(info[1]);
                     ProductOneItemResult.getInstance().setProductPrice(Integer.valueOf(info[2]));
@@ -68,10 +68,10 @@ public class UploadInfoFragment extends Fragment {
                             .replace(R.id.constraint_upload, uploadExplain)
                             .addToBackStack(null)
                             .commit();
-                }
-                else{
-                    tvInput.setVisibility(View.VISIBLE);
-                }
+//                }
+//                else{
+//                    tvInput.setVisibility(View.VISIBLE);
+//                }
             }
         });
 

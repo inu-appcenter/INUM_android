@@ -45,4 +45,8 @@ public class AdapterListviewCategoryChild extends BaseAdapter {
 
         return view;
     }
+
+    public String getName(int position){
+        return mdata[position];
+    }
 }
