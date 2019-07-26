@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.UploadPreviewFragment">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/layout_upload_preview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            layout="@layout/fragment_product_detail"
+            />
+
+    </android.support.constraint.ConstraintLayout>
+
+</FrameLayout>
