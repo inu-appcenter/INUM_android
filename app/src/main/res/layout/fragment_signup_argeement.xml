@@ -7,45 +7,26 @@
     android:id="@+id/agreement">
 
     <TextView
-        android:id="@+id/signup_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="회원 가입하기"
-        android:textColor="@color/gunmetal"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="44dp"/>
-
-        <ImageView
-            android:id="@+id/indicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/signup_indi_step1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signup_title"
-            android:layout_marginTop="17dp"/>
-
-    <TextView
         android:id="@+id/txt_signup_agree"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="27dp"
         android:text="개인정보 수집 약관 동의"
         android:textColor="@color/gunmetal"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/indicator"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="11dp"
         />
 
     <ScrollView
         android:id="@+id/scrollview_agree"
-        android:layout_width="310dp"
+        android:layout_width="match_parent"
         android:layout_height="235dp"
-        android:background="@color/pale_grey"
+        android:background="@drawable/round_square_8dp"
+        android:backgroundTint="@color/pale_grey"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_signup_agree"
@@ -53,12 +34,12 @@
         >
         <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/agreement"
                 android:textSize="11sp"
                 android:textColor="@color/gunmetal"
+                android:padding="12dp"
                 />
-
     </ScrollView>
 
     <CheckBox
@@ -76,29 +57,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scrollview_agree" />
 
-   <Button
-       android:id="@+id/btn_signup_agree_nextstep"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       app:layout_constraintBottom_toBottomOf="parent"
-       android:background="@drawable/upside_stroke_square_3dp"
-       android:text="다음"
-       android:textSize="20sp"
-       android:textColor="@color/gunmetal" />
-
     <TextView
         android:id="@+id/signup_non_agree"
-        android:layout_width="wrap_content"
-        android:layout_height="18sp"
+        android:theme="@style/TextViewStyleSmallRed"
+        style="@style/TextViewStyleSmallRed"
         android:layout_gravity="center"
         android:layout_marginBottom="14dp"
         android:text="*개인정보 수집에 동의해야 합니다."
-        android:textColor="@color/orangey_red"
-        android:textSize="12sp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@id/btn_signup_agree_nextstep"
+        app:layout_constraintBottom_toTopOf="@id/btn_sign_up_next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         />
+
+    <Button
+        android:id="@+id/btn_sign_up_next"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:text="다음"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textColor="@color/gunmetal"
+        android:background="@drawable/upside_stroke_square_3dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 
 </android.support.constraint.ConstraintLayout>

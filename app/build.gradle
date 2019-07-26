@@ -53,4 +53,10 @@ dependencies {
 
     // permission
     implementation 'gun0912.ted:tedpermission:2.2.2'
+
+    implementation 'com.github.baoyachi:StepView:1.9'
+
+}
+repositories {
+    maven { url "https://jitpack.io" }
 }

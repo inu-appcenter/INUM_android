@@ -5,154 +5,111 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fragment_pw">
 
-    <TextView
-        android:id="@+id/std_info_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="비밀번호 설정하기"
-        android:textColor="@color/gunmetal"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="44dp" />
-
-    <ImageView
-        android:id="@+id/pw_indicator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/signup_indi_step3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/std_info_title"
-        android:layout_marginTop="17dp"
-        />
-
-    <TextView
-        android:id="@+id/txt_enterpw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="비밀번호 입력"
-        android:textColor="@color/gunmetal"
-        android:textSize="12sp"
-        app:layout_constraintLeft_toLeftOf="@+id/etv_signup_pw"
-        app:layout_constraintTop_toBottomOf="@+id/pw_indicator"
-        android:layout_marginTop="13dp" />
-
-    <EditText
-        android:id="@+id/etv_signup_pw"
-        android:layout_width="320dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="4dp"
-        android:hint="8자리 이상 입력"
-        android:textColorHint="@color/pinkish_grey"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.437"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_enterpw"/>
-    <TextView
-        android:id="@+id/txt_pwlength_error"
-        android:text="*8글자 이상 입력해야 합니다."
-        android:layout_width="wrap_content"
-        android:layout_height="18sp"
-        android:layout_gravity="center"
-        android:layout_marginTop="8dp"
-        android:textColor="@color/orangey_red"
-        android:textSize="12sp"
-        android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@+id/etv_signup_pw"
-        app:layout_constraintRight_toRightOf="@+id/etv_signup_pw" />
-    <TextView
-        android:id="@+id/txt_pwlength"
-        android:text="*사용할 수 있는 비밀번호입니다.."
-        android:layout_width="wrap_content"
-        android:layout_height="18sp"
-        android:layout_gravity="center"
-        android:layout_marginTop="8dp"
-        android:textColor="#7bd21c"
-        android:textSize="12sp"
-        android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@+id/etv_signup_pw"
-        app:layout_constraintRight_toRightOf="@id/txt_pwlength_error"
-        app:layout_editor_absoluteX="195dp"
-         />
-
-    <TextView
-        android:id="@+id/txt_confirmpw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="비밀번호 확인"
-        android:textColor="@color/gunmetal"
-        android:textSize="12sp"
-        app:layout_constraintLeft_toLeftOf="@+id/etv_signup_confirmpw"
-        app:layout_constraintTop_toBottomOf="@+id/txt_pwlength"
-        android:layout_marginTop="6dp"
-         />
-
-    <EditText
-        android:id="@+id/etv_signup_confirmpw"
-        android:layout_width="320dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="4dp"
-        android:hint="입력"
-        android:textColorHint="@color/pinkish_grey"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.437"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_confirmpw" />
-    <TextView
-        android:id="@+id/txt_confirmpw_message_error"
-        android:text="*비밀번호가 일치하지 않습니다."
-        android:layout_width="wrap_content"
-        android:layout_height="18sp"
-        android:layout_gravity="center"
-        android:layout_marginTop="8dp"
-        android:textColor="@color/orangey_red"
-        android:textSize="12sp"
-        android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@+id/etv_signup_confirmpw"
-        app:layout_constraintRight_toRightOf="@+id/etv_signup_confirmpw"
-       />
-    <TextView
-        android:id="@+id/txt_confirmpw_message"
-        android:text="*비밀번호가 일치합니다."
-        android:layout_width="wrap_content"
-        android:layout_height="18sp"
-        android:layout_gravity="center"
-        android:layout_marginTop="8dp"
-        android:textColor="#7bd21c"
-        android:textSize="12sp"
-        android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@+id/etv_signup_confirmpw"
-        app:layout_constraintRight_toRightOf="@id/txt_confirmpw_message_error"
-        app:layout_constraintEnd_toEndOf="@id/txt_confirmpw_message_error"
-        />
-
-
-    <TextView
-        android:id="@+id/txt_pw_message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="*비밀번호를 입력해야 합니다."
-        android:textSize="12sp"
-        android:textColor="@color/orangey_red"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btn_signup_pw_nextstep"
-        android:layout_marginBottom="14dp"
-        android:visibility="invisible"/>
-
-
-    <Button
-        android:id="@+id/btn_signup_pw_nextstep"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@drawable/upside_stroke_square_3dp"
-        android:text="다음"
-        android:textSize="20sp"
-        android:textColor="@color/gunmetal"/>
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="13dp">
 
+        <TextView
+            style="@style/TextViewStyleSmallGunmetal"
+            android:theme="@style/TextViewStyleSmallGunmetal"
+            android:text="비밀번호 입력"
+            />
+
+        <EditText
+            android:id="@+id/et_sign_up_pw"
+            style="@style/EditTextStyleLight"
+            android:theme="@style/EditTextStyleLight"
+            android:hint="8자리 이상 입력"/>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:id="@+id/tv_sign_up_pw_length_error"
+                style="@style/TextViewStyleSmallRed"
+                android:theme="@style/TextViewStyleSmallRed"
+                android:text="*8글자 이상 입력해야 합니다."
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/tv_sign_up_pw_length"
+                android:text="*사용할 수 있는 비밀번호입니다.."
+                style="@style/TextViewStyleSmall"
+                android:theme="@style/TextViewStyleSmall"
+                android:textColor="@color/apple_green"
+                android:visibility="invisible"
+                />
+        </FrameLayout>
+
+        <TextView
+            style="@style/TextViewStyleSmallGunmetal"
+            android:theme="@style/TextViewStyleSmallGunmetal"
+            android:text="비밀번호 확인"
+            android:layout_marginTop="6dp"
+            />
+
+        <EditText
+            android:id="@+id/et_sign_up_pw_again"
+            style="@style/EditTextStyleLight"
+            android:theme="@style/EditTextStyleLight" />
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:id="@+id/tv_sign_up_not_same"
+                style="@style/TextViewStyleSmallRed"
+                android:theme="@style/TextViewStyleSmallRed"
+                android:text="*비밀번호가 일치하지 않습니다."
+                android:layout_gravity="end"
+                android:visibility="invisible"
+                />
+
+            <TextView
+                android:id="@+id/tv_sign_up_same"
+                android:text="*비밀번호가 일치합니다."
+                style="@style/TextViewStyleSmall"
+                android:layout_gravity="end"
+                android:theme="@style/TextViewStyleSmall"
+                android:textColor="@color/apple_green"
+                android:visibility="invisible"
+                />
+
+        </FrameLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_sign_up_pw_no_input"
+        style="@style/TextViewStyleSmallRed"
+        android:theme="@style/TextViewStyleSmallRed"
+        android:text="*비밀번호를 입력해야 합니다."
+        android:layout_marginBottom="14dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/btn_sign_up_next"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <Button
+        android:id="@+id/btn_sign_up_next"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:text="다음"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textColor="@color/gunmetal"
+        android:background="@drawable/upside_stroke_square_3dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

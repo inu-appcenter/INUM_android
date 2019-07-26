@@ -10,7 +10,7 @@ public class UserData {
     private String name;
     private String id;
     private String passwd;
-    private String tel;
+    private String phone;
 
     public String getName() {
         return name;
@@ -37,10 +37,10 @@ public class UserData {
     }
 
     public String getPhone() {
-        return tel;
+        return phone;
     }
 
-    public void setPhone(String tel) {
-        this.tel = tel;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

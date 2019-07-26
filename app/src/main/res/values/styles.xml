@@ -25,6 +25,7 @@
     <style name="EditTextStyleLight" parent="EditTextStylePinkishGrey">
         <item name="android:textSize">16sp</item>
         <item name="android:hint">입력</item>
+        <item name="android:paddingStart">14dp</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:layout_marginTop">4dp</item>
         <item name="android:singleLine">true</item>
@@ -76,5 +77,6 @@
         <item name="android:layout_height">29dp</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/gunmetal</item>
+        <item name="android:layout_marginTop">20dp</item>
     </style>
 </resources>

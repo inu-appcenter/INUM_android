@@ -2,11 +2,10 @@ package org.gowoon.inum.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -120,7 +119,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
             case R.id.tv_login_join:
             {
-                Intent intent_signup = new Intent(getApplicationContext(), SignupActivity.class);
+                Intent intent_signup = new Intent(getApplicationContext(), SignUpActivity.class);
                 startActivity(intent_signup);
                 break;
             }
