@@ -38,7 +38,7 @@ public class SignUpInfoFragment extends Fragment {
 
         init(rootview);
         setSpinner(spinner,majorList);
-        ((SignUpActivity)getActivity()).initViewSignUp("학생정보 입력하기","다음");
+        ((SignUpActivity)getActivity()).initViewSignUp("학생정보 입력하기");
 
         rootview.findViewById(R.id.btn_sign_up_next).setOnClickListener(new View.OnClickListener() {
             @Override

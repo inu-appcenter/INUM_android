@@ -24,7 +24,7 @@ public class SignUpPhoneFragment extends Fragment {
 
         View rootview = inflater.inflate(R.layout.fragment_signup_phone, container, false);
 
-//        ((SignUpActivity) getActivity()).initView("휴대폰 인증","다음");
+        ((SignUpActivity) getActivity()).initViewSignUp("휴대폰 인증");
 
         phonenum = rootview.findViewById(R.id.et_sign_up_phone);
         errormsg = rootview.findViewById(R.id.tv_sign_up_phone_error);

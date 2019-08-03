@@ -33,7 +33,7 @@ public class SignUpPwFragment extends Fragment {
 
         View rootview = inflater.inflate(R.layout.fragment_signup_pw,container,false);
 
-//        ((SignUpActivity) getActivity()).initView("비밀번호 설정하기","다음");
+        ((SignUpActivity) getActivity()).initViewSignUp("비밀번호 설정하기");
         viewSet(rootview);
 
         rootview.findViewById(R.id.btn_sign_up_next).setOnClickListener(new View.OnClickListener() {

@@ -24,7 +24,7 @@ public class SignUpAgreementFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        ((SignUpActivity) getActivity()).initViewSignUp("회원가입 하기");
     }
 
     @Override
@@ -34,7 +34,6 @@ public class SignUpAgreementFragment extends Fragment {
 
         checkBox = rootview.findViewById(R.id.checkbox_signup_agree);
         message = rootview.findViewById(R.id.signup_non_agree);
-        ((SignUpActivity) getActivity()).initViewSignUp("회원가입 하기","다음");
 
         rootview.findViewById(R.id.btn_sign_up_next).setOnClickListener(new View.OnClickListener() {
             @Override

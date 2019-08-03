@@ -36,9 +36,8 @@
 
     <Button
         android:id="@+id/btn_di_submit"
-        android:layout_width="168dp"
+        android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:layout_marginStart="8dp"
         android:background="#00ffffff"
         android:textColor="#4a4a4a"
         android:text="확인"
@@ -46,7 +45,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view8" />
+        app:layout_constraintTop_toBottomOf="@+id/view10" />
 
 
 </android.support.constraint.ConstraintLayout>

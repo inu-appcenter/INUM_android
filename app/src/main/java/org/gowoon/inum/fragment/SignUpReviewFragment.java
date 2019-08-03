@@ -32,14 +32,16 @@ public class SignUpReviewFragment extends Fragment {
 
     Button next;
 
+    public SignUpReviewFragment(){}
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootview = inflater.inflate(R.layout.fragment_signup_review, container, false);
-//        ((SignUpActivity) getActivity()).initView("회원 가입 완료하기","완료");
+        ((SignUpActivity) getActivity()).initViewSignUp("회원 가입 완료하기");
 
         viewSet(rootview);
-        rootview.findViewById(R.id.btn_sign_up_next).setOnClickListener(new View.OnClickListener() {
+        next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Singleton.retrofit.account(id,UserData.getInstance().getPw(),name,phone)
@@ -87,13 +89,18 @@ public class SignUpReviewFragment extends Fragment {
         tvName = root.findViewById(R.id.tv_sign_up_review_name);
         tvPhone = root.findViewById(R.id.tv_sign_up_review_phone_num);
 
-        name = UserData.getInstance().getName();
-        id = UserData.getInstance().getSchoolID();
-        phone = UserData.getInstance().getPhone();
+        next = root.findViewById(R.id.btn_sign_up_next);
+        next.setText("완료");
 
+        dataSet();
         tvName.setText(name);
         tvId.setText(id);
         tvPhone.setText(phone);
-
+    }
+    private void dataSet(){
+        UserData uData = UserData.getInstance();
+        name = uData.getName();
+        id = uData.getSchoolID();
+        phone = uData.getPhone();
     }
 }

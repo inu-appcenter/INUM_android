@@ -16,34 +16,28 @@ import org.gowoon.inum.R;
 import org.gowoon.inum.activity.LoginActivity;
 import org.gowoon.inum.custom.Adapter_dialog_onebutton;
 
+import java.util.Objects;
+
 public class SignUpCompleteFragment extends Fragment {
-
-
-    Button btnsubmit;
-    Adapter_dialog_onebutton dialog;
+    Button btnSubmit;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootview = inflater.inflate(R.layout.fragment_signup_complete,container, false);
+        View rootView = inflater.inflate(R.layout.fragment_signup_complete,container, false);
+        viewInit(rootView);
 
-//        dialog = new Adapter_dialog_onebutton(getActivity(),"회원가입이 완료되었습니다.\n이메일 인증 완료 후 로그인해주세요.");
-//        dialog.show();
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Objects.requireNonNull(getActivity()).finish();
+            }
+        });
 
-//        //TODO
-//        //다이얼로그 버튼 리스너로 바꾸기, Intent 말고 Fragment 종료
-//        btnsubmit = rootview.findViewById(R.id.btn_di_submit);
-//        btnsubmit.setOnKeyListener(new View.OnKeyListener() {
-//            @Override
-//            public boolean onKey(View v, int keyCode, KeyEvent event) {
-//
-//                Intent intent_signup = new Intent(getActivity(),LoginActivity.class);
-//                startActivity(intent_signup);
-//
-//                return false;
-//            }
-//        });
-        return rootview;
+        return rootView;
+    }
+    private void viewInit(View view){
+        btnSubmit = view.findViewById(R.id.btn_sign_up_submit);
     }
 }
 
