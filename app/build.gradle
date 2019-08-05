@@ -56,6 +56,9 @@ dependencies {
 
     implementation 'com.github.baoyachi:StepView:1.9'
 
+    // lombok library
+    compileOnly 'org.projectlombok:lombok:1.18.8'
+    annotationProcessor 'org.projectlombok:lombok:1.18.8'
 }
 repositories {
     maven { url "https://jitpack.io" }

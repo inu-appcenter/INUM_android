@@ -2,12 +2,15 @@ package org.gowoon.inum.fragment;
 
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -25,7 +28,7 @@ import android.widget.TextView;
 import org.gowoon.inum.R;
 import org.gowoon.inum.activity.ProductActivity;
 import org.gowoon.inum.custom.AdapterGridCategory;
-import org.gowoon.inum.model.SearchIdResult;
+import org.gowoon.inum.model.MainProductResult;
 import org.gowoon.inum.recycler.Adapter_recycler_ProductSearch;
 import org.gowoon.inum.util.Singleton;
 
@@ -50,7 +53,7 @@ public class SearchProductCategoryFragment extends Fragment {
     ArrayList<String> griditems;
     TextView tv_category, tv_searchok, tvNone;
     ImageView iv_icon, iv_cancle;
-    String parent, child;
+    String parent, child, token;
     Integer caticon;
     int groupposition;
 
@@ -75,6 +78,8 @@ public class SearchProductCategoryFragment extends Fragment {
         iv_cancle = rootview.findViewById(R.id.iv_search_category_erase);
         tvNone = rootview.findViewById(R.id.tv_search_category_none);
 
+        getPreferences();
+        
         //  검색창
         et_search.setOnFocusChangeListener(new View.OnFocusChangeListener(){
             @Override
@@ -139,13 +144,14 @@ public class SearchProductCategoryFragment extends Fragment {
         }
         else {
             fullcategory = parent+child;
+            fullcategory = fullcategory.trim();
         }
 
-        Singleton.retrofit.category(fullcategory).enqueue(new Callback<ArrayList<SearchIdResult>>() {
+        Singleton.retrofit.category(token,fullcategory).enqueue(new Callback<ArrayList<MainProductResult>>() {
             @Override
-            public void onResponse(Call<ArrayList<SearchIdResult>> call, Response<ArrayList<SearchIdResult>> response) {
+            public void onResponse(Call<ArrayList<MainProductResult>> call, Response<ArrayList<MainProductResult>> response) {
                 if (response.isSuccessful()){
-                    ArrayList<SearchIdResult> results = response.body();
+                    ArrayList<MainProductResult> results = response.body();
                     if (results.size()!=0){
                         Adapter.mDataset.addAll(results);
                         Adapter.notifyDataSetChanged();
@@ -154,11 +160,11 @@ public class SearchProductCategoryFragment extends Fragment {
                         tvNone.setVisibility(View.VISIBLE);
                         recyclerView.setVisibility(View.INVISIBLE);
                     }
-//                    Log.d("category_load","카테고리별 상품 로딩" +results.get(0).getProductName());
+                    Log.d("category_load","카테고리별 상품 로딩" +results.get(0).getProductName());
                 }
             }
             @Override
-            public void onFailure(Call<ArrayList<SearchIdResult>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<MainProductResult>> call, Throwable t) {
 
             }
         });
@@ -185,5 +191,9 @@ public class SearchProductCategoryFragment extends Fragment {
 
         return rootview;
     }
-
+    
+    public void getPreferences(){
+        final SharedPreferences pref = getActivity().getSharedPreferences("userinfo", Context.MODE_PRIVATE);
+        token = pref.getString("token","");
+    }
 }

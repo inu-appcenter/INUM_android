@@ -55,7 +55,8 @@ public class DrawerMypageFragment extends Fragment {
         productnum = (TextView) Drawer.findViewById(R.id.tv_mypage_newproduct);
         SharedPreferences pref = Objects.requireNonNull(getActivity()).getSharedPreferences("userinfo",MODE_PRIVATE);
         String id = pref.getString("userid","");
-        mypagename.setText(pref.getString("name",""));
+        String token = pref.getString("token","");
+//        mypagename.setText(pref.getString("name",""));
 
         message = Drawer.findViewById(R.id.framelayout_mypage_message);
         message.setOnClickListener(new View.OnClickListener() {
@@ -75,12 +76,12 @@ public class DrawerMypageFragment extends Fragment {
             }
         });
 
-        Singleton.retrofit.searchId(id).enqueue(new Callback<ArrayList<SearchIdResult>>() {
+        Singleton.retrofit.searchId(token, id).enqueue(new Callback<ArrayList<SearchIdResult>>() {
             @Override
             public void onResponse(Call<ArrayList<SearchIdResult>> call, Response<ArrayList<SearchIdResult>> response) {
                 if (response.isSuccessful()){
                     ArrayList<SearchIdResult> result = response.body();
-                    productnum.setText(String.valueOf(result.size()));
+                    productnum.setText(String.valueOf(result != null ? result.size() : 0));
                 }
             }
 

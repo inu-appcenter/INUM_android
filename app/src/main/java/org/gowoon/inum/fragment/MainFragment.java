@@ -25,6 +25,7 @@ import org.gowoon.inum.util.Singleton;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
 import retrofit2.Call;
@@ -87,14 +88,15 @@ public class MainFragment extends android.support.v4.app.Fragment {
         });
 
         pref = getActivity().getSharedPreferences("userinfo",MODE_PRIVATE);
-        String token =  pref.getString("token","");
+        final String token =  pref.getString("token","");
         String id = pref.getString("userid","");
 
-        if (!token.equals("")) {
+        if (!Objects.requireNonNull(token).equals("")) {
             Log.d("token test", token);
             Singleton.retrofit.main(token).enqueue(new Callback<ArrayList<ArrayList<MainProductResult>>>() {
                 @Override
                 public void onResponse(Call<ArrayList<ArrayList<MainProductResult>>> call, Response<ArrayList<ArrayList<MainProductResult>>> response) {
+                    Log.d("token response test", token);
                     Log.d("main recycler test", "" + response.code());
                     if (response.isSuccessful()) {
                         ArrayList<ArrayList<MainProductResult>> result = response.body();

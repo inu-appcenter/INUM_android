@@ -20,12 +20,12 @@ import java.util.ArrayList;
 
 public class Adapter_recycler_ProductSearch extends RecyclerView.Adapter<Adapter_recycler_ProductSearch.mViewHolder>{
 
-    public ArrayList<SearchIdResult> mDataset = new ArrayList<>();
+    public ArrayList<MainProductResult> mDataset = new ArrayList<>();
 
     public Adapter_recycler_ProductSearch(){
 
     }
-    public Adapter_recycler_ProductSearch(ArrayList<SearchIdResult> myData) {
+    public Adapter_recycler_ProductSearch(ArrayList<MainProductResult> myData) {
         this.mDataset = myData;
     }
 
