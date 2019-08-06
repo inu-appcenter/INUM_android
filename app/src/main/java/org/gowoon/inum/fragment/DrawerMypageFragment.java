@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,8 +19,10 @@ import org.gowoon.inum.activity.MypageActivity;
 import org.gowoon.inum.activity.MyproductActivity;
 import org.gowoon.inum.activity.UploadActivity;
 import org.gowoon.inum.model.SearchIdResult;
+import org.gowoon.inum.model.UserInfoVO;
 import org.gowoon.inum.util.Singleton;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -32,15 +35,61 @@ import static android.content.Context.MODE_PRIVATE;
 public class DrawerMypageFragment extends Fragment {
 
     private FrameLayout Drawer,message,myproduct;
-    TextView newmessage,productnum, mypagename, upload;
+    TextView tvNewMsg,tvUserProduct, tvName, tvUpload;
+    UserInfoVO infoVO;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         Drawer = (FrameLayout) inflater.inflate(R.layout.fragment_drawer_mypage, container, false);
 
-        upload = Drawer.findViewById(R.id.tv_mypage_uploadproduct);
-        upload.setOnClickListener(new View.OnClickListener() {
+        SharedPreferences pref = Objects.requireNonNull(getActivity()).getSharedPreferences("userinfo",MODE_PRIVATE);
+        String id = pref.getString("userid","");
+        String token = pref.getString("token","");
+
+        Singleton.retrofit.userInfo(token).enqueue(new Callback<UserInfoVO>() {
+            @Override
+            public void onResponse(Call<UserInfoVO> call, Response<UserInfoVO> response) {
+                if (response.isSuccessful()){
+                    infoVO = response.body();
+                    Log.d("load info",infoVO.getId());
+                    tvName.setText(infoVO.getName());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserInfoVO> call, Throwable t) {
+
+            }
+        });
+
+        Singleton.retrofit.searchId(token, id).enqueue(new Callback<ArrayList<SearchIdResult>>() {
+            @Override
+            public void onResponse(Call<ArrayList<SearchIdResult>> call, Response<ArrayList<SearchIdResult>> response) {
+                if (response.isSuccessful()){
+                    ArrayList<SearchIdResult> result = response.body();
+                    tvUserProduct.setText(String.valueOf(result != null ? result.size() : 0));
+                    Log.d("product num ", String.valueOf(result.size()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<SearchIdResult>> call, Throwable t) {
+
+            }
+        });
+
+        initView(Drawer);
+
+        tvUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent upload_intent = new Intent(getActivity().getApplicationContext(), UploadActivity.class);
@@ -49,14 +98,6 @@ public class DrawerMypageFragment extends Fragment {
                 drawer.closeDrawer(Gravity.END);
             }
         });
-
-        mypagename = Drawer.findViewById(R.id.tv_mypage_name);
-        newmessage = (TextView) Drawer.findViewById(R.id.tv_mypage_newmessage);
-        productnum = (TextView) Drawer.findViewById(R.id.tv_mypage_newproduct);
-        SharedPreferences pref = Objects.requireNonNull(getActivity()).getSharedPreferences("userinfo",MODE_PRIVATE);
-        String id = pref.getString("userid","");
-        String token = pref.getString("token","");
-//        mypagename.setText(pref.getString("name",""));
 
         message = Drawer.findViewById(R.id.framelayout_mypage_message);
         message.setOnClickListener(new View.OnClickListener() {
@@ -76,25 +117,11 @@ public class DrawerMypageFragment extends Fragment {
             }
         });
 
-        Singleton.retrofit.searchId(token, id).enqueue(new Callback<ArrayList<SearchIdResult>>() {
-            @Override
-            public void onResponse(Call<ArrayList<SearchIdResult>> call, Response<ArrayList<SearchIdResult>> response) {
-                if (response.isSuccessful()){
-                    ArrayList<SearchIdResult> result = response.body();
-                    productnum.setText(String.valueOf(result != null ? result.size() : 0));
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<SearchIdResult>> call, Throwable t) {
-
-            }
-        });
-
         Drawer.findViewById(R.id.tv_mypage_setting).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent_setting = new Intent(getActivity(), MypageActivity.class);
+                intent_setting.putExtra("info", (Serializable) infoVO);
                 startActivity(intent_setting);
                 DrawerLayout drawer = getActivity().findViewById(R.id.drawer_main);
                 drawer.closeDrawer(Gravity.END);
@@ -102,5 +129,11 @@ public class DrawerMypageFragment extends Fragment {
         });
         return Drawer;
     }
+    private void initView(View Drawer){
+        tvUpload = Drawer.findViewById(R.id.tv_mypage_uploadproduct);
+        tvName = Drawer.findViewById(R.id.tv_mypage_name);
 
+        tvNewMsg = Drawer.findViewById(R.id.tv_mypage_newmessage);
+        tvUserProduct = Drawer.findViewById(R.id.tv_mypage_newproduct);
+    }
 }

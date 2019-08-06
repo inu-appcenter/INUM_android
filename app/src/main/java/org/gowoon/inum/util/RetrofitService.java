@@ -91,13 +91,12 @@ public interface RetrofitService {
 
     @GET("product/oneItem")
     Call<ProductOneItemResult>
-    productOneItem(@Header("x-access-token") String userToken, @Body String productId);
+    productOneItem(@Header("x-access-token") String userToken, @Query("productId") String productId);
 
     // load userItem
-    @FormUrlEncoded
-    @POST("product/userItem")
+    @GET("product/userItem")
     Call<ArrayList<SearchIdResult>>
-    searchId(@Header("x-access-token") String userToken, @Field("userId") String userId);
+    searchId(@Header("x-access-token") String userToken, @Query("userId") String userId);
 
     // load Category Product List
     @GET("product/category")
