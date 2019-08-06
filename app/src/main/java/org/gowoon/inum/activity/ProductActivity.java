@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import org.gowoon.inum.R;
 import org.gowoon.inum.custom.AdapterViewPagerProduct;
+import org.gowoon.inum.custom.Adapter_dialog_declare;
 import org.gowoon.inum.model.ProductOneItemResult;
 import org.gowoon.inum.util.Singleton;
 
@@ -45,6 +46,20 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
 
         ImageButton btn_left = findViewById(R.id.btn_product_detail_left);
         ImageButton btn_right = findViewById(R.id.btn_product_detail_right);
+
+        ImageButton btn_declare = findViewById(R.id.btn_product_detail_declare);
+
+        btn_declare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Adapter_dialog_onebutton dialog = new Adapter_dialog_onebutton(getActivity(),"인천대 포탈 웹메일로\n임시 비밀번호가 발송되었습니다!");
+//                dialog.show();
+//                dialog = new Adapter_dialog_twobutton(getActivity(),"확인을 누르시면 새로운\n전화번호로 변경됩니다.");
+                Adapter_dialog_declare dialog = new Adapter_dialog_declare(ProductActivity.this);
+                dialog.show();
+            }
+        });
+
         btn_left.setOnClickListener(this);
         btn_right.setOnClickListener(this);
 

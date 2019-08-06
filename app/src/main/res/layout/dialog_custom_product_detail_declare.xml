@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="335dp"
+    android:layout_height="328dp"
+    android:background="@drawable/popup_product_background"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tv_dialog_product_declare_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="신고하기"
+        android:textSize="20sp"
+        android:textColor="@color/gunmetal"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/tv_dialog_product_declare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="신고 이유를 선택해 주세요."
+        android:textColor="@color/gunmetal"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_dialog_product_declare_title"
+        android:layout_marginTop="32dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+
+        <RadioGroup
+            android:id="@+id/radio_group_declare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_dialog_product_declare"
+            >
+                <RadioButton
+                    android:id="@+id/radio_btn_declare_obsence"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="음란성"
+                    android:textSize="18sp"
+                    android:textColor="@color/gunmetal"
+                    style="@style/declareRadiobtn"
+                    />
+                <RadioButton
+                    android:id="@+id/radio_btn_declare_advertisement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/declareRadiobtn"
+                    android:text="광고"
+                    android:textSize="18sp"
+                    android:textColor="@color/gunmetal"/>
+                <RadioButton
+                    android:id="@+id/radio_btn_declare_overlap"
+                    style="@style/declareRadiobtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="도배"
+                    android:textColor="@color/gunmetal"
+                    android:textSize="18sp" />
+                <RadioButton
+                    android:id="@+id/radio_btn_declare_fake"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/declareRadiobtn"
+                    android:text="허위상품"
+                    android:textSize="18sp"
+                    android:textColor="@color/gunmetal"
+                    />
+
+        </RadioGroup>
+
+
+
+
+    <Button
+        android:id="@+id/btn_di_declare_cancel"
+        android:layout_width="168dp"
+        android:layout_height="56dp"
+        android:text="취소"
+        android:background="#00ffffff"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/view9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view8" />
+
+    <View
+        android:id="@+id/view9"
+        android:layout_width="1dp"
+        android:layout_height="56dp"
+        android:background="@color/white_two"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_di_declare_declare"
+        android:layout_width="168dp"
+        android:layout_height="56dp"
+        android:text="신고하기"
+        android:background="#00ffffff"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/view9"
+        app:layout_constraintTop_toBottomOf="@+id/view8" />
+
+</android.support.constraint.ConstraintLayout>
