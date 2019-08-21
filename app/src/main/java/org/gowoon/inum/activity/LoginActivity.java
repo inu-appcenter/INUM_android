@@ -11,10 +11,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 import org.gowoon.inum.R;
 import org.gowoon.inum.fragment.forgotpwFragment;
-import org.gowoon.inum.model.LoginResult;
 import org.gowoon.inum.util.Singleton;
+
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -65,62 +69,67 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 pw = etv_pw.getText().toString();
                 Log.d("login click",stdid + pw);
 
-                Singleton.retrofit.login(stdid,pw,FCM).enqueue(new Callback<LoginResult>() {
+                Singleton.retrofit.signIn(stdid,pw,FCM).enqueue(new Callback<JsonObject>() {
                     @Override
-                    public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
+                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                         if ((response.isSuccessful())&&(response.body() != null)){
-                            LoginResult result = response.body();
-                            if (result.getMessage().equals("logged in success")) {
-                                if (checkBox_login.isChecked()){
-                                    editor.putString("userid",stdid);
-                                    editor.putString("userpw",pw);
-                                    editor.putString("usertel",result.getTel());
-                                    editor.putBoolean("checkboxlogin",checkBox_login.isChecked());
-                                    editor.commit();
-                                }
+                            switch (response.code()){
+                                case 200:{
+                                    String userToken = String.valueOf(response.body().get("token"));
+                                    if (checkBox_login.isChecked()){
+                                        editor.putString("userid",stdid);
+                                        editor.putString("userpw",pw);
+                                        editor.putBoolean("checkboxlogin",checkBox_login.isChecked());
+                                        editor.commit();
+                                    }
 
-                                if (!pref_info.getString("token","").equals(result.getToken())){
-                                    editor.putString("token",result.getToken());
-                                    editor.putString("usertel",result.getTel());
-                                    editor.putString("userid",stdid);
-                                    editor.putString("userpw",pw);
-                                    editor.putString("name",result.getName());
-                                    editor.commit();
-                                }
+                                    userToken = userToken.substring(1,userToken.length()-1);
+                                    if (!Objects.equals(pref_info.getString("token", ""), userToken)){
+                                        editor.putString("token", userToken);
+                                        editor.putString("userid",stdid);
+                                        editor.putString("userpw",pw);
+                                        editor.commit();
+                                    }
 
-                                Log.d("login_result_msg",""+result.getMessage() + result.getToken());
-                                tv_notcorrect.setVisibility(View.INVISIBLE);
+                                    Log.d("login_result_msg",response.message() + userToken);
+                                    tv_notcorrect.setVisibility(View.INVISIBLE);
 
-                                Intent intent_login = new Intent(getApplicationContext(), MainActivity.class);
-                                startActivity(intent_login);
-                                finish();
-                            }
-                            else {
-                                tv_notcorrect.setVisibility(View.VISIBLE);
-                                if (result.getMessage().equals("certification")) {
-                                    Log.d("login_result_msg_Err","인증안됨");
-                                    tv_notcorrect.setText("이메일 인증 후 로그인 해주세요");
+                                    Intent intent_login = new Intent(getApplicationContext(), MainActivity.class);
+                                    startActivity(intent_login);
+                                    finish();
+
+                                    break;
                                 }
-                                else if (result.getMessage().equals("fail")){
-                                    Log.d("login_fail_wrong","아이디비밀번호오류");
-                                    tv_notcorrect.setText("*학번과 일치하는 패스워드가 아닙니다.");
+                                case 400:{
                                     tv_notcorrect.setVisibility(View.VISIBLE);
+                                    String signInAns = String.valueOf(response.errorBody());
+                                    if(signInAns.equals("password")){
+                                        Log.d("login_fail_wrong","아이디비밀번호오류");
+                                        tv_notcorrect.setText("*학번과 일치하는 패스워드가 아닙니다.");
+                                    }
+                                    if(signInAns.equals("certification")){
+                                        Log.d("login_result_msg_Err","인증안됨");
+                                        tv_notcorrect.setText("이메일 인증 후 로그인 해주세요");
+                                        Toast.makeText(LoginActivity.this, "포탈 이메일 인증 후 로그인 해주세요", Toast.LENGTH_LONG).show();
+                                    }
+
+                                    break;
                                 }
                             }
                         }
                     }
                     @Override
-                    public void onFailure(Call<LoginResult> call, Throwable t) {
-                        Log.d("Loginfail","onFailure"+t);
-                        Toast.makeText(LoginActivity.this, "네트워크 연결을 확인해주세요", Toast.LENGTH_LONG).show();
+                    public void onFailure(Call<JsonObject> call, Throwable t) {
+                        Log.d("signInFail","onFailure"+t);
+                        Toast.makeText(LoginActivity.this, "서버 연결을 확인해주세요", Toast.LENGTH_LONG).show();
                     }
                 });
                 break;
             }
             case R.id.tv_login_join:
             {
-                Intent intent_signup = new Intent(getApplicationContext(), SignUpActivity.class);
-                startActivity(intent_signup);
+                Intent intentSignUp = new Intent(getApplicationContext(), SignUpActivity.class);
+                startActivity(intentSignUp);
                 break;
             }
             case R.id.tv_login_findpw:

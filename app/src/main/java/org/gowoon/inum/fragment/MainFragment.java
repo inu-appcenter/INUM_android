@@ -25,6 +25,7 @@ import org.gowoon.inum.util.Singleton;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
 import retrofit2.Call;
@@ -47,34 +48,35 @@ public class MainFragment extends android.support.v4.app.Fragment {
         View rootview = inflater.inflate(R.layout.fragment_main, container, false);
 
         final ArrayList<String> data = new ArrayList<>();
-        Singleton.retrofit.readBanner().enqueue(new Callback<BannerItemResult>() {
-            @Override
-            public void onResponse(Call<BannerItemResult> call, Response<BannerItemResult> response) {
-                if(response.isSuccessful()){
-                    BannerItemResult result = response.body();
-                    assert result != null;
-                    List list = result.getFileName();
-
-                    data.addAll(list);
-
-                    Log.d("Banner Viewpager Item" , result.getFileName().get(0));
-//                    data.add(result.getFileName().get(0));
-                    AdapterAutoScrollViewpager scrollAdapter = new AdapterAutoScrollViewpager(getActivity(),data);
-                    autoviewpager.setAdapter(scrollAdapter);
-
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<BannerItemResult> call, Throwable t) {
-
-            }
-        });
-
         autoviewpager = rootview.findViewById(R.id.viewpager_main_banner);
         autoviewpager.setInterval(5000);
         autoviewpager.startAutoScroll();
+
+//        Singleton.retrofit.readBanner().enqueue(new Callback<BannerItemResult>() {
+//            @Override
+//            public void onResponse(Call<BannerItemResult> call, Response<BannerItemResult> response) {
+//                if(response.isSuccessful()){
+//                    BannerItemResult result = response.body();
+//                    assert result != null;
+//                    List list = result.getFileName();
+//
+//                    data.addAll(list);
+//
+//                    Log.d("Banner Viewpager Item" , result.getFileName().get(0));
+////                    data.add(result.getFileName().get(0));
+                    data.add("ad1.png");
+                    data.add("ad2.png");
+                    data.add("ad3.png");
+                    AdapterAutoScrollViewpager scrollAdapter = new AdapterAutoScrollViewpager(getActivity(),data);
+                    autoviewpager.setAdapter(scrollAdapter);
+//                }
+//            }
+
+//            @Override
+//            public void onFailure(Call<BannerItemResult> call, Throwable t) {
+//
+//            }
+//        });
 
         btn_message = rootview.findViewById(R.id.constraint_main_message);
         btn_message.setOnClickListener(new View.OnClickListener() {
@@ -87,14 +89,15 @@ public class MainFragment extends android.support.v4.app.Fragment {
         });
 
         pref = getActivity().getSharedPreferences("userinfo",MODE_PRIVATE);
-        String token =  pref.getString("token","");
+        final String token =  pref.getString("token","");
         String id = pref.getString("userid","");
 
-        if (!token.equals("")) {
+        if (!Objects.requireNonNull(token).equals("")) {
             Log.d("token test", token);
             Singleton.retrofit.main(token).enqueue(new Callback<ArrayList<ArrayList<MainProductResult>>>() {
                 @Override
                 public void onResponse(Call<ArrayList<ArrayList<MainProductResult>>> call, Response<ArrayList<ArrayList<MainProductResult>>> response) {
+                    Log.d("token response test", token);
                     Log.d("main recycler test", "" + response.code());
                     if (response.isSuccessful()) {
                         ArrayList<ArrayList<MainProductResult>> result = response.body();

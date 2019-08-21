@@ -20,12 +20,12 @@ import java.util.ArrayList;
 
 public class Adapter_recycler_ProductSearch extends RecyclerView.Adapter<Adapter_recycler_ProductSearch.mViewHolder>{
 
-    public ArrayList<SearchIdResult> mDataset = new ArrayList<>();
+    public ArrayList<MainProductResult> mDataset = new ArrayList<>();
 
     public Adapter_recycler_ProductSearch(){
 
     }
-    public Adapter_recycler_ProductSearch(ArrayList<SearchIdResult> myData) {
+    public Adapter_recycler_ProductSearch(ArrayList<MainProductResult> myData) {
         this.mDataset = myData;
     }
 
@@ -53,7 +53,10 @@ public class Adapter_recycler_ProductSearch extends RecyclerView.Adapter<Adapter
     public void onBindViewHolder(@NonNull Adapter_recycler_ProductSearch.mViewHolder holder, final int position) {
         holder.name.setText(mDataset.get(position).getProductName());
         holder.price.setText(mDataset.get(position).getProductPrice() + "원");
-        Glide.with(holder.productimg).load(Config.serverUrl + "imgload/" + mDataset.get(position).getProductImg().get(0)).into(holder.productimg);
+        Glide.with(holder.productimg).load(Config.serverUrl + "imgload/"
+                + mDataset.get(position).getSellerId()
+                + mDataset.get(position).getFileFolder()+"/"
+                + mDataset.get(position).getProductImg().get(0)).into(holder.productimg);
         holder.itemView.setOnClickListener(new View.OnClickListener(){
 
             @Override

@@ -3,116 +3,138 @@ package org.gowoon.inum.util;
 import com.google.gson.JsonObject;
 
 import org.gowoon.inum.model.BannerItemResult;
-import org.gowoon.inum.model.LoginResult;
 import org.gowoon.inum.model.MainProductResult;
 import org.gowoon.inum.model.ProductOneItemResult;
 import org.gowoon.inum.model.SearchIdResult;
-import org.gowoon.inum.model.UserData;
-import org.json.JSONObject;
+import org.gowoon.inum.model.UserInfoVO;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
-import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
+import retrofit2.http.Query;
 
 public interface RetrofitService {
     //User
+    // 회원가입
     @FormUrlEncoded
-    @POST("account")
+    @POST("account/signUp")
     Call<JsonObject>
-    account(@Field("id") String id, @Field("passwd") String passwd, @Field("name") String name, @Field("tel") String tel);
+    signUp(@Field("id") String id, @Field("passwd") String passwd, @Field("tel") String tel, @Field("major") String major, @Field("name") String name);
 
+    // 로그인
     @FormUrlEncoded
-    @POST("login")
-    Call<LoginResult>
-    login(@Field("id") String id, @Field("passwd") String passwd, @Field("FCM") String FCM);
+    @POST("account/signIn")
+    Call<JsonObject>
+    signIn(@Field("id") String id, @Field("passwd") String passwd, @Field("FCM") String FCM);
 
-    //비밀번호 변경
+    //  임시 비밀번호 발급
     @FormUrlEncoded
-    @POST("stateChange/newPassword")
-    public Call<JsonObject>
+    @PUT("account/tmpPasswd")
+    Call<JsonObject>
     forgotPw(@Field("id") String id, @Field("name") String name);
 
-
+    // User Info to Token
+    @GET("account/myPage")
+    Call<UserInfoVO>
+    userInfo(@Header("x-access-token") String token);
+    
     @FormUrlEncoded
     @POST("account/delete")
     Call<JsonObject>
     secession(@Field("id") String id, @Field("passwd") String passwd);
 
-    //Setting
+    //Info Setting
     @FormUrlEncoded
-    @POST("stateChange/changeTel")
-    public Call<JsonObject>
-    changeTel(@Field("id") String id, @Field("newTel") String tel);
+    @PUT("account/changeTel")
+    Call<JsonObject>
+    changeTel(@Header("x-access-token") String userToken, @Field("passwd") String password, @Field("tel") String tel);
 
     @FormUrlEncoded
     @POST("stateChange/changePasswd")
-    public Call<JsonObject>
+    Call<JsonObject>
     changePasswd(@Field("id") String id, @Field("pastPasswd") String pastpw, @Field("newPasswd") String newpw);
 
-    //Product
-    @POST("PSelect/main")
-    public Call <ArrayList<ArrayList<MainProductResult>>>
-    main(@Header("x-access-token") String main_token);
-
-    @FormUrlEncoded
-    @POST("PSelect/search")
-    public Call<ArrayList<SearchIdResult>>
-    searchproduct(@Field("productName") String searchtxt);
-
-    @FormUrlEncoded
-    @POST("PSelect/searchId")
-    public Call<ArrayList<SearchIdResult>>
-    searchId( @Field("sellerId") String sellerid);
-
-    @FormUrlEncoded
-    @POST("PSelect/category")
-    public Call<ArrayList<SearchIdResult>>
-    category(@Field("category") String category);
-
-    //report _ moonhee,119
-    @FormUrlEncoded
-    @POST("report")
-    public Call<JsonObject>
-    moonhee(@Field("kind") String kind, @Field("senderId") String senderId, @Field("context") String context);
-
-    @FormUrlEncoded
-    @POST("report")
-    public Call<JsonObject>
-    report(@Field("kind") String kind, @Field("senderId") String senderId, @Field("productId") String productId);
-
+    // Main Activity
     // banner
     @POST("readBanner")
-    public Call<BannerItemResult>
+    Call<BannerItemResult>
     readBanner();
 
+    // All Product Load
+    @GET("product/mainList")
+    Call <ArrayList<ArrayList<MainProductResult>>>
+    main(@Header("x-access-token") String token);
+
+    /*
+        GET 방식, URL/product/search/{searchName} 호출.
+        단, 주소값이 "URL/product/search?searchName={searchName]" 이 됨.
+    */
+    @GET("product/search")
+    Call<ArrayList<MainProductResult>>
+    searchName(@Header("x-access-token") String userToken, @Query("searchName") String searchName);
+
+    // search in Category
+    @GET("product/categorySearch")
+    Call<ArrayList<MainProductResult>>
+    searchInCategory(@Header("x-access-token") String userToken, @Query("searchName") String searchName, @Query("category") String category);
+
+    @GET("product/oneItem")
+    Call<ProductOneItemResult>
+    productOneItem(@Header("x-access-token") String userToken, @Query("productId") String productId);
+
+    // load userItem
+    @GET("product/userItem")
+    Call<ArrayList<SearchIdResult>>
+    searchId(@Header("x-access-token") String userToken, @Query("userId") String userId);
+
+    // load Category Product List
+    @GET("product/category")
+    Call<ArrayList<MainProductResult>>
+    category(@Header("x-access-token") String userToken, @Query("category") String category);
+
+    //report
     @FormUrlEncoded
-    @POST("PSelect/oneItem")
-    public Call<ProductOneItemResult>
-    productOneItem(@Header("x-access-token") String main_token, @Field("productId") String productId);
+    @POST("report/")
+    Call<JsonObject>
+    report(@Header("x-access-token") String userToken, @Field("kind") String kind, @Field("context") String context);
 
-    // Product Upload
+    // Product
+    //`upload
     @Multipart
-    @POST ("Pupload")
-    public Call<JSONObject>
-    productUpload(@Header("x-access-token") String main_token
-            ,@Part("userfile") List<String> stringList
-            ,@Part("productName") String name
-            ,@Part("productState") String state
-            ,@Part("productPrice") Integer price
-            ,@Part("category") String category
-            ,@Part("productInfo") String info
-            ,@Part("method") String method
-            ,@Part("place") String place
-            ,@Part("id") String id
-
+    @POST ("product/upload")
+    Call<JsonObject>
+    productUpload(@Header("x-access-token") String userToken
+            , @Part("userfile") List<String> stringList
+            , @Part("productName") String name
+            , @Part("productState") String state
+            , @Part("productPrice") Integer price
+            , @Part("category") String category
+            , @Part("productInfo") String info
+            , @Part("method") String method
+            , @Part("place") String place
     );
+
+    // sold out
+    @FormUrlEncoded
+    @PUT("product/selling")
+    Call<JsonObject>
+    productSoldOut(@Header("x-access-token") String userToken, @Field("productId") String productId);
+
+    // delete
+    @FormUrlEncoded
+    @DELETE("product/")
+    Call<JsonObject>
+    productDelete(@Header("x-access-token") String userToken, @Field("productId") String productId
+            , @Field("fileFolder") String fileFolder);
 }

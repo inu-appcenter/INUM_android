@@ -5,9 +5,12 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+import lombok.Data;
+
+@Data
 public class ProductOneItemResult {
 
-    public static ProductOneItemResult productData = new ProductOneItemResult();
+    private static ProductOneItemResult productData = new ProductOneItemResult();
 
     public static ProductOneItemResult getInstance() {
         return productData;
@@ -74,145 +77,157 @@ public class ProductOneItemResult {
     @SerializedName("sellerPhone")
     @Expose
     private String sellerPhone;
+
+    @SerializedName("fileFolder")
+    @Expose
+    private String fileFolder;
+
     @SerializedName("__v")
     @Expose
     private Integer v;
 
-    public List<String> getProductImg() {
-        return productImg;
-    }
-
-    public void setProductImg(List<String> productImg) {
-        this.productImg = productImg;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getProductId() {
-        return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public String getProductState() {
-        return productState;
-    }
-
-    public void setProductState(String productState) {
-        this.productState = productState;
-    }
-
-    public Integer getProductPrice() {
-        return productPrice;
-    }
-
-    public void setProductPrice(Integer productPrice) {
-        this.productPrice = productPrice;
-    }
-
-    public Integer getProductStar() {
-        return productStar;
-    }
-
-    public void setProductStar(Integer productStar) {
-        this.productStar = productStar;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public String getProductInfo() {
-        return productInfo;
-    }
-
-    public void setProductInfo(String productInfo) {
-        this.productInfo = productInfo;
-    }
-
-    public String getMethod() {
-        return method;
-    }
-
-    public void setMethod(String method) {
-        this.method = method;
-    }
-
-    public String getPlace() {
-        return place;
-    }
-
-    public void setPlace(String place) {
-        this.place = place;
-    }
-
-    public String getSellerId() {
-        return sellerId;
-    }
-
-    public void setSellerId(String sellerId) {
-        this.sellerId = sellerId;
-    }
-
-    public Boolean getProductSelled() {
-        return productSelled;
-    }
-
-    public void setProductSelled(Boolean productSelled) {
-        this.productSelled = productSelled;
-    }
-
-    public String getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(String updateDate) {
-        this.updateDate = updateDate;
-    }
-
-    public String getSellerName() {
-        return sellerName;
-    }
-
-    public void setSellerName(String sellerName) {
-        this.sellerName = sellerName;
-    }
-
-    public String getSellerPhone() {
-        return sellerPhone;
-    }
-
-    public void setSellerPhone(String sellerPhone) {
-        this.sellerPhone = sellerPhone;
-    }
-
-    public Integer getV() {
-        return v;
-    }
-
-    public void setV(Integer v) {
-        this.v = v;
-    }
-
-
+//    public List<String> getProductImg() {
+//        return productImg;
+//    }
+//
+//    public void setProductImg(List<String> productImg) {
+//        this.productImg = productImg;
+//    }
+//
+//    public String getId() {
+//        return id;
+//    }
+//
+//    public void setId(String id) {
+//        this.id = id;
+//    }
+//
+//    public String getProductId() {
+//        return productId;
+//    }
+//
+//    public void setProductId(String productId) {
+//        this.productId = productId;
+//    }
+//
+//    public String getProductName() {
+//        return productName;
+//    }
+//
+//    public void setProductName(String productName) {
+//        this.productName = productName;
+//    }
+//
+//    public String getProductState() {
+//        return productState;
+//    }
+//
+//    public void setProductState(String productState) {
+//        this.productState = productState;
+//    }
+//
+//    public Integer getProductPrice() {
+//        return productPrice;
+//    }
+//
+//    public void setProductPrice(Integer productPrice) {
+//        this.productPrice = productPrice;
+//    }
+//
+//    public Integer getProductStar() {
+//        return productStar;
+//    }
+//
+//    public void setProductStar(Integer productStar) {
+//        this.productStar = productStar;
+//    }
+//
+//    public String getCategory() {
+//        return category;
+//    }
+//
+//    public void setCategory(String category) {
+//        this.category = category;
+//    }
+//
+//    public String getProductInfo() {
+//        return productInfo;
+//    }
+//
+//    public void setProductInfo(String productInfo) {
+//        this.productInfo = productInfo;
+//    }
+//
+//    public String getMethod() {
+//        return method;
+//    }
+//
+//    public void setMethod(String method) {
+//        this.method = method;
+//    }
+//
+//    public String getPlace() {
+//        return place;
+//    }
+//
+//    public void setPlace(String place) {
+//        this.place = place;
+//    }
+//
+//    public String getSellerId() {
+//        return sellerId;
+//    }
+//
+//    public void setSellerId(String sellerId) {
+//        this.sellerId = sellerId;
+//    }
+//
+//    public Boolean getProductSelled() {
+//        return productSelled;
+//    }
+//
+//    public void setProductSelled(Boolean productSelled) {
+//        this.productSelled = productSelled;
+//    }
+//
+//    public String getUpdateDate() {
+//        return updateDate;
+//    }
+//
+//    public void setUpdateDate(String updateDate) {
+//        this.updateDate = updateDate;
+//    }
+//
+//    public String getSellerName() {
+//        return sellerName;
+//    }
+//
+//    public void setSellerName(String sellerName) {
+//        this.sellerName = sellerName;
+//    }
+//
+//    public String getSellerPhone() {
+//        return sellerPhone;
+//    }
+//
+//    public void setSellerPhone(String sellerPhone) {
+//        this.sellerPhone = sellerPhone;
+//    }
+//
+//    public Integer getV() {
+//        return v;
+//    }
+//
+//    public void setV(Integer v) {
+//        this.v = v;
+//    }
+//
+//
+//    public String getFileFolder() {
+//        return fileFolder;
+//    }
+//
+//    public void setFileFolder(String fileFolder) {
+//        this.fileFolder = fileFolder;
+//    }
 }

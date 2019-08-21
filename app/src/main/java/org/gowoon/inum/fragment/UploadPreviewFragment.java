@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
 
 import org.gowoon.inum.R;
@@ -44,7 +45,6 @@ public class UploadPreviewFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,17 +59,19 @@ public class UploadPreviewFragment extends Fragment {
         tvUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Singleton.retrofit.productUpload(token,imageUri,name,state,price,category,explain,method,place,userId)
-                        .enqueue(new Callback<JSONObject>() {
+                Singleton.retrofit.productUpload(token,imageUri,name,state,price,category,explain,method,place)
+                        .enqueue(new Callback<JsonObject>() {
                             @Override
-                            public void onResponse(Call<JSONObject> call, Response<JSONObject> response) {
+                            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                                 if (response.isSuccessful()){
-                                    try {
-                                        if (response.body().get("ans")=="true"){
+                                    if (response.code()==200){
+                                        try{
+                                            if (response.message().equals("success")){
                                             Toast.makeText(getActivity(),"등록 완료",Toast.LENGTH_LONG).show();
+                                            }
+                                        }catch (JsonIOException e){
+                                            e.printStackTrace();
                                         }
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
                                     }
                                 }
                                 else {
@@ -77,9 +79,8 @@ public class UploadPreviewFragment extends Fragment {
                                     Log.d("upload fail","fail..");
                                 }
                             }
-
                             @Override
-                            public void onFailure(Call<JSONObject> call, Throwable t) {
+                            public void onFailure(Call<JsonObject> call, Throwable t) {
                                 Log.d("upload fail onFailure","fail..");
                                 t.getMessage();
                                 Log.d("err msg",t.getMessage());
@@ -106,7 +107,6 @@ public class UploadPreviewFragment extends Fragment {
         tvCategory.setText("-카테고리:" +category);
         tvState.setText("-상품 상태:" +state);
         tvExplain.setText(explain);
-//        tvPrice.setText(price.toString());
         tvPlace.setText("-거래 장소:" +place);
         tvMethod.setText("-거래 방식:" +method);
         tvStar.setText("자세한 사항은 판매자에게 문의하세요!");
@@ -115,10 +115,8 @@ public class UploadPreviewFragment extends Fragment {
     private void getInfo(){
         SharedPreferences pref = Objects.requireNonNull(getActivity()).getSharedPreferences("userinfo",MODE_PRIVATE);
         token = pref.getString("token","");
-        userId = pref.getString("userid","");
 
         uploadItemInfo = ProductOneItemResult.getInstance();
-//        imageUri = uploadItemInfo.getProductImg();
         imageUri.add(0,"sample");
         name = uploadItemInfo.getProductName();
         price = uploadItemInfo.getProductPrice();
