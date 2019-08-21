@@ -72,7 +72,11 @@ public class Adapter_ProductMain extends RecyclerView.Adapter<Adapter_ProductMai
         else {
             holder.subcategory.setText("");
         }
-        Glide.with(holder.productimg).load(Config.serverUrl + "imgload/" + mDataset.get(position).getProductImg().get(0)).into(holder.productimg);
+        Glide.with(holder.productimg).load(Config.serverUrl + "imgload/"
+                +mDataset.get(position).getSellerId()
+                +mDataset.get(position).getFileFolder()+"/"
+                +mDataset.get(position).getProductImg().get(0)).into(holder.productimg);
+
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

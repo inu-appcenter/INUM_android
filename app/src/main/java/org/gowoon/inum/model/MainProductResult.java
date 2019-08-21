@@ -30,6 +30,10 @@ public class MainProductResult {
     @Expose
     private String category;
 
+    @SerializedName("sellerId")
+    @Expose
+    private String sellerId;
+
     @SerializedName("productSelled")
     @Expose
     private Boolean productSelled;

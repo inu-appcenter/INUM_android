@@ -39,7 +39,10 @@ public class Adapter_recycler_MyProduct extends RecyclerView.Adapter<RecyclerVie
         final SearchIdResult sdata = data.get(position);
         final ListViewHolder listholder = (ListViewHolder) holder;
         listholder.product_name.setText(sdata.getProductName());
-        Glide.with(listholder.product_img).load(Config.serverUrl + "imgload/" + data.get(position).getProductImg().get(0)).into(listholder.product_img);
+        Glide.with(listholder.product_img).load(Config.serverUrl + "imgload/"
+                +data.get(position).getSellerId()
+                +data.get(position).getFileFolder()+"/"
+                +data.get(position).getProductImg().get(0)).into(listholder.product_img);
 
 //        listholder.Rclayout.setOnClickListener(new View.OnClickListener(){
 //            @Override
