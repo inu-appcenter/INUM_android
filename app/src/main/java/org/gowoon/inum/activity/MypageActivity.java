@@ -6,27 +6,34 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.gowoon.inum.R;
+import org.gowoon.inum.custom.Adapter_dialog_twobutton;
 import org.gowoon.inum.custom.Adapter_listview_setting;
 import org.gowoon.inum.fragment.SettingPhoneChangeFragment;
 import org.gowoon.inum.fragment.SettingPushAlarmFragment;
 import org.gowoon.inum.fragment.SettingPwChangeFragment;
 import org.gowoon.inum.fragment.SettingQuestFragment;
 import org.gowoon.inum.fragment.SettingSecessionFragment;
+import org.gowoon.inum.model.UserInfoVO;
+import org.gowoon.inum.util.Singleton;
 
+import java.io.Serializable;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MypageActivity extends AppCompatActivity {
 
     ListView listview;
     Adapter_listview_setting adapter;
     String[] item;
-    MainActivity mainactivity;
-
     SharedPreferences.Editor editor;
 
     @Override
@@ -38,11 +45,13 @@ public class MypageActivity extends AppCompatActivity {
 
         listview = findViewById(R.id.listview_mypage);
         listview.setAdapter(adapter);
+        getUserInfo();
+        final Adapter_dialog_twobutton dialogLogout =
+                new Adapter_dialog_twobutton(this,"확인을 누르시면\n로그아웃 후 로그인 화면으로 이동합니다");
 
         item = new String[]{"전화번호 변경", "푸시 알림 설정", "문의하기", "비밀번호 변경", "로그아웃", "회원 탈퇴"};
-        for (int i = 0 ; i<item.length ;i++)
-        {
-            adapter.addItem(item[i]);
+        for (String s : item) {
+            adapter.addItem(s);
         }
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -51,19 +60,18 @@ public class MypageActivity extends AppCompatActivity {
                 switch (position){
                     //번호변경
                     case 0:{
-                        SettingPhoneChangeFragment phone_change = new SettingPhoneChangeFragment();
+                        SettingPhoneChangeFragment phoneChange = new SettingPhoneChangeFragment();
                         getFragmentManager().beginTransaction()
-                                //.setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_right,R.anim.enter_from_right,R.anim.exit_to_right)
-                                .replace(R.id.activiy_setting, phone_change)
+                                .replace(R.id.activiy_setting, phoneChange)
                                 .addToBackStack(null)
                                 .commit();
                         break;
                     }
                     //푸시알림
                     case 1:{
-                        SettingPushAlarmFragment push_alarm = new SettingPushAlarmFragment();
+                        SettingPushAlarmFragment pushAlarm = new SettingPushAlarmFragment();
                         getFragmentManager().beginTransaction()
-                                .replace(R.id.activiy_setting, push_alarm)
+                                .replace(R.id.activiy_setting, pushAlarm)
                                 .addToBackStack(null)
                                 .commit();
                         break;
@@ -79,9 +87,9 @@ public class MypageActivity extends AppCompatActivity {
                     }
                     //비밀번호 변경
                     case 3:{
-                        SettingPwChangeFragment pwchange = new SettingPwChangeFragment();
+                        SettingPwChangeFragment pwChange = new SettingPwChangeFragment();
                         getFragmentManager().beginTransaction()
-                                .replace(R.id.activiy_setting, pwchange)
+                                .replace(R.id.activiy_setting, pwChange)
                                 .addToBackStack(null)
                                 .commit();
                         break;
@@ -92,15 +100,16 @@ public class MypageActivity extends AppCompatActivity {
                         editor = pref.edit();
                         editor.clear();
                         editor.apply();
-
-                        mainactivity = (MainActivity) MainActivity.Main;
-                        mainactivity.finish();
-
-                        Intent intent_login = new Intent(getApplicationContext(), LoginActivity.class);
-                        intent_login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent_login);
-                        finish();
-
+                        dialogLogout.show();
+                        dialogLogout.setOnOkButtonClickListener(new Adapter_dialog_twobutton.OnOkButtonClickListener() {
+                            @Override
+                            public void onClick() {
+                                Intent intentLogin = new Intent(getApplicationContext(), LoginActivity.class);
+                                intentLogin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intentLogin);
+                                finishAffinity();
+                            }
+                        });
                         break;
                     }
                     //탈퇴
@@ -115,5 +124,9 @@ public class MypageActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    public void getUserInfo(){
+        UserInfoVO infoVO = (UserInfoVO)getIntent().getSerializableExtra("infoVO");
+        Log.d("load data", infoVO.getId());
     }
 }

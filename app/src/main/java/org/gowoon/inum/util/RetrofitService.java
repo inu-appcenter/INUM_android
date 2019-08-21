@@ -103,17 +103,11 @@ public interface RetrofitService {
     Call<ArrayList<MainProductResult>>
     category(@Header("x-access-token") String userToken, @Query("category") String category);
 
-    //report _ moonhee,119
+    //report
     @FormUrlEncoded
-    @POST("report")
+    @POST("report/")
     Call<JsonObject>
-    moonhee(@Field("kind") String kind, @Field("senderId") String senderId, @Field("context") String context);
-
-    @FormUrlEncoded
-    @POST("report")
-    Call<JsonObject>
-    report(@Field("kind") String kind, @Field("senderId") String senderId, @Field("productId") String productId);
-
+    report(@Header("x-access-token") String userToken, @Field("kind") String kind, @Field("context") String context);
 
     // Product
     //`upload

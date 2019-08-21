@@ -24,8 +24,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SettingQuestFragment extends Fragment {
-    EditText question;
-    String txt_question;
+    EditText etRequest;
+    String request;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,21 +34,16 @@ public class SettingQuestFragment extends Fragment {
         final ViewGroup rootview = (ViewGroup)inflater.inflate(R.layout.fragment_setting_quest, container, false);
         final Adapter_dialog_twobutton dialog_send = new Adapter_dialog_twobutton(getActivity(),"확인을 누르시면\n문의사항이 전송됩니다.");
 
-        question = rootview.findViewById(R.id.et_setting_question);
-        txt_question = question.getText().toString();
-        Log.d("moonhee",txt_question);
+        etRequest = rootview.findViewById(R.id.et_setting_question);
+
+        Log.d("moonhee",request);
         rootview.findViewById(R.id.btn_question_send)
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (txt_question==null)
-                        {
-                            rootview.findViewById(R.id.tv_setting_question_noinput).setVisibility(View.VISIBLE);
-                        }
-                        else {
-                            rootview.findViewById(R.id.tv_setting_question_noinput).setVisibility(View.INVISIBLE);
-                            dialog_send.show();
-                        }
+                        request = etRequest.getText().toString();
+                        rootview.findViewById(R.id.tv_setting_question_noinput).setVisibility(View.INVISIBLE);
+                        dialog_send.show();
                     }
                 });
 
@@ -56,19 +51,14 @@ public class SettingQuestFragment extends Fragment {
             @Override
             public void onClick() {
                 final SharedPreferences pref = getActivity().getSharedPreferences("userinfo", Context.MODE_PRIVATE);
-                String id = pref.getString("userid","");
-                Singleton.retrofit.moonhee("moonhee",id,txt_question).enqueue(new Callback<JsonObject>() {
+                String token = pref.getString("token","");
+                Singleton.retrofit.report(token,"moonHee",request).enqueue(new Callback<JsonObject>() {
                     @Override
                     public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                        if(response.isSuccessful()){
-                            assert response.body() != null;
-                            JsonObject result = response.body();
-                            Log.d("moonhee_test",""+result);
-                            if(String.valueOf(result.get("ans")).equals("true")){
-                                FragmentManager fragmentManager = getActivity().getFragmentManager();
-                                fragmentManager.beginTransaction()
-                                        .remove(SettingQuestFragment.this).commit();
-                            }
+                        if (response.code()==200){
+                            FragmentManager fragmentManager = getActivity().getFragmentManager();
+                            fragmentManager.beginTransaction()
+                                    .remove(SettingQuestFragment.this).commit();
                         }
                     }
                     @Override

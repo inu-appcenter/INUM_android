@@ -23,6 +23,7 @@ import org.gowoon.inum.model.UserInfoVO;
 import org.gowoon.inum.util.Singleton;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -32,7 +33,7 @@ import retrofit2.Response;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class DrawerMypageFragment extends Fragment {
+public class DrawerMypageFragment extends Fragment implements View.OnClickListener {
 
     private FrameLayout Drawer,message,myproduct;
     TextView tvNewMsg,tvUserProduct, tvName, tvUpload;
@@ -94,8 +95,7 @@ public class DrawerMypageFragment extends Fragment {
             public void onClick(View view) {
                 Intent upload_intent = new Intent(getActivity().getApplicationContext(), UploadActivity.class);
                 startActivity(upload_intent);
-                DrawerLayout drawer = getActivity().findViewById(R.id.drawer_main);
-                drawer.closeDrawer(Gravity.END);
+                close();
             }
         });
 
@@ -114,17 +114,17 @@ public class DrawerMypageFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent_product = new Intent(getActivity(), MyproductActivity.class);
                 startActivity(intent_product);
+                close();
             }
         });
 
         Drawer.findViewById(R.id.tv_mypage_setting).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_setting = new Intent(getActivity(), MypageActivity.class);
-                intent_setting.putExtra("info", (Serializable) infoVO);
-                startActivity(intent_setting);
-                DrawerLayout drawer = getActivity().findViewById(R.id.drawer_main);
-                drawer.closeDrawer(Gravity.END);
+                Intent intentSetting = new Intent(getActivity(), MypageActivity.class);
+                intentSetting.putExtra("infoVO", infoVO);
+                startActivity(intentSetting);
+                close();
             }
         });
         return Drawer;
@@ -135,5 +135,16 @@ public class DrawerMypageFragment extends Fragment {
 
         tvNewMsg = Drawer.findViewById(R.id.tv_mypage_newmessage);
         tvUserProduct = Drawer.findViewById(R.id.tv_mypage_newproduct);
+    }
+    private void close(){
+        DrawerLayout drawer = getActivity().findViewById(R.id.drawer_main);
+        drawer.closeDrawer(Gravity.END);
+    }
+
+    @Override
+    public void onClick(View view) {
+//        switch (view){
+//            case R.id.
+//        }
     }
 }
