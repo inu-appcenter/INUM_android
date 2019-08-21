@@ -16,15 +16,15 @@ import android.widget.Toast;
 
 import org.gowoon.inum.R;
 import org.gowoon.inum.activity.ChatActivity;
+import org.gowoon.inum.activity.MainActivity;
 import org.gowoon.inum.activity.ProductActivity;
 import org.gowoon.inum.custom.AdapterAutoScrollViewpager;
-import org.gowoon.inum.model.BannerItemResult;
+import org.gowoon.inum.custom.BackPressCloseHandler;
 import org.gowoon.inum.model.MainProductResult;
 import org.gowoon.inum.recycler.Adapter_ProductMain;
 import org.gowoon.inum.util.Singleton;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
@@ -40,42 +40,17 @@ public class MainFragment extends android.support.v4.app.Fragment {
     RecyclerView recyclerView_book, recyclerView_room, recyclerView_ticket;
     Adapter_ProductMain Adapter_room, Adapter_book, Adapter_ticket ;
     ArrayList<MainProductResult> list = new ArrayList<>();
-    AutoScrollViewPager autoviewpager;
+    AutoScrollViewPager bannerViewPager;
+    AdapterAutoScrollViewpager scrollAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootview = inflater.inflate(R.layout.fragment_main, container, false);
 
-        final ArrayList<String> data = new ArrayList<>();
-        Singleton.retrofit.readBanner().enqueue(new Callback<BannerItemResult>() {
-            @Override
-            public void onResponse(Call<BannerItemResult> call, Response<BannerItemResult> response) {
-                if(response.isSuccessful()){
-                    BannerItemResult result = response.body();
-                    assert result != null;
-                    List list = result.getFileName();
-
-                    data.addAll(list);
-
-                    Log.d("Banner Viewpager Item" , result.getFileName().get(0));
-//                    data.add(result.getFileName().get(0));
-                    AdapterAutoScrollViewpager scrollAdapter = new AdapterAutoScrollViewpager(getActivity(),data);
-                    autoviewpager.setAdapter(scrollAdapter);
-
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<BannerItemResult> call, Throwable t) {
-
-            }
-        });
-
-        autoviewpager = rootview.findViewById(R.id.viewpager_main_banner);
-        autoviewpager.setInterval(5000);
-        autoviewpager.startAutoScroll();
+        bannerViewPager = rootview.findViewById(R.id.viewpager_main_banner);
+        setBanner(bannerViewPager);
+        setBannerData(bannerViewPager);
 
         btn_message = rootview.findViewById(R.id.constraint_main_message);
         btn_message.setOnClickListener(new View.OnClickListener() {
@@ -87,7 +62,9 @@ public class MainFragment extends android.support.v4.app.Fragment {
             }
         });
 
-        pref = getActivity().getSharedPreferences("userinfo",MODE_PRIVATE);
+        ((MainActivity) Objects.requireNonNull(getActivity())).backPressHolder();
+
+        pref = Objects.requireNonNull(getActivity()).getSharedPreferences("userinfo",MODE_PRIVATE);
         final String token =  pref.getString("token","");
         String id = pref.getString("userid","");
 
@@ -188,4 +165,18 @@ public class MainFragment extends android.support.v4.app.Fragment {
         return rootview;
     }
 
+    private void setBanner(AutoScrollViewPager bannerViewPager){
+        bannerViewPager.setInterval(5000);
+        bannerViewPager.setScrollDurationFactor(10);
+        bannerViewPager.startAutoScroll();
+    }
+    private void setBannerData(AutoScrollViewPager bannerViewPager){
+        final ArrayList<String> data = new ArrayList<>();
+        data.add("ad1.png");
+        data.add("ad2.png");
+        data.add("ad3.png");
+
+        scrollAdapter = new AdapterAutoScrollViewpager(getActivity(),data);
+        bannerViewPager.setAdapter(scrollAdapter);
+    }
 }
