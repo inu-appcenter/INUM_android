@@ -160,7 +160,7 @@ public class SearchProductCategoryFragment extends Fragment {
                         tvNone.setVisibility(View.VISIBLE);
                         recyclerView.setVisibility(View.INVISIBLE);
                     }
-                    Log.d("category_load","카테고리별 상품 로딩" +results.get(0).getProductName());
+                    Log.d("category_load","카테고리별 상품 로딩" +results.size());
                 }
             }
             @Override

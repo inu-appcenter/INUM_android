@@ -85,7 +85,7 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
 
                         arrayImage.addAll(Objects.requireNonNull(result).getProductImg());
 
-                        vAdapter = new AdapterViewPagerProduct(getApplicationContext(), arrayImage, result.getFileFolder());
+                        vAdapter = new AdapterViewPagerProduct(getApplicationContext(), arrayImage, result.getFileFolder(), result.getSellerId());
                         viewPager.setAdapter(vAdapter);
 
                         circleIndicator.setupWithViewPager(viewPager);
