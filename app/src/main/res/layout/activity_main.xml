@@ -115,9 +115,7 @@
                         android:textColor="@color/gunmetal"
                         android:textSize="14sp"
                         android:visibility="gone"
-                        android:layout_weight="5"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        android:layout_weight="5"/>
 
                 </LinearLayout>
 
