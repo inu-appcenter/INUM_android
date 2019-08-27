@@ -1,9 +1,10 @@
 package org.gowoon.inum.custom;
 
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.baoyachi.stepview.bean.StepBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +17,10 @@ public class AdapterViewPagerSignUp extends FragmentPagerAdapter {
         super(fm);
     }
 
-    public void addFragment(Fragment fragment, int step){
+    public StepBean addFragment(Fragment fragment, int step){
         mFragmentList.add(fragment);
         mFragmentStep.add(step);
+        return null;
     }
 
     @Override

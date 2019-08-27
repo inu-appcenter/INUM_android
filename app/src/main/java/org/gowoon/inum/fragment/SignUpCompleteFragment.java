@@ -14,6 +14,7 @@ import android.widget.Button;
 
 import org.gowoon.inum.R;
 import org.gowoon.inum.activity.LoginActivity;
+import org.gowoon.inum.activity.SignUpActivity;
 import org.gowoon.inum.custom.Adapter_dialog_onebutton;
 
 import java.util.Objects;
@@ -27,6 +28,7 @@ public class SignUpCompleteFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_signup_complete,container, false);
         viewInit(rootView);
 
+
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -36,8 +38,8 @@ public class SignUpCompleteFragment extends Fragment {
 
         return rootView;
     }
+
     private void viewInit(View view){
         btnSubmit = view.findViewById(R.id.btn_sign_up_submit);
     }
 }
-

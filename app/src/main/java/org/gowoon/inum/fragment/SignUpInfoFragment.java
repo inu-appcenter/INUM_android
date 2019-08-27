@@ -1,6 +1,7 @@
 package org.gowoon.inum.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +13,14 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.baoyachi.stepview.bean.StepBean;
+
 import org.gowoon.inum.R;
 import org.gowoon.inum.activity.SignUpActivity;
 import org.gowoon.inum.model.UserData;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class SignUpInfoFragment extends Fragment {
@@ -31,14 +35,21 @@ public class SignUpInfoFragment extends Fragment {
     Boolean inputId = false, inputName = false, inputMajor= true;
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        ((SignUpActivity)getActivity()).initViewSignUp("학생정보 입력하기");
+        ((SignUpActivity)getActivity()).stepView(1,0,-1,-1,-1);
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-
         View rootview = inflater.inflate(R.layout.fragment_signup_info,container,false);
 
         init(rootview);
         setSpinner(spinner,majorList);
-        ((SignUpActivity)getActivity()).initViewSignUp("학생정보 입력하기");
+
+
 
         rootview.findViewById(R.id.btn_sign_up_next).setOnClickListener(new View.OnClickListener() {
             @Override
