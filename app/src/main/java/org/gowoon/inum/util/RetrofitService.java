@@ -9,7 +9,9 @@ import org.gowoon.inum.model.SearchIdResult;
 import org.gowoon.inum.model.UserInfoVO;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -23,6 +25,7 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 
 public interface RetrofitService {
     //User
@@ -87,7 +90,7 @@ public interface RetrofitService {
     // search in Category
     @GET("product/categorySearch")
     Call<ArrayList<MainProductResult>>
-    searchInCategory(@Header("x-access-token") String userToken, @Query("searchName") String searchName, @Query("category") String category);
+    searchInCategory(@Header("x-access-token") String userToken, @QueryMap HashMap<String, String> map);
 
     @GET("product/oneItem")
     Call<ProductOneItemResult>
