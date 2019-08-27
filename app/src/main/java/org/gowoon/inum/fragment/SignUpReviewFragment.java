@@ -1,6 +1,7 @@
 package org.gowoon.inum.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baoyachi.stepview.bean.StepBean;
 import com.google.gson.JsonObject;
 
 import org.gowoon.inum.R;
@@ -17,7 +19,9 @@ import org.gowoon.inum.activity.SignUpActivity;
 import org.gowoon.inum.model.UserData;
 import org.gowoon.inum.util.Singleton;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -35,10 +39,18 @@ public class SignUpReviewFragment extends Fragment {
     public SignUpReviewFragment(){}
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        ((SignUpActivity) getActivity()).initViewSignUp("회원 가입 완료하기");
+        ((SignUpActivity)getActivity()).stepView(1,1,1,1,0);
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootview = inflater.inflate(R.layout.fragment_signup_review, container, false);
-        ((SignUpActivity) getActivity()).initViewSignUp("회원 가입 완료하기");
+
+
 
         viewSet(rootview);
         next.setOnClickListener(new View.OnClickListener() {

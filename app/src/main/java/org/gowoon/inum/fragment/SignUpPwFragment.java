@@ -9,9 +9,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.baoyachi.stepview.bean.StepBean;
+
 import org.gowoon.inum.R;
 import org.gowoon.inum.activity.SignUpActivity;
 import org.gowoon.inum.model.UserData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SignUpPwFragment extends Fragment {
 
@@ -23,7 +28,10 @@ public class SignUpPwFragment extends Fragment {
     Boolean passWordOK = false;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
+        ((SignUpActivity) getActivity()).initViewSignUp("비밀번호 설정하기");
+        ((SignUpActivity)getActivity()).stepView(1,1,0,-1,-1);
         super.onCreate(savedInstanceState);
     }
 
@@ -33,7 +41,8 @@ public class SignUpPwFragment extends Fragment {
 
         View rootview = inflater.inflate(R.layout.fragment_signup_pw,container,false);
 
-        ((SignUpActivity) getActivity()).initViewSignUp("비밀번호 설정하기");
+
+
         viewSet(rootview);
 
         rootview.findViewById(R.id.btn_sign_up_next).setOnClickListener(new View.OnClickListener() {

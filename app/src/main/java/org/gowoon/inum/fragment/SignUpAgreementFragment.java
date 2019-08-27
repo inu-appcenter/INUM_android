@@ -12,25 +12,48 @@ import android.widget.TextView;
 
 import org.gowoon.inum.R;
 import org.gowoon.inum.activity.SignUpActivity;
+import org.gowoon.inum.custom.NonSwipeViewPager;
 import org.gowoon.inum.model.Upload;
 
 
 public class SignUpAgreementFragment extends Fragment {
 
+    private NonSwipeViewPager viewPager;
+    private int curr;
     private CheckBox checkBox;
     private TextView message;
     Button btn_nextstep;
 
+
+//    @Override
+//    public void onCreate(@Nullable Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//
+//
+//    }
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
         ((SignUpActivity) getActivity()).initViewSignUp("회원가입 하기");
+        ((SignUpActivity)getActivity()).stepView(0,-1,-1,-1,-1);
+        super.onCreate(savedInstanceState);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootview = inflater.inflate(R.layout.fragment_signup_argeement, container, false);
+
+
+//        curr = viewPager.getCurrentItem();
+//        int prev = curr-1;
+//
+//        else if (curr>0){
+//            viewPager.setCurrentItem(prev,true);
+
+            View rootview = inflater.inflate(R.layout.fragment_signup_argeement, container, false);
+
 
         checkBox = rootview.findViewById(R.id.checkbox_signup_agree);
         message = rootview.findViewById(R.id.signup_non_agree);
@@ -46,7 +69,6 @@ public class SignUpAgreementFragment extends Fragment {
                 }
             }
         });
-
         return rootview;
     }
 }

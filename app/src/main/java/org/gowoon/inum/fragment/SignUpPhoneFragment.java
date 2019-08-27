@@ -1,6 +1,7 @@
 package org.gowoon.inum.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +10,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.baoyachi.stepview.bean.StepBean;
+
 import org.gowoon.inum.R;
 import org.gowoon.inum.activity.SignUpActivity;
 import org.gowoon.inum.model.UserData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SignUpPhoneFragment extends Fragment {
 
@@ -20,11 +26,19 @@ public class SignUpPhoneFragment extends Fragment {
     String phone;
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        ((SignUpActivity) getActivity()).initViewSignUp("휴대폰 인증");
+        ((SignUpActivity)getActivity()).stepView(1,1,1,0,-1);
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootview = inflater.inflate(R.layout.fragment_signup_phone, container, false);
 
-        ((SignUpActivity) getActivity()).initViewSignUp("휴대폰 인증");
+
+
 
         phonenum = rootview.findViewById(R.id.et_sign_up_phone);
         errormsg = rootview.findViewById(R.id.tv_sign_up_phone_error);

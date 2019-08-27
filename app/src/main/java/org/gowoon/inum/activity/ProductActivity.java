@@ -1,7 +1,10 @@
 package org.gowoon.inum.activity;
 
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.os.IBinder;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,13 +13,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.JsonObject;
 
 import org.gowoon.inum.R;
 import org.gowoon.inum.custom.AdapterViewPagerProduct;
 import org.gowoon.inum.custom.Adapter_dialog_declare;
+import org.gowoon.inum.custom.Adapter_dialog_onebutton;
+import org.gowoon.inum.model.Declare;
 import org.gowoon.inum.model.ProductOneItemResult;
+import org.gowoon.inum.model.UserData;
 import org.gowoon.inum.util.Singleton;
 
 import java.util.ArrayList;
@@ -26,7 +35,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProductActivity extends AppCompatActivity implements View.OnClickListener{
+public class ProductActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView tvName, tvPlace, tvPrice, tvInfo, tvMethod, tvCategory, tvState, tvStar;
     LinearLayout btnSeller;
@@ -34,10 +43,13 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
     ArrayList<String> arrayImage, arrayProductData;
 
     AdapterViewPagerProduct vAdapter;
+
     String productId, sellerId;
+    String declare_kind, declare_senderId, declare_productId;
     ViewPager viewPager;
     CircleIndicator indicator;
     com.pm10.library.CircleIndicator circleIndicator;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,19 +61,84 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
 
         ImageButton btn_declare = findViewById(R.id.btn_product_detail_declare);
 
-        btn_declare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Adapter_dialog_onebutton dialog = new Adapter_dialog_onebutton(getActivity(),"인천대 포탈 웹메일로\n임시 비밀번호가 발송되었습니다!");
-//                dialog.show();
-//                dialog = new Adapter_dialog_twobutton(getActivity(),"확인을 누르시면 새로운\n전화번호로 변경됩니다.");
-                Adapter_dialog_declare dialog = new Adapter_dialog_declare(ProductActivity.this);
-                dialog.show();
-            }
-        });
+        final RadioGroup declareRadioGroup = findViewById(R.id.radio_group_declare);
 
         btn_left.setOnClickListener(this);
         btn_right.setOnClickListener(this);
+
+        btn_declare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Adapter_dialog_declare dialog_declare = new Adapter_dialog_declare(ProductActivity.this);
+                dialog_declare.show();
+                dialog_declare.setOnDeclareButtonClickListener(new Adapter_dialog_declare.OnDeclareButtonClickListener() {
+                    @Override
+                    public void onClick() {
+
+                        Singleton.retrofit.report(declare_kind, declare_senderId, declare_productId)
+                                .enqueue(new Callback<JsonObject>() {
+                                    @Override
+                                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                                        if(response.isSuccessful()){
+
+                                            declareRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                                                @Override
+                                                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                                                    switch (checkedId){
+                                                        case R.id.radio_btn_declare_obsence:
+                                                            Singleton.retrofit.report("음란성",UserData.getInstance().getSchoolID(),ProductOneItemResult.getInstance().getProductId());
+                                                            break;
+                                                        case R.id.radio_btn_declare_advertisement:
+                                                            Singleton.retrofit.report("광고",UserData.getInstance().getSchoolID(),ProductOneItemResult.getInstance().getProductId());
+                                                            break;
+                                                        case R.id.radio_btn_declare_overlap:
+                                                            Singleton.retrofit.report("도배",UserData.getInstance().getSchoolID(),ProductOneItemResult.getInstance().getProductId());
+                                                            break;
+                                                        case R.id.radio_btn_declare_fake:
+                                                            Singleton.retrofit.report("허위상품",UserData.getInstance().getSchoolID(),ProductOneItemResult.getInstance().getProductId());
+                                                            break;
+                                                    }
+                                                }
+                                            });
+
+                                            Log.v("kind", declare_kind+" senderId: "+ declare_senderId+ " productID: " + declare_productId);
+                                            JsonObject result = response.body();
+                                            if (result.get("ans").equals("true")) {
+                                                Log.v("declare", "성공");
+                                                Adapter_dialog_onebutton dialog_onebutton = new Adapter_dialog_onebutton(ProductActivity.this, "상품 신고가 완료되었습니다.");
+                                                dialog_onebutton.show();
+                                                dialog_onebutton.setOnOkButtonClickListener(new Adapter_dialog_onebutton.OnOkButtonClickListener() {
+                                                    @Override
+                                                    public void onClick() {
+                                                        Intent intent_declare = new Intent(String.valueOf(ProductActivity.class));
+                                                        startActivity(intent_declare);
+                                                    }
+                                                });
+                                            }
+                                            else {
+                                                Log.v("declare", "실패");
+                                                Toast.makeText(ProductActivity.this,"신고에 실패하였습니다. 다시 시도해주세요",Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    }
+                                    @Override
+                                    public void onFailure(Call<JsonObject> call, Throwable t) {
+                                        Toast.makeText(ProductActivity.this,"서버 연결상태를 확인해주세요",Toast.LENGTH_SHORT)
+                                                .show();
+                                    }
+                                });
+                    }
+                });
+                dialog_declare.setOnDeclareCancelButtonClickListener(new Adapter_dialog_declare.OnCancelButtonClickListener() {
+                    @Override
+                    public void onClick() {
+                        Toast.makeText(ProductActivity.this, "신고를 취소하였습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
+
 
         arrayImage = new ArrayList<>();
         arrayProductData = new ArrayList<>();
