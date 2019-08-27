@@ -24,6 +24,7 @@ public class UploadInfoFragment extends Fragment {
     String[] info;
     Boolean inputItem = true;
 
+    private String name, status, price;
 
     public UploadInfoFragment() {
         // Required empty public constructor
@@ -51,11 +52,13 @@ public class UploadInfoFragment extends Fragment {
         tvNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                info = new String[]{etvName.getText().toString(), etvStatus.getText().toString(), etvPrice.getText().toString()};
-//                for (int i = 0 ; i <3 ; i++){
-//                    inputItem = !(info[i].equals(""));
-//                }
-//                if (inputItem){
+                getText();
+                if(name.equals("") || status.equals("") || price.equals("")){
+                    tvInput.setVisibility(View.VISIBLE);
+                }
+                else{
+                    tvInput.setVisibility(View.INVISIBLE);
+                    info = new String[]{name, status, price};
                     ProductOneItemResult.getInstance().setProductName(info[0]);
                     ProductOneItemResult.getInstance().setProductState(info[1]);
                     ProductOneItemResult.getInstance().setProductPrice(Integer.valueOf(info[2]));
@@ -68,15 +71,16 @@ public class UploadInfoFragment extends Fragment {
                             .replace(R.id.constraint_upload, uploadExplain)
                             .addToBackStack(null)
                             .commit();
-//                }
-//                else{
-//                    tvInput.setVisibility(View.VISIBLE);
-//                }
+                }
+
             }
         });
-
-
-
         return rootView;
+    }
+
+    private void getText(){
+        name = etvName.getText().toString();
+        status = etvStatus.getText().toString();
+        price = etvPrice.getText().toString();
     }
 }

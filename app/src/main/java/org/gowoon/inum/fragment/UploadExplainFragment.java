@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.gowoon.inum.R;
 import org.gowoon.inum.activity.UploadActivity;
@@ -71,20 +72,26 @@ public class UploadExplainFragment extends android.support.v4.app.Fragment{
         tvNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (meeting) {
-                    place = evPlace.getText().toString();
+                if(evExplain.getText().toString().equals("")||meeting==null){
+                    Toast.makeText(getContext(),"상품 설명을 입력해주세요",Toast.LENGTH_SHORT).show();
                 }
-                ProductOneItemResult.getInstance().setMethod(method);
-                ProductOneItemResult.getInstance().setPlace(place);
-                ProductOneItemResult.getInstance().setProductInfo(evExplain.getText().toString());
-                Log.d("upload explain", method+place);
+                else{
+                    if (meeting) {
+                        place = evPlace.getText().toString();
+                    }
+                    ProductOneItemResult.getInstance().setMethod(method);
+                    ProductOneItemResult.getInstance().setPlace(place);
+                    ProductOneItemResult.getInstance().setProductInfo(evExplain.getText().toString());
+                    Log.d("upload explain", method+place);
 
-                UploadImageFragment uploadImage = new UploadImageFragment();
-                getFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left,R.anim.enter_from_left,R.anim.exit_to_right)
-                        .replace(R.id.constraint_upload, uploadImage)
-                        .addToBackStack(null)
-                        .commit();
+                    UploadImageFragment uploadImage = new UploadImageFragment();
+                    getFragmentManager().beginTransaction()
+                            .setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left,R.anim.enter_from_left,R.anim.exit_to_right)
+                            .replace(R.id.constraint_upload, uploadImage)
+                            .addToBackStack(null)
+                            .commit();
+                }
+
             }
         });
         return rootView;

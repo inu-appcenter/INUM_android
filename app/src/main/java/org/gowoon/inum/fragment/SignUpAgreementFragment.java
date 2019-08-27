@@ -13,7 +13,6 @@ import android.widget.TextView;
 import org.gowoon.inum.R;
 import org.gowoon.inum.activity.SignUpActivity;
 import org.gowoon.inum.custom.NonSwipeViewPager;
-import org.gowoon.inum.model.Upload;
 
 public class SignUpAgreementFragment extends Fragment {
 

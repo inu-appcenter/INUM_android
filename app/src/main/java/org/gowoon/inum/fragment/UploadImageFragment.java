@@ -49,7 +49,7 @@ public class UploadImageFragment extends Fragment {
     TextView tvAddImage, tvCamera;
 
     private static final int SELECT_ALBUM = 1, SELECT_CAMERA = 2, IMAGE_OUTPUT_SIZE = 191;
-    private static final int CROP_FROM_CAMERA = 3, CROP_FROM_ALBUM =4;
+    private static final int CROP_FROM_CAMERA = 3, CROP_FROM_ALBUM =4, REQUEST_IMAGE_CAPTURE=5;
     private String filePath;
     private Uri imageCaptureUri;
     List<String> imageList = new ArrayList<>();
@@ -126,8 +126,7 @@ public class UploadImageFragment extends Fragment {
 
     public void getFromCamera(){
         Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intentCamera, SELECT_CAMERA);
-
+//        startActivityForResult(intentCamera, SELECT_CAMERA);
         File photoFile = null;
         try {
             photoFile = createImageFile();
@@ -146,9 +145,11 @@ public class UploadImageFragment extends Fragment {
 //        intentCamera.putExtra(MediaStore.EXTRA_OUTPUT,imageCaptureUri);
 //        startActivityForResult(intentCamera,SELECT_CAMERA);
     }
+
+
     private File createImageFile() throws IOException {
         // Create an image file name
-        String timeStamp = new SimpleDateFormat("HHmmss").format(new Date());
+        String timeStamp = "fuck";//new SimpleDateFormat("HHmmss").format(new Date());
         String imageFileName = "IP" + timeStamp + "_";
         File storageDir = new File(Environment.getExternalStorageDirectory() + "/test/"); //test라는 경로에 이미지를 저장하기 위함
         if (!storageDir.exists()) {
@@ -170,7 +171,8 @@ public class UploadImageFragment extends Fragment {
             switch (requestCode) {
                 case SELECT_ALBUM: {
                     imageCaptureUri = data.getData();
-                    Log.d("album uri", imageCaptureUri.getPath());
+                    rAdapter.addItem(imageCaptureUri.toString());
+                    Log.d("album uri", imageCaptureUri.toString());
                 }
                 // 리사이즈할 이미지 크기 결정, 크롭 어플리케이션 호출
                 case SELECT_CAMERA: {
