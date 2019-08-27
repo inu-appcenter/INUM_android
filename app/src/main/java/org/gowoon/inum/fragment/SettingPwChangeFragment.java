@@ -144,9 +144,8 @@ public class SettingPwChangeFragment extends Fragment {
                                                 editor.clear();
                                                 editor.apply();
 
-                                                mainactivity = (MainActivity) MainActivity.Main;
-                                                mainactivity.finish();
                                                 getActivity().finish();
+                                                getActivity().finishAffinity();
 
                                                 Intent intent_login = new Intent(getActivity(), LoginActivity.class);
                                                 intent_login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

@@ -18,7 +18,7 @@ import android.widget.TextView;
 import org.gowoon.inum.R;
 import org.gowoon.inum.activity.ProductActivity;
 import org.gowoon.inum.model.MainProductResult;
-import org.gowoon.inum.model.SearchIdResult;
+import org.gowoon.inum.model.MainProductResult;
 import org.gowoon.inum.recycler.Adapter_recycler_ProductSearch;
 import org.gowoon.inum.util.Singleton;
 
@@ -59,11 +59,11 @@ public class SearchProductMainFragment extends Fragment {
         if (!search.equals("")) {
             noInput.setVisibility(View.INVISIBLE);
             tv_search.setVisibility(View.VISIBLE);
-            Singleton.retrofit.searchproduct(search).enqueue(new Callback<ArrayList<SearchIdResult>>() {
+            Singleton.retrofit.searchName(pref.getString("token",""),search).enqueue(new Callback<ArrayList<MainProductResult>>() {
                 @Override
-                public void onResponse(Call<ArrayList<SearchIdResult>> call, Response<ArrayList<SearchIdResult>> response) {
+                public void onResponse(Call<ArrayList<MainProductResult>> call, Response<ArrayList<MainProductResult>> response) {
                     if (response.isSuccessful()) {
-                        ArrayList<SearchIdResult> results = response.body();
+                        ArrayList<MainProductResult> results = response.body();
                         if (results != null) {
                             if (results.size() == 0) {
                                 resultNum.setText("검색결과 00");
@@ -95,7 +95,7 @@ public class SearchProductMainFragment extends Fragment {
                 }
 
                 @Override
-                public void onFailure(Call<ArrayList<SearchIdResult>> call, Throwable t) {
+                public void onFailure(Call<ArrayList<MainProductResult>> call, Throwable t) {
 
                 }
             });

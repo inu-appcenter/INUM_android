@@ -30,7 +30,7 @@ public class SettingPhoneChangeFragment extends Fragment {
     TextView tv_currentnum, tv_noinputerr;
     EditText etv_newnum;
     Adapter_dialog_twobutton dialog;
-    String id,userTel,newTel;
+    String password,userTel,newTel;
     SharedPreferences.Editor editor;
 
     @Override
@@ -39,7 +39,7 @@ public class SettingPhoneChangeFragment extends Fragment {
         final ViewGroup rootview = (ViewGroup) inflater.inflate(R.layout.fragment_setting_phone_change, container, false);
 
         final SharedPreferences pref = getActivity().getSharedPreferences("userinfo", Context.MODE_PRIVATE);
-        id = pref.getString("userid","");
+        password = pref.getString("userpw","");
         userTel = pref.getString("usertel","");
 
         tv_currentnum = rootview.findViewById(R.id.tv_setting_phonechange_current_num);
@@ -61,7 +61,7 @@ public class SettingPhoneChangeFragment extends Fragment {
                         public void onClick() {
                             Log.d("newTel", newTel);
 
-                            Singleton.retrofit.changeTel(id ,newTel).enqueue(new Callback<JsonObject>() {
+                            Singleton.retrofit.changeTel(pref.getString("token",""), password ,newTel).enqueue(new Callback<JsonObject>() {
                                 @Override
                                 public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                                     if(response.isSuccessful()){

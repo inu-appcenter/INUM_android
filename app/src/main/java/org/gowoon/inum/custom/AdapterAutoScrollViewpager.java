@@ -18,7 +18,7 @@ import java.util.List;
 
 public class AdapterAutoScrollViewpager extends PagerAdapter {
     Context context;
-    ArrayList<String> data;
+    private ArrayList<String> data;
 
     public AdapterAutoScrollViewpager(Context context, ArrayList<String> data){
         this.context = context;

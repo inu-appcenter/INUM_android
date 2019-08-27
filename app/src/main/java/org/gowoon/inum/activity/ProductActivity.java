@@ -29,6 +29,7 @@ import org.gowoon.inum.model.UserData;
 import org.gowoon.inum.util.Singleton;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import me.relex.circleindicator.CircleIndicator;
 import retrofit2.Call;
@@ -40,12 +41,13 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
     TextView tvName, tvPlace, tvPrice, tvInfo, tvMethod, tvCategory, tvState, tvStar;
     LinearLayout btnSeller;
 
-    ArrayList<String> arrayImage, arrayProductData;
+    ArrayList<String> arrayImage;
 
     AdapterViewPagerProduct vAdapter;
-
-    String productId, sellerId;
+  
     String declare_kind, declare_senderId, declare_productId;
+    String productId, sellerId, fileFolder;
+  
     ViewPager viewPager;
     CircleIndicator indicator;
     com.pm10.library.CircleIndicator circleIndicator;
@@ -141,7 +143,6 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
 
 
         arrayImage = new ArrayList<>();
-        arrayProductData = new ArrayList<>();
 
         btnSeller = findViewById(R.id.layout_detail_other_product);
         btnSeller.setOnClickListener(this);
@@ -175,17 +176,12 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
 
                         Log.d("product","product info load");
 
-                        arrayImage.addAll(result.getProductImg());
-                        arrayProductData.add(result.getProductName());
-                        arrayProductData.add(result.getSellerId());
-                        arrayProductData.add(result.getCategory());
+                        arrayImage.addAll(Objects.requireNonNull(result).getProductImg());
 
-                        vAdapter = new AdapterViewPagerProduct(getApplicationContext(), arrayImage);
+                        vAdapter = new AdapterViewPagerProduct(getApplicationContext(), arrayImage, result.getFileFolder(), result.getSellerId());
                         viewPager.setAdapter(vAdapter);
-//                        indicator.setViewPager(viewPager);
+
                         circleIndicator.setupWithViewPager(viewPager);
-//                        vAdapter.registerDataSetObserver(indicator.getDataSetObserver());
-//                        indicator.bringToFront();
                         circleIndicator.bringToFront();
 
 //                        Intent intentSeller = new Intent(getApplicationContext(),SellerProduct.class);

@@ -35,7 +35,7 @@ public class MyproductActivity extends AppCompatActivity {
         myproduct = findViewById(R.id.recyclerview_myproduct);
         mAdapter = new Adapter_recycler_MyProduct();
 
-        Singleton.retrofit.searchId(id).enqueue(new Callback<ArrayList<SearchIdResult>>() {
+        Singleton.retrofit.searchId(pref.getString("token",""),id).enqueue(new Callback<ArrayList<SearchIdResult>>() {
             @Override
             public void onResponse(Call<ArrayList<SearchIdResult>> call, Response<ArrayList<SearchIdResult>> response) {
                 if (response.isSuccessful()){

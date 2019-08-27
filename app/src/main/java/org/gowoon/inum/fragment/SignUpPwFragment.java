@@ -58,7 +58,7 @@ public class SignUpPwFragment extends Fragment {
                         tvPwLengthErr.setVisibility(View.INVISIBLE);
 
                         if (passWd.equals(passWdAgain)){
-                            UserData.getInstance().setPw(passWd);
+                            UserData.getInstance().setPasswd(passWd);
                             tvPwAgain.setVisibility(View.VISIBLE);
                             tvPwAgainErr.setVisibility(View.INVISIBLE);
 
@@ -136,6 +136,6 @@ public class SignUpPwFragment extends Fragment {
     }
 
     private void setInfo(String pw){
-        UserData.getInstance().setPw(pw);
+        UserData.getInstance().setPasswd(pw);
     }
 }

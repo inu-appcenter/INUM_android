@@ -56,7 +56,7 @@ public class SignUpReviewFragment extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Singleton.retrofit.account(id,UserData.getInstance().getPw(),name,phone)
+                Singleton.retrofit.signUp(id,UserData.getInstance().getPasswd(),phone,major,name)
                         .enqueue(new Callback<JsonObject>() {
                             @Override
                             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -112,7 +112,7 @@ public class SignUpReviewFragment extends Fragment {
     private void dataSet(){
         UserData uData = UserData.getInstance();
         name = uData.getName();
-        id = uData.getSchoolID();
+        id = uData.getId();
         phone = uData.getPhone();
     }
 }

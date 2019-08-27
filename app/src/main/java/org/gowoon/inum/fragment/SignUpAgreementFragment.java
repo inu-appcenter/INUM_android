@@ -15,7 +15,6 @@ import org.gowoon.inum.activity.SignUpActivity;
 import org.gowoon.inum.custom.NonSwipeViewPager;
 import org.gowoon.inum.model.Upload;
 
-
 public class SignUpAgreementFragment extends Fragment {
 
     private NonSwipeViewPager viewPager;

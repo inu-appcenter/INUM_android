@@ -70,7 +70,7 @@ public class SignUpInfoFragment extends Fragment {
                 if (inputId&&inputName&&inputMajor){
                     tvErrNoInput.setVisibility(View.INVISIBLE);
                     UserData.getInstance().setName(name);
-                    UserData.getInstance().setSchoolID(id);
+                    UserData.getInstance().setId(id);
                     ((SignUpActivity)getActivity()).setViewPagerNext();
                 }
                 else{
