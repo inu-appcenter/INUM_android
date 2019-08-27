@@ -12,59 +12,68 @@
         android:background="#fff"
         android:layout_marginTop="5dp">
 
-        <FrameLayout
-            android:id="@+id/framelayout_search_category_searchbar"
+        <LinearLayout
+            android:id="@+id/linear_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="13dp"
-            android:layout_marginStart="13dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:orientation="horizontal"
+            android:weightSum="6"
             app:layout_constraintTop_toTopOf="parent">
 
-            <EditText
-                android:id="@+id/etv_search_category_search"
+            <FrameLayout
+                android:id="@+id/framelayout_search_category_searchbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="13dp"
+                android:layout_marginEnd="13dp"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/etv_search_category_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="33dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/round_search"
+                    android:maxLines="1"
+                    android:inputType="text"
+                    android:hint="찾고있는 상품을 입력하세요."
+                    android:paddingStart="38.5dp"
+                    android:textColor="#000"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/iv_search_category_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@drawable/search" />
+
+                <ImageView
+                    android:id="@+id/iv_search_category_erase"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/erase" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tv_search_category_ok"
                 android:layout_width="match_parent"
                 android:layout_height="33dp"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/round_search"
-                android:maxLines="1"
-                android:inputType="text"
-                android:hint="찾고있는 상품을 입력하세요."
-                android:paddingStart="38.5dp"
-                android:textColor="#000"
-                android:textSize="16sp" />
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_marginEnd="4dp"
+                android:text="확인"
+                android:textColor="@color/gunmetal"
+                android:textSize="14sp"
+                android:visibility="gone"
+                android:layout_weight="5" />
 
-            <ImageView
-                android:id="@+id/iv_search_category_search"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/search" />
 
-            <ImageView
-                android:id="@+id/iv_search_category_erase"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:visibility="invisible"
-                app:srcCompat="@drawable/erase" />
-        </FrameLayout>
-
-        <TextView
-            android:id="@+id/tv_search_category_ok"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_marginEnd="21dp"
-            android:layout_marginTop="11.5dp"
-            android:text="확인"
-            android:textColor="@color/gunmetal"
-            android:textSize="14sp"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/iv_search_category_icon"
@@ -76,7 +85,7 @@
             android:src="@drawable/book"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/framelayout_search_category_searchbar" />
+            app:layout_constraintTop_toBottomOf="@+id/linear_category" />
 
         <TextView
             android:id="@+id/tv_search_category_catname"
@@ -87,52 +96,61 @@
             android:text="책 전체"
             android:textColor="@color/gunmetal"
             android:textSize="13sp"
+            android:gravity="center"
             app:layout_constraintStart_toEndOf="@+id/iv_search_category_icon"
-            app:layout_constraintTop_toBottomOf="@+id/framelayout_search_category_searchbar" />
+            app:layout_constraintTop_toBottomOf="@+id/linear_category" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="88.5dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="vertical"
+            >
 
             <GridView
                 android:id="@+id/gridview_search_category"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15.5dp"
-                app:layout_constraintTop_toBottomOf="@+id/tv_search_category_catname"
+                android:layout_height="61dp"
                 android:numColumns="2"
+                android:padding="1dp"
+                android:layout_gravity="center"
                 android:horizontalSpacing="1dp"
                 android:verticalSpacing="1dp"
                 android:background="@color/white_d8"
                 tools:listitem="@layout/item_grid_searchsubcategory"
                 />
 
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/constraint_search_product_product_layer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="148.5dp"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/tv_search_category_none"
-                android:layout_width="wrap_content"
-                android:layout_height="22dp"
-                android:text="아직 등록된 상품이 없어요:("
-                android:textColor="@color/gunmetal_two"
-                android:textSize="15sp"
-                android:layout_marginTop="23.4dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerview_search_category"
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraint_search_product_product_layer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="19.5dp"
-                android:layout_marginStart="6.5dp"
-                android:layout_marginEnd="6.5dp"
-                tools:listitem="@layout/item_recyclerview_product"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
 
-        </android.support.constraint.ConstraintLayout>
+                <TextView
+                    android:id="@+id/tv_search_category_none"
+                    android:layout_width="wrap_content"
+                    android:layout_height="22dp"
+                    android:text="아직 등록된 상품이 없어요:("
+                    android:textColor="@color/gunmetal_two"
+                    android:textSize="15sp"
+                    android:layout_marginTop="23.4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerview_search_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="19.5dp"
+                    android:layout_marginStart="6.5dp"
+                    android:layout_marginEnd="6.5dp"
+                    tools:listitem="@layout/item_recyclerview_product"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </android.support.constraint.ConstraintLayout>
+        </LinearLayout>
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>

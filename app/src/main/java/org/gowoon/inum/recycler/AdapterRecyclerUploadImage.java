@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 
 import org.gowoon.inum.R;
@@ -48,8 +49,11 @@ public class AdapterRecyclerUploadImage extends RecyclerView.Adapter<AdapterRecy
 //        final ItemImageList iL = data.get(position);
 //        final ListViewHolder listholder = (ListViewHolder) holder;
 
+        float mScale = holder.uploadImage.getResources().getDisplayMetrics().density;
+
         Glide.with(holder.uploadImage).load(data.get(0))
                 .apply(new RequestOptions().override(191,191).centerCrop())
+                .apply(new RequestOptions().bitmapTransform(new RoundedCorners((int) (mScale*6.9))))
                 .into(holder.uploadImage);
 //        holder.uploadImage.setImageURI(iL.getImageUri());
         holder.itemView.setOnClickListener(new View.OnClickListener(){

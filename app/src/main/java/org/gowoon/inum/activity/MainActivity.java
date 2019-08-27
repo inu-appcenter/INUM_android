@@ -95,8 +95,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             .replace(R.id.framelayout_fragment_main_main, searchproduct)
                             .addToBackStack(null)
                             .commit();
-                    InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-                    inputMethodManager.hideSoftInputFromWindow(etSearch.getWindowToken(),0);
 
                     cleanEditSearch(etSearch);
 
@@ -153,12 +151,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ivClosemypage.setOnClickListener(this);
     }
     
-    public void setSearch(){
+    private void setSearch(){
         etSearch = findViewById(R.id.etv_main_search);
         search = findViewById(R.id.framelayout_main_searchbar);
     }
 
-    public void cleanEditSearch(EditText etSearch){
+    private void cleanEditSearch(EditText etSearch){
         etSearch.clearFocus();
         etSearch.setText("");
         etSearch.setHint("찾고있는 상품을 입력하세요");
