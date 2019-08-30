@@ -3,7 +3,9 @@ package org.gowoon.inum.fragment;
 
 import android.Manifest;
 import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
@@ -25,6 +27,9 @@ import android.widget.Toast;
 
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
+import com.zhihu.matisse.Matisse;
+import com.zhihu.matisse.MimeType;
+import com.zhihu.matisse.engine.impl.GlideEngine;
 
 import org.gowoon.inum.R;
 import org.gowoon.inum.activity.UploadActivity;
@@ -42,9 +47,10 @@ import static android.app.Activity.RESULT_OK;
 
 public class UploadImageFragment extends Fragment {
 
-    AdapterRecyclerUploadImage rAdapter = new AdapterRecyclerUploadImage();
-    ItemImageList list, itemImageList;
-    RecyclerView recyclerViewImage;
+    AdapterRecyclerUploadImage rAdapter;
+    ItemImageList list;
+    List<Uri> itemImageList;
+    RecyclerView recyclerViewImage ;
     LinearLayout layoutSelect;
     TextView tvAddImage, tvCamera;
 
@@ -84,8 +90,9 @@ public class UploadImageFragment extends Fragment {
         recyclerViewImage = rootView.findViewById(R.id.recyclerview_upload_image);
         list = new ItemImageList(Uri.parse(""),true);
 
-//        rAdapter.addItem(list);
-        rAdapter.addItem("");
+        rAdapter = new AdapterRecyclerUploadImage(getContext());
+        rAdapter.addItem(Uri.parse(""));
+//        rAdapter.addItem("");
 
         RecyclerView.LayoutManager mLayoutManager;
         mLayoutManager = new GridLayoutManager(getActivity(),4);
@@ -118,10 +125,21 @@ public class UploadImageFragment extends Fragment {
     }
 
     public void getFromAlbum(){
-        Intent intentImage = new Intent(Intent.ACTION_PICK);
-        intentImage.setType(MediaStore.Images.Media.CONTENT_TYPE);
-        intentImage.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
-        startActivityForResult(intentImage,SELECT_ALBUM);
+//        Intent intentImage = new Intent(Intent.ACTION_PICK);
+//        intentImage.setType(MediaStore.Images.Media.CONTENT_TYPE);
+//        intentImage.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
+//        startActivityForResult(intentImage,SELECT_ALBUM);
+
+        Matisse.from(UploadImageFragment.this)
+                .choose(MimeType.ofAll())
+                .countable(true)
+                .maxSelectable(10)
+                .gridExpectedSize(getResources().getDimensionPixelSize(R.dimen.media_grid_size))
+                .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
+                .thumbnailScale(0.85f)
+                .imageEngine(new GlideEngine())
+                .theme(R.style.Matisse_Zhihu)
+                .forResult(REQUEST_IMAGE_CAPTURE);
     }
 
     public void getFromCamera(){
@@ -166,56 +184,68 @@ public class UploadImageFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_OK) {
-            switch (requestCode) {
-                case SELECT_ALBUM: {
-                    imageCaptureUri = data.getData();
-                    rAdapter.addItem(imageCaptureUri.toString());
-                    Log.d("album uri", imageCaptureUri.toString());
-                }
-                // 리사이즈할 이미지 크기 결정, 크롭 어플리케이션 호출
-                case SELECT_CAMERA: {
-                    Intent intentCameraSize = new Intent("com.android.camera.action.CROP");
-                    intentCameraSize.setDataAndType(imageCaptureUri, "image/*");
-
-                    //crop image size
-                    intentCameraSize.putExtra("outputX", IMAGE_OUTPUT_SIZE);
-                    intentCameraSize.putExtra("outputY", IMAGE_OUTPUT_SIZE);
-                    // crop box 비율
-                    intentCameraSize.putExtra("aspectX", 1);
-                    intentCameraSize.putExtra("outputX", 1);
-
-                    intentCameraSize.putExtra("scale", true);
-                    intentCameraSize.putExtra("return-data", true);
-
-                    startActivityForResult(intentCameraSize, CROP_FROM_CAMERA);
-
-                    break;
-                }
-                case CROP_FROM_CAMERA: {
-                    //크롭된 이미지 받기
-                    final Bundle extra = data.getExtras();
-                    filePath = Environment.getExternalStorageDirectory()
-                            .getAbsolutePath() + "/SmartWheel/" + System.currentTimeMillis() + ".jpg";
-
-                    if (extra != null) {
-//                        TODO
-                        Bitmap photo = extra.getParcelable("data");
-                        imageList.add(imageCaptureUri+filePath);
-//                        imageList.add(String.valueOf(imageCaptureUri));
-//                        list.setImageUri(imageList);
-//                        imageList = itemImageList;
-                        Log.d("image crop", filePath);
-                        rAdapter.addItem(imageList.get(0));
-                        rAdapter.notifyDataSetChanged();
-                        break;
-                    }
-                }
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
+            itemImageList = Matisse.obtainResult(data);
+            Log.d("Matisse","ItemImageList : " + itemImageList);
+            for (int i = 0 ; i < itemImageList.size() ; i++){
+                rAdapter.addItem(itemImageList.get(i));
             }
         }
-        return;
     }
+
+//
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if (resultCode == RESULT_OK) {
+//            switch (requestCode) {
+//                case SELECT_ALBUM: {
+//                    imageCaptureUri = data.getData();
+//                    rAdapter.addItem(imageCaptureUri.toString());
+//                    Log.d("album uri", imageCaptureUri.toString());
+//                }
+//                // 리사이즈할 이미지 크기 결정, 크롭 어플리케이션 호출
+//                case SELECT_CAMERA: {
+//                    Intent intentCameraSize = new Intent("com.android.camera.action.CROP");
+//                    intentCameraSize.setDataAndType(imageCaptureUri, "image/*");
+//
+//                    //crop image size
+//                    intentCameraSize.putExtra("outputX", IMAGE_OUTPUT_SIZE);
+//                    intentCameraSize.putExtra("outputY", IMAGE_OUTPUT_SIZE);
+//                    // crop box 비율
+//                    intentCameraSize.putExtra("aspectX", 1);
+//                    intentCameraSize.putExtra("outputX", 1);
+//
+//                    intentCameraSize.putExtra("scale", true);
+//                    intentCameraSize.putExtra("return-data", true);
+//
+//                    startActivityForResult(intentCameraSize, CROP_FROM_CAMERA);
+//
+//                    break;
+//                }
+//                case CROP_FROM_CAMERA: {
+//                    //크롭된 이미지 받기
+//                    final Bundle extra = data.getExtras();
+//                    filePath = Environment.getExternalStorageDirectory()
+//                            .getAbsolutePath() + "/SmartWheel/" + System.currentTimeMillis() + ".jpg";
+//
+//                    if (extra != null) {
+//                        Bitmap photo = extra.getParcelable("data");
+//                        imageList.add(imageCaptureUri+filePath);
+////                        imageList.add(String.valueOf(imageCaptureUri));
+////                        list.setImageUri(imageList);
+////                        imageList = itemImageList;
+//                        Log.d("image crop", filePath);
+//                        rAdapter.addItem(imageList.get(0));
+//                        rAdapter.notifyDataSetChanged();
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//        return;
+//    }
     public void makePermission(){
         PermissionListener permissionListener = new PermissionListener(){
             @Override

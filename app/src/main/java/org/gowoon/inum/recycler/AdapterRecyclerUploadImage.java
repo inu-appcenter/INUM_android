@@ -1,8 +1,7 @@
 package org.gowoon.inum.recycler;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
-import android.support.annotation.ColorRes;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,18 +15,18 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 
 import org.gowoon.inum.R;
-import org.gowoon.inum.model.ItemImageList;
-import org.gowoon.inum.util.Config;
 
 import java.util.ArrayList;
 
 public class AdapterRecyclerUploadImage extends RecyclerView.Adapter<AdapterRecyclerUploadImage.ListViewHolder>{
 //    private ArrayList<ItemImageList> data = new ArrayList<>(8);
-    private ArrayList<String> data = new ArrayList<>(8);
+    private ArrayList<Uri> data = new ArrayList<>(8);
+    private Object mContext;
     public AdapterRecyclerUploadImage(){}
 
-    public AdapterRecyclerUploadImage(ArrayList<String> myData) {
-        this.data = myData;
+    public AdapterRecyclerUploadImage( Context context) {
+//        this.data = myData;
+        this.mContext = context;
     }
 
     @NonNull
@@ -51,10 +50,17 @@ public class AdapterRecyclerUploadImage extends RecyclerView.Adapter<AdapterRecy
 
         float mScale = holder.uploadImage.getResources().getDisplayMetrics().density;
 
-        Glide.with(holder.uploadImage).load(data.get(0))
-                .apply(new RequestOptions().override(191,191).centerCrop())
-                .apply(new RequestOptions().bitmapTransform(new RoundedCorners((int) (mScale*6.9))))
+        Glide.with((Context) mContext).asBitmap()
+                .load(data.get(position))
+                .apply(new RequestOptions().override(191,191)
+                        .centerCrop()
+                        .bitmapTransform(new RoundedCorners((int) (mScale*6.9))))
                 .into(holder.uploadImage);
+
+//        Glide.with(holder.uploadImage).load(data.get(0))
+//                .apply(new RequestOptions().override(191,191).centerCrop())
+//                .apply(new RequestOptions().bitmapTransform(new RoundedCorners((int) (mScale*6.9))))
+//                .into(holder.uploadImage);
 //        holder.uploadImage.setImageURI(iL.getImageUri());
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -71,7 +77,7 @@ public class AdapterRecyclerUploadImage extends RecyclerView.Adapter<AdapterRecy
 
         public ListViewHolder(View itemView){
             super(itemView);
-            uploadImage = (ImageView) itemView.findViewById(R.id.iv_item_upload_image);
+            uploadImage = itemView.findViewById(R.id.iv_item_upload_image);
         }
     }
 
@@ -96,7 +102,7 @@ public class AdapterRecyclerUploadImage extends RecyclerView.Adapter<AdapterRecy
         this.itemClick = itemClick;
     }
 
-    public void addItem(String Data){
+    public void addItem(Uri Data){
 //        data.add(Data);
         data.add(Data);
         notifyDataSetChanged();
