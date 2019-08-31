@@ -23,6 +23,9 @@ android {
         abortOnError false
     }
 
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -68,9 +71,8 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.8'
 
     //image picker library
-    implementation 'com.zhihu.android:matisse:0.5.0-alpha4'
+    implementation 'gun0912.ted:tedimagepicker:1.0.1'
 }
 repositories {
     maven { url "https://jitpack.io" }
-    jcenter()
 }

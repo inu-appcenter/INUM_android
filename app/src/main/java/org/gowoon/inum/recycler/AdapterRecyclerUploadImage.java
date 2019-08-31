@@ -15,6 +15,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 
 import org.gowoon.inum.R;
+import org.gowoon.inum.model.ItemImageList;
 
 import java.util.ArrayList;
 
@@ -35,9 +36,6 @@ public class AdapterRecyclerUploadImage extends RecyclerView.Adapter<AdapterRecy
 
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_upload_recyclerview_image,parent,false);
-//        inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//        view = inflater.inflate(R.layout.item_upload_recyclerview_image,parent,false);
-//        ListViewHolder imageHolder = new ListViewHolder(view);
         return new AdapterRecyclerUploadImage.ListViewHolder(view);
     }
 
@@ -46,21 +44,15 @@ public class AdapterRecyclerUploadImage extends RecyclerView.Adapter<AdapterRecy
         Log.d("viewHolder", String.valueOf(position));
 
 //        final ItemImageList iL = data.get(position);
-//        final ListViewHolder listholder = (ListViewHolder) holder;
+        final ListViewHolder listholder = (ListViewHolder) holder;
 
         float mScale = holder.uploadImage.getResources().getDisplayMetrics().density;
 
-        Glide.with((Context) mContext).asBitmap()
-                .load(data.get(position))
-                .apply(new RequestOptions().override(191,191)
-                        .centerCrop()
-                        .bitmapTransform(new RoundedCorners((int) (mScale*6.9))))
-                .into(holder.uploadImage);
 
-//        Glide.with(holder.uploadImage).load(data.get(0))
-//                .apply(new RequestOptions().override(191,191).centerCrop())
-//                .apply(new RequestOptions().bitmapTransform(new RoundedCorners((int) (mScale*6.9))))
-//                .into(holder.uploadImage);
+        Glide.with(holder.uploadImage).load(data.get(0))
+                .apply(new RequestOptions().override(191,191).centerCrop())
+                .apply(new RequestOptions().bitmapTransform(new RoundedCorners((int) (mScale*6.9))))
+                .into(holder.uploadImage);
 //        holder.uploadImage.setImageURI(iL.getImageUri());
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override

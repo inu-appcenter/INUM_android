@@ -2,12 +2,7 @@ package org.gowoon.inum.fragment;
 
 
 import android.Manifest;
-import android.content.ClipData;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.graphics.Bitmap;
-import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -27,9 +22,6 @@ import android.widget.Toast;
 
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
-import com.zhihu.matisse.Matisse;
-import com.zhihu.matisse.MimeType;
-import com.zhihu.matisse.engine.impl.GlideEngine;
 
 import org.gowoon.inum.R;
 import org.gowoon.inum.activity.UploadActivity;
@@ -38,10 +30,12 @@ import org.gowoon.inum.recycler.AdapterRecyclerUploadImage;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+
+import gun0912.tedimagepicker.builder.TedImagePicker;
+import gun0912.tedimagepicker.builder.listener.OnMultiSelectedListener;
+import gun0912.tedimagepicker.builder.type.MediaType;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -130,16 +124,17 @@ public class UploadImageFragment extends Fragment {
 //        intentImage.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
 //        startActivityForResult(intentImage,SELECT_ALBUM);
 
-        Matisse.from(UploadImageFragment.this)
-                .choose(MimeType.ofAll())
-                .countable(true)
-                .maxSelectable(10)
-                .gridExpectedSize(getResources().getDimensionPixelSize(R.dimen.media_grid_size))
-                .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
-                .thumbnailScale(0.85f)
-                .imageEngine(new GlideEngine())
-                .theme(R.style.Matisse_Zhihu)
-                .forResult(REQUEST_IMAGE_CAPTURE);
+        TedImagePicker.with(getContext())
+                .mediaType(MediaType.IMAGE)
+                .cameraTileBackground(R.color.orangey_red)
+                .max(8,"최대 8개까지 선택해주세요")
+                .startMultiImage(new OnMultiSelectedListener() {
+                    @Override
+                    public void onSelected(List<? extends Uri> list) {
+                        rAdapter.addItem(list.get(0));
+                    }
+                });
+
     }
 
     public void getFromCamera(){
@@ -171,7 +166,7 @@ public class UploadImageFragment extends Fragment {
         String imageFileName = "IP" + timeStamp + "_";
         File storageDir = new File(Environment.getExternalStorageDirectory() + "/test/"); //test라는 경로에 이미지를 저장하기 위함
         if (!storageDir.exists()) {
-            storageDir.mkdirs();
+            storageDir.mkdir();
         }
         File image = File.createTempFile(
                 imageFileName,
@@ -185,7 +180,6 @@ public class UploadImageFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
-            itemImageList = Matisse.obtainResult(data);
             Log.d("Matisse","ItemImageList : " + itemImageList);
             for (int i = 0 ; i < itemImageList.size() ; i++){
                 rAdapter.addItem(itemImageList.get(i));
@@ -262,7 +256,7 @@ public class UploadImageFragment extends Fragment {
                 .setRationaleTitle("권한 허용")
                 .setRationaleMessage("사진 업로드를 위해 권한을 허용해주세요")
                 .setDeniedMessage("나중에 [설정]>[권한]에서 허용할 수 있습니다")
-                .setPermissions(Manifest.permission.CAMERA,Manifest.permission.READ_EXTERNAL_STORAGE)
+                .setPermissions(Manifest.permission.CAMERA,Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
                 .check();
     }
