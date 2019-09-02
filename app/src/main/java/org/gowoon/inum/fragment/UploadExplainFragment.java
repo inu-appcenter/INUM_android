@@ -2,8 +2,9 @@ package org.gowoon.inum.fragment;
 
 
 import android.os.Bundle;
-import android.app.Fragment;
-import android.support.constraint.ConstraintLayout;
+
+import androidx.fragment.app.Fragment;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +20,7 @@ import org.gowoon.inum.R;
 import org.gowoon.inum.activity.UploadActivity;
 import org.gowoon.inum.model.ProductOneItemResult;
 
-public class UploadExplainFragment extends android.support.v4.app.Fragment{
+public class UploadExplainFragment extends Fragment {
 
     EditText evExplain, evPlace;
     RadioButton radioButtonMeet, radioButtonPost;

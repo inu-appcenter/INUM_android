@@ -1,31 +1,21 @@
 package org.gowoon.inum.activity;
 
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.content.SharedPreferences;
-import android.os.IBinder;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.gson.JsonObject;
 
 import org.gowoon.inum.R;
 import org.gowoon.inum.custom.AdapterViewPagerProduct;
-import org.gowoon.inum.custom.Adapter_dialog_declare;
-import org.gowoon.inum.custom.Adapter_dialog_onebutton;
-import org.gowoon.inum.model.Declare;
 import org.gowoon.inum.model.ProductOneItemResult;
-import org.gowoon.inum.model.UserData;
 import org.gowoon.inum.util.Singleton;
 
 import java.util.ArrayList;

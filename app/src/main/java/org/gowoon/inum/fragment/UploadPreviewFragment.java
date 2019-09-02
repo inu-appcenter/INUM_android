@@ -3,7 +3,7 @@ package org.gowoon.inum.fragment;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,8 +18,6 @@ import org.gowoon.inum.R;
 import org.gowoon.inum.activity.UploadActivity;
 import org.gowoon.inum.model.ProductOneItemResult;
 import org.gowoon.inum.util.Singleton;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;

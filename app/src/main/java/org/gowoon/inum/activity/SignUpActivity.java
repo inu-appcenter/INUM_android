@@ -1,21 +1,18 @@
 package org.gowoon.inum.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.LayoutInflater;
+
+import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baoyachi.stepview.bean.StepBean;
 
-import org.gowoon.inum.R;
 import org.gowoon.inum.custom.AdapterViewPagerSignUp;
 import org.gowoon.inum.custom.NonSwipeViewPager;
 import org.gowoon.inum.fragment.SignUpAgreementFragment;
@@ -26,7 +23,6 @@ import org.gowoon.inum.fragment.SignUpPwFragment;
 import org.gowoon.inum.fragment.SignUpReviewFragment;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import static org.gowoon.inum.R.*;

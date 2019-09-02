@@ -3,8 +3,8 @@ package org.gowoon.inum.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +15,6 @@ import android.widget.TextView;
 import org.gowoon.inum.R;
 import org.gowoon.inum.activity.UploadActivity;
 import org.gowoon.inum.model.ProductOneItemResult;
-
-import static org.gowoon.inum.activity.UploadActivity.*;
 
 public class UploadInfoFragment extends Fragment {
     EditText etvName, etvStatus, etvPrice;
