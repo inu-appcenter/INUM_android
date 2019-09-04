@@ -1,9 +1,9 @@
 package org.gowoon.inum.recycler;
 
-import android.content.Context;
 import android.net.Uri;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,85 +17,76 @@ import com.bumptech.glide.request.RequestOptions;
 import org.gowoon.inum.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class AdapterRecyclerUploadImage extends RecyclerView.Adapter<AdapterRecyclerUploadImage.ListViewHolder>{
+public class AdapterRecyclerUploadImage extends RecyclerView.Adapter<AdapterRecyclerUploadImage.ViewHolder>{
 //    private ArrayList<ItemImageList> data = new ArrayList<>(8);
-    private ArrayList<Uri> data = new ArrayList<>(8);
-    private Object mContext;
+    private ArrayList<Uri> mData = new ArrayList<>();
     public AdapterRecyclerUploadImage(){}
-
-    public AdapterRecyclerUploadImage( Context context) {
-//        this.data = myData;
-        this.mContext = context;
-    }
-
-    @NonNull
-    @Override
-    public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_upload_recyclerview_image,parent,false);
-        return new AdapterRecyclerUploadImage.ListViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull AdapterRecyclerUploadImage.ListViewHolder holder, final int position) {
-        Log.d("viewHolder", String.valueOf(position));
-
-//        final ItemImageList iL = data.get(position);
-        final ListViewHolder listholder = (ListViewHolder) holder;
-
-        float mScale = holder.uploadImage.getResources().getDisplayMetrics().density;
-
-
-        Glide.with(holder.uploadImage).load(data.get(0))
-                .apply(new RequestOptions().override(191,191).centerCrop())
-                .apply(new RequestOptions().bitmapTransform(new RoundedCorners((int) (mScale*6.9))))
-                .into(holder.uploadImage);
-//        holder.uploadImage.setImageURI(iL.getImageUri());
-        holder.itemView.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                if (itemClick != null){
-                    itemClick.onClick(v,position);
-                }
-            }
-        });
-    }
-
-    public class ListViewHolder extends RecyclerView.ViewHolder{
-        public ImageView uploadImage;
-
-        public ListViewHolder(View itemView){
-            super(itemView);
-            uploadImage = itemView.findViewById(R.id.iv_item_upload_image);
-        }
-    }
-
-    @Override
-    public int getItemCount() {
-        return data.size();
-    }
-
-    public void clearItem() {
-        for(int i=0; i<data.size();i++){
-            notifyItemRemoved(i);
-        }
-    }
-
     public ItemClick itemClick;
 
     public interface ItemClick{
         void onClick(View view, int position);
     }
 
-    public void setItemClick(AdapterRecyclerUploadImage.ItemClick itemClick){
+    class ViewHolder extends RecyclerView.ViewHolder{
+        ImageView image, addImage;
+        ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            image = itemView.findViewById(R.id.iv_item_upload_image);
+            addImage = itemView.findViewById(R.id.iv_item_upload_image_plus);
+        }
+    }
+
+    public void setItemClick(ItemClick itemClick){
         this.itemClick = itemClick;
     }
 
-    public void addItem(Uri Data){
-//        data.add(Data);
-        data.add(Data);
+    @NonNull
+    @Override
+    public AdapterRecyclerUploadImage.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_upload_recyclerview_image,parent,false);
+        return new ViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull AdapterRecyclerUploadImage.ViewHolder holder, final int position) {
+        float mScale = holder.image.getResources().getDisplayMetrics().density;
+        if (mData.size()==9){
+            mData.remove(0);
+        }
+        if (mData.size()==1){
+            holder.addImage.setVisibility(View.VISIBLE);
+        }
+
+
+
+        Glide.with(holder.image).load(mData.get(position))
+                .apply(new RequestOptions().override(191,191).centerCrop())
+                .apply(new RequestOptions().bitmapTransform(new RoundedCorners((int) (mScale*6.9))))
+                .into(holder.image);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (itemClick!=null){
+                    itemClick.onClick(view,position);
+                }
+            }
+        });
+    }
+
+    @Override
+    public int getItemCount() {
+        return mData.size();
+    }
+
+    public void addItem(List<? extends Uri> item){
+        mData.addAll(item);
         notifyDataSetChanged();
+    }
+
+    public void popAddButton(){
+        mData.remove(0);
     }
 }

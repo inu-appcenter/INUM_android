@@ -2,23 +2,19 @@ package org.gowoon.inum.fragment;
 
 
 import android.Manifest;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-import androidx.fragment.app.Fragment;
-import androidx.core.content.FileProvider;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
@@ -28,30 +24,28 @@ import org.gowoon.inum.activity.UploadActivity;
 import org.gowoon.inum.model.ItemImageList;
 import org.gowoon.inum.recycler.AdapterRecyclerUploadImage;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import gun0912.tedimagepicker.builder.TedImagePicker;
 import gun0912.tedimagepicker.builder.listener.OnMultiSelectedListener;
 import gun0912.tedimagepicker.builder.type.MediaType;
 
-import static android.app.Activity.RESULT_OK;
-
 public class UploadImageFragment extends Fragment {
 
-    AdapterRecyclerUploadImage rAdapter;
-    ItemImageList list;
-    List<Uri> itemImageList;
-    RecyclerView recyclerViewImage ;
-    LinearLayout layoutSelect;
+    private AdapterRecyclerUploadImage rAdapter = new AdapterRecyclerUploadImage();
+    ArrayList<ItemImageList> rList;
+    ItemImageList itemImageList;
+    private RecyclerView recyclerViewImage ;
+    private LinearLayout layoutSelect;
     TextView tvAddImage, tvCamera;
+    private ArrayList<Uri> mListImage = new ArrayList<>();
 
-    private static final int SELECT_ALBUM = 1, SELECT_CAMERA = 2, IMAGE_OUTPUT_SIZE = 191;
-    private static final int CROP_FROM_CAMERA = 3, CROP_FROM_ALBUM =4, REQUEST_IMAGE_CAPTURE=5;
-    private String filePath;
-    private Uri imageCaptureUri;
+//    private static final int SELECT_ALBUM = 1, SELECT_CAMERA = 2, IMAGE_OUTPUT_SIZE = 191;
+//    private static final int CROP_FROM_CAMERA = 3, CROP_FROM_ALBUM =4, REQUEST_IMAGE_CAPTURE=5;
+//    private String filePath;
+//    private Uri imageCaptureUri;
     List<String> imageList = new ArrayList<>();
 
     public UploadImageFragment() {
@@ -82,11 +76,10 @@ public class UploadImageFragment extends Fragment {
 
         layoutSelect = rootView.findViewById(R.id.linearLayout_upload_image_select);
         recyclerViewImage = rootView.findViewById(R.id.recyclerview_upload_image);
-        list = new ItemImageList(Uri.parse(""),true);
 
-        rAdapter = new AdapterRecyclerUploadImage(getContext());
-        rAdapter.addItem(Uri.parse(""));
-//        rAdapter.addItem("");
+        mListImage.add(Uri.parse(""));
+
+        rAdapter.addItem(mListImage);
 
         RecyclerView.LayoutManager mLayoutManager;
         mLayoutManager = new GridLayoutManager(getActivity(),4);
@@ -97,7 +90,6 @@ public class UploadImageFragment extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 layoutSelect.setVisibility(View.VISIBLE);
-//                view.findViewById(R.id.view_upload_item_opacity).setVisibility(View.VISIBLE);
                 tvAddImage = rootView.findViewById(R.id.tv_upload_image_multi);
                 tvAddImage.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -105,87 +97,78 @@ public class UploadImageFragment extends Fragment {
                         getFromAlbum();
                     }
                 });
-                tvCamera = rootView.findViewById(R.id.tv_upload_image_camera);
-                tvCamera.setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View view) {
-                        getFromCamera();
-                    }
-                });
-
             }
         });
         return rootView;
     }
 
-    public void getFromAlbum(){
-//        Intent intentImage = new Intent(Intent.ACTION_PICK);
-//        intentImage.setType(MediaStore.Images.Media.CONTENT_TYPE);
-//        intentImage.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
-//        startActivityForResult(intentImage,SELECT_ALBUM);
-
-        TedImagePicker.with(getContext())
+    private void getFromAlbum(){
+        TedImagePicker.with(Objects.requireNonNull(getContext()))
                 .mediaType(MediaType.IMAGE)
                 .cameraTileBackground(R.color.orangey_red)
-                .max(8,"최대 8개까지 선택해주세요")
+                .max(9-rAdapter.getItemCount(),"이미지는 최대 8장까지 선택 가능합니다.")
                 .startMultiImage(new OnMultiSelectedListener() {
                     @Override
                     public void onSelected(List<? extends Uri> list) {
-                        rAdapter.addItem(list.get(0));
+                        mListImage.addAll(list);
+//                        rAdapter.popAddButton();
+                        mListImage.remove(0);
+                        rAdapter.addItem(mListImage);
+                        recyclerViewImage.setAdapter(rAdapter);
+                        layoutSelect.setVisibility(View.INVISIBLE);
                     }
                 });
-
     }
-
-    public void getFromCamera(){
-        Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        startActivityForResult(intentCamera, SELECT_CAMERA);
-        File photoFile = null;
-        try {
-            photoFile = createImageFile();
-        } catch (IOException e) {
-            Toast.makeText(getContext(), "이미지 처리 오류! 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
-        }
-        if (photoFile != null) {
-           imageCaptureUri = FileProvider.getUriForFile(getContext(),
-                    "com.example.test.provider", photoFile); //FileProvider의 경우 이전 포스트를 참고하세요.
-            intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, imageCaptureUri); //사진을 찍어 해당 Content uri를 photoUri에 적용시키기 위함
-            startActivityForResult(intentCamera, SELECT_CAMERA);
-        }
-//        String imageURL = "tmp_"+ String.valueOf(System.currentTimeMillis()) +".jpg";
-//        imageCaptureUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), imageURL));
 //
-//        intentCamera.putExtra(MediaStore.EXTRA_OUTPUT,imageCaptureUri);
-//        startActivityForResult(intentCamera,SELECT_CAMERA);
-    }
+//    private void getFromCamera(){
+//        Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+////        startActivityForResult(intentCamera, SELECT_CAMERA);
+//        File photoFile = null;
+//        try {
+//            photoFile = createImageFile();
+//        } catch (IOException e) {
+//            Toast.makeText(getContext(), "이미지 처리 오류! 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
+//        }
+//        if (photoFile != null) {
+//           imageCaptureUri = FileProvider.getUriForFile(getContext(),
+//                    "com.example.test.provider", photoFile); //FileProvider의 경우 이전 포스트를 참고하세요.
+//            intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, imageCaptureUri); //사진을 찍어 해당 Content uri를 photoUri에 적용시키기 위함
+//            startActivityForResult(intentCamera, SELECT_CAMERA);
+//        }
+////        String imageURL = "tmp_"+ String.valueOf(System.currentTimeMillis()) +".jpg";
+////        imageCaptureUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), imageURL));
+////
+////        intentCamera.putExtra(MediaStore.EXTRA_OUTPUT,imageCaptureUri);
+////        startActivityForResult(intentCamera,SELECT_CAMERA);
+//    }
 
+//
+//    private File createImageFile() throws IOException {
+//        // Create an image file name
+//        String timeStamp = "fuck";//new SimpleDateFormat("HHmmss").format(new Date());
+//        String imageFileName = "IP" + timeStamp + "_";
+//        File storageDir = new File(Environment.getExternalStorageDirectory() + "/test/"); //test라는 경로에 이미지를 저장하기 위함
+//        if (!storageDir.exists()) {
+//            storageDir.mkdir();
+//        }
+//        File image = File.createTempFile(
+//                imageFileName,
+//                ".jpg",
+//                storageDir
+//        );
+//        return image;
+//    }
 
-    private File createImageFile() throws IOException {
-        // Create an image file name
-        String timeStamp = "fuck";//new SimpleDateFormat("HHmmss").format(new Date());
-        String imageFileName = "IP" + timeStamp + "_";
-        File storageDir = new File(Environment.getExternalStorageDirectory() + "/test/"); //test라는 경로에 이미지를 저장하기 위함
-        if (!storageDir.exists()) {
-            storageDir.mkdir();
-        }
-        File image = File.createTempFile(
-                imageFileName,
-                ".jpg",
-                storageDir
-        );
-        return image;
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
-            Log.d("Matisse","ItemImageList : " + itemImageList);
-            for (int i = 0 ; i < itemImageList.size() ; i++){
-                rAdapter.addItem(itemImageList.get(i));
-            }
-        }
-    }
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
+//            Log.d("Matisse","ItemImageList : " + itemImageList);
+//            for (int i = 0 ; i < itemImageList.size() ; i++){
+//                rAdapter.addItem(itemImageList.get(i));
+//            }
+//        }
+//    }
 
 //
 //    @Override
@@ -240,7 +223,7 @@ public class UploadImageFragment extends Fragment {
 //        }
 //        return;
 //    }
-    public void makePermission(){
+    private void makePermission(){
         PermissionListener permissionListener = new PermissionListener(){
             @Override
             public void onPermissionGranted() {

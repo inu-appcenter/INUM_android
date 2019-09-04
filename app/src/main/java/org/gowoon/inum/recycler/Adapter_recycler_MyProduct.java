@@ -36,13 +36,15 @@ public class Adapter_recycler_MyProduct extends RecyclerView.Adapter<RecyclerVie
     }
 
     public void onBindViewHolder( RecyclerView.ViewHolder holder, final int position) {
-        final SearchIdResult sdata = data.get(position);
+        final SearchIdResult sData = data.get(position);
         final ListViewHolder listholder = (ListViewHolder) holder;
-        listholder.product_name.setText(sdata.getProductName());
+        listholder.product_name.setText(sData.getProductName());
+
         Glide.with(listholder.product_img).load(Config.serverUrl + "imgload/"
-                +data.get(position).getSellerId()
-                +data.get(position).getFileFolder()+"/"
-                +data.get(position).getProductImg().get(0)).into(listholder.product_img);
+                +sData.getSellerId()
+                +sData.getFileFolder()+"/"
+                +sData.getProductImg().get(0))
+                .into(listholder.product_img);
 
 //        listholder.Rclayout.setOnClickListener(new View.OnClickListener(){
 //            @Override
@@ -55,7 +57,7 @@ public class Adapter_recycler_MyProduct extends RecyclerView.Adapter<RecyclerVie
         listholder.more_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                final Adapter_dialog_product_menu dialogProductMenu = new Adapter_dialog_product_menu(inflater.getContext(),sdata.getProductId());
+                final Adapter_dialog_product_menu dialogProductMenu = new Adapter_dialog_product_menu(inflater.getContext(),sData.getProductId());
 //                dialogProductMenu.setProductName(listholder.product_name.getText().toString());
                 dialogProductMenu.show();
             }
