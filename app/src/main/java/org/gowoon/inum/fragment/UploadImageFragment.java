@@ -103,6 +103,7 @@ public class UploadImageFragment extends Fragment {
     }
 
     private void getFromAlbum(){
+        mListImage.clear();
         TedImagePicker.with(Objects.requireNonNull(getContext()))
                 .mediaType(MediaType.IMAGE)
                 .cameraTileBackground(R.color.orangey_red)
@@ -110,16 +111,15 @@ public class UploadImageFragment extends Fragment {
                 .startMultiImage(new OnMultiSelectedListener() {
                     @Override
                     public void onSelected(List<? extends Uri> list) {
-                        mListImage.clear();
                         mListImage.addAll(list);
                         rAdapter.addItem(mListImage);
-//                        if (rAdapter.getItemCount()==9){
-//                            recyclerViewImage.removeViewAt(9);
-//                            rAdapter.notifyItemRemoved(9);
-//                            rAdapter.notifyItemRangeChanged(9, list.size());
-//                        }
-                        rAdapter.notifyDataSetChanged();
+                        if (rAdapter.getItemCount()==9){
+                            rAdapter.notifyItemRemoved(8);
+                            rAdapter.notifyItemRangeChanged(8, list.size());
+
+                        }
                         recyclerViewImage.setAdapter(rAdapter);
+//                        recyclerViewImage.removeViewAt(8);
                         layoutSelect.setVisibility(View.INVISIBLE);
                     }
                 });

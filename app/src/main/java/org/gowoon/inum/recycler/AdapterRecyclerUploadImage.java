@@ -4,6 +4,7 @@ import android.net.Uri;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,13 +54,12 @@ public class AdapterRecyclerUploadImage extends RecyclerView.Adapter<AdapterRecy
     @Override
     public void onBindViewHolder(@NonNull AdapterRecyclerUploadImage.ViewHolder holder, final int position) {
         float mScale = holder.image.getResources().getDisplayMetrics().density;
-        if (mData.size()==9){
+        if (mData.size()<9){
 //            notifyItemRemoved(0);
-            mData.remove(9);
-            notifyItemRemoved(9);
-            notifyItemRangeChanged(9, mData.size());
-        }
-        else{
+//            mData.remove(8);
+//            notifyItemRemoved(8);
+//            notifyItemRangeChanged(8, mData.size());
+
             if (position==mData.size()-1){
                 holder.addImage.setVisibility(View.VISIBLE);
             }
@@ -91,9 +91,5 @@ public class AdapterRecyclerUploadImage extends RecyclerView.Adapter<AdapterRecy
     public void addItem(List<? extends Uri> item){
         mData.addAll(0,item);
         notifyDataSetChanged();
-    }
-
-    public void popAddButton(){
-        mData.remove(0);
     }
 }
