@@ -51,7 +51,7 @@ public class MyproductActivity extends AppCompatActivity {
         });
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         myproduct.setLayoutManager(linearLayoutManager);
 
         myproduct.setAdapter(mAdapter);

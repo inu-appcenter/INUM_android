@@ -54,13 +54,20 @@ public class AdapterRecyclerUploadImage extends RecyclerView.Adapter<AdapterRecy
     public void onBindViewHolder(@NonNull AdapterRecyclerUploadImage.ViewHolder holder, final int position) {
         float mScale = holder.image.getResources().getDisplayMetrics().density;
         if (mData.size()==9){
-            mData.remove(0);
+//            notifyItemRemoved(0);
+            mData.remove(9);
+            notifyItemRemoved(9);
+            notifyItemRangeChanged(9, mData.size());
         }
-        if (mData.size()==1){
-            holder.addImage.setVisibility(View.VISIBLE);
+        else{
+            if (position==mData.size()-1){
+                holder.addImage.setVisibility(View.VISIBLE);
+            }
+            else {
+                holder.addImage.setVisibility(View.INVISIBLE);
+            }
+
         }
-
-
 
         Glide.with(holder.image).load(mData.get(position))
                 .apply(new RequestOptions().override(191,191).centerCrop())
@@ -82,7 +89,7 @@ public class AdapterRecyclerUploadImage extends RecyclerView.Adapter<AdapterRecy
     }
 
     public void addItem(List<? extends Uri> item){
-        mData.addAll(item);
+        mData.addAll(0,item);
         notifyDataSetChanged();
     }
 

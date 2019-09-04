@@ -110,10 +110,15 @@ public class UploadImageFragment extends Fragment {
                 .startMultiImage(new OnMultiSelectedListener() {
                     @Override
                     public void onSelected(List<? extends Uri> list) {
+                        mListImage.clear();
                         mListImage.addAll(list);
-//                        rAdapter.popAddButton();
-                        mListImage.remove(0);
                         rAdapter.addItem(mListImage);
+//                        if (rAdapter.getItemCount()==9){
+//                            recyclerViewImage.removeViewAt(9);
+//                            rAdapter.notifyItemRemoved(9);
+//                            rAdapter.notifyItemRangeChanged(9, list.size());
+//                        }
+                        rAdapter.notifyDataSetChanged();
                         recyclerViewImage.setAdapter(rAdapter);
                         layoutSelect.setVisibility(View.INVISIBLE);
                     }
