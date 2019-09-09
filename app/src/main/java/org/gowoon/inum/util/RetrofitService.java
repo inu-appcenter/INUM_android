@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -118,7 +119,7 @@ public interface RetrofitService {
     @POST ("product/upload")
     Call<JsonObject>
     productUpload(@Header("x-access-token") String userToken
-            , @Part("userfile") List<String> stringList
+            , @Part("userfile") ArrayList<MultipartBody.Part> imageList
             , @Part("productName") String name
             , @Part("productState") String state
             , @Part("productPrice") Integer price
