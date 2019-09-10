@@ -55,7 +55,6 @@ public class AdapterRecyclerUploadImage extends RecyclerView.Adapter<AdapterRecy
     public void onBindViewHolder(@NonNull AdapterRecyclerUploadImage.ViewHolder holder, final int position) {
         float mScale = holder.image.getResources().getDisplayMetrics().density;
         if (mData.size()<9){
-//            notifyItemRemoved(0);
 //            mData.remove(8);
 //            notifyItemRemoved(8);
 //            notifyItemRangeChanged(8, mData.size());

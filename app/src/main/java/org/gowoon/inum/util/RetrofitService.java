@@ -119,7 +119,7 @@ public interface RetrofitService {
     @POST ("product/upload")
     Call<JsonObject>
     productUpload(@Header("x-access-token") String userToken
-            , @Part("userfile") ArrayList<MultipartBody.Part> imageList
+            , @Part ArrayList<MultipartBody.Part> imageList
             , @Part("productName") String name
             , @Part("productState") String state
             , @Part("productPrice") Integer price
