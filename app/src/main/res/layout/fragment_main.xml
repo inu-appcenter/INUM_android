@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.MainFragment">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -20,7 +20,7 @@
 
         </cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager>
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_main_message"
             android:layout_width="match_parent"
             android:layout_height="52dp"
@@ -69,7 +69,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/rightside" />
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!--<ListView-->
         <!--android:id="@+id/Listview_main_categoryproduct"-->
@@ -86,7 +86,7 @@
             app:layout_constraintTop_toBottomOf="@id/constraint_main_message"
             />
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_main_category_book"
             android:layout_width="match_parent"
             android:layout_height="184dp"
@@ -116,7 +116,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tv_main_recycler_product_category"/>
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview_main_product_book"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -127,11 +127,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 >
-            </android.support.v7.widget.RecyclerView>
+            </androidx.recyclerview.widget.RecyclerView>
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_main_category_ticket"
             android:layout_width="match_parent"
             android:layout_height="184dp"
@@ -161,7 +161,7 @@
                 app:layout_constraintStart_toEndOf="@id/tv_main_category_ticket"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview_main_product_ticket"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -172,8 +172,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-        </android.support.constraint.ConstraintLayout>
-        <android.support.constraint.ConstraintLayout
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_main_category_room"
             android:layout_width="match_parent"
             android:layout_height="184dp"
@@ -203,7 +203,7 @@
                 app:layout_constraintStart_toEndOf="@id/tv_main_category_room"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview_main_product_room"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -214,8 +214,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

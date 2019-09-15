@@ -1,10 +1,9 @@
 package org.gowoon.inum.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,14 +19,6 @@ import org.gowoon.inum.fragment.SettingPwChangeFragment;
 import org.gowoon.inum.fragment.SettingQuestFragment;
 import org.gowoon.inum.fragment.SettingSecessionFragment;
 import org.gowoon.inum.model.UserInfoVO;
-import org.gowoon.inum.util.Singleton;
-
-import java.io.Serializable;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MypageActivity extends AppCompatActivity {
 

@@ -2,13 +2,12 @@ package org.gowoon.inum.fragment;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import org.gowoon.inum.R;
 import org.gowoon.inum.activity.UploadActivity;

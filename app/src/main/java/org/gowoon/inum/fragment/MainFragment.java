@@ -4,10 +4,11 @@ package org.gowoon.inum.fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +20,6 @@ import org.gowoon.inum.activity.ChatActivity;
 import org.gowoon.inum.activity.MainActivity;
 import org.gowoon.inum.activity.ProductActivity;
 import org.gowoon.inum.custom.AdapterAutoScrollViewpager;
-import org.gowoon.inum.custom.BackPressCloseHandler;
 import org.gowoon.inum.model.MainProductResult;
 import org.gowoon.inum.recycler.Adapter_ProductMain;
 import org.gowoon.inum.util.Singleton;
@@ -34,7 +34,7 @@ import retrofit2.Response;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class MainFragment extends android.support.v4.app.Fragment {
+public class MainFragment extends Fragment {
     SharedPreferences pref;
     ConstraintLayout btn_message;
     RecyclerView recyclerView_book, recyclerView_room, recyclerView_ticket;
