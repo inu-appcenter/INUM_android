@@ -71,7 +71,6 @@ public class SearchProductCategoryFragment extends Fragment implements View.OnCl
 
         initView(rootView);
         setSearch(rootView);
-        // 맨 처음 해당되는 카테고리 상품 로드
 
         tvSearchOk = rootView.findViewById(R.id.tv_search_category_ok);
         ivCancel = rootView.findViewById(R.id.iv_search_category_erase);
@@ -89,8 +88,9 @@ public class SearchProductCategoryFragment extends Fragment implements View.OnCl
         categoryIcon = getArguments().getInt("categoryimage");
 
         getPreferences();
-
+        // 해당되는 카테고리 상품 로드
         searchItem(token,"",getFullCategory(),2);
+
         //  검색창
         etSearch.setOnFocusChangeListener(new View.OnFocusChangeListener(){
             @Override
@@ -156,7 +156,7 @@ public class SearchProductCategoryFragment extends Fragment implements View.OnCl
         Adapter.setItemClick(new Adapter_recycler_ProductSearch.ItemClick() {
             @Override
             public void onClick(View view, int position) {
-                String productId = Adapter.mDataset.get(position).getProductId();
+                String productId = Adapter.mData.get(position).getProductId();
                 Intent intentProductDetail = new Intent(getActivity(), ProductActivity.class);
                 intentProductDetail.putExtra("id", productId);
                 startActivity(intentProductDetail);
@@ -231,7 +231,7 @@ public class SearchProductCategoryFragment extends Fragment implements View.OnCl
     }
 
     private void searchItem(String token, String text,String fullCategory, int NUM){
-        Adapter.mDataset.clear();
+        Adapter.mData.clear();
         switch (NUM){
             case CATEGORY:{
                 Singleton.retrofit.category(token,fullCategory).enqueue(new Callback<ArrayList<MainProductResult>>() {
@@ -240,7 +240,7 @@ public class SearchProductCategoryFragment extends Fragment implements View.OnCl
                         if (response.isSuccessful()){
                             ArrayList<MainProductResult> results = response.body();
                             if (results.size()!=0){
-                                Adapter.mDataset.addAll(results);
+                                Adapter.mData.addAll(results);
                                 Adapter.notifyDataSetChanged();
                                 tvNone.setVisibility(View.INVISIBLE);
                                 recyclerView.setVisibility(View.VISIBLE);
@@ -268,7 +268,7 @@ public class SearchProductCategoryFragment extends Fragment implements View.OnCl
                         if (response.code() == 200){
                             ArrayList<MainProductResult> results = response.body();
                             if (results.size()!=0){
-                                Adapter.mDataset.addAll(results);
+                                Adapter.mData.addAll(results);
                                 Adapter.notifyDataSetChanged();
                                 tvNone.setVisibility(View.INVISIBLE);
                             }else{

@@ -19,22 +19,23 @@ import java.util.ArrayList;
 
 public class Adapter_recycler_ProductSearch extends RecyclerView.Adapter<Adapter_recycler_ProductSearch.mViewHolder>{
 
-    public ArrayList<MainProductResult> mDataset = new ArrayList<>();
+    public ArrayList<MainProductResult> mData = new ArrayList<>();
+    private ItemClick itemClick;
 
     public Adapter_recycler_ProductSearch(){
 
     }
     public Adapter_recycler_ProductSearch(ArrayList<MainProductResult> myData) {
-        this.mDataset = myData;
+        this.mData = myData;
     }
 
-    public class mViewHolder extends RecyclerView.ViewHolder{
-        public ImageView productimg;
-        public TextView name, price;
+    class mViewHolder extends RecyclerView.ViewHolder{
+        ImageView productImg;
+        TextView name, price;
 
-        public mViewHolder(@NonNull View itemView) {
+        mViewHolder(@NonNull View itemView) {
             super(itemView);
-            productimg = itemView.findViewById(R.id.iv_productcard2_image);
+            productImg = itemView.findViewById(R.id.iv_productcard2_image);
             name = itemView.findViewById(R.id.tv_productcard2_name);
             price = itemView.findViewById(R.id.tv_productcard2_price);
         }
@@ -50,12 +51,17 @@ public class Adapter_recycler_ProductSearch extends RecyclerView.Adapter<Adapter
 
     @Override
     public void onBindViewHolder(@NonNull Adapter_recycler_ProductSearch.mViewHolder holder, final int position) {
-        holder.name.setText(mDataset.get(position).getProductName());
-        holder.price.setText(mDataset.get(position).getProductPrice() + "원");
-        Glide.with(holder.productimg).load(Config.serverUrl + "imgload/"
-                + mDataset.get(position).getSellerId()
-                + mDataset.get(position).getFileFolder()+"/"
-                + mDataset.get(position).getProductImg().get(0)).into(holder.productimg);
+
+        holder.name.setText(mData.get(position).getProductName());
+        holder.price.setText(mData.get(position).getProductPrice() + "원");
+
+        if (mData.get(position).getProductImg()!=null){
+            Glide.with(holder.productImg).load(Config.serverUrl + "imgload/"
+                    + mData.get(position).getSellerId()
+                    + mData.get(position).getFileFolder() + "/"
+                    + mData.get(position).getProductImg().get(0))
+                    .into(holder.productImg);
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -66,7 +72,6 @@ public class Adapter_recycler_ProductSearch extends RecyclerView.Adapter<Adapter
             }
         });
     }
-        public ItemClick itemClick;
 
     public interface ItemClick{
         void onClick(View view, int position);
@@ -78,10 +83,6 @@ public class Adapter_recycler_ProductSearch extends RecyclerView.Adapter<Adapter
 
     @Override
     public int getItemCount() {
-        return mDataset.size();
-    }
-
-    public void addItemSet(ArrayList<MainProductResult> myData){
-        this.mDataset = myData;
+        return mData.size();
     }
 }

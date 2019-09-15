@@ -79,7 +79,7 @@ public class SearchProductMainFragment extends Fragment {
                                 mAdapter.setItemClick(new Adapter_recycler_ProductSearch.ItemClick() {
                                     @Override
                                     public void onClick(View view, int position) {
-                                        String productId = mAdapter.mDataset.get(position).getProductId();
+                                        String productId = mAdapter.mData.get(position).getProductId();
                                         Intent intentProductDetail = new Intent(getActivity(), ProductActivity.class);
                                         intentProductDetail.putExtra("id", productId);
                                         startActivity(intentProductDetail);
@@ -87,7 +87,7 @@ public class SearchProductMainFragment extends Fragment {
                                 });
 
                                 mAdapter.notifyDataSetChanged();
-                                Log.d("searchtest", "검색결과부르기" + mAdapter.mDataset.get(0));
+                                Log.d("searchtest", "검색결과부르기" + mAdapter.mData.get(0));
                             }
                         }
                     }
