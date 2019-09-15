@@ -81,4 +81,7 @@ public class Adapter_recycler_ProductSearch extends RecyclerView.Adapter<Adapter
         return mDataset.size();
     }
 
+    public void addItemSet(ArrayList<MainProductResult> myData){
+        this.mDataset = myData;
+    }
 }

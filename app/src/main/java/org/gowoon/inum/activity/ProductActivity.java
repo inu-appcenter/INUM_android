@@ -213,12 +213,6 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     @Override
-    protected void onDestroy() {
-
-        super.onDestroy();
-    }
-
-    @Override
     public void onClick(View v) {
         int curr = viewPager.getCurrentItem();
         int last = vAdapter.getCount()-1;
