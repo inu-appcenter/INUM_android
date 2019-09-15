@@ -131,7 +131,6 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
 //        });
 //
 
-
         arrayImage = new ArrayList<>();
 
         btnSeller = findViewById(R.id.layout_detail_other_product);
@@ -214,6 +213,12 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     @Override
+    protected void onDestroy() {
+
+        super.onDestroy();
+    }
+
+    @Override
     public void onClick(View v) {
         int curr = viewPager.getCurrentItem();
         int last = vAdapter.getCount()-1;
@@ -226,6 +231,7 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
 //            }
             case R.id.btn_product_detail_right:
             {
+                Log.w("product view pager", String.valueOf(curr));
                 if (next>last){
                     viewPager.setCurrentItem(0,true);
                 }
