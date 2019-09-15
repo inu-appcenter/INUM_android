@@ -1,45 +1,21 @@
 package org.gowoon.inum.custom;
 
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.Dialog;
-import android.app.FragmentManager;
-import android.app.Service;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Binder;
 import android.os.Bundle;
-import android.os.IBinder;
-import android.support.annotation.NonNull;
-import android.util.Log;
-import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
-
-import com.google.gson.JsonObject;
 
 import org.gowoon.inum.R;
-import org.gowoon.inum.activity.ProductActivity;
-import org.gowoon.inum.fragment.forgotpwFragment;
-import org.gowoon.inum.model.Declare;
-import org.gowoon.inum.model.ProductOneItemResult;
-import org.gowoon.inum.model.SearchIdResult;
-import org.gowoon.inum.model.UserData;
-import org.gowoon.inum.util.RetrofitService;
-import org.gowoon.inum.util.Singleton;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class Adapter_dialog_declare extends Dialog{
 

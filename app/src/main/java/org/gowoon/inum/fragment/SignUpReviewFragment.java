@@ -1,8 +1,8 @@
 package org.gowoon.inum.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,18 +11,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baoyachi.stepview.bean.StepBean;
 import com.google.gson.JsonObject;
 
 import org.gowoon.inum.R;
 import org.gowoon.inum.activity.SignUpActivity;
 import org.gowoon.inum.model.UserData;
 import org.gowoon.inum.util.Singleton;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;

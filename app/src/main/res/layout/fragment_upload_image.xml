@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.UploadImageFragment">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -37,7 +37,7 @@
                 />
         </LinearLayout>
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_upload_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -72,19 +72,19 @@
             android:gravity="center_horizontal"
             >
 
-            <TextView
-                android:id="@+id/tv_upload_image_camera"
-                android:layout_width="268.8dp"
-                android:layout_height="46.1dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginBottom="11.5dp"
-                android:elevation="5dp"
-                android:background="@drawable/round_square_8dp"
-                android:backgroundTint="#fff"
-                android:gravity="center"
-                android:text="촬영하기"
-                android:textColor="@color/gunmetal"
-                android:textSize="16sp" />
+<!--            <TextView-->
+<!--                android:id="@+id/tv_upload_image_camera"-->
+<!--                android:layout_width="268.8dp"-->
+<!--                android:layout_height="46.1dp"-->
+<!--                android:layout_marginTop="3dp"-->
+<!--                android:layout_marginBottom="11.5dp"-->
+<!--                android:elevation="5dp"-->
+<!--                android:background="@drawable/round_square_8dp"-->
+<!--                android:backgroundTint="#fff"-->
+<!--                android:gravity="center"-->
+<!--                android:text="촬영하기"-->
+<!--                android:textColor="@color/gunmetal"-->
+<!--                android:textSize="16sp" />-->
 
             <TextView
                 android:id="@+id/tv_upload_image_multi"
@@ -94,11 +94,11 @@
                 android:background="@drawable/round_square_8dp"
                 android:backgroundTint="#fff"
                 android:gravity="center"
-                android:text="앨범"
+                android:text="여러장 선택"
                 android:textColor="@color/gunmetal"
                 android:textSize="16sp"
                 android:layout_marginBottom="3dp"
                 />
         </LinearLayout>
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

@@ -2,12 +2,15 @@ package org.gowoon.inum.fragment;
 
 
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,15 +19,18 @@ import com.google.gson.JsonObject;
 
 import org.gowoon.inum.R;
 import org.gowoon.inum.activity.UploadActivity;
+import org.gowoon.inum.model.ItemImageList;
 import org.gowoon.inum.model.ProductOneItemResult;
 import org.gowoon.inum.util.Singleton;
-import org.json.JSONException;
-import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,8 +44,12 @@ public class UploadPreviewFragment extends Fragment {
     ProductOneItemResult uploadItemInfo = new ProductOneItemResult();
     TextView tvName, tvState, tvPrice, tvPlace, tvMethod, tvStar, tvExplain, tvCategory;
     String name, state, place, method, explain, category, userId, token;
-    Integer price;
-    List<String> imageUri = new ArrayList<>();
+    int price;
+    private ArrayList<Uri> imageUriList = new ArrayList<>();
+    private ArrayList<MultipartBody.Part> imageFileList = new ArrayList<>();
+
+    private ImageButton declareBtn;
+    private LinearLayout sellersBtn;
 
     public UploadPreviewFragment() {
         // Required empty public constructor
@@ -55,23 +65,29 @@ public class UploadPreviewFragment extends Fragment {
 
         getInfo();
         initViewSet(rootView);
+        includeViewSet(rootView);
+
+        uriToFile();
 
         tvUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Singleton.retrofit.productUpload(token,imageUri,name,state,price,category,explain,method,place)
+                Singleton.retrofit.productUpload(token,imageFileList,name,state,price,category,explain,method,place)
                         .enqueue(new Callback<JsonObject>() {
                             @Override
                             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                                 if (response.isSuccessful()){
-                                    if (response.code()==200){
-                                        try{
-                                            if (response.message().equals("success")){
+                                    if (response.code()==200)
+                                    {
+//                                        try{
+//                                            if (response.message().equals("success")){
                                             Toast.makeText(getActivity(),"등록 완료",Toast.LENGTH_LONG).show();
-                                            }
-                                        }catch (JsonIOException e){
-                                            e.printStackTrace();
-                                        }
+                                            Log.d("upload success","업로드 성공");
+                                            Objects.requireNonNull(getActivity()).finish();
+//                                            }
+//                                        }catch (JsonIOException e){
+//                                            e.printStackTrace();
+//                                        }
                                     }
                                 }
                                 else {
@@ -92,6 +108,28 @@ public class UploadPreviewFragment extends Fragment {
 
         return rootView;
     }
+    private void includeViewSet(View root){
+        declareBtn = root.findViewById(R.id.btn_product_detail_declare);
+        sellersBtn = root.findViewById(R.id.layout_detail_other_product);
+
+        declareBtn.setVisibility(View.GONE);
+        sellersBtn.setVisibility(View.GONE
+        );
+    }
+
+    private void uriToFile(){
+        imageUriList = ItemImageList.getInstance().getImageUri();
+        for (int i = 0 ; i < imageUriList.size();i++) {
+            File file = new File(imageUriList.get(i).getPath());
+            RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+            MultipartBody.Part multiFile = MultipartBody.Part.createFormData("userFile", file.getName(), requestFile);
+            imageFileList.add(i,multiFile);
+        }
+    }
+
+    private void getPath(Uri uri){
+
+    }
 
     private void initViewSet(View root){
         tvCategory = root.findViewById(R.id.tv_product_detail_category);
@@ -104,6 +142,7 @@ public class UploadPreviewFragment extends Fragment {
         tvExplain = root.findViewById(R.id.tv_product_detail_info);
 
         tvName.setText(name);
+        tvPrice.setText(price + "원");
         tvCategory.setText("-카테고리:" +category);
         tvState.setText("-상품 상태:" +state);
         tvExplain.setText(explain);
@@ -117,7 +156,6 @@ public class UploadPreviewFragment extends Fragment {
         token = pref.getString("token","");
 
         uploadItemInfo = ProductOneItemResult.getInstance();
-        imageUri.add(0,"sample");
         name = uploadItemInfo.getProductName();
         price = uploadItemInfo.getProductPrice();
         place = uploadItemInfo.getPlace();

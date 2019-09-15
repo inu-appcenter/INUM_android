@@ -1,8 +1,10 @@
 package org.gowoon.inum.custom;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v4.view.PagerAdapter;
+import androidx.annotation.NonNull;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import com.bumptech.glide.request.RequestOptions;
 
 import org.gowoon.inum.R;
 import org.gowoon.inum.util.Config;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -28,6 +31,7 @@ public class AdapterViewPagerProduct extends PagerAdapter {
         this.sellerId = sellerId;
     }
 
+    @NotNull
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -48,5 +52,10 @@ public class AdapterViewPagerProduct extends PagerAdapter {
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object o) {
         return view == o;
+    }
+
+    @Override
+    public void destroyItem (ViewGroup container, int position, Object object){
+        container.removeView((View) object);
     }
 }

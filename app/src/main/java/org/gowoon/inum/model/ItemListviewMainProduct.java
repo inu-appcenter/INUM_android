@@ -1,7 +1,5 @@
 package org.gowoon.inum.model;
 
-import android.support.v7.widget.RecyclerView;
-
 import java.util.ArrayList;
 
 public class ItemListviewMainProduct {

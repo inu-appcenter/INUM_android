@@ -4,9 +4,8 @@ package org.gowoon.inum.fragment;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.DrawerLayout;
+
+import androidx.drawerlayout.widget.DrawerLayout;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -22,10 +21,8 @@ import org.gowoon.inum.R;
 import org.gowoon.inum.custom.ExpandableListCategory_Adapter;
 import org.gowoon.inum.model.DataCategoryParent;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 import java.util.Vector;
 
 public class DrawerCategoryFragment extends Fragment {
