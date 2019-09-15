@@ -9,13 +9,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/layout_upload_preview"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            layout="@layout/fragment_product_detail"
-            />
+            android:layout_height="match_parent">
 
+            <include
+                android:id="@+id/layout_upload_preview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                layout="@layout/fragment_product_detail"
+                />
+
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </FrameLayout>
