@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,7 @@ import com.google.gson.JsonObject;
 
 import org.gowoon.inum.R;
 import org.gowoon.inum.activity.UploadActivity;
+import org.gowoon.inum.custom.AdapterViewPagerProduct;
 import org.gowoon.inum.model.ItemImageList;
 import org.gowoon.inum.model.ProductOneItemResult;
 import org.gowoon.inum.util.Singleton;
@@ -48,6 +51,7 @@ public class UploadPreviewFragment extends Fragment {
     private ArrayList<Uri> imageUriList = new ArrayList<>();
     private ArrayList<MultipartBody.Part> imageFileList = new ArrayList<>();
 
+    private ViewPager viewPager;
     private ImageButton declareBtn;
     private LinearLayout sellersBtn;
 
@@ -68,6 +72,7 @@ public class UploadPreviewFragment extends Fragment {
         includeViewSet(rootView);
 
         uriToFile();
+        setViewPager();
 
         tvUpload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,17 +82,10 @@ public class UploadPreviewFragment extends Fragment {
                             @Override
                             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                                 if (response.isSuccessful()){
-                                    if (response.code()==200)
-                                    {
-//                                        try{
-//                                            if (response.message().equals("success")){
-                                            Toast.makeText(getActivity(),"등록 완료",Toast.LENGTH_LONG).show();
-                                            Log.d("upload success","업로드 성공");
-                                            Objects.requireNonNull(getActivity()).finish();
-//                                            }
-//                                        }catch (JsonIOException e){
-//                                            e.printStackTrace();
-//                                        }
+                                    if (response.toString().equals("success")){
+                                        Toast.makeText(getActivity(),"등록 완료",Toast.LENGTH_LONG).show();
+                                        Log.d("upload success","업로드 성공");
+                                        Objects.requireNonNull(getActivity()).finish();
                                     }
                                 }
                                 else {
@@ -108,6 +106,12 @@ public class UploadPreviewFragment extends Fragment {
 
         return rootView;
     }
+
+    private void setViewPager(){
+        AdapterViewPagerProduct mAdapter = new AdapterViewPagerProduct(getContext(),imageUriList);
+        viewPager.setAdapter(mAdapter);
+    }
+
     private void includeViewSet(View root){
         declareBtn = root.findViewById(R.id.btn_product_detail_declare);
         sellersBtn = root.findViewById(R.id.layout_detail_other_product);
@@ -127,11 +131,8 @@ public class UploadPreviewFragment extends Fragment {
         }
     }
 
-    private void getPath(Uri uri){
-
-    }
-
     private void initViewSet(View root){
+        viewPager = root.findViewById(R.id.viewpager_product_detail_image);
         tvCategory = root.findViewById(R.id.tv_product_detail_category);
         tvName = root.findViewById(R.id.tv_product_detail_name);
         tvState = root.findViewById(R.id.tv_product_detail_status);
