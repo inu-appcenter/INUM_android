@@ -15,6 +15,7 @@ import android.widget.PopupMenu;
 import org.gowoon.inum.R;
 import org.gowoon.inum.activity.UploadActivity;
 import org.gowoon.inum.custom.AdapterListviewCategory;
+import org.gowoon.inum.model.ProductOneItemResult;
 
 import java.util.ArrayList;
 
@@ -62,6 +63,8 @@ public class UploadCategoryFragment extends Fragment {
                             .commit();
                 }
                 else{
+                    ProductOneItemResult.getInstance().setCategory(lAdapter.getName(position));
+
                     UploadInfoFragment categoryInfo = new UploadInfoFragment();
                     getFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left,R.anim.enter_from_left,R.anim.exit_to_right)
