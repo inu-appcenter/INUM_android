@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import me.relex.circleindicator.CircleIndicator;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -54,6 +55,7 @@ public class UploadPreviewFragment extends Fragment {
     private ViewPager viewPager;
     private ImageButton declareBtn;
     private LinearLayout sellersBtn;
+    private com.pm10.library.CircleIndicator circleIndicator;
 
     public UploadPreviewFragment() {
         // Required empty public constructor
@@ -110,6 +112,9 @@ public class UploadPreviewFragment extends Fragment {
     private void setViewPager(){
         AdapterViewPagerProduct mAdapter = new AdapterViewPagerProduct(getContext(),imageUriList);
         viewPager.setAdapter(mAdapter);
+
+        circleIndicator.setupWithViewPager(viewPager);
+        circleIndicator.bringToFront();
     }
 
     private void includeViewSet(View root){
@@ -132,6 +137,7 @@ public class UploadPreviewFragment extends Fragment {
     }
 
     private void initViewSet(View root){
+        circleIndicator = root.findViewById(R.id.indicator_product_circle);
         viewPager = root.findViewById(R.id.viewpager_product_detail_image);
         tvCategory = root.findViewById(R.id.tv_product_detail_category);
         tvName = root.findViewById(R.id.tv_product_detail_name);
