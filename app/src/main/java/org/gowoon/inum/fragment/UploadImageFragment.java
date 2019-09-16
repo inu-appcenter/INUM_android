@@ -4,7 +4,6 @@ package org.gowoon.inum.fragment;
 import android.Manifest;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,10 +40,8 @@ public class UploadImageFragment extends Fragment {
     private AdapterRecyclerUploadImage rAdapter = new AdapterRecyclerUploadImage();
     private RecyclerView recyclerViewImage ;
     private LinearLayout layoutSelect;
-    TextView tvAddImage;
+    TextView tvAddImage, tvDelete;
     private ArrayList<Uri> mListImage = new ArrayList<>();
-    Bundle imageBundle;
-
     List<String> imageList = new ArrayList<>();
 
     public UploadImageFragment() {
@@ -59,6 +56,8 @@ public class UploadImageFragment extends Fragment {
 
         ((UploadActivity)getActivity()).initView("상품 등록하기","다음",true);
         makePermission();
+        tvAddImage = rootView.findViewById(R.id.tv_upload_image_multi);
+        tvDelete = rootView.findViewById(R.id.tv_upload_image_delete);
 
         getActivity().findViewById(R.id.tv_upload_next).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +76,6 @@ public class UploadImageFragment extends Fragment {
         recyclerViewImage = rootView.findViewById(R.id.recyclerview_upload_image);
 
         mListImage.add(Uri.parse(""));
-
         rAdapter.addItem(mListImage);
 
         RecyclerView.LayoutManager mLayoutManager;
@@ -88,15 +86,29 @@ public class UploadImageFragment extends Fragment {
         recyclerViewImage.setAdapter(rAdapter);
         rAdapter.setItemClick(new AdapterRecyclerUploadImage.ItemClick() {
             @Override
-            public void onClick(View view, int position) {
+            public void onClick(View view, final int position) {
                 layoutSelect.setVisibility(View.VISIBLE);
-                tvAddImage = rootView.findViewById(R.id.tv_upload_image_multi);
-                tvAddImage.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        getFromAlbum();
-                    }
-                });
+                tvAddImage.setVisibility(View.VISIBLE);
+                if (rAdapter.getItemStyle(position)){
+                    tvAddImage.setText("취소");
+                    tvDelete.setVisibility(View.VISIBLE);
+                    tvDelete.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            deleteImage(position);
+                        }
+                    });
+                }else {
+//                    layoutSelect.setVisibility(View.VISIBLE);
+                    tvAddImage.setText("여러장 선택");
+                    tvDelete.setVisibility(View.INVISIBLE);
+                    tvAddImage.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            getFromAlbum();
+                        }
+                    });
+                }
             }
         });
         return rootView;
@@ -129,6 +141,12 @@ public class UploadImageFragment extends Fragment {
     private void setImageData(ArrayList list){
         ProductOneItemResult.getInstance().setProductImg(list);
         ItemImageList.getInstance().setImageUri(list);
+    }
+
+    private void deleteImage(int position){
+        rAdapter.mData.remove(position);
+        rAdapter.notifyItemRemoved(position);
+        rAdapter.notifyItemRangeRemoved(position,rAdapter.mData.size());
     }
 
     private void makePermission(){

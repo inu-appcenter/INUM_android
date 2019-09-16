@@ -22,7 +22,7 @@ import java.util.List;
 
 public class AdapterRecyclerUploadImage extends RecyclerView.Adapter<AdapterRecyclerUploadImage.ViewHolder>{
 //    private ArrayList<ItemImageList> data = new ArrayList<>(8);
-    private ArrayList<Uri> mData = new ArrayList<>();
+    public ArrayList<Uri> mData = new ArrayList<>();
     public AdapterRecyclerUploadImage(){}
     public ItemClick itemClick;
 
@@ -90,5 +90,9 @@ public class AdapterRecyclerUploadImage extends RecyclerView.Adapter<AdapterRecy
     public void addItem(List<? extends Uri> item){
         mData.addAll(0,item);
         notifyDataSetChanged();
+    }
+
+    public boolean getItemStyle(int position){
+        return position != mData.size() - 1;
     }
 }
