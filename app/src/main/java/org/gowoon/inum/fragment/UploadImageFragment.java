@@ -91,6 +91,12 @@ public class UploadImageFragment extends Fragment {
                 tvAddImage.setVisibility(View.VISIBLE);
                 if (rAdapter.getItemStyle(position)){
                     tvAddImage.setText("취소");
+                    tvAddImage.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            layoutSelect.setVisibility(View.INVISIBLE);
+                        }
+                    });
                     tvDelete.setVisibility(View.VISIBLE);
                     tvDelete.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -99,7 +105,6 @@ public class UploadImageFragment extends Fragment {
                         }
                     });
                 }else {
-//                    layoutSelect.setVisibility(View.VISIBLE);
                     tvAddImage.setText("여러장 선택");
                     tvDelete.setVisibility(View.INVISIBLE);
                     tvAddImage.setOnClickListener(new View.OnClickListener() {
@@ -147,6 +152,7 @@ public class UploadImageFragment extends Fragment {
         rAdapter.mData.remove(position);
         rAdapter.notifyItemRemoved(position);
         rAdapter.notifyItemRangeRemoved(position,rAdapter.mData.size());
+        layoutSelect.setVisibility(View.INVISIBLE);
     }
 
     private void makePermission(){
