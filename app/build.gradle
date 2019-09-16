@@ -61,7 +61,6 @@ dependencies {
 
     //viewpager indicator
     implementation 'com.pm10:indicator:1.0.2'
-    implementation 'me.relex:circleindicator:1.2.2'
 
     //AutoViewPager
     implementation ('cn.trinea.android.view.autoscrollviewpager:android-auto-scroll-view-pager:1.1.2') {
