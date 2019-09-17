@@ -35,14 +35,16 @@ import gun0912.tedimagepicker.builder.TedImagePicker;
 import gun0912.tedimagepicker.builder.listener.OnMultiSelectedListener;
 import gun0912.tedimagepicker.builder.type.MediaType;
 
-public class UploadImageFragment extends Fragment {
+public class UploadImageFragment extends Fragment implements View.OnClickListener {
 
     private AdapterRecyclerUploadImage rAdapter = new AdapterRecyclerUploadImage();
     private RecyclerView recyclerViewImage ;
     private LinearLayout layoutSelect;
-    TextView tvAddImage, tvDelete;
+    TextView tvAddImage, tvDelete, tvImageNum , tvNext;
     private ArrayList<Uri> mListImage = new ArrayList<>();
     List<String> imageList = new ArrayList<>();
+
+    private int imageNum = 0;
 
     public UploadImageFragment() {
         // Required empty public constructor
@@ -58,24 +60,16 @@ public class UploadImageFragment extends Fragment {
         makePermission();
         tvAddImage = rootView.findViewById(R.id.tv_upload_image_multi);
         tvDelete = rootView.findViewById(R.id.tv_upload_image_delete);
-
-        getActivity().findViewById(R.id.tv_upload_next).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                UploadPreviewFragment uploadPreview = new UploadPreviewFragment();
-
-                getFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left,R.anim.enter_from_left,R.anim.exit_to_right)
-                        .replace(R.id.constraint_upload, uploadPreview)
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
+        tvImageNum = rootView.findViewById(R.id.tv_upload_image_num);
+        tvNext = getActivity().findViewById(R.id.tv_upload_next);
+        tvNext.setOnClickListener(this);
 
         layoutSelect = rootView.findViewById(R.id.linearLayout_upload_image_select);
         recyclerViewImage = rootView.findViewById(R.id.recyclerview_upload_image);
 
-        mListImage.add(Uri.parse(""));
+        if (mListImage.size()==0){
+            mListImage.add(Uri.parse(""));
+        }
         rAdapter.addItem(mListImage);
 
         RecyclerView.LayoutManager mLayoutManager;
@@ -84,36 +78,18 @@ public class UploadImageFragment extends Fragment {
         recyclerViewImage.setItemAnimator(new DefaultItemAnimator());
         recyclerViewImage.addItemDecoration(new UploadItemDecoration(getContext()));
         recyclerViewImage.setAdapter(rAdapter);
-        rAdapter.setItemClick(new AdapterRecyclerUploadImage.ItemClick() {
-            @Override
-            public void onClick(View view, final int position) {
-                layoutSelect.setVisibility(View.VISIBLE);
-                tvAddImage.setVisibility(View.VISIBLE);
-                if (rAdapter.getItemStyle(position)){
-                    tvAddImage.setText("취소");
-                    tvAddImage.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            layoutSelect.setVisibility(View.INVISIBLE);
-                        }
-                    });
-                    tvDelete.setVisibility(View.VISIBLE);
-                    tvDelete.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            deleteImage(position);
-                        }
-                    });
-                }else {
-                    tvAddImage.setText("여러장 선택");
-                    tvDelete.setVisibility(View.INVISIBLE);
-                    tvAddImage.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            getFromAlbum();
-                        }
-                    });
-                }
+        rAdapter.setItemClick((view, position) -> {
+            layoutSelect.setVisibility(View.VISIBLE);
+            tvAddImage.setVisibility(View.VISIBLE);
+            if (rAdapter.getItemStyle(position)){
+                tvAddImage.setText("취소");
+                tvAddImage.setOnClickListener(view12 -> layoutSelect.setVisibility(View.INVISIBLE));
+                tvDelete.setVisibility(View.VISIBLE);
+                tvDelete.setOnClickListener(view1 -> deleteImage(position));
+            }else {
+                tvAddImage.setText("여러장 선택");
+                tvDelete.setVisibility(View.INVISIBLE);
+                tvAddImage.setOnClickListener(view13 -> getFromAlbum());
             }
         });
         return rootView;
@@ -138,7 +114,10 @@ public class UploadImageFragment extends Fragment {
                         recyclerViewImage.setAdapter(rAdapter);
                         layoutSelect.setVisibility(View.INVISIBLE);
 
-                        setImageData(mListImage);
+                        imageNum = imageNum+mListImage.size();
+                        tvImageNum.setText(imageNum+"/8");
+
+//                        setImageData(mListImage);
                     }
                 });
     }
@@ -153,6 +132,10 @@ public class UploadImageFragment extends Fragment {
         rAdapter.notifyItemRemoved(position);
         rAdapter.notifyItemRangeRemoved(position,rAdapter.mData.size());
         layoutSelect.setVisibility(View.INVISIBLE);
+
+        imageNum = --imageNum;
+        tvImageNum.setText(imageNum+"/8");
+//        ItemImageList.getInstance().getImageUri().remove(position);
     }
 
     private void makePermission(){
@@ -174,5 +157,26 @@ public class UploadImageFragment extends Fragment {
                 .setPermissions(Manifest.permission.CAMERA,Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
                 .check();
+    }
+
+    @Override
+    public void onClick(View view) {
+        mListImage.clear();
+        mListImage.addAll(rAdapter.mData);
+        mListImage.remove(mListImage.size()-1);
+        setImageData(mListImage);
+
+        recyclerViewImage.removeAllViews();
+        changeFragment();
+    }
+
+    private void changeFragment(){
+        UploadPreviewFragment uploadPreview = new UploadPreviewFragment();
+
+        getFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left,R.anim.enter_from_left,R.anim.exit_to_right)
+                .replace(R.id.constraint_upload, uploadPreview)
+                .addToBackStack(null)
+                .commit();
     }
 }

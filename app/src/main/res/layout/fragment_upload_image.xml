@@ -28,6 +28,7 @@
                 />
 
             <TextView
+                android:id="@+id/tv_upload_image_num"
                 style="@style/TextViewStyleSmall"
                 android:theme="@style/TextViewStyleSmall"
                 android:textColor="@color/dark_mint_green"
