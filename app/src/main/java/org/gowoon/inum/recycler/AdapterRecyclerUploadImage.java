@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterRecyclerUploadImage extends RecyclerView.Adapter<AdapterRecyclerUploadImage.ViewHolder>{
-//    private ArrayList<ItemImageList> data = new ArrayList<>(8);
     public ArrayList<Uri> mData = new ArrayList<>();
     public AdapterRecyclerUploadImage(){}
     public ItemClick itemClick;
