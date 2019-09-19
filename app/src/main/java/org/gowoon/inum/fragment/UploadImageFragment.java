@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.Objects;
 
 import gun0912.tedimagepicker.builder.TedImagePicker;
-import gun0912.tedimagepicker.builder.listener.OnMultiSelectedListener;
 import gun0912.tedimagepicker.builder.type.MediaType;
 
 public class UploadImageFragment extends Fragment implements View.OnClickListener {
@@ -48,7 +47,6 @@ public class UploadImageFragment extends Fragment implements View.OnClickListene
 
     public UploadImageFragment() {
         // Required empty public constructor
-
     }
 
     @Override
@@ -69,8 +67,10 @@ public class UploadImageFragment extends Fragment implements View.OnClickListene
 
         if (mListImage.size()==0){
             mListImage.add(Uri.parse(""));
+            rAdapter.addItem(mListImage);
+        }else{
+            tvImageNum.setText(imageNum+"/8");
         }
-        rAdapter.addItem(mListImage);
 
         RecyclerView.LayoutManager mLayoutManager;
         mLayoutManager = new GridLayoutManager(getActivity(),4);
@@ -101,24 +101,19 @@ public class UploadImageFragment extends Fragment implements View.OnClickListene
                 .mediaType(MediaType.IMAGE)
                 .cameraTileBackground(R.color.orangey_red)
                 .max(9-rAdapter.getItemCount(),"이미지는 최대 8장까지 선택 가능합니다.")
-                .startMultiImage(new OnMultiSelectedListener() {
-                    @Override
-                    public void onSelected(List<? extends Uri> list) {
-                        mListImage.addAll(list);
-                        rAdapter.addItem(mListImage);
-                        if (rAdapter.getItemCount()==9){
-                            rAdapter.notifyItemRemoved(8);
-                            rAdapter.notifyItemRangeChanged(8, list.size());
-                            Log.d("image list count", String.valueOf(rAdapter.getItemCount()));
-                        }
-                        recyclerViewImage.setAdapter(rAdapter);
-                        layoutSelect.setVisibility(View.INVISIBLE);
-
-                        imageNum = imageNum+mListImage.size();
-                        tvImageNum.setText(imageNum+"/8");
-
-//                        setImageData(mListImage);
+                .startMultiImage(list -> {
+                    mListImage.addAll(list);
+                    rAdapter.addItem(mListImage);
+                    if (rAdapter.getItemCount()==9){
+                        rAdapter.notifyItemRemoved(8);
+                        rAdapter.notifyItemRangeChanged(8, list.size());
+                        Log.d("image list count", String.valueOf(rAdapter.getItemCount()));
                     }
+                    recyclerViewImage.setAdapter(rAdapter);
+                    layoutSelect.setVisibility(View.INVISIBLE);
+
+                    imageNum = imageNum+mListImage.size();
+                    tvImageNum.setText(imageNum+"/8");
                 });
     }
 

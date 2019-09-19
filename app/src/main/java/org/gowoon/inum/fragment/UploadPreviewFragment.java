@@ -73,34 +73,31 @@ public class UploadPreviewFragment extends Fragment {
         uriToFile();
         setViewPager();
 
-        tvUpload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Singleton.retrofit.productUpload(token,imageFileList,name,state,price,category,explain,method,place)
-                        .enqueue(new Callback<JsonObject>() {
-                            @Override
-                            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                                if (response.isSuccessful()){
-                                    if (response.code()==200){
-                                        Toast.makeText(getActivity(),"등록 완료",Toast.LENGTH_LONG).show();
-                                        Log.d("upload success","업로드 성공");
-                                        Objects.requireNonNull(getActivity()).finish();
-                                    }
-                                }
-                                else {
-                                    Toast.makeText(getActivity(), "등록 실패", Toast.LENGTH_LONG).show();
-                                    Log.d("upload fail","fail..");
+        tvUpload.setOnClickListener(view -> {
+            Singleton.retrofit.productUpload(token,imageFileList,name,state,price,category,explain,method,place)
+                    .enqueue(new Callback<JsonObject>() {
+                        @Override
+                        public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                            if (response.isSuccessful()){
+                                if (response.code()==200){
+                                    Toast.makeText(getActivity(),"등록 완료",Toast.LENGTH_LONG).show();
+                                    Log.d("upload success","업로드 성공");
+                                    Objects.requireNonNull(getActivity()).finish();
                                 }
                             }
-                            @Override
-                            public void onFailure(Call<JsonObject> call, Throwable t) {
-                                Log.d("upload fail onFailure","fail..");
-                                t.getMessage();
-                                Log.d("err msg",t.getMessage());
+                            else {
+                                Toast.makeText(getActivity(), "등록 실패", Toast.LENGTH_LONG).show();
+                                Log.d("upload fail","fail..");
                             }
-                        });
-                Log.d("item info",name+price);
-            }
+                        }
+                        @Override
+                        public void onFailure(Call<JsonObject> call, Throwable t) {
+                            Log.d("upload fail onFailure","fail..");
+                            t.getMessage();
+                            Log.d("err msg",t.getMessage());
+                        }
+                    });
+            Log.d("item info",name+price);
         });
 
         return rootView;
