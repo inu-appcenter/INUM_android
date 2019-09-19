@@ -81,7 +81,7 @@ public class UploadPreviewFragment extends Fragment {
                             @Override
                             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                                 if (response.isSuccessful()){
-                                    if (response.toString().equals("success")){
+                                    if (response.code()==200){
                                         Toast.makeText(getActivity(),"등록 완료",Toast.LENGTH_LONG).show();
                                         Log.d("upload success","업로드 성공");
                                         Objects.requireNonNull(getActivity()).finish();
