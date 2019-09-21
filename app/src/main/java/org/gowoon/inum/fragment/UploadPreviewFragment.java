@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -48,13 +49,14 @@ import static android.content.Context.MODE_PRIVATE;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UploadPreviewFragment extends Fragment {
+public class UploadPreviewFragment extends Fragment implements View.OnClickListener{
     ProductOneItemResult uploadItemInfo = new ProductOneItemResult();
     TextView tvName, tvState, tvPrice, tvPlace, tvMethod, tvStar, tvExplain, tvCategory;
     String name, state, place, method, explain, category, userId, token;
     int price;
     private ArrayList<Uri> imageUriList = new ArrayList<>();
     private ArrayList<MultipartBody.Part> imageFileList = new ArrayList<>();
+    private AdapterViewPagerProduct mAdapter;
 
     private ViewPager viewPager;
     private ImageButton declareBtn;
@@ -115,7 +117,7 @@ public class UploadPreviewFragment extends Fragment {
     }
 
     private void setViewPager(){
-        AdapterViewPagerProduct mAdapter = new AdapterViewPagerProduct(getContext(),imageUriList);
+        mAdapter = new AdapterViewPagerProduct(getContext(),imageUriList);
         viewPager.setAdapter(mAdapter);
 
         circleIndicator.setupWithViewPager(viewPager);
@@ -191,6 +193,11 @@ public class UploadPreviewFragment extends Fragment {
         tvStar = root.findViewById(R.id.tv_product_detail_current);
         tvExplain = root.findViewById(R.id.tv_product_detail_info);
 
+        Button btnRight = root.findViewById(R.id.btn_product_detail_right);
+        Button btnLeft = root.findViewById(R.id.btn_product_detail_left);
+        btnRight.setOnClickListener(this);
+        btnLeft.setOnClickListener(this);
+
         tvName.setText(name);
         tvPrice.setText(price + "원");
         tvCategory.setText("-카테고리:" +category);
@@ -213,5 +220,33 @@ public class UploadPreviewFragment extends Fragment {
         method = uploadItemInfo.getMethod();
         explain = uploadItemInfo.getProductInfo();
         state = uploadItemInfo.getProductState();
+    }
+
+    @Override
+    public void onClick(View v) {
+        int curr = viewPager.getCurrentItem();
+        int last = mAdapter.getCount()-1;
+        int next = curr+1;
+        int prev = curr-1;
+        switch (v.getId()) {
+            case R.id.btn_product_detail_right:
+            {
+                Log.w("product view pager", String.valueOf(curr));
+                if (next>last){
+                    viewPager.setCurrentItem(0,true);
+                }
+                else
+                    viewPager.setCurrentItem(next);
+                break;
+            }
+            case R.id.btn_product_detail_left:{
+                if(prev<0){
+                    viewPager.setCurrentItem(last,true);
+                }
+                else
+                    viewPager.setCurrentItem(prev);
+                break;
+            }
+        }
     }
 }
