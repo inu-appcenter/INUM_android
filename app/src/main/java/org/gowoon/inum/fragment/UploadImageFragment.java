@@ -130,7 +130,6 @@ public class UploadImageFragment extends Fragment implements View.OnClickListene
 
         imageNum = --imageNum;
         tvImageNum.setText(imageNum+"/8");
-//        ItemImageList.getInstance().getImageUri().remove(position);
     }
 
     private void makePermission(){

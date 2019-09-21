@@ -69,7 +69,7 @@ public class AdapterRecyclerUploadImage extends RecyclerView.Adapter<AdapterRecy
 
         Glide.with(holder.image).load(mData.get(position))
                 .apply(new RequestOptions().override(191,191).centerCrop())
-                .apply(new RequestOptions().bitmapTransform(new RoundedCorners((int) (mScale*6.9))))
+                .apply(new RequestOptions().bitmapTransform(new RoundedCorners((int) (mScale*8))))
                 .into(holder.image);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,7 +1,10 @@
 package org.gowoon.inum.fragment;
 
 
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,9 +29,13 @@ import org.gowoon.inum.model.ProductOneItemResult;
 import org.gowoon.inum.util.Singleton;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import id.zelory.compressor.Compressor;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -70,7 +77,11 @@ public class UploadPreviewFragment extends Fragment {
         initViewSet(rootView);
         includeViewSet(rootView);
 
-        uriToFile();
+        try {
+            uriToFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         setViewPager();
 
         tvUpload.setOnClickListener(view -> {
@@ -120,15 +131,53 @@ public class UploadPreviewFragment extends Fragment {
         );
     }
 
-    private void uriToFile(){
+    private void uriToFile() throws IOException {
         imageUriList = ItemImageList.getInstance().getImageUri();
+        FileOutputStream outputStream = null;
+
         for (int i = 0 ; i < imageUriList.size();i++) {
             File file = new File(imageUriList.get(i).getPath());
-            RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+            File compressedImageFile = new Compressor(getContext()).compressToFile(file);
+            RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), compressedImageFile);
             MultipartBody.Part multiFile = MultipartBody.Part.createFormData("userFile", file.getName(), requestFile);
             imageFileList.add(i,multiFile);
         }
     }
+
+//    private Bitmap resizeImage(Context context, Uri uri){
+//        Bitmap resizeBitmap = null;
+//        BitmapFactory.Options options = new BitmapFactory.Options();
+//        int RESIZE= 1024;
+//
+//        try {
+//            BitmapFactory.decodeStream(context.getContentResolver().openInputStream(uri), null, options);
+//
+//            int width = options.outWidth;
+//            int height = options.outHeight;
+//            int sampleSize = 1;
+//
+//            while (true){
+//                if (width/2 < RESIZE|| height/2 < RESIZE){
+//                    break;
+//                }
+//                width /= 2;
+//                height /= 2;
+//                sampleSize *= 2;
+//            }
+//
+//            options.inSampleSize = sampleSize;
+//            Bitmap bitmap = BitmapFactory.decodeStream(context.getContentResolver().openInputStream(uri), null, options);
+//            resizeBitmap = bitmap;
+//
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        finally {
+//
+//        }
+//        return resizeBitmap;
+//    }
 
     private void initViewSet(View root){
         circleIndicator = root.findViewById(R.id.indicator_product_circle);
