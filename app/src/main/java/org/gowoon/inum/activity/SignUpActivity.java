@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -29,10 +30,17 @@ import static org.gowoon.inum.R.*;
 import static org.gowoon.inum.R.layout.*;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener{
+    private static String TAG = "SignUpActivity";
+
     public AdapterViewPagerSignUp vAdapter;
     public Button btnNext;
     public NonSwipeViewPager viewPager;
     public int curr;
+
+    /**
+     * Number of sign-up steps.
+     */
+    private int STEPS = 5;
 
 //    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 //    {
@@ -81,6 +89,53 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(SignUpActivity.this, drawable.attention));
     }
 
+    /**
+     * Set stepView by index.
+     * Assume that the target is set to 0, otherwise -1.
+     *
+     * @param stepIndex the index of stepView to set.
+     *                  if you want (1, 0, -1, -1, -1), the index would be (1).
+     */
+    public void stepView(int stepIndex) {
+        if (stepIndex < 0 || stepIndex >= STEPS) {
+            Log.d(TAG, "step index out of range!");
+            return;
+        }
+
+        int[] p = {-1, -1, -1, -1, -1};
+        for (int i = 0; i < stepIndex; ++i) {
+            p[i] = 1;
+        }
+        p[stepIndex] = 0;
+
+        stepView(p[0], p[1], p[2], p[3], p[4]);
+    }
+
+    public void setTitle(int stepIndex) {
+        switch (stepIndex){
+            case 0:{
+                initViewSignUp("회원가입 하기");
+                break;
+            }
+            case 1:{
+                initViewSignUp("학생정보 입력하기");
+                break;
+            }
+            case 2:{
+                initViewSignUp("비밀번호 설정하기");
+                break;
+            }
+            case 3:{
+                initViewSignUp("휴대폰 인증");
+                break;
+            }
+            case 4:{
+                initViewSignUp("회원 가입 완료하기");
+                break;
+            }
+        }
+    }
+
     public void initViewSignUp(String title){
             TextView tvTitle = findViewById(id.tv_sign_up_title);
             tvTitle.setText(title);
@@ -94,6 +149,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             super.onBackPressed();
         }
         else if (curr>0){
+            stepView(curr);
+            setTitle(curr);
             viewPager.setCurrentItem(prev,true); }
     }
 
@@ -125,29 +182,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         else {
             viewPager.setCurrentItem(next);
         }
-
-//        switch (curr){
-//            case 0:{
-//                initViewSignUp("회원가입 하기");
-//                break;
-//            }
-//            case 1:{
-//                initViewSignUp("학생정보 입력하기");
-//                break;
-//            }
-//            case 2:{
-//                initViewSignUp("비밀번호 설정하기");
-//                break;
-//            }
-//            case 3:{
-//                initViewSignUp("휴대폰 인증");
-//                break;
-//            }
-//            case 4:{
-//                initViewSignUp("회원 가입 완료하기");
-//                break;
-//            }
-//        }
     }
 
     @Override
