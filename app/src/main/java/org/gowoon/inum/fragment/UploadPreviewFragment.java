@@ -1,10 +1,7 @@
 package org.gowoon.inum.fragment;
 
 
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,7 +27,6 @@ import org.gowoon.inum.model.ProductOneItemResult;
 import org.gowoon.inum.util.Singleton;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -54,14 +50,15 @@ public class UploadPreviewFragment extends Fragment implements View.OnClickListe
     TextView tvName, tvState, tvPrice, tvPlace, tvMethod, tvStar, tvExplain, tvCategory;
     String name, state, place, method, explain, category, userId, token;
     int price;
+
     private ArrayList<Uri> imageUriList = new ArrayList<>();
     private ArrayList<MultipartBody.Part> imageFileList = new ArrayList<>();
     private AdapterViewPagerProduct mAdapter;
 
     private ViewPager viewPager;
-    private ImageButton declareBtn;
-    private LinearLayout sellersBtn;
     private com.pm10.library.CircleIndicator circleIndicator;
+
+    private static final String TAG = "Upload Preview";
 
     public UploadPreviewFragment() {
         // Required empty public constructor
@@ -94,23 +91,22 @@ public class UploadPreviewFragment extends Fragment implements View.OnClickListe
                             if (response.isSuccessful()){
                                 if (response.code()==200){
                                     Toast.makeText(getActivity(),"등록 완료",Toast.LENGTH_LONG).show();
-                                    Log.d("upload success","업로드 성공");
+                                    Log.d(TAG,"업로드 성공");
                                     Objects.requireNonNull(getActivity()).finish();
                                 }
                             }
                             else {
                                 Toast.makeText(getActivity(), "등록 실패", Toast.LENGTH_LONG).show();
-                                Log.d("upload fail","fail..");
+                                Log.d(TAG,"response err");
                             }
                         }
                         @Override
                         public void onFailure(Call<JsonObject> call, Throwable t) {
-                            Log.d("upload fail onFailure","fail..");
+                            Log.d(TAG,"retrofit on failure");
                             t.getMessage();
-                            Log.d("err msg",t.getMessage());
+                            Log.d(TAG+"error",t.getMessage());
                         }
                     });
-            Log.d("item info",name+price);
         });
 
         return rootView;
@@ -125,8 +121,8 @@ public class UploadPreviewFragment extends Fragment implements View.OnClickListe
     }
 
     private void includeViewSet(View root){
-        declareBtn = root.findViewById(R.id.btn_product_detail_declare);
-        sellersBtn = root.findViewById(R.id.layout_detail_other_product);
+        ImageButton declareBtn = root.findViewById(R.id.btn_product_detail_declare);
+        LinearLayout sellersBtn = root.findViewById(R.id.layout_detail_other_product);
 
         declareBtn.setVisibility(View.GONE);
         sellersBtn.setVisibility(View.GONE
@@ -193,8 +189,8 @@ public class UploadPreviewFragment extends Fragment implements View.OnClickListe
         tvStar = root.findViewById(R.id.tv_product_detail_current);
         tvExplain = root.findViewById(R.id.tv_product_detail_info);
 
-        Button btnRight = root.findViewById(R.id.btn_product_detail_right);
-        Button btnLeft = root.findViewById(R.id.btn_product_detail_left);
+        ImageButton btnRight = root.findViewById(R.id.btn_product_detail_right);
+        ImageButton btnLeft = root.findViewById(R.id.btn_product_detail_left);
         btnRight.setOnClickListener(this);
         btnLeft.setOnClickListener(this);
 
