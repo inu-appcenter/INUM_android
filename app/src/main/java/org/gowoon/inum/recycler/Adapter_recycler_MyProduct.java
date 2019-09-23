@@ -31,6 +31,10 @@ public class Adapter_recycler_MyProduct extends RecyclerView.Adapter<RecyclerVie
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.item_recyclerview_myproduct,parent,false);
+        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+        layoutParams.height = (int) (parent.getHeight() * 0.081);
+        view.setLayoutParams(layoutParams);
+
         ListViewHolder holder = new ListViewHolder(view);
         return holder;
     }
