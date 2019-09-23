@@ -92,6 +92,7 @@ public class UploadPreviewFragment extends Fragment implements View.OnClickListe
                                 if (response.code()==200){
                                     Toast.makeText(getActivity(),"등록 완료",Toast.LENGTH_LONG).show();
                                     Log.d(TAG,"업로드 성공");
+                                    Log.w(TAG,name+state+price+category+explain);
                                     Objects.requireNonNull(getActivity()).finish();
                                 }
                             }
@@ -244,5 +245,10 @@ public class UploadPreviewFragment extends Fragment implements View.OnClickListe
                 break;
             }
         }
+    }
+
+    // send retrofit plain text
+    private RequestBody setRequestBody(String data){
+        return RequestBody.create(MediaType.parse("text/plain"),data);
     }
 }
