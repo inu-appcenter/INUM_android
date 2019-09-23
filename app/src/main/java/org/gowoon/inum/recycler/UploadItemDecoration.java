@@ -13,10 +13,9 @@ public class UploadItemDecoration extends RecyclerView.ItemDecoration {
     private int MARGIN_WIDTH;
     private int MARGIN_HEIGHT;
 
-    public UploadItemDecoration(Context context) {
-
-        MARGIN_WIDTH = dpToPx(context, 9.6);
-        MARGIN_HEIGHT = dpToPx(context, 11.5);
+    public UploadItemDecoration(Context context,Float width, Float height) {
+        MARGIN_WIDTH = dpToPx(context, width);
+        MARGIN_HEIGHT = dpToPx(context, height);
     }
 
     @Override
@@ -28,7 +27,7 @@ public class UploadItemDecoration extends RecyclerView.ItemDecoration {
         int itemCount = state.getItemCount();
 
         //상하 설정
-        if(position == 0 || position == 1) {
+        if(position == 0 || position == 1 || position == 2 ||position == 3) {
             // 첫번 째 줄 아이템
             outRect.top = 0;
             outRect.bottom = MARGIN_HEIGHT;

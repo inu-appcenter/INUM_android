@@ -39,7 +39,7 @@ public class UploadImageFragment extends Fragment implements View.OnClickListene
     private AdapterRecyclerUploadImage rAdapter = new AdapterRecyclerUploadImage();
     private RecyclerView recyclerViewImage ;
     private LinearLayout layoutSelect;
-    TextView tvAddImage, tvDelete, tvImageNum , tvNext;
+    TextView tvAddImage, tvDelete, tvImageNum , tvNext, tvEmpty;
     private ArrayList<Uri> mListImage = new ArrayList<>();
     List<String> imageList = new ArrayList<>();
 
@@ -61,6 +61,7 @@ public class UploadImageFragment extends Fragment implements View.OnClickListene
         tvImageNum = rootView.findViewById(R.id.tv_upload_image_num);
         tvNext = getActivity().findViewById(R.id.tv_upload_next);
         tvNext.setOnClickListener(this);
+        tvEmpty = rootView.findViewById(R.id.tv_upload_image_no_input);
 
         layoutSelect = rootView.findViewById(R.id.linearLayout_upload_image_select);
         recyclerViewImage = rootView.findViewById(R.id.recyclerview_upload_image);
@@ -76,7 +77,8 @@ public class UploadImageFragment extends Fragment implements View.OnClickListene
         mLayoutManager = new GridLayoutManager(getActivity(),4);
         recyclerViewImage.setLayoutManager(mLayoutManager);
         recyclerViewImage.setItemAnimator(new DefaultItemAnimator());
-        recyclerViewImage.addItemDecoration(new UploadItemDecoration(getContext()));
+        recyclerViewImage.addItemDecoration(new UploadItemDecoration(getContext(),9.6f,11.5f));
+
         recyclerViewImage.setAdapter(rAdapter);
         rAdapter.setItemClick((view, position) -> {
             layoutSelect.setVisibility(View.VISIBLE);
@@ -118,7 +120,7 @@ public class UploadImageFragment extends Fragment implements View.OnClickListene
     }
 
     private void setImageData(ArrayList list){
-        ProductOneItemResult.getInstance().setProductImg(list);
+//        ProductOneItemResult.getInstance().setProductImg(list);
         ItemImageList.getInstance().setImageUri(list);
     }
 
@@ -155,13 +157,18 @@ public class UploadImageFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onClick(View view) {
-        mListImage.clear();
-        mListImage.addAll(rAdapter.mData);
-        mListImage.remove(mListImage.size()-1);
-        setImageData(mListImage);
+        if (imageNum==0){
+            tvEmpty.setVisibility(View.VISIBLE);
+        }else{
+            tvEmpty.setVisibility(View.INVISIBLE);
+            mListImage.clear();
+            mListImage.addAll(rAdapter.mData);
+            mListImage.remove(mListImage.size()-1);
+            setImageData(mListImage);
 
-        recyclerViewImage.removeAllViews();
-        changeFragment();
+            recyclerViewImage.removeAllViews();
+            changeFragment();
+        }
     }
 
     private void changeFragment(){
