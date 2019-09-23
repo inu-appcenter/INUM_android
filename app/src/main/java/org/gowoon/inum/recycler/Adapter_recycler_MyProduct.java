@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 
 import org.gowoon.inum.R;
 import org.gowoon.inum.custom.Adapter_dialog_product_menu;
@@ -27,38 +29,30 @@ public class Adapter_recycler_MyProduct extends RecyclerView.Adapter<RecyclerVie
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = null;
-
         inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        view = inflater.inflate(R.layout.item_recyclerview_myproduct,parent,false);
+        View view = inflater.inflate(R.layout.item_recyclerview_myproduct,parent,false);
         ListViewHolder holder = new ListViewHolder(view);
         return holder;
     }
 
     public void onBindViewHolder( RecyclerView.ViewHolder holder, final int position) {
         final SearchIdResult sData = data.get(position);
-        final ListViewHolder listholder = (ListViewHolder) holder;
-        listholder.product_name.setText(sData.getProductName());
+        final ListViewHolder listViewHolder = (ListViewHolder) holder;
+        float mScale = listViewHolder.product_img.getResources().getDisplayMetrics().density;
+        listViewHolder.product_name.setText(sData.getProductName());
 
-        Glide.with(listholder.product_img).load(Config.serverUrl + "imgload/"
+        Glide.with(listViewHolder.product_img).load(Config.serverUrl + "imgload/"
                 +sData.getSellerId()
                 +sData.getFileFolder()+"/"
                 +sData.getProductImg().get(0))
-                .into(listholder.product_img);
+                .apply(new RequestOptions().bitmapTransform(new RoundedCorners((int) (mScale*8))))
+                .into(listViewHolder.product_img);
 
-//        listholder.Rclayout.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v) {
-//            //    Intent intent = new Intent(v.getContext(), ProductDetail.class);
-//            //    v.getContext().startActivity(intent);
-//
-//            }
-//        });
-        listholder.more_btn.setOnClickListener(new View.OnClickListener(){
+        listViewHolder.more_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 final Adapter_dialog_product_menu dialogProductMenu = new Adapter_dialog_product_menu(inflater.getContext(),sData.getProductId());
-//                dialogProductMenu.setProductName(listholder.product_name.getText().toString());
+//                dialogProductMenu.setProductName(listViewHolder.product_name.getText().toString());
                 dialogProductMenu.show();
             }
         });
