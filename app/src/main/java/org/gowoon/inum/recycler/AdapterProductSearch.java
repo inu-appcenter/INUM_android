@@ -46,8 +46,12 @@ public class AdapterProductSearch extends RecyclerView.Adapter<AdapterProductSea
     @NonNull
     @Override
     public mViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_recyclerview_product,parent,false);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View view = inflater.inflate(R.layout.item_recyclerview_product,parent,false);
+        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+        layoutParams.width = (int) (parent.getWidth()*0.25);
+        view.setLayoutParams(layoutParams);
+
         return new AdapterProductSearch.mViewHolder(view);
     }
 
