@@ -5,8 +5,10 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,6 +34,7 @@ import org.gowoon.inum.activity.ProductActivity;
 import org.gowoon.inum.custom.AdapterGridCategory;
 import org.gowoon.inum.model.MainProductResult;
 import org.gowoon.inum.recycler.AdapterProductSearch;
+import org.gowoon.inum.recycler.SearchItemDecoration;
 import org.gowoon.inum.util.Singleton;
 
 import java.util.ArrayList;
@@ -214,6 +217,7 @@ public class SearchProductCategoryFragment extends Fragment implements View.OnCl
         etSearch = rootView.findViewById(R.id.etv_search_category_search);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void setRecyclerView(RecyclerView recyclerView, AdapterProductSearch Adapter){
         recyclerView.setHasFixedSize(true);
 
@@ -221,6 +225,7 @@ public class SearchProductCategoryFragment extends Fragment implements View.OnCl
         mLayoutManager = new GridLayoutManager(getActivity(),3);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new SearchItemDecoration(getContext(),20f,20f,12f));
         recyclerView.setAdapter(Adapter);
         Adapter.notifyDataSetChanged();
     }

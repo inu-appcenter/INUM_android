@@ -143,9 +143,7 @@
                     android:id="@+id/recyclerview_search_category"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="19.5dp"
-                    android:layout_marginStart="6.5dp"
-                    android:layout_marginEnd="6.5dp"
+                    android:layout_marginTop="29.5dp"
                     tools:listitem="@layout/item_recyclerview_product"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
