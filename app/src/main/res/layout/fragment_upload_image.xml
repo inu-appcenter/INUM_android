@@ -28,6 +28,7 @@
                 />
 
             <TextView
+                android:id="@+id/tv_upload_image_num"
                 style="@style/TextViewStyleSmall"
                 android:theme="@style/TextViewStyleSmall"
                 android:textColor="@color/dark_mint_green"
@@ -64,7 +65,6 @@
             android:layout_width="280dp"
             android:layout_height="111.7dp"
             android:orientation="vertical"
-            android:visibility="gone"
             android:layout_marginBottom="58dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -72,19 +72,20 @@
             android:gravity="center_horizontal"
             >
 
-<!--            <TextView-->
-<!--                android:id="@+id/tv_upload_image_camera"-->
-<!--                android:layout_width="268.8dp"-->
-<!--                android:layout_height="46.1dp"-->
-<!--                android:layout_marginTop="3dp"-->
-<!--                android:layout_marginBottom="11.5dp"-->
-<!--                android:elevation="5dp"-->
-<!--                android:background="@drawable/round_square_8dp"-->
-<!--                android:backgroundTint="#fff"-->
-<!--                android:gravity="center"-->
-<!--                android:text="촬영하기"-->
-<!--                android:textColor="@color/gunmetal"-->
-<!--                android:textSize="16sp" />-->
+            <TextView
+                android:id="@+id/tv_upload_image_delete"
+                android:layout_width="268.8dp"
+                android:layout_height="46.1dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="11.5dp"
+                android:elevation="5dp"
+                android:background="@drawable/round_square_8dp"
+                android:backgroundTint="@color/salmon"
+                android:gravity="center"
+                android:text="삭제"
+                android:visibility="gone"
+                android:textColor="@color/pale_grey"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tv_upload_image_multi"
@@ -95,6 +96,7 @@
                 android:backgroundTint="#fff"
                 android:gravity="center"
                 android:text="여러장 선택"
+                android:visibility="gone"
                 android:textColor="@color/gunmetal"
                 android:textSize="16sp"
                 android:layout_marginBottom="3dp"

@@ -2,9 +2,6 @@ package org.gowoon.inum.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +9,9 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import org.gowoon.inum.R;
 import org.gowoon.inum.custom.AdapterViewPagerProduct;
@@ -21,7 +21,6 @@ import org.gowoon.inum.util.Singleton;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import me.relex.circleindicator.CircleIndicator;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -39,7 +38,6 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
     String productId, sellerId, fileFolder;
 
     ViewPager viewPager;
-    CircleIndicator indicator;
     com.pm10.library.CircleIndicator circleIndicator;
 
 
@@ -146,7 +144,6 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
         tvStar = findViewById(R.id.tv_product_detail_current);
 
         viewPager = findViewById(R.id.viewpager_product_detail_image);
-//        indicator = findViewById(R.id.indicator_product_image);
         circleIndicator = findViewById(R.id.indicator_product_circle);
 
         Intent intent = getIntent();

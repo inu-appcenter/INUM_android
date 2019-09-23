@@ -42,4 +42,5 @@
     <!--upload-->
     <color name="dark_mint_green">#1ac07a</color>
     <color name="pinkish_grey_two">#cccccc</color>
+    <color name="salmon">#ff6e66</color>
 </resources>

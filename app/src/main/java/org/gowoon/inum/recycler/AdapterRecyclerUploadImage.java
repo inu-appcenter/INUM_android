@@ -21,8 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterRecyclerUploadImage extends RecyclerView.Adapter<AdapterRecyclerUploadImage.ViewHolder>{
-//    private ArrayList<ItemImageList> data = new ArrayList<>(8);
-    private ArrayList<Uri> mData = new ArrayList<>();
+    public ArrayList<Uri> mData = new ArrayList<>();
     public AdapterRecyclerUploadImage(){}
     public ItemClick itemClick;
 
@@ -70,7 +69,7 @@ public class AdapterRecyclerUploadImage extends RecyclerView.Adapter<AdapterRecy
 
         Glide.with(holder.image).load(mData.get(position))
                 .apply(new RequestOptions().override(191,191).centerCrop())
-                .apply(new RequestOptions().bitmapTransform(new RoundedCorners((int) (mScale*6.9))))
+                .apply(new RequestOptions().bitmapTransform(new RoundedCorners((int) (mScale*8))))
                 .into(holder.image);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,5 +89,9 @@ public class AdapterRecyclerUploadImage extends RecyclerView.Adapter<AdapterRecy
     public void addItem(List<? extends Uri> item){
         mData.addAll(0,item);
         notifyDataSetChanged();
+    }
+
+    public boolean getItemStyle(int position){
+        return position != mData.size() - 1;
     }
 }
