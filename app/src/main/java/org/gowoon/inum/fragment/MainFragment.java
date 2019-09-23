@@ -48,6 +48,10 @@ public class MainFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootview = inflater.inflate(R.layout.fragment_main, container, false);
 
+        /*
+        TODO
+        AutoScroll Viewpager Library Change
+         */
         bannerViewPager = rootview.findViewById(R.id.viewpager_main_banner);
         setBanner(bannerViewPager);
         setBannerData(bannerViewPager);
