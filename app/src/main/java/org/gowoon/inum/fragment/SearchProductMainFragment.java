@@ -4,8 +4,11 @@ package org.gowoon.inum.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.app.Fragment;
+
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +22,7 @@ import org.gowoon.inum.R;
 import org.gowoon.inum.activity.ProductActivity;
 import org.gowoon.inum.model.MainProductResult;
 import org.gowoon.inum.recycler.AdapterProductSearch;
+import org.gowoon.inum.recycler.SearchItemDecoration;
 import org.gowoon.inum.util.Singleton;
 
 import java.util.ArrayList;
@@ -42,6 +46,7 @@ public class SearchProductMainFragment extends Fragment {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -112,6 +117,7 @@ public class SearchProductMainFragment extends Fragment {
         mLayoutManager = new GridLayoutManager(getActivity(),3);
         recyclersearch.setLayoutManager(mLayoutManager);
         recyclersearch.setItemAnimator(new DefaultItemAnimator());
+        recyclersearch.addItemDecoration(new SearchItemDecoration(getContext(),20f,20f,12.5f));
         return rootview;
     }
 }

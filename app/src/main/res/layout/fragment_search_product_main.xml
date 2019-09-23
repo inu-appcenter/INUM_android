@@ -20,11 +20,11 @@
             android:layout_width="wrap_content"
             android:layout_height="18dp"
             android:layout_marginStart="28dp"
-            android:layout_marginTop="7dp"
             android:text="검색결과 00"
             android:textColor="@color/gunmetal"
             android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_search_product_main_searchtxt"
@@ -69,8 +69,6 @@
             android:id="@+id/recyclerView_search_product_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginEnd="7.5dp"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="67dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
