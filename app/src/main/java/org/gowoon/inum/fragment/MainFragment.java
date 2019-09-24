@@ -57,13 +57,10 @@ public class MainFragment extends Fragment {
         setBannerData(bannerViewPager);
 
         btn_message = rootview.findViewById(R.id.constraint_main_message);
-        btn_message.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent_message = new Intent(getActivity(), ChatActivity.class);
-                startActivity(intent_message);
+        btn_message.setOnClickListener(view -> {
+            Intent intent_message = new Intent(getActivity(), ChatActivity.class);
+            startActivity(intent_message);
 
-            }
         });
 
         ((MainActivity) Objects.requireNonNull(getActivity())).backPressHolder();
@@ -108,33 +105,24 @@ public class MainFragment extends Fragment {
         Adapter_book = new AdapterProductMain();
         Adapter_room = new AdapterProductMain();
 
-        Adapter_book.setItemClick(new AdapterProductMain.ItemClick() {
-            @Override
-            public void onClick(View view, int position) {
-                String productId = Adapter_book.mDataset.get(position).getProductId();
-                Intent intentProductDetail = new Intent(getActivity(), ProductActivity.class);
-                intentProductDetail.putExtra("id", productId);
-                startActivity(intentProductDetail);
-            }
+        Adapter_book.setItemClick((view, position) -> {
+            String productId = Adapter_book.mDataset.get(position).getProductId();
+            Intent intentProductDetail = new Intent(getActivity(), ProductActivity.class);
+            intentProductDetail.putExtra("id", productId);
+            startActivity(intentProductDetail);
         });
 
-        Adapter_ticket.setItemClick(new AdapterProductMain.ItemClick() {
-            @Override
-            public void onClick(View view, int position) {
-                String productId = Adapter_ticket.mDataset.get(position).getProductId();
-                Intent intentProductDetail = new Intent(getActivity(), ProductActivity.class);
-                intentProductDetail.putExtra("id", productId);
-                startActivity(intentProductDetail);
-            }
+        Adapter_ticket.setItemClick((view, position) -> {
+            String productId = Adapter_ticket.mDataset.get(position).getProductId();
+            Intent intentProductDetail = new Intent(getActivity(), ProductActivity.class);
+            intentProductDetail.putExtra("id", productId);
+            startActivity(intentProductDetail);
         });
-        Adapter_room.setItemClick(new AdapterProductMain.ItemClick() {
-            @Override
-            public void onClick(View view, int position) {
-                String productId = Adapter_room.mDataset.get(position).getProductId();
-                Intent intentProductDetail = new Intent(getActivity(), ProductActivity.class);
-                intentProductDetail.putExtra("id", productId);
-                startActivity(intentProductDetail);
-            }
+        Adapter_room.setItemClick((view, position) -> {
+            String productId = Adapter_room.mDataset.get(position).getProductId();
+            Intent intentProductDetail = new Intent(getActivity(), ProductActivity.class);
+            intentProductDetail.putExtra("id", productId);
+            startActivity(intentProductDetail);
         });
 
         recyclerView_book = (RecyclerView) rootview.findViewById(R.id.recyclerview_main_product_book);
@@ -182,5 +170,11 @@ public class MainFragment extends Fragment {
 
         scrollAdapter = new AdapterAutoScrollViewpager(getActivity(),data);
         bannerViewPager.setAdapter(scrollAdapter);
+    }
+
+    private void setPercent(View rootView, RecyclerView recyclerView){
+        ViewGroup.LayoutParams layoutParams = recyclerView.getLayoutParams();
+        layoutParams.width = (int) (rootView.getWidth()*0.288);
+        recyclerView.setLayoutParams(layoutParams);
     }
 }
