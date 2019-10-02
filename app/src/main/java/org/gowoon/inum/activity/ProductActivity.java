@@ -10,11 +10,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
+
 import org.gowoon.inum.R;
 import org.gowoon.inum.custom.AdapterViewPagerProduct;
+import org.gowoon.inum.custom.Adapter_dialog_declare;
+import org.gowoon.inum.custom.Adapter_dialog_onebutton;
 import org.gowoon.inum.model.ProductOneItemResult;
 import org.gowoon.inum.util.Singleton;
 
@@ -34,7 +39,9 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
     ArrayList<String> arrayImage;
 
     AdapterViewPagerProduct vAdapter;
-    String productId, sellerId, fileFolder;
+
+    String productId, sellerId,declareKind, fileFolder;
+
     ViewPager viewPager;
     CircleIndicator indicator;
     com.pm10.library.CircleIndicator circleIndicator;
@@ -46,8 +53,11 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
 
         ImageButton btn_left = findViewById(R.id.btn_product_detail_left);
         ImageButton btn_right = findViewById(R.id.btn_product_detail_right);
-        btn_left.setOnClickListener(this);
-        btn_right.setOnClickListener(this);
+
+
+        ImageButton btn_declare = findViewById(R.id.btn_product_detail_declare);
+
+        final RadioGroup declareRadioGroup = findViewById(R.id.radio_group_declare);
 
         arrayImage = new ArrayList<>();
 
@@ -72,7 +82,61 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
         Log.d("product id", productId);
 
         SharedPreferences pref = getSharedPreferences("userinfo",MODE_PRIVATE);
-        String token = pref.getString("token","");
+        final String token = pref.getString("token","");
+
+        btn_left.setOnClickListener(this);
+        btn_right.setOnClickListener(this);
+
+        btn_declare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Adapter_dialog_declare dialog_declare = new Adapter_dialog_declare(ProductActivity.this);
+                declareKind=dialog_declare.kind;
+                dialog_declare.show();
+                dialog_declare.setOnDeclareButtonClickListener(new Adapter_dialog_declare.OnDeclareButtonClickListener() {
+                    @Override
+                    public void onClick() {
+                        Singleton.retrofit.declare(token, declareKind, productId).enqueue(new Callback<JsonObject>() {
+                                    @Override
+                                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                                        if(response.isSuccessful()){
+                                            Log.v("token", token+" kind: "+ declareKind+ " productID: " + productId);
+                                            JsonObject result = response.body();
+                                            if (result.get("ans").equals("true")) {
+                                                Log.v("declare", "성공");
+                                                Adapter_dialog_onebutton dialog_onebutton = new Adapter_dialog_onebutton(ProductActivity.this, "상품 신고가 완료되었습니다.");
+                                                dialog_onebutton.show();
+                                                dialog_onebutton.setOnOkButtonClickListener(new Adapter_dialog_onebutton.OnOkButtonClickListener() {
+                                                    @Override
+                                                    public void onClick() {
+                                                        Intent intent_declare = new Intent(String.valueOf(ProductActivity.class));
+                                                        startActivity(intent_declare);
+                                                    }
+                                                });
+                                            }
+                                            else {
+                                                Log.v("declare", "실패");
+                                                Toast.makeText(ProductActivity.this,"신고에 실패하였습니다. 다시 시도해주세요",Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    }
+                                    @Override
+                                    public void onFailure(Call<JsonObject> call, Throwable t) {
+                                        Log.v("token", token+" kind: "+ declareKind+ " productID: " + productId);
+                                        Toast.makeText(ProductActivity.this,"서버 연결상태를 확인해주세요",Toast.LENGTH_SHORT)
+                                                .show();
+                                    }
+                                });
+                    }
+                });
+                dialog_declare.setOnDeclareCancelButtonClickListener(new Adapter_dialog_declare.OnCancelButtonClickListener() {
+                    @Override
+                    public void onClick() {
+                        Toast.makeText(ProductActivity.this, "신고를 취소하였습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
 
         if (productId != null){
             Singleton.retrofit.productOneItem(token,productId).enqueue(new Callback<ProductOneItemResult>() {

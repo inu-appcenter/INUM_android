@@ -58,6 +58,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <ImageButton
+                android:id="@+id/btn_product_detail_declare"
+                android:layout_marginTop="20dp"
+                android:layout_width="92dp"
+                android:layout_height="48dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@drawable/declare"
+                />
+
             <TextView
                 android:id="@+id/tv_product_detail_name"
                 android:layout_width="wrap_content"

@@ -38,7 +38,8 @@ public class SignUpInfoFragment extends Fragment {
 
         init(rootview);
         setSpinner(spinner,majorList);
-        ((SignUpActivity)getActivity()).initViewSignUp("학생정보 입력하기");
+//        ((SignUpActivity)getActivity()).initViewSignUp("학생정보 입력하기");
+        ((SignUpActivity)getActivity()).stepView(1,0,-1,-1,-1);
 
         rootview.findViewById(R.id.btn_sign_up_next).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +61,7 @@ public class SignUpInfoFragment extends Fragment {
                     tvErrNoInput.setVisibility(View.INVISIBLE);
                     UserData.getInstance().setName(name);
                     UserData.getInstance().setId(id);
+//                    getFragmentManager().beginTransaction().replace(R.id.container_signup, new SignUpPhoneFragment()).commit();
                     ((SignUpActivity)getActivity()).setViewPagerNext();
                 }
                 else{
@@ -95,6 +97,7 @@ public class SignUpInfoFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 major = dummyList.get(position);
+                UserData.getInstance().setMajor(major);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {

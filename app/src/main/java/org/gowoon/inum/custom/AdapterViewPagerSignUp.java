@@ -5,12 +5,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import org.gowoon.inum.activity.SignUpActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterViewPagerSignUp extends FragmentPagerAdapter {
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private List<Integer> mFragmentStep = new ArrayList<>();
+
+
 
     public AdapterViewPagerSignUp(FragmentManager fm) {
         super(fm);

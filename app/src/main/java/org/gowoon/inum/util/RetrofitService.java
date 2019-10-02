@@ -112,6 +112,12 @@ public interface RetrofitService {
     Call<JsonObject>
     report(@Header("x-access-token") String userToken, @Field("kind") String kind, @Field("context") String context);
 
+    //report
+    @FormUrlEncoded
+    @POST("report/")
+    Call<JsonObject>
+    declare(@Header("x-access-token") String userToken, @Field("kind") String kind, @Field("productId") String productId);
+
     // Product
     //`upload
     @Multipart

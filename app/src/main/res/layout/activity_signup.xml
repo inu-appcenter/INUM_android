@@ -10,7 +10,6 @@
     <TextView
         android:id="@+id/tv_sign_up_title"
         style="@style/TextViewStyleTitle"
-        android:text="회원가입하기"
         android:theme="@style/TextViewStyleTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,6 +27,6 @@
         android:layout_width="match_parent"
         android:layout_height="42dp"
         android:layout_centerInParent="true"
-        app:layout_constraintBottom_toTopOf="@+id/viewpager_sign_up"
+        app:layout_constraintTop_toTopOf= "parent"
         />
 </android.support.constraint.ConstraintLayout>

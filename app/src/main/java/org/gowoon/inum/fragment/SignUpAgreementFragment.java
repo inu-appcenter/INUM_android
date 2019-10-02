@@ -22,7 +22,8 @@ public class SignUpAgreementFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((SignUpActivity) getActivity()).initViewSignUp("회원가입 하기");
+//        ((SignUpActivity) getActivity()).initViewSignUp("회원가입 하기");
+        ((SignUpActivity)getActivity()).stepView(0,-1,-1,-1,-1);
     }
 
     @Override
@@ -38,13 +39,13 @@ public class SignUpAgreementFragment extends Fragment {
             public void onClick(View view) {
                 if (checkBox.isChecked()) {
                     message.setVisibility(View.INVISIBLE);
+//                    getFragmentManager().beginTransaction().replace(R.id.container_signup,new SignUpInfoFragment()).commit();
                     ((SignUpActivity)getActivity()).setViewPagerNext();
                 }else {
                     message.setVisibility(View.VISIBLE);
                 }
             }
         });
-
         return rootview;
     }
 }

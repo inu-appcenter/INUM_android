@@ -40,6 +40,7 @@ public class AdapterViewPagerProduct extends PagerAdapter {
         return view;
     }
 
+
     @Override
     public int getCount() {
         return mResources.size();

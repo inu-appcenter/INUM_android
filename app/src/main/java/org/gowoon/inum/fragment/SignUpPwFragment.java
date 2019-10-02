@@ -2,6 +2,7 @@ package org.gowoon.inum.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,12 +29,14 @@ public class SignUpPwFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
 
         View rootview = inflater.inflate(R.layout.fragment_signup_pw,container,false);
 
-        ((SignUpActivity) getActivity()).initViewSignUp("비밀번호 설정하기");
+//        ((SignUpActivity) getActivity()).initViewSignUp("비밀번호 설정하기");
+        ((SignUpActivity)getActivity()).stepView(1,1,0,-1,-1);
+
         viewSet(rootview);
 
         rootview.findViewById(R.id.btn_sign_up_next).setOnClickListener(new View.OnClickListener() {
@@ -54,6 +57,8 @@ public class SignUpPwFragment extends Fragment {
                             tvPwAgainErr.setVisibility(View.INVISIBLE);
 
                             setInfo(passWd);
+                            Log.v("pw: ",UserData.getInstance().getPasswd());
+//                            getFragmentManager().beginTransaction().replace(R.id.container_signup, new SignUpReviewFragment()).commit();
                             ((SignUpActivity)getActivity()).setViewPagerNext();
                         }
                         else {
