@@ -59,7 +59,6 @@ public class SettingPhoneChangeFragment extends Fragment {
                         @Override
                         public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                             if(response.code()==200){
-                                userTel = newTel;
                                 FragmentManager fragmentManager = getActivity().getFragmentManager();
                                 fragmentManager.beginTransaction()
                                         .remove(SettingPhoneChangeFragment.this).commit();

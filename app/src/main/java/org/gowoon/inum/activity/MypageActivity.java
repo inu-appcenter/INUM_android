@@ -33,6 +33,12 @@ public class MypageActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        getUserInfo();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mypage);
@@ -41,7 +47,7 @@ public class MypageActivity extends AppCompatActivity {
 
         listview = findViewById(R.id.listview_mypage);
         listview.setAdapter(adapter);
-        getUserInfo();
+//        getUserInfo();
         final AdapterDialogTwoButton dialogLogout =
                 new AdapterDialogTwoButton(this,"확인을 누르시면\n로그아웃 후 로그인 화면으로 이동합니다");
 
@@ -128,6 +134,7 @@ public class MypageActivity extends AppCompatActivity {
             public void onResponse(Call<UserInfoVO> call, Response<UserInfoVO> response) {
                 if (response.code()==200){
                     tel = response.body().getTel();
+                    Log.w("user Tel",tel);
                 }
                 else {
                     Log.d("user info load err","err");
