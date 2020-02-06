@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.gowoon.inum.R;
 import org.gowoon.inum.custom.AdapterDialogTwoButton;
-import org.gowoon.inum.custom.Adapter_listview_setting;
+import org.gowoon.inum.custom.AdapterListSetting;
 import org.gowoon.inum.fragment.SettingPhoneChangeFragment;
 import org.gowoon.inum.fragment.SettingPushAlarmFragment;
 import org.gowoon.inum.fragment.SettingPwChangeFragment;
@@ -27,7 +27,7 @@ import retrofit2.Response;
 public class MypageActivity extends AppCompatActivity {
 
     ListView listview;
-    Adapter_listview_setting adapter;
+    AdapterListSetting adapter;
     String[] item;
     private String id, token, tel;
     SharedPreferences.Editor editor;
@@ -43,7 +43,7 @@ public class MypageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mypage);
 
-        adapter = new Adapter_listview_setting();
+        adapter = new AdapterListSetting();
 
         listview = findViewById(R.id.listview_mypage);
         listview.setAdapter(adapter);

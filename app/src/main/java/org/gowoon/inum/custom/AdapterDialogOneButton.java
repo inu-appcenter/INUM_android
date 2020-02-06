@@ -15,11 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class Adapter_dialog_onebutton extends Dialog {
-
-//    public Adapter_dialog_onebutton(@NonNull Context context) {
-//        super(context);
-//    }
+public class AdapterDialogOneButton extends Dialog {
 
     @BindView(R.id.btn_di_submit) protected Button okButton;
 
@@ -39,14 +35,14 @@ public class Adapter_dialog_onebutton extends Dialog {
         setContentView(R.layout.dialog_custom_onebutton);
         ButterKnife.bind(this);
         mTitleView = findViewById(R.id.txt_di_one);
-        setdialogtxt(mTitle);
+        setDialogTitle(mTitle);
     }
-    public Adapter_dialog_onebutton(Context context, String title){
+    public AdapterDialogOneButton(Context context, String title){
         super(context);
         this.mTitle = title;
     }
 
-    public void setdialogtxt(String text){
+    public void setDialogTitle(String text){
         mTitleView.setText(text);
     }
 

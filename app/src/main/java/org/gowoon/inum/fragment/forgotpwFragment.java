@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.google.gson.JsonObject;
 
 import org.gowoon.inum.R;
-import org.gowoon.inum.custom.Adapter_dialog_onebutton;
+import org.gowoon.inum.custom.AdapterDialogTwoButton;
 import org.gowoon.inum.util.Singleton;
 import org.w3c.dom.Text;
 
@@ -56,10 +56,10 @@ public class forgotpwFragment extends Fragment {
                                 Log.d("비밀번호 찾기",""+result);
                                 if(String.valueOf(result.get("ans")).equals("true")){
                                     tv_err.setVisibility(View.INVISIBLE);
-                                    Adapter_dialog_onebutton dialog = new Adapter_dialog_onebutton(getActivity(),"인천대 포탈 웹메일로\n임시 비밀번호가 발송되었습니다!");
+                                    AdapterDialogTwoButton dialog = new AdapterDialogTwoButton(getActivity(),"인천대 포탈 웹메일로\n임시 비밀번호가 발송되었습니다!");
                                     dialog.show();
 
-                                    dialog.setOnOkButtonClickListener(new Adapter_dialog_onebutton.OnOkButtonClickListener() {
+                                    dialog.setOnOkButtonClickListener(new AdapterDialogTwoButton.OnOkButtonClickListener() {
                                         @Override
                                         public void onClick() {
                                             FragmentManager fragmentManager = getActivity().getFragmentManager();

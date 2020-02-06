@@ -23,7 +23,7 @@ import com.google.gson.JsonObject;
 import org.gowoon.inum.R;
 import org.gowoon.inum.activity.LoginActivity;
 import org.gowoon.inum.activity.MainActivity;
-import org.gowoon.inum.custom.Adapter_dialog_onebutton;
+import org.gowoon.inum.custom.AdapterDialogTwoButton;
 import org.gowoon.inum.custom.AdapterDialogTwoButton;
 import org.gowoon.inum.util.Singleton;
 
@@ -165,7 +165,7 @@ public class SettingPwChangeFragment extends Fragment {
                         });
                     }
                 }else {
-                    Adapter_dialog_onebutton dialogInCorrect = new Adapter_dialog_onebutton(getActivity(), "현재 비밀번호가\n일치하지 않습니다.");
+                    AdapterDialogTwoButton dialogInCorrect = new AdapterDialogTwoButton(getActivity(), "현재 비밀번호가\n일치하지 않습니다.");
                     dialogInCorrect.show();
                 }
             }
