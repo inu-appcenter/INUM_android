@@ -18,7 +18,7 @@ import android.widget.Toast;
 import com.google.gson.JsonObject;
 
 import org.gowoon.inum.R;
-import org.gowoon.inum.custom.Adapter_dialog_twobutton;
+import org.gowoon.inum.custom.AdapterDialogTwoButton;
 import org.gowoon.inum.util.Singleton;
 
 import retrofit2.Call;
@@ -27,11 +27,10 @@ import retrofit2.Response;
 
 public class SettingPhoneChangeFragment extends Fragment {
     Button btnChangeTel;
-    TextView tvCurrentTel, tvNoInput;
+    TextView tvCurrentTel;
     EditText editNewTel;
-    Adapter_dialog_twobutton dialog;
+    AdapterDialogTwoButton dialog;
     String password,userTel,newTel;
-    SharedPreferences.Editor editor;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,7 +44,7 @@ public class SettingPhoneChangeFragment extends Fragment {
         tvCurrentTel = rootview.findViewById(R.id.tv_setting_phonechange_current_num);
         tvCurrentTel.setText(userTel);
         editNewTel = rootview.findViewById(R.id.etv_setting_phonechange_newnum);
-        dialog = new Adapter_dialog_twobutton(getActivity(),"확인을 누르시면 새로운\n전화번호로 변경됩니다.");
+        dialog = new AdapterDialogTwoButton(getActivity(),"확인을 누르시면 새로운\n전화번호로 변경됩니다.");
 
         btnChangeTel = rootview.findViewById(R.id.btn_setting_phone_change);
         btnChangeTel.setOnClickListener(view -> {
@@ -56,34 +55,23 @@ public class SettingPhoneChangeFragment extends Fragment {
 
                 dialog.setOnOkButtonClickListener(() -> {
                     Log.d("newTel", newTel);
-
-                    Singleton.retrofit.changeTel(pref.getString("token",""), password ,newTel).enqueue(new Callback<JsonObject>() {
+                    Singleton.retrofit.changeTel(pref.getString("token",""), "0" ,newTel).enqueue(new Callback<JsonObject>() {
                         @Override
                         public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                            if(response.isSuccessful()){
-                                assert response.body() != null;
-                                JsonObject result = response.body();
-                                Log.d("changeTel_test",""+result);
-                                if(String.valueOf(result.get("ans")).equals("true")){
-                                    if(!userTel.equals(newTel)){
-                                        editor = pref.edit();
-                                        editor.putString("tel", newTel);
-                                        editor.apply();
-                                        tvCurrentTel.setText(newTel);
-                                        FragmentManager fragmentManager = getActivity().getFragmentManager();
-                                        fragmentManager.beginTransaction()
-                                                .remove(SettingPhoneChangeFragment.this).commit();
-                                        Toast.makeText(getActivity(),"전화번호 변경 성공!",Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                                else{
-                                    Toast.makeText(getActivity(),"전화번호 변경 실패",Toast.LENGTH_SHORT).show();
-                                }
+                            if(response.code()==200){
+                                userTel = newTel;
+                                FragmentManager fragmentManager = getActivity().getFragmentManager();
+                                fragmentManager.beginTransaction()
+                                        .remove(SettingPhoneChangeFragment.this).commit();
+                                Toast.makeText(getActivity(),"전화번호 변경 성공!",Toast.LENGTH_SHORT).show();
+                            }
+                            else{
+                                Toast.makeText(getActivity(),"전화번호 변경 실패",Toast.LENGTH_SHORT).show();
                             }
                         }
                         @Override
                         public void onFailure(Call<JsonObject> call, Throwable t) {
-
+                            Toast.makeText(getActivity(),"서버 연결을 확인해주세요",Toast.LENGTH_SHORT).show();
                         }
                     });
                 });

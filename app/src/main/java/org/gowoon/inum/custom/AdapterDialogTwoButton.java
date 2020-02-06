@@ -15,12 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class Adapter_dialog_twobutton extends Dialog {
-
-//    public Adapter_dialog_twobutton(@NonNull Context context) {
-//        super(context);
-//    }
-
+public class AdapterDialogTwoButton extends Dialog {
     @BindView(R.id.btn_di_twobutton_submit) protected Button okButton;
     @BindView(R.id.btn_di_twobutton_cancle) protected Button cancelButton;
 
@@ -47,7 +42,7 @@ public class Adapter_dialog_twobutton extends Dialog {
         setdialogtxt(mTitle);
 
     }
-    public Adapter_dialog_twobutton(Context context, String title){
+    public AdapterDialogTwoButton(Context context, String title){
         super(context);
         this.mTitle = title;
     }

@@ -24,7 +24,7 @@ import org.gowoon.inum.R;
 import org.gowoon.inum.activity.LoginActivity;
 import org.gowoon.inum.activity.MainActivity;
 import org.gowoon.inum.custom.Adapter_dialog_onebutton;
-import org.gowoon.inum.custom.Adapter_dialog_twobutton;
+import org.gowoon.inum.custom.AdapterDialogTwoButton;
 import org.gowoon.inum.util.Singleton;
 
 import retrofit2.Call;
@@ -124,9 +124,9 @@ public class SettingPwChangeFragment extends Fragment {
                 currentPw = etCurrentPw.getText().toString().trim();
                 if (pw.equals(currentPw)) {
                     if (sameCurrent && length) {
-                        Adapter_dialog_twobutton dialog = new Adapter_dialog_twobutton(getActivity(), "확인을 누르시면 새로운\n 비밀번호로 변경됩니다.");
+                        AdapterDialogTwoButton dialog = new AdapterDialogTwoButton(getActivity(), "확인을 누르시면 새로운\n 비밀번호로 변경됩니다.");
                         dialog.show();
-                        dialog.setOnOkButtonClickListener(new Adapter_dialog_twobutton.OnOkButtonClickListener() {
+                        dialog.setOnOkButtonClickListener(new AdapterDialogTwoButton.OnOkButtonClickListener() {
                             @Override
                             public void onClick() {
                                 String newPw = etNewPwAgain.getText().toString().trim();
