@@ -74,7 +74,7 @@ public class Adapter_dialog_product_menu extends Dialog {
     }
 
     @OnClick(R.id.btn_dialog_product_menu_cancle)
-    public void cancleButton(){
+    public void cancelButton(){
         if(cancelButtonClickListener != null){
             cancelButtonClickListener.onClick();
         }

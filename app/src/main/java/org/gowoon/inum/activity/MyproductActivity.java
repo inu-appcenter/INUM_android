@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.gowoon.inum.R;
 import org.gowoon.inum.model.SearchIdResult;
-import org.gowoon.inum.recycler.Adapter_recycler_MyProduct;
+import org.gowoon.inum.recycler.AdapterMyProduct;
 import org.gowoon.inum.util.Singleton;
 
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import retrofit2.Response;
 public class MyproductActivity extends AppCompatActivity {
 
     RecyclerView myproduct;
-    Adapter_recycler_MyProduct mAdapter;
+    AdapterMyProduct mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class MyproductActivity extends AppCompatActivity {
         SharedPreferences pref = Objects.requireNonNull(this).getSharedPreferences("userinfo",MODE_PRIVATE);
         String id = pref.getString("userid","");
         myproduct = findViewById(R.id.recyclerview_myproduct);
-        mAdapter = new Adapter_recycler_MyProduct();
+        mAdapter = new AdapterMyProduct();
 
         Singleton.retrofit.searchId(pref.getString("token",""),id).enqueue(new Callback<ArrayList<SearchIdResult>>() {
             @Override
