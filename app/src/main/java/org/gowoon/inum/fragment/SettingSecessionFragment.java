@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.google.gson.JsonObject;
 
 import org.gowoon.inum.R;
-import org.gowoon.inum.custom.Adapter_dialog_twobutton;
+import org.gowoon.inum.custom.AdapterDialogTwoButton;
 import org.gowoon.inum.util.Singleton;
 
 import retrofit2.Call;
@@ -45,8 +45,8 @@ public class SettingSecessionFragment extends Fragment {
         noinput = rootview.findViewById(R.id.tv_setting_secession_noinput);
         incorrect = rootview.findViewById(R.id.tv_setting_secession_incorrect);
 
-        final Adapter_dialog_twobutton dialog_out
-                = new Adapter_dialog_twobutton(getActivity(),"확인을 누르시면 회원 탈퇴됩니다.");
+        final AdapterDialogTwoButton dialog_out
+                = new AdapterDialogTwoButton(getActivity(),"확인을 누르시면 회원 탈퇴됩니다.");
 
         btnSecession = rootview.findViewById(R.id.btn_setting_secession);
         btnSecession.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +69,7 @@ public class SettingSecessionFragment extends Fragment {
             }
         });
 
-        dialog_out.setOnOkButtonClickListener(new Adapter_dialog_twobutton.OnOkButtonClickListener() {
+        dialog_out.setOnOkButtonClickListener(new AdapterDialogTwoButton.OnOkButtonClickListener() {
             @Override
             public void onClick() {
                 Singleton.retrofit.secession(userId, userPw).enqueue(new Callback<JsonObject>() {

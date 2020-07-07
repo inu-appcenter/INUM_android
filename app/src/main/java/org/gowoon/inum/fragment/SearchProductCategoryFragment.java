@@ -5,8 +5,10 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,7 +33,8 @@ import org.gowoon.inum.R;
 import org.gowoon.inum.activity.ProductActivity;
 import org.gowoon.inum.custom.AdapterGridCategory;
 import org.gowoon.inum.model.MainProductResult;
-import org.gowoon.inum.recycler.Adapter_recycler_ProductSearch;
+import org.gowoon.inum.recycler.AdapterProductSearch;
+import org.gowoon.inum.recycler.SearchItemDecoration;
 import org.gowoon.inum.util.Singleton;
 
 import java.util.ArrayList;
@@ -49,7 +52,7 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class SearchProductCategoryFragment extends Fragment implements View.OnClickListener {
     RecyclerView recyclerView;
-    private Adapter_recycler_ProductSearch Adapter = new Adapter_recycler_ProductSearch();;
+    private AdapterProductSearch Adapter = new AdapterProductSearch();;
 
     EditText etSearch;
 
@@ -153,7 +156,7 @@ public class SearchProductCategoryFragment extends Fragment implements View.OnCl
         tvCategory.setText(parent + " " + child);
         ivIcon.setImageDrawable(menu.getItem(groupPosition).getIcon());
 
-        Adapter.setItemClick(new Adapter_recycler_ProductSearch.ItemClick() {
+        Adapter.setItemClick(new AdapterProductSearch.ItemClick() {
             @Override
             public void onClick(View view, int position) {
                 String productId = Adapter.mData.get(position).getProductId();
@@ -214,13 +217,15 @@ public class SearchProductCategoryFragment extends Fragment implements View.OnCl
         etSearch = rootView.findViewById(R.id.etv_search_category_search);
     }
 
-    public void setRecyclerView(RecyclerView recyclerView, Adapter_recycler_ProductSearch Adapter){
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void setRecyclerView(RecyclerView recyclerView, AdapterProductSearch Adapter){
         recyclerView.setHasFixedSize(true);
 
         RecyclerView.LayoutManager mLayoutManager;
         mLayoutManager = new GridLayoutManager(getActivity(),3);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new SearchItemDecoration(getContext(),20f,20f,12f));
         recyclerView.setAdapter(Adapter);
         Adapter.notifyDataSetChanged();
     }

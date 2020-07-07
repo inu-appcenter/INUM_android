@@ -21,7 +21,7 @@ import org.gowoon.inum.activity.MainActivity;
 import org.gowoon.inum.activity.ProductActivity;
 import org.gowoon.inum.custom.AdapterAutoScrollViewpager;
 import org.gowoon.inum.model.MainProductResult;
-import org.gowoon.inum.recycler.Adapter_ProductMain;
+import org.gowoon.inum.recycler.AdapterProductMain;
 import org.gowoon.inum.util.Singleton;
 
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class MainFragment extends Fragment {
     SharedPreferences pref;
     ConstraintLayout btn_message;
     RecyclerView recyclerView_book, recyclerView_room, recyclerView_ticket;
-    Adapter_ProductMain Adapter_room, Adapter_book, Adapter_ticket ;
+    AdapterProductMain Adapter_room, Adapter_book, Adapter_ticket ;
     ArrayList<MainProductResult> list = new ArrayList<>();
     AutoScrollViewPager bannerViewPager;
     AdapterAutoScrollViewpager scrollAdapter;
@@ -48,18 +48,19 @@ public class MainFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootview = inflater.inflate(R.layout.fragment_main, container, false);
 
+        /*
+        TODO
+        AutoScroll Viewpager Library Change
+         */
         bannerViewPager = rootview.findViewById(R.id.viewpager_main_banner);
         setBanner(bannerViewPager);
         setBannerData(bannerViewPager);
 
         btn_message = rootview.findViewById(R.id.constraint_main_message);
-        btn_message.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent_message = new Intent(getActivity(), ChatActivity.class);
-                startActivity(intent_message);
+        btn_message.setOnClickListener(view -> {
+            Intent intent_message = new Intent(getActivity(), ChatActivity.class);
+            startActivity(intent_message);
 
-            }
         });
 
         ((MainActivity) Objects.requireNonNull(getActivity())).backPressHolder();
@@ -100,37 +101,28 @@ public class MainFragment extends Fragment {
             });
         }
 
-        Adapter_ticket = new Adapter_ProductMain();
-        Adapter_book = new Adapter_ProductMain();
-        Adapter_room = new Adapter_ProductMain();
+        Adapter_ticket = new AdapterProductMain();
+        Adapter_book = new AdapterProductMain();
+        Adapter_room = new AdapterProductMain();
 
-        Adapter_book.setItemClick(new Adapter_ProductMain.ItemClick() {
-            @Override
-            public void onClick(View view, int position) {
-                String productId = Adapter_book.mDataset.get(position).getProductId();
-                Intent intentProductDetail = new Intent(getActivity(), ProductActivity.class);
-                intentProductDetail.putExtra("id", productId);
-                startActivity(intentProductDetail);
-            }
+        Adapter_book.setItemClick((view, position) -> {
+            String productId = Adapter_book.mDataset.get(position).getProductId();
+            Intent intentProductDetail = new Intent(getActivity(), ProductActivity.class);
+            intentProductDetail.putExtra("id", productId);
+            startActivity(intentProductDetail);
         });
 
-        Adapter_ticket.setItemClick(new Adapter_ProductMain.ItemClick() {
-            @Override
-            public void onClick(View view, int position) {
-                String productId = Adapter_ticket.mDataset.get(position).getProductId();
-                Intent intentProductDetail = new Intent(getActivity(), ProductActivity.class);
-                intentProductDetail.putExtra("id", productId);
-                startActivity(intentProductDetail);
-            }
+        Adapter_ticket.setItemClick((view, position) -> {
+            String productId = Adapter_ticket.mDataset.get(position).getProductId();
+            Intent intentProductDetail = new Intent(getActivity(), ProductActivity.class);
+            intentProductDetail.putExtra("id", productId);
+            startActivity(intentProductDetail);
         });
-        Adapter_room.setItemClick(new Adapter_ProductMain.ItemClick() {
-            @Override
-            public void onClick(View view, int position) {
-                String productId = Adapter_room.mDataset.get(position).getProductId();
-                Intent intentProductDetail = new Intent(getActivity(), ProductActivity.class);
-                intentProductDetail.putExtra("id", productId);
-                startActivity(intentProductDetail);
-            }
+        Adapter_room.setItemClick((view, position) -> {
+            String productId = Adapter_room.mDataset.get(position).getProductId();
+            Intent intentProductDetail = new Intent(getActivity(), ProductActivity.class);
+            intentProductDetail.putExtra("id", productId);
+            startActivity(intentProductDetail);
         });
 
         recyclerView_book = (RecyclerView) rootview.findViewById(R.id.recyclerview_main_product_book);
@@ -178,5 +170,11 @@ public class MainFragment extends Fragment {
 
         scrollAdapter = new AdapterAutoScrollViewpager(getActivity(),data);
         bannerViewPager.setAdapter(scrollAdapter);
+    }
+
+    private void setPercent(View rootView, RecyclerView recyclerView){
+        ViewGroup.LayoutParams layoutParams = recyclerView.getLayoutParams();
+        layoutParams.width = (int) (rootView.getWidth()*0.288);
+        recyclerView.setLayoutParams(layoutParams);
     }
 }

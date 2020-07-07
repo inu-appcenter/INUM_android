@@ -37,14 +37,6 @@ public class DrawerMypageFragment extends Fragment implements View.OnClickListen
     TextView tvNewMsg,tvUserProduct, tvName, tvUpload;
     UserInfoVO infoVO;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -88,42 +80,30 @@ public class DrawerMypageFragment extends Fragment implements View.OnClickListen
 
         initView(Drawer);
 
-        tvUpload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent upload_intent = new Intent(getActivity().getApplicationContext(), UploadActivity.class);
-                startActivity(upload_intent);
-                close();
-            }
+        tvUpload.setOnClickListener(view -> {
+            Intent upload_intent = new Intent(getActivity().getApplicationContext(), UploadActivity.class);
+            startActivity(upload_intent);
+            close();
         });
 
         message = Drawer.findViewById(R.id.framelayout_mypage_message);
-        message.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent_message = new Intent(getActivity(), ChatActivity.class);
-                startActivity(intent_message);
-            }
+        message.setOnClickListener(view -> {
+            Intent intent_message = new Intent(getActivity(), ChatActivity.class);
+            startActivity(intent_message);
         });
 
         myproduct = Drawer.findViewById(R.id.framelayout_mypage_myproduct);
-        myproduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent_product = new Intent(getActivity(), MyproductActivity.class);
-                startActivity(intent_product);
-                close();
-            }
+        myproduct.setOnClickListener(view -> {
+            Intent intent_product = new Intent(getActivity(), MyproductActivity.class);
+            startActivity(intent_product);
+            close();
         });
 
-        Drawer.findViewById(R.id.tv_mypage_setting).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentSetting = new Intent(getActivity(), MypageActivity.class);
-                intentSetting.putExtra("infoVO", infoVO);
-                startActivity(intentSetting);
-                close();
-            }
+        Drawer.findViewById(R.id.tv_mypage_setting).setOnClickListener(v -> {
+            Intent intentSetting = new Intent(getActivity(), MypageActivity.class);
+            intentSetting.putExtra("infoVO", infoVO);
+            startActivity(intentSetting);
+            close();
         });
         return Drawer;
     }

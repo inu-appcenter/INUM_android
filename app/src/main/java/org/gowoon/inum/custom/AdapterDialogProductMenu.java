@@ -15,8 +15,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class Adapter_dialog_product_menu extends Dialog {
-    public Adapter_dialog_product_menu(@NonNull Context context, String productId) {
+public class AdapterDialogProductMenu extends Dialog {
+    public AdapterDialogProductMenu(@NonNull Context context, String productId) {
         super(context);
         this.productId = productId;
     }
@@ -58,10 +58,10 @@ public class Adapter_dialog_product_menu extends Dialog {
         ButterKnife.bind(this);
     }
 
-    public void setOnOkButtonClickListener(Adapter_dialog_product_menu.OnOkButtonClickListener listener){
+    public void setOnOkButtonClickListener(AdapterDialogProductMenu.OnOkButtonClickListener listener){
         okButtonClickListener = listener;
     }
-    public void setOnCancelButtonClickListener(Adapter_dialog_product_menu.OnCancelButtonClickListener listener){
+    public void setOnCancelButtonClickListener(AdapterDialogProductMenu.OnCancelButtonClickListener listener){
         cancelButtonClickListener = listener;
     }
 
@@ -74,7 +74,7 @@ public class Adapter_dialog_product_menu extends Dialog {
     }
 
     @OnClick(R.id.btn_dialog_product_menu_cancle)
-    public void cancleButton(){
+    public void cancelButton(){
         if(cancelButtonClickListener != null){
             cancelButtonClickListener.onClick();
         }

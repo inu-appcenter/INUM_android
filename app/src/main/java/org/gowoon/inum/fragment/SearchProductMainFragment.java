@@ -4,8 +4,11 @@ package org.gowoon.inum.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.app.Fragment;
+
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,7 +21,8 @@ import android.widget.TextView;
 import org.gowoon.inum.R;
 import org.gowoon.inum.activity.ProductActivity;
 import org.gowoon.inum.model.MainProductResult;
-import org.gowoon.inum.recycler.Adapter_recycler_ProductSearch;
+import org.gowoon.inum.recycler.AdapterProductSearch;
+import org.gowoon.inum.recycler.SearchItemDecoration;
 import org.gowoon.inum.util.Singleton;
 
 import java.util.ArrayList;
@@ -31,7 +35,7 @@ public class SearchProductMainFragment extends Fragment {
 
     TextView resultNum, tv_search, none, noInput;
     RecyclerView recyclersearch;
-    Adapter_recycler_ProductSearch mAdapter;
+    AdapterProductSearch mAdapter;
     String search;
     SharedPreferences pref;
 
@@ -42,6 +46,7 @@ public class SearchProductMainFragment extends Fragment {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -73,10 +78,10 @@ public class SearchProductMainFragment extends Fragment {
                                 resultNum.setText("검색결과 " + results.size());
                                 recyclersearch.setVisibility(View.VISIBLE);
                                 none.setVisibility(View.INVISIBLE);
-                                mAdapter = new Adapter_recycler_ProductSearch(results);
+                                mAdapter = new AdapterProductSearch(results);
                                 recyclersearch.setAdapter(mAdapter);
 
-                                mAdapter.setItemClick(new Adapter_recycler_ProductSearch.ItemClick() {
+                                mAdapter.setItemClick(new AdapterProductSearch.ItemClick() {
                                     @Override
                                     public void onClick(View view, int position) {
                                         String productId = mAdapter.mData.get(position).getProductId();
@@ -112,6 +117,7 @@ public class SearchProductMainFragment extends Fragment {
         mLayoutManager = new GridLayoutManager(getActivity(),3);
         recyclersearch.setLayoutManager(mLayoutManager);
         recyclersearch.setItemAnimator(new DefaultItemAnimator());
+        recyclersearch.addItemDecoration(new SearchItemDecoration(getContext(),20f,20f,12.5f));
         return rootview;
     }
 }

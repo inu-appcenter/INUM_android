@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 
 import org.gowoon.inum.R;
 import org.gowoon.inum.model.MainProductResult;
@@ -17,15 +19,15 @@ import org.gowoon.inum.util.Config;
 
 import java.util.ArrayList;
 
-public class Adapter_recycler_ProductSearch extends RecyclerView.Adapter<Adapter_recycler_ProductSearch.mViewHolder>{
+public class AdapterProductSearch extends RecyclerView.Adapter<AdapterProductSearch.mViewHolder>{
 
     public ArrayList<MainProductResult> mData = new ArrayList<>();
     private ItemClick itemClick;
 
-    public Adapter_recycler_ProductSearch(){
+    public AdapterProductSearch(){
 
     }
-    public Adapter_recycler_ProductSearch(ArrayList<MainProductResult> myData) {
+    public AdapterProductSearch(ArrayList<MainProductResult> myData) {
         this.mData = myData;
     }
 
@@ -44,14 +46,18 @@ public class Adapter_recycler_ProductSearch extends RecyclerView.Adapter<Adapter
     @NonNull
     @Override
     public mViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_recyclerview_product,parent,false);
-        return new Adapter_recycler_ProductSearch.mViewHolder(view);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View view = inflater.inflate(R.layout.item_recyclerview_product,parent,false);
+        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+        layoutParams.width = (int) (parent.getWidth()*0.25);
+        view.setLayoutParams(layoutParams);
+
+        return new AdapterProductSearch.mViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Adapter_recycler_ProductSearch.mViewHolder holder, final int position) {
-
+    public void onBindViewHolder(@NonNull AdapterProductSearch.mViewHolder holder, final int position) {
+        float mScale = holder.productImg.getResources().getDisplayMetrics().density;
         holder.name.setText(mData.get(position).getProductName());
         holder.price.setText(mData.get(position).getProductPrice() + "원");
 
@@ -60,6 +66,7 @@ public class Adapter_recycler_ProductSearch extends RecyclerView.Adapter<Adapter
                     + mData.get(position).getSellerId()
                     + mData.get(position).getFileFolder() + "/"
                     + mData.get(position).getProductImg().get(0))
+                    .apply(new RequestOptions().bitmapTransform(new RoundedCorners((int) (mScale*8))))
                     .into(holder.productImg);
         }
         holder.itemView.setOnClickListener(new View.OnClickListener(){
@@ -77,7 +84,7 @@ public class Adapter_recycler_ProductSearch extends RecyclerView.Adapter<Adapter
         void onClick(View view, int position);
     }
 
-    public void setItemClick(Adapter_recycler_ProductSearch.ItemClick itemClick){
+    public void setItemClick(AdapterProductSearch.ItemClick itemClick){
         this.itemClick = itemClick;
     }
 

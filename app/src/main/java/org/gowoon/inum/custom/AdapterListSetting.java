@@ -12,7 +12,7 @@ import org.gowoon.inum.model.ItemListViewSetting;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Adapter_listview_setting extends BaseAdapter {
+public class AdapterListSetting extends BaseAdapter {
     private ArrayList<ItemListViewSetting> itemlistview = new ArrayList<ItemListViewSetting>();
 
     @Override

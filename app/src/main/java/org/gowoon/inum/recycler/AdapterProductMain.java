@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 
 import org.gowoon.inum.R;
 import org.gowoon.inum.model.MainProductResult;
@@ -16,7 +18,7 @@ import org.gowoon.inum.util.Config;
 
 import java.util.ArrayList;
 
-public class Adapter_ProductMain extends RecyclerView.Adapter<Adapter_ProductMain.ViewHolder>{
+public class AdapterProductMain extends RecyclerView.Adapter<AdapterProductMain.ViewHolder>{
 
     public ArrayList<MainProductResult> mDataset = new ArrayList<>();
 
@@ -24,18 +26,18 @@ public class Adapter_ProductMain extends RecyclerView.Adapter<Adapter_ProductMai
 
     public ItemClick itemClick;
 
-    public Adapter_ProductMain() {
+    public AdapterProductMain() {
 
     }
     public interface ItemClick{
-        public void onClick(View view, int position);
+        void onClick(View view, int position);
     }
 
     public void setItemClick(ItemClick itemClick){
         this.itemClick = itemClick;
     }
 
-    public Adapter_ProductMain(ArrayList<MainProductResult> myData) {
+    public AdapterProductMain(ArrayList<MainProductResult> myData) {
         this.mDataset.addAll(myData);
     }
 
@@ -56,13 +58,19 @@ public class Adapter_ProductMain extends RecyclerView.Adapter<Adapter_ProductMai
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_recyclerview_main,parent,false);
+        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+        layoutParams.width = (int) (parent.getWidth()*0.46);
+        layoutParams.height = parent.getHeight();
+        view.setLayoutParams(layoutParams);
+
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Adapter_ProductMain.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull AdapterProductMain.ViewHolder holder, final int position) {
         holder.name.setText(mDataset.get(position).getProductName());
         holder.price.setText(mDataset.get(position).getProductPrice() + "");
+        float mScale = holder.productimg.getResources().getDisplayMetrics().density;
         String category = mDataset.get(position).getCategory();
         if (category.contains("책")){
             String[] subcategory = category.split("책");
@@ -74,14 +82,13 @@ public class Adapter_ProductMain extends RecyclerView.Adapter<Adapter_ProductMai
         Glide.with(holder.productimg).load(Config.serverUrl + "imgload/"
                 +mDataset.get(position).getSellerId()
                 +mDataset.get(position).getFileFolder()+"/"
-                +mDataset.get(position).getProductImg().get(0)).into(holder.productimg);
+                +mDataset.get(position).getProductImg().get(0))
+                .apply(new RequestOptions().bitmapTransform(new RoundedCorners((int) (mScale*6.9f))))
+                .into(holder.productimg);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                if (itemClick != null){
-                    itemClick.onClick(v,position);
-                }
+        holder.itemView.setOnClickListener(v -> {
+            if (itemClick != null){
+                itemClick.onClick(v,position);
             }
         });
     }
